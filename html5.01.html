@@ -99,6 +99,10 @@
 					</p>
 				</section>
 
+                <section data-markdown>
+                    ### HTML dokument je definovaný prostredníctvom HTML elementov (prvkov)
+                </section>
+
 
                 <!--
                     pozrime sa na to, co obnasa v jazyku HTML vytvorit obsah
@@ -110,7 +114,7 @@
                 <!--
                     - html dokument sa sklada z mnoziny html znaciek / elementov
                     - kazda znacka ma svoje meno, ktore piseme medzi znaky < a >
-                    - to, co sa nachadza medzi znackami, tvori obsah znacky, co moze byt samostatny text, ale rovnako tam mozu byt vnorene dalsie znacky
+                    - to, co sa nachadza medzi znackami, tvori obsah znacky
                 -->
                 <section data-transition="none">
                     <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">         <znacka>Hello world</znacka></code></pre>
@@ -118,17 +122,25 @@
 
 
                 <!--
-                    Takto mozeme text Hello world umiestnit medzi znacky <p> a </p>, ktore ohranicuju textovy odstavec 
+                    Takto mozeme text Hello world umiestnit medzi znacky <h1> a </h1>, ktore ohranicuju nadpis prvej urovne
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">             <h1>Hello world</h1></code></pre>
+                </section>
+
+                <!--
+                    rovnako tak mozeme text Hello world uzavriet medzi znacky <p> a </p>, ktore ohranicuju textovy odstavec 
                 -->
                 <section data-transition="none">
                     <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">              <p>Hello world</p></code></pre>
                 </section>
 
                 <!--
-                    rovnako tak mozeme text Hello world uzavriet medzi znacky <h1> a </h1>, ktore ohranicuju nadpis prvej urovne
+                    Obsahom značky však nemusí byť len text, ale napríklad ďalšia značka.
+                    V tomto prípade je slovo world zabalené do značky <b> a </b>
                 -->
                 <section data-transition="none">
-                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">             <h1>Hello world</h1></code></pre>
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">              <p>Hello <b>world</b></p></code></pre>
                 </section>
 
 
@@ -193,6 +205,41 @@
                     3. stránka bude mať svoj titulok v hlavičke ako aj názov úrovne 1
                     4. stránka bude obsahovať fotografiu umelca
                     5. na stránke sa bude nachádzať odkaz na zdroj, z ktorého ste text ukradli
+                    6. overte si svoj výtvor, či je valídny na stránke [validator.w3.org](https://validator.w3.org/)
+                </section>
+
+				<section id="elements-overview">
+					<h1>HTML5 101</h1>
+					<h3>Elements Overview</h3>
+					<p>
+						<small>Created by mirek</small>
+					</p>
+				</section>
+
+
+
+				<section id="boxes">
+					<h1>HTML5 101</h1>
+					<h3>Boxes and Grids</h3>
+					<p>
+						<small>Created by mirek</small>
+					</p>
+				</section>
+
+
+                <!--
+                    Pozrime sa na jednu zaujímavosť a síce na to, ako je stránka poskladaná a aký obrys majú jej jednolivé prvky
+                -->
+                <section>
+                    <h2>Tvar elementov</h2>
+
+                    <div style="width:200px; height:200px; border-radius: 50%; background: green;"></div>
+                    <div style="width:200px; height:100px; border-radius: 50%; background: red;">hello</div>
+                </section>
+
+
+                <section data-markdown>
+                    ![layout](https://www.gliffy.com/_ui/images/examples/example_wireframe_large.png)
                 </section>
 
 
