@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js – The HTML Presentation Framework</title>
+		<title>The HTML5 Course</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -40,20 +40,161 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
+				<section id="introduction">
+					<h1>HTML5 101</h1>
+					<h3>The Introduction</h3>
 					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+						<small>Created by mirek</small>
 					</p>
 				</section>
 
-				<section>
-					<h2>Hello There</h2>
+				<section data-markdown>
+					## HTML je jazyk, v ktorom sú napísané webové stránky.
+				</section>
+
+                <section data-markdown data-background="#0091be">
+                    ![html5 components](https://i.ytimg.com/vi/LcTQoRlcs-A/maxresdefault.jpg)
+                </section>
+
+                <section data-markdown>
+                    ## Stránka ako dom
+
+                    1. HTML súbory reprezentujú štruktúru domu (rozmiestnenie stien, účel izieb, ...)
+                    2. CSS súbory reprezentujú štýl domácnosti (akej farby sú steny, koberce, dekorácie, ...)
+                    3. JS súbory predstavujú interaktívne komponenty domácnosti (vypínače, ovládače, ...)
+
+                </section>
+
+                <section data-markdown data-background="#448cd4">
+                    ![nástroje na postavenie a opravovanie domu](images/html5.tools.overview.jpg)
+                </section>
+
+                <section data-markdown>
+                    ## [www.dennikn.sk](http://www.dennikn.sk)
+                </section>
+                <!--
+                    pozrime sa na zivu stranku pomocou integrovaneho nastroja v prehliadaci
+                    - F12 alebo CTRL+SHIFT+i
+                    - struktura stranky
+                    - oznacovanie elementov
+                    - rozklikavanie elementov
+                -->
+
+                <section data-markdown>
+                    ## Quizz
+
+                    Zistite, či:
+
+                    1. sú všetky elementy stránky viditeľné
+                    2. majú všetky elementy obdĺžnikový tvar
+                    3. viete nájsť každý text zo stránky v HTML kóde
+                </section>
+
+
+				<section id="elements">
+					<h1>HTML5 101</h1>
+					<h3>HTML Elements</h3>
 					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
+						<small>Created by mirek</small>
 					</p>
 				</section>
+
+
+                <!--
+                    pozrime sa na to, co obnasa v jazyku HTML vytvorit obsah
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">                 Hello world         </code></pre>
+                </section>
+
+                <!--
+                    - html dokument sa sklada z mnoziny html znaciek / elementov
+                    - kazda znacka ma svoje meno, ktore piseme medzi znaky < a >
+                    - to, co sa nachadza medzi znackami, tvori obsah znacky, co moze byt samostatny text, ale rovnako tam mozu byt vnorene dalsie znacky
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">         <znacka>Hello world</znacka></code></pre>
+                </section>
+
+
+                <!--
+                    Takto mozeme text Hello world umiestnit medzi znacky <p> a </p>, ktore ohranicuju textovy odstavec 
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">              <p>Hello world</p></code></pre>
+                </section>
+
+                <!--
+                    rovnako tak mozeme text Hello world uzavriet medzi znacky <h1> a </h1>, ktore ohranicuju nadpis prvej urovne
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">             <h1>Hello world</h1></code></pre>
+                </section>
+
+
+                <!--
+                    - okrem samotneho nazvu a obsahu mozu mat znacky definovane aj dalsie atributy, ktorymi je mozne nastavit ich dalsie vlasnosti
+                    - napr. atributom class je mozne vybrat vizualny styl s nazvom big
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html"> <h1 class="big">Hello world</h1></code></pre>
+                </section>
+
+                <!--
+                    - alebo to moze byt cielova adresa odkazu
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html"><a href="adresa">Hello world</a></code></pre>
+                    <!--<a href="adresa">Hello world</a>-->
+                </section>
+
+                <!--
+                    - okrem toho, ze pozname parove znacky, pozname aj neparove znacky
+                    - neparove znacky su take, ktore nemaju koncovu uzatvaraciu znacku
+                    - prikladom moze byt obrazok
+                    - v tomto pripade je otvaraci element rovno aj uzatvaracim, pricom sa moze ale nemusi pisat koncove lomitko
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html"><img src="adresa obrazku"></code></pre>
+                </section>
+
+                <!--
+                    - dokonca sa môže jednať aj len o samotný element bez tela a bez párovej značky
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html"><br/></code></pre>
+                </section>
+
+                <!--
+                    pozrime sa na celkovu strukturu html elementu v priklade, kde chceme na obrazovku vypisat text Hello world!
+                -->
+
+                <section>
+                    <pre style="font-size: 30px; background:none; box-shadow:none;"><code class="hljs html">&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+&lt;title>Nadpis stránky&lt;/title>
+&lt;/head>
+&lt;body>
+&lt;h1>Prvý nadpis&lt;/h1>
+&lt;p>Prvý odstavec&lt;/p>
+&lt;/body>
+&lt;/html></code></pre>
+                </section>
+
+
+                <section data-markdown>
+                    ## Quizz
+
+                    Vytvorte HTML dokument, ktorý bude obsahovať text básne od <i>Sama Chalupku: Mor ho!</i>. Pri tvorbe dodržte nasledovné pravidlá:
+
+                    1. každú strofu básne vypíšte ako samostatný paragraf
+                    2. dodržiavajte zalamovanie riadkov
+                    3. stránka bude mať svoj titulok v hlavičke ako aj názov úrovne 1
+                    4. stránka bude obsahovať fotografiu umelca
+                    5. na stránke sa bude nachádzať odkaz na zdroj, z ktorého ste text ukradli
+                </section>
+
 
 				<!-- Example of nested vertical slides -->
 				<section>
