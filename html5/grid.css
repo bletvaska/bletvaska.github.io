@@ -1,0 +1,45 @@
+* {
+    border: 4px solid black;
+    padding: 10px;
+}
+
+.header {
+    background-color: blue;
+}
+
+.content {
+    background-color: purple;
+}
+
+.footer {
+    background-color: green;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.krabicka{
+    width: 200px;
+    padding-left: 10px;
+    padding-right: 20px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.col-12 {
+    width: 100%;
+}

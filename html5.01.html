@@ -393,6 +393,15 @@
                 </section>
 
 
+                <section data-markdown>
+                    ## Dokumentácia
+
+                    [![mozilla developer network](http://www.emarketeers.com/e-insight/wp-content/uploads/2014/09/mdn-logo.png)](https://developer.mozilla.org/en/)
+
+                    [CSS](https://developer.mozilla.org/en/docs/Web/CSS) &amp; [CSS3](https://developer.mozilla.org/en/docs/Web/CSS/CSS3)
+                </section>
+
+
 				<section data-markdown id="bootstrap">
 					# HTML5 101
 					### Bootstrap
@@ -415,7 +424,7 @@
 
 				<section data-markdown data-background="#5b4282">
 ![Bootstrap Logo](https://bootstrapbay.com/blog/wp-content/uploads/2014/07/bootstrap-logo.png)
-[http://getbootstrap.comBootstrap](http://getbootstrap.com/)
+[http://getbootstrap.com](http://getbootstrap.com/)
 	    		</section>
 
 
@@ -427,8 +436,225 @@
 				</section>
 
 
+				<section data-markdown>
+                    ## Dokumentácia
+
+                    [![mozilla developer network](http://www.emarketeers.com/e-insight/wp-content/uploads/2014/09/mdn-logo.png)](https://developer.mozilla.org/en/)
+
+                    [JavaScript](https://developer.mozilla.org/en/docs/Web/JavaScript)
+                </section>
+
+
                 <section data-markdown>
-                    ## Otázky?
+                    ## Arrays
+
+                    ```javascript
+                    var numbers = [1, 2, 3, 4, 5];
+                    var names = ['john', 'alice', 'lucy', 'tom'];
+
+                    //
+                    var len = numbers.length;
+                    ```
+                </section>
+
+
+                <section data-markdown>
+                ### Function Declaration
+
+                ```javascript
+                function add(num1, num2){
+                    return num1 + num2;
+                }
+                ```
+
+                ### Function Expression
+
+                ```javascript
+                var add = function(num1, num2){
+                    return num1 + num2;
+                }
+                ```
+                </section>
+
+                <script>
+                function add(num1, num2){
+                    return num1 + num2;
+                }
+                </script>
+
+
+                <section data-markdown>
+                    ## Objects
+
+                    ```javascript
+                    var person = {
+                        name: 'Sherlock',
+                        surname: 'Holmes',
+                        getName: function(){
+                            return this.name + ' ' + this.surname;
+                        }
+                    };
+
+                    // usage
+                    console.log(person.name);
+                    person['surname'] = 'holmes';
+                    ```
+                </section>
+
+                <script>
+                     var person = {
+                        name: 'Sherlock',
+                        surname: 'Holmes',
+                        getName: function(){
+                            return this.name + ' ' + this.surname;
+                        }
+                    };
+                </script>
+
+
+                <!-- toString() -->
+                <section data-markdown data-state="constructor-function">
+                    ## Constructor Function
+
+                    ```javascript
+                    function Person(name, surname, sex = 'M'){
+                        this.name = name;
+                        this.surname = surname;
+                        this.sex = sex;
+                        
+                        this.getName = function(){
+                            return this.name + ' ' + this.surname;
+                        };
+                    }
+
+                    // usage
+                    var person = new Person('Sherlock', 'Holmes');
+                    ```
+                </section>
+
+                <section data-markdown data-state="person-prototype">
+                    ## Prototype
+
+                    ```javascript
+                    function Person(name, surname, sex = 'M'){
+                        this.name = name;
+                        this.surname = surname;
+                        this.sex = sex;
+                    }
+
+                    Person.prototype.getName = function(){
+                        return this.name + ' ' + this.surname;
+                    };
+                    ```
+                </section>
+
+
+
+    
+                <!--
+                    http://bonsaiden.github.io/JavaScript-Garden/#types
+                -->
+                <!--<section data-markdown>-->
+                    <!--## The Class of an Object-->
+                <!--</section>-->
+
+
+                <section data-markdown>
+                    ## DOM
+
+                    Document Object Model
+                </section>
+
+                <section data-state="show-dom">
+                
+                </section>
+
+
+				<section data-markdown id="jQuery">
+					# HTML5 101
+					### jQuery
+
+					Created by mirek
+				</section>
+
+
+                <section data-markdown>
+                    ## ```.append()``` and ```.prepend()```
+
+                    * [```.append()```](http://api.jquery.com/append/) - insert content, specified by the parameter, to the end of each element in the set of matched elements
+                    * [```.prepend()```](http://api.jquery.com/prepend/) - insert content, specified by the parameter, to the beginning of each element in the set of matched elements
+
+                    ```javascript
+                    // example usage
+                    $('h2').append(' STOP');
+                    $('h2').prepend('START ');
+                    $('ul').append('&lt;li>new entry&lt;/li>');
+                    $('ul').prepend('&lt;li>new entry&lt;/li>');
+                    ```
+                </section>
+
+
+                <section data-markdown id="html-text">
+                    ## ```.html()``` and ```.text()```
+
+                    * [```.html()```](http://api.jquery.com/html/) - get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element
+                    * [```.text()```](http://api.jquery.com/text/) - get the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements
+
+                    ```javascript
+                    // example usage
+                    $('section#html-text').html();
+                    $('section#html-text').text();
+                    $('section#html-text h2').html('&lt;i>Heading&lt;/i>);
+                    $('section#html-text h2').text('&lt;i>Heading&lt;/i>);
+                    ```
+                </section>
+
+
+                <section data-markdown id="detach">
+                    ## ```.detach()```
+                
+                    * [```.detach()```](http://api.jquery.com/detach/) - remove the set of matched elements from the DOM
+
+                    ```javascript
+                    // example usage
+                    $('li').detach();
+                    $('section#detach').detach();
+
+                    ```
+                </section>
+
+
+                <section data-markdown>
+                    ## jQuery Event Basics
+
+                    **event** - user’s interaction, which can be handled
+
+                    * **mouse events** - click, dblclick, mouseenter, mouseleave
+                    * **keyboard events** - keypress, keydown, keyup
+                    * **form events** - submit, change, focus, blur
+                    * **document/window events** - load, resize, scroll, unload
+
+                </section>
+
+				<section data-markdown id="Ajax">
+					# HTML5 101
+					### Ajax
+
+					Created by mirek
+				</section>
+
+
+                <section data-markdown>
+                    ## Ajax
+
+                    Asynchronous JavaScript and XML
+                
+                </section>
+
+
+
+                <section data-markdown>
+                    ## Questions?
                 </section>
 			</div>
 
@@ -436,6 +662,7 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+		<script src="js/jquery.min.js"></script>
 
 		<script>
 
@@ -459,7 +686,41 @@
 				]
 			});
 
+
+            Reveal.addEventListener('show-dom', function(event){
+                console.log("show dom");
+            });
+
+            Reveal.addEventListener('constructor-function', function(event){
+                console.log("constructor-function");
+                window.Person = function(name, surname, sex='M'){
+                    this.name = name;
+                    this.surname = surname;
+                    this.sex = sex;
+                    
+                    this.getName = function(){
+                        return this.name + ' ' + this.surname;
+                    };
+                }
+            });
+
+
+            Reveal.addEventListener('person-prototype', function(event){
+                console.log("person-prototype");
+                window.Person = function(name, surname, sex='M'){
+                    this.name = name;
+                    this.surname = surname;
+                    this.sex = sex;
+                };
+
+                Person.prototype.getName = function(){
+                    return this.name + ' ' + this.surname;
+                };
+            });
+
 		</script>
+
+
 
 	</body>
 </html>
