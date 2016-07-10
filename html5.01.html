@@ -257,7 +257,7 @@
                 <section data-markdown>
                     ## Obrázky
 
-                    ![obrázok](http://placehold.it/350x150)
+                    ![obrázok](https://placehold.it/350x150)
                 </section>
 
 
@@ -449,11 +449,15 @@
                     ## Arrays
 
                     ```javascript
-                    var numbers = [1, 2, 3, 4, 5];
+                    var numbers = [23, 42, 93, 34, 45];
                     var names = ['john', 'alice', 'lucy', 'tom'];
 
-                    //
+                    // working with arrays
                     var len = numbers.length;
+                    numbers.push(99);
+                    for(var i = 0; i &lt; len; i++){
+                        console.log(numbers[i]);
+                    }
                     ```
                 </section>
 
@@ -604,8 +608,8 @@
                     // example usage
                     $('section#html-text').html();
                     $('section#html-text').text();
-                    $('section#html-text h2').html('&lt;i>Heading&lt;/i>);
-                    $('section#html-text h2').text('&lt;i>Heading&lt;/i>);
+                    $('section#html-text h2').html('&lt;i>Heading&lt;/i>');
+                    $('section#html-text h2').text('&lt;i>Heading&lt;/i>');
                     ```
                 </section>
 
@@ -649,6 +653,11 @@
 
                     Asynchronous JavaScript and XML
                 
+                </section>
+
+
+                <section data-markdown>
+                    http://api.openweathermap.org/data/2.5/weather?units=metric&APPID=3718d7f90e7b081ca8f46aa4305c05ea&q=kosice
                 </section>
 
 
