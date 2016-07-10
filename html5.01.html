@@ -446,6 +446,21 @@
 
 
                 <section data-markdown>
+                    ## Strings
+
+                    ```javascript
+                    // strings can be defined as "string"
+                    var name = "juraj";
+                    // or as 'string'
+                    var surname = 'Holmes';
+                    var age = 33;
+                    // dont mix them! use "string" or 'string'
+                    var text = name + ' ' + surname + " is " + age + ' years old';
+                    ```
+                </section>
+
+
+                <section data-markdown>
                     ## Arrays
 
                     ```javascript
@@ -569,7 +584,8 @@
                     Document Object Model
                 </section>
 
-                <section data-state="show-dom">
+                <section data-markdown>
+                    ## Traversing DOM
                 
                 </section>
 
@@ -580,6 +596,40 @@
 
 					Created by mirek
 				</section>
+
+
+                <section data-markdown>
+                    ## Selectors
+
+                    ```javascript
+                    var s = $('*');
+                    var s = $('p');
+                    var s = $('.active');
+                    var s = $('#location');
+                    var s = $('input:enabled');
+                    var s = $('li[data-selected="true"');
+                    var s = $('h1, #title');
+                    ```
+                </section>
+
+                <section data-markdown>
+                    ## Quizz
+
+                    Create selector to 
+                    1. get all ```h1``` elements
+                    2. ...
+                </section>
+
+
+                <section data-markdown>
+                    ## Selectors Tips
+
+                    * never use universal selector ```'*'```
+                    * use identifiers
+                    * use enough-specific selectors (but not too much)
+                    * use methods
+                </section>
+
 
 
                 <section data-markdown>
@@ -629,9 +679,17 @@
 
 
                 <section data-markdown>
-                    ## jQuery Event Basics
+                    ## jQuery Events Basics
 
-                    **event** - user’s interaction, which can be handled
+                    * **event** - user’s interaction, which can be handled
+                    * **event listener** - 
+                    * **event handler** -
+                    * **event object** -
+                </section>
+
+
+                <section data-markdown>
+                    ## Event Types
 
                     * **mouse events** - click, dblclick, mouseenter, mouseleave
                     * **keyboard events** - keypress, keydown, keyup

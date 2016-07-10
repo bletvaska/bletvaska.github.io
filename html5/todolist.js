@@ -22,10 +22,12 @@ $(document).ready(function(){
         localStorage.tasks = JSON.stringify(tasks);
     });
 
-    //$('input#description').on('change', function(){
-        //console.log('changed');
-        //console.log($('input#description').val());
-    //});
+    $('input').on('keypress', function(event){
+        if(event.which == 13){  // if ENTER was pressed
+            console.log('changed');
+            console.log($('input#description').val());
+        }
+    });
 
     // handler for click event on Show All tasks button
     $('button#btn-show-all').on('click', function(){
@@ -104,13 +106,9 @@ function Task(description, active = true, id = null){
  * Returns task as HTML element
  */
 Task.prototype.toHtml = function(){
-    var element = $('<li>');
-
-    // set id
-    element.attr('data-id', this.id);
-
-    // set active state
-    element.attr('data-active', this.active);
+    var element = $('<li>')
+        .attr('data-id', this.id)   // set task id
+        .attr('data-active', this.active);  // set active state
 
     // set active/inactive
     if(this.active == false){
