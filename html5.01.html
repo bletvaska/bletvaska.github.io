@@ -29,6 +29,8 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
+		<script src="js/jquery.min.js"></script>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -698,6 +700,67 @@
 
                 </section>
 
+
+                <section id="mouse-event-example">
+                    <h2>Mouse Event Example</h2>
+
+                    <pre>
+                        <code class="hljs javascript">// example code
+$(document).ready(function(){
+    $('section#mouse-event-example pre').on('mousemove', function(event){
+        var text = 'x: ' + event.clientX + ', y: ' + event.clientY;
+        $('section#mouse-event-example p').text(text);
+    });
+
+    $('section#mouse-event-example pre').on('mouseout', function(event){
+        $('section#mouse-event-example p').text('');
+    });
+
+});</code>
+                        </pre>
+
+                    <p>(move cursor to code)</p>
+
+                    <script>
+$(document).ready(function(){
+    $('section#mouse-event-example pre').on('mousemove', function(event){
+        $('section#mouse-event-example p').text('x: ' + event.clientX + ', y: ' + event.clientY);
+    });
+
+    $('section#mouse-event-example pre').on('mouseout', function(event){
+        $('section#mouse-event-example p').text('');
+    });
+
+});
+                    </script>
+                </section>
+
+
+                <section id="keyboard-event-example">
+                    <h2>Keyboard Event Example</h2>
+
+                    <input type="text" style="font-size: 1.5em" placeholder="Enter some text">
+
+                    <pre><code class="hljs javascript">// example code
+$(document).ready(function(){
+    $('section#keyboard-event-example').on('keyup', function(event){
+        var content = $('section#keyboard-event-example input').val();
+        $('section#keyboard-event-example p').text(content);
+    });
+});</code></pre>
+
+                    <p>(nothing entered yet)</p>
+
+                    <script>
+$(document).ready(function(){
+    $('section#keyboard-event-example').on('keyup', function(event){
+        var content = $('section#keyboard-event-example input').val();
+        $('section#keyboard-event-example p').text(content);
+    });
+});
+                    </script>
+                </section>
+
 				<section data-markdown id="Ajax">
 					# HTML5 101
 					### Ajax
@@ -729,7 +792,6 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
-		<script src="js/jquery.min.js"></script>
 
 		<script>
 
