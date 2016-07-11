@@ -21,24 +21,38 @@
   </head>
   <body>
     <div class="container">
-        <h1>Todo List</h1>
-
-        <form action="#">
-        <div class="form-group">
-            <input type="text" id="description" placeholder="Enter description" class="form-control">
-
-            <button id="btn-add" class="btn btn-default">Add</button>
+        <div class="row">
+            <div class="col-md-4">
+                <h1>Todo List</h1>
+            </div>
         </div>
-        </form>
+
+        <div class="row">
+            <div class="col-md-4">
+                <form action="#">
+                <div class="form-group">
+                    <input type="text" id="description" placeholder="Enter description" class="form-control">
+
+                    <button id="btn-add" class="btn btn-default">Add</button>
+                </div>
+                </form>
+            </div>
+        </div>
 
         <ul id="tasks">
         </ul>
 
-        <div class="btn-group" role="group" aria-label="...">
+        <div class="row">
+            <div class="col-md-4">
+
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <button id="btn-show-all" type="button" class="btn btn-default">All</button>
             <button id="btn-show-active" type="button" class="btn btn-default">Active</button>
             <button id="btn-show-completed" type="button" class="btn btn-default">Completed</button>
             <button id="btn-clear-completed" type="button" class="btn btn-default">Clear Completed</button>
+
+            </div>
+        </div>
         </div>
     </div>
 

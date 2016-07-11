@@ -30,6 +30,7 @@
 		</script>
 
 		<script src="js/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://it4kt.cnl.sk/c/smart/2015/css/mrilko.css">
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -740,6 +741,7 @@ $(document).ready(function(){
                     <h2>Keyboard Event Example</h2>
 
                     <input type="text" style="font-size: 1.5em" placeholder="Enter some text">
+                    <p>(nothing entered yet)</p>
 
                     <pre><code class="hljs javascript">// example code
 $(document).ready(function(){
@@ -748,8 +750,6 @@ $(document).ready(function(){
         $('section#keyboard-event-example p').text(content);
     });
 });</code></pre>
-
-                    <p>(nothing entered yet)</p>
 
                     <script>
 $(document).ready(function(){
@@ -760,6 +760,45 @@ $(document).ready(function(){
 });
                     </script>
                 </section>
+
+
+                <section id="form-event-example">
+                    <h2>Form Event Example</h2>
+
+                    <form action="#">
+                        <input type="text" placeholder="Your name" style="font-size: 1.5em">
+                        <button type="submit" style="font-size: 1.5em">Send</button>
+                    </form>
+                    <p>&nbsp;</p>
+
+                    <pre><code class="hljs javascript">// example code
+ $(document).ready(function(){
+    $('section#form-event-example').on('submit', function(event){
+        var name = $('section#form-event-example input').val();
+        if(name.trim().length == 0){
+            alert('Nothing entered');
+        }else{
+            $('section#form-event-example p').text('Welcome ' + name);
+        }
+        event.preventDefault();
+    });
+});</code></pre>
+
+                    <script>
+$(document).ready(function(){
+    $('section#form-event-example').on('submit', function(event){
+        var name = $('section#form-event-example input').val();
+        if(name.trim().length == 0){
+            alert('Nothing entered');
+        }else{
+            $('section#form-event-example p').text('Welcome ' + name);
+        }
+        event.preventDefault();
+    });
+});
+                    </script>
+                </section>
+
 
 				<section data-markdown id="Ajax">
 					# HTML5 101
@@ -782,6 +821,29 @@ $(document).ready(function(){
                 </section>
 
 
+				<section>
+					<div id="SearchActivity" class="activity">
+						<br><br><br><br>
+						<input type="text" id="city">
+						<br><br>
+
+						<div id="search_button">Search</div>
+
+					</div>
+
+					<div id="ForecastActivity" class="activity">
+						<br><br>
+						<b><span id="location" style="font-size: 39px;"></span></b><br/>
+						Temp: <span id="temp"></span><br/>
+						Wind: <span id="wind"></span><br/>
+						Humidity: <span id="humidity"></span>
+						<br><br>
+						<div id="back_button">Back</div>
+					</div>
+				</section>
+
+
+
 
                 <section data-markdown>
                     ## Questions?
@@ -792,6 +854,7 @@ $(document).ready(function(){
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+        <script src="http://it4kt.cnl.sk/c/smart/2015/js/mrilko.js"></script>
 
 		<script>
 
