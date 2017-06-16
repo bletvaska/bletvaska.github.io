@@ -269,6 +269,15 @@
                 </section>
 
 
+                <section id="headings">
+                    <h1>Nadpis 1. úrovne</h1>
+                    <h2>Nadpis 2. úrovne</h2>
+                    <h3>Nadpis 3. úrovne</h3>
+                    <h4>Nadpis 4. úrovne</h4>
+                    <h5>Nadpis 5. úrovne</h5>
+                    <h6>Nadpis 6. úrovne</h6>
+                </section>
+
                 <section id="html-elements-quiz" data-markdown>
                     ## Quizz
 
@@ -336,6 +345,21 @@
                         font-weight: bold;
                     }
                     ```
+                </section>
+
+
+
+                <section id="css-quiz" data-markdown>
+                    ## Lab
+
+                    Naštýlujte báseň _Mor ho!_ od _Sama Chalupku_ nasledovne:
+
+                    * Vaše štýly uložte do externého súboru.
+                    * Nadpis: 26pt, magenta na zelenom podklade
+                    * Okolo obrázku vytvorte rámik.
+                    * Linka na zdroj, z ktorého ste báseň ukradli, nech zozelenie, keď cez ňu prejdete kurzorom.
+                    * Druha strofa básne nech je tučná.
+                    * Výsledok musí byť valídny. Ak sa tak stane, svoj výsledok označkujte obrázkom z validátora, ktorý ste použili.
                 </section>
 
 
@@ -444,11 +468,11 @@
                     ![12 Column Grid](http://blogs.infragistics.com/cfs-filesystemfile.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/ux/960.jpg)
                 </section>
 
-                <section data-markdown>
-                    ## 12 stĺpcový grid systém
-                    ```CSS
-.row {
-	width: 960px;
+                <section >
+                    <h2>12 stĺpcový grid systém</h2>
+                    <div style="width: 45%; display: inline-flex;">
+                        <pre><code class="lang-CSS hljs">.row {
+	width: 100%;
 	display: flex;
 }
 
@@ -464,9 +488,29 @@
 
 .col-12{
 	width: 100%;
+}</code></pre>
+                    </div>
+
+                    <div style="width: 45%; display: inline-flex;">
+                        <pre><code class="lang-CSS hljs">.row {
+	width: 960px;
+	display: flex;
 }
 
-                    ```
+.col-1{
+	width: 80px;
+}
+
+.col-2{
+	width: 160px;
+}
+
+...
+
+.col-12{
+	width: 960px;
+}</code></pre>
+                    </div>
                 
                 </section>
 
