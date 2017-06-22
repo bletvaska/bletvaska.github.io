@@ -967,6 +967,25 @@ $(document).ready(function(){
                     [Hypertext Transfer Protocol](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
                 </section>
 
+
+
+                <section data-markdown id="http-methods">
+                    ## Basic HTTP Methods
+
+                    * **`GET`** - vráti reprezentáciu zdroja na danej URL
+                    * **`HEAD`** - rovnako ako metóda `GET`, ale v odpovedi sa nebude nachádzať telo
+                    * **`POST`** - vytvorí nový zdroj z priložených dát
+                    * **`DELETE`** - odstráni zdroj s daným URL
+                    * **`PUT`** - aktualizuje zdroj na danej URL jeho úplným nahradením 
+                    * **`PATCH`** - aktualizuje vybrané časti zdroja na danej URL
+                </section>
+
+
+                <section data-markdown id="http-status-code">
+                    ## [HTTP Status Codes](https://httpstatuses.com/)
+                </section>
+
+
                 <section id="client-server">
                     <h2>Client Server</h2>
 
@@ -995,19 +1014,6 @@ Connection closed by foreign host.
                         </code></pre>
                     </div>
                 </section>
-
-
-                <section data-markdown id="http-methods">
-                    ## Basic HTTP Methods
-
-                    * **`GET`** - vráti reprezentáciu zdroja na danej URL
-                    * **`HEAD`** - rovnako ako metóda `GET`, ale v odpovedi sa nebude nachádzať telo
-                    * **`POST`** - vytvorí nový zdroj z priložených dát
-                    * **`DELETE`** - odstráni zdroj s daným URL
-                    * **`PUT`** - aktualizuje zdroj na danej URL jeho úplným nahradením 
-                    * **`PATCH`** - aktualizuje vybrané časti zdroja na danej URL
-                </section>
-
 
                 <section data-markdown id="http-lab">
                     ## Lab: REST with Postman
@@ -1071,18 +1077,13 @@ var appid = '08f5d8fd385c443eeff6608c643e0bc5';
 
 $.ajax({
   url: url + '&q=' + city + '&APPID=' + appid,
-  type: 'GET'
-  data: {
-     format: 'json'
-  },
-  dataType: 'jsonp',
   success: function(data) {
     console.log(data.name);
     console.log(data.main.temp + '°C');
     console.log(data.wind.speed + 'm/s ' + 
         data.wind.deg + '°');
     console.log(data.main.humidity + '%');
-  },
+  }
 });</code></pre>
                     </div>
 
