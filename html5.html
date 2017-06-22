@@ -953,6 +953,69 @@ $(document).ready(function(){
                 </section>
 
 
+                <section data-markdown id="http-protocol">
+					# HTML5 101
+					### HTTP
+
+					Created by mirek
+                </section>
+
+
+                <section data-markdown id="http-intro">
+                    ## HTTP
+
+                    [Hypertext Transfer Protocol](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
+                </section>
+
+                <section id="client-server">
+                    <h2>Client Server</h2>
+
+                    <div style="width: 35%; display: inline-flex;">
+                        <pre><code class="lang-bash hljs"># Client Request
+GET / HTTP/1.1
+Host: www.example.com</code></pre>
+                    </div>
+
+                    <div style="width: 55%; display: inline-flex;">
+                        <pre><code class="lang-bash hljs"># Server Response
+HTTP/1.1 200 OK
+Date: Thu, 22 Jun 2017 09:05:37 GMT
+Server: Apache/2.2.22 (Ubuntu)
+Last-Modified: Wed, 05 Feb 2014 12:13:29 GMT
+ETag: "a1469-481-4f1a7af493ac4"
+Accept-Ranges: bytes
+Content-Length: 1153
+Vary: Accept-Encoding
+Content-Type: text/html
+X-Pad: avoid browser bug
+
+&lt;!DOCTYPE html&gt;
+...
+Connection closed by foreign host.
+                        </code></pre>
+                    </div>
+                </section>
+
+
+                <section data-markdown id="http-methods">
+                    ## Basic HTTP Methods
+
+                    * **`GET`** - vráti reprezentáciu zdroja na danej URL
+                    * **`HEAD`** - rovnako ako metóda `GET`, ale v odpovedi sa nebude nachádzať telo
+                    * **`POST`** - vytvorí nový zdroj z priložených dát
+                    * **`DELETE`** - odstráni zdroj s daným URL
+                    * **`PUT`** - aktualizuje zdroj na danej URL jeho úplným nahradením 
+                    * **`PATCH`** - aktualizuje vybrané časti zdroja na danej URL
+                </section>
+
+
+                <section data-markdown id="http-lab">
+                    ## Lab: REST with Postman
+
+                    Vyskúšajte si jednoduché dopyty s aplikáciou Postman na serveri [http://httpbin.org/](http://httpbin.org/).
+                </section>
+
+
 				<section data-markdown id="Ajax">
 					# HTML5 101
 					### Ajax
@@ -979,28 +1042,51 @@ $(document).ready(function(){
 
 
 				<section>
-					<div id="SearchActivity" class="activity">
-						<br><br><br><br>
-						<input type="text" id="city">
-						<br><br>
+                    <div style="width: 35%; display: inline-flex;">
+                        <div id="SearchActivity" class="activity">
+                            <br><br><br><br>
+                            <input type="text" id="city">
+                            <br><br>
 
-						<div id="search_button">Search</div>
+                            <div id="search_button">Search</div>
 
-					</div>
+                        </div>
 
-					<div id="ForecastActivity" class="activity">
-						<br><br>
-						<b><span id="location" style="font-size: 39px;"></span></b><br/>
-						Temp: <span id="temp"></span><br/>
-						Wind: <span id="wind"></span><br/>
-						Humidity: <span id="humidity"></span>
-						<br><br>
-						<div id="back_button">Back</div>
-					</div>
+                        <div id="ForecastActivity" class="activity">
+                            <br><br>
+                            <b><span id="location" style="font-size: 39px;"></span></b><br/>
+                            Temp: <span id="temp"></span><br/>
+                            Wind: <span id="wind"></span><br/>
+                            Humidity: <span id="humidity"></span>
+                            <br><br>
+                            <div id="back_button">Back</div>
+                        </div>
+                    </div>
+
+                    <div style="width: 55%; display: inline-flex;">
+                        <pre><code class="lang-javascript hljs">var url = 'http://api.openweathermap.org/' + 
+          'data/2.5/weather?units=metric';
+var city = 'kosice';
+var appid = '08f5d8fd385c443eeff6608c643e0bc5';
+
+$.ajax({
+  url: url + '&q=' + city + '&APPID=' + appid,
+  type: 'GET'
+  data: {
+     format: 'json'
+  },
+  dataType: 'jsonp',
+  success: function(data) {
+    console.log(data.name);
+    console.log(data.main.temp + '°C');
+    console.log(data.wind.speed + 'm/s ' + 
+        data.wind.deg + '°');
+    console.log(data.main.humidity + '%');
+  },
+});</code></pre>
+                    </div>
+
 				</section>
-
-
-
 
                 <section data-markdown>
                     ## Questions?
@@ -1068,8 +1154,5 @@ $(document).ready(function(){
             });
 
 		</script>
-
-
-
 	</body>
 </html>
