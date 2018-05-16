@@ -21,8 +21,8 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -32,12 +32,13 @@
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
-		<script src="js/jquery.min.js"></script>
         <link rel="stylesheet" href="http://it4kt.cnl.sk/c/smart/2015/css/mrilko.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -404,14 +405,12 @@
                 </section>
 
 
-
-
                 <section data-markdown>
                     ## Boxing
                 </section>
 
                 <section data-markdown>
-                    ![layout](https://www.gliffy.com/_ui/images/examples/example_wireframe_large.png)
+                    ![layout](images/example.wireframe.large.png)
                 </section>
 
                 <section data-markdown>
@@ -423,7 +422,7 @@
 
                 <section data>
                     <h2>Tvorba boxov v HTML</h2>
-                
+
                     <pre><code class="hljs html">&lt;div>
     &lt;div>
         box 1
@@ -461,7 +460,7 @@
                 -->
                 <section>
                     <h2>Box Model</h2>
-                
+
                     <div style="width: 550px; border: 2px solid; margin: 0 auto;">
                         margin
                         <div style="width: 500px; border: 2px solid; margin: 0 auto; background: grey;">
@@ -486,7 +485,7 @@
 
 
                 <section data-markdown>
-                    ![12 Column Grid](http://blogs.infragistics.com/cfs-filesystemfile.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/ux/960.jpg)
+                    ![12 Column Grid](images/960.jpg)
                 </section>
 
                 <section >
@@ -1156,7 +1155,7 @@ $.ajax({
                     this.name = name;
                     this.surname = surname;
                     this.sex = sex;
-                    
+
                     this.getName = function(){
                         return this.name + ' ' + this.surname;
                     };
