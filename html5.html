@@ -13,8 +13,8 @@
 
 		<title>The HTML5 Course</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="Introduction to HTML5 technologies.">
+		<meta name="author" content="mirek">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -67,7 +67,7 @@
                     [JavaScript](https://developer.mozilla.org/en/docs/Web/JavaScript)
                 </section>
 
-				
+
                 <section id="introduction">
 					<h1>HTML5 101</h1>
 					<h3>The Introduction</h3>
@@ -322,7 +322,7 @@
 
 
                 <!--
-                    co je to css? a na co sluzia? 
+                    co je to css? a na co sluzia?
                 -->
                 <section data-markdown id="what-is-css">
                     ## Štýly definujú, ako sa majú zobrazovať HTML elementy.
@@ -492,46 +492,34 @@
                     <h2>12 stĺpcový grid systém</h2>
                     <div style="width: 45%; display: inline-flex;">
                         <pre><code class="lang-CSS hljs">.row {
-	width: 100%;
-	display: flex;
+    width: 100%;
+    display: flex;
 }
 
-.col-1{
-	width: 8.33%;
-}
+.col-1 { width: 8.33%; }
 
-.col-2{
-	width: 16.66%;
-}
+.col-2 { width: 16.66%; }
 
 ...
 
-.col-12{
-	width: 100%;
-}</code></pre>
+.col-12 { width: 100%; }</code></pre>
                     </div>
 
                     <div style="width: 45%; display: inline-flex;">
                         <pre><code class="lang-CSS hljs">.row {
-	width: 960px;
-	display: flex;
+    width: 960px;
+    display: flex;
 }
 
-.col-1{
-	width: 80px;
-}
+.col-1 { width: 80px; }
 
-.col-2{
-	width: 160px;
-}
+.col-2 { width: 160px; }
 
 ...
 
-.col-12{
-	width: 960px;
-}</code></pre>
+.col-12 { width: 960px; }</code></pre>
                     </div>
-                
+
                 </section>
 
 
@@ -605,12 +593,12 @@
 
                     ```javascript
                     // strings can be defined as "string"
-                    var name = "juraj";
+                    let name = "juraj";
                     // or as 'string'
-                    var surname = 'Holmes';
-                    var age = 33;
+                    let surname = 'Holmes';
+                    let age = 33;
                     // dont mix them! use "string" or 'string'
-                    var text = name + ' ' + surname + " is " + age + ' years old';
+                    let text = name + ' ' + surname + " is " + age + ' years old';
                     ```
                 </section>
 
@@ -619,13 +607,13 @@
                     ## Arrays
 
                     ```javascript
-                    var numbers = [23, 42, 93, 34, 45];
-                    var names = ['john', 'alice', 'lucy', 'tom'];
+                    let numbers = [23, 42, 93, 34, 45];
+                    let names = ['john', 'alice', 'lucy', 'tom'];
 
                     // working with arrays
-                    var len = numbers.length;
+                    let len = numbers.length;
                     numbers.push(99);
-                    for(var i = 0; i &lt; len; i++){
+                    for(let i = 0; i &lt; len; i++){
                         console.log(numbers[i]);
                     }
                     ```
@@ -644,7 +632,7 @@
                 ### Function Expression
 
                 ```javascript
-                var add = function(num1, num2){
+                let add = function(num1, num2){
                     return num1 + num2;
                 }
                 ```
@@ -661,7 +649,7 @@
                     ## Objects
 
                     ```javascript
-                    var person = {
+                    let person = {
                         name: 'Sherlock',
                         surname: 'Holmes',
                         getName: function(){
@@ -695,14 +683,14 @@
                         this.name = name;
                         this.surname = surname;
                         this.sex = sex;
-                        
+
                         this.getName = function(){
                             return this.name + ' ' + this.surname;
                         };
                     }
 
                     // usage
-                    var person = new Person('Sherlock', 'Holmes');
+                    let person = new Person('Sherlock', 'Holmes');
                     ```
                 </section>
 
@@ -723,8 +711,6 @@
                 </section>
 
 
-
-    
                 <!--
                     http://bonsaiden.github.io/JavaScript-Garden/#types
                 -->
@@ -741,7 +727,7 @@
 
                 <section data-markdown>
                     ## Traversing DOM
-                
+
                 </section>
 
 
@@ -761,13 +747,13 @@
                     ## Selectors
 
                     ```javascript
-                    var s = $('*');
-                    var s = $('p');
-                    var s = $('.active');
-                    var s = $('#location');
-                    var s = $('input:enabled');
-                    var s = $('li[data-selected="true"');
-                    var s = $('h1, #title');
+                    let s = $('*');
+                    s = $('p');
+                    s = $('.active');
+                    s = $('#location');
+                    s = $('input:enabled');
+                    s = $('li[data-selected="true"');
+                    s = $('h1, #title');
                     ```
                 </section>
 
@@ -833,7 +819,7 @@
 
                 <section data-markdown id="detach">
                     ## ```.detach()```
-                
+
                     * [```.detach()```](http://api.jquery.com/detach/) - remove the set of matched elements from the DOM
 
                     ```javascript
@@ -844,6 +830,10 @@
                     ```
                 </section>
 
+                <section data-markdown data-background="#32332B">
+                    ## Event Loop
+                    ![Event Loop Overview](https://www.wikitechy.com/tutorials/node-js/img/nodejs-images/node-js-event-loop-event-driven-application.png)
+                </section>
 
                 <section data-markdown>
                     ## jQuery Events Basics
@@ -873,7 +863,7 @@
                         <code class="hljs javascript">// example code
 $(document).ready(function(){
     $('section#mouse-event-example pre').on('mousemove', function(event){
-        var text = 'x: ' + event.clientX + ', y: ' + event.clientY;
+        let text = 'x: ' + event.clientX + ', y: ' + event.clientY;
         $('section#mouse-event-example p').text(text);
     });
 
@@ -895,7 +885,6 @@ $(document).ready(function(){
     $('section#mouse-event-example pre').on('mouseout', function(event){
         $('section#mouse-event-example p').text('');
     });
-
 });
                     </script>
                 </section>
@@ -910,7 +899,7 @@ $(document).ready(function(){
                     <pre><code class="hljs javascript">// example code
 $(document).ready(function(){
     $('section#keyboard-event-example').on('keyup', function(event){
-        var content = $('section#keyboard-event-example input').val();
+        let content = $('section#keyboard-event-example input').val();
         $('section#keyboard-event-example p').text(content);
     });
 });</code></pre>
@@ -918,7 +907,7 @@ $(document).ready(function(){
                     <script>
 $(document).ready(function(){
     $('section#keyboard-event-example').on('keyup', function(event){
-        var content = $('section#keyboard-event-example input').val();
+        let content = $('section#keyboard-event-example input').val();
         $('section#keyboard-event-example p').text(content);
     });
 });
@@ -938,7 +927,7 @@ $(document).ready(function(){
                     <pre><code class="hljs javascript">// example code
  $(document).ready(function(){
     $('section#form-event-example').on('submit', function(event){
-        var name = $('section#form-event-example input').val();
+        let name = $('section#form-event-example input').val();
         if(name.trim().length == 0){
             alert('Nothing entered');
         }else{
@@ -951,7 +940,7 @@ $(document).ready(function(){
                     <script>
 $(document).ready(function(){
     $('section#form-event-example').on('submit', function(event){
-        var name = $('section#form-event-example input').val();
+        let name = $('section#form-event-example input').val();
         if(name.trim().length == 0){
             alert('Nothing entered');
         }else{
@@ -982,7 +971,6 @@ $(document).ready(function(){
 
                     [Hypertext Transfer Protocol](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
                 </section>
-
 
 
                 <section data-markdown id="http-methods">
@@ -1086,10 +1074,10 @@ Connection closed by foreign host.
                     </div>
 
                     <div style="width: 55%; display: inline-flex;">
-                        <pre><code class="lang-javascript hljs">var url = 'http://api.openweathermap.org/' + 
+                        <pre><code class="lang-javascript hljs">let url = 'http://api.openweathermap.org/' + 
           'data/2.5/weather?units=metric';
-var city = 'kosice';
-var appid = '08f5d8fd385c443eeff6608c643e0bc5';
+let city = 'kosice';
+let appid = '08f5d8fd385c443eeff6608c643e0bc5';
 
 $.ajax({
   url: url + '&q=' + city + '&APPID=' + appid,
@@ -1102,7 +1090,6 @@ $.ajax({
   }
 });</code></pre>
                     </div>
-
 				</section>
 
 
@@ -1118,12 +1105,11 @@ $.ajax({
 
 		</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
         <script src="http://it4kt.cnl.sk/c/smart/2015/js/mrilko.js"></script>
 
 		<script>
-
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: true,
@@ -1144,7 +1130,6 @@ $.ajax({
 				]
 			});
 
-
             Reveal.addEventListener('show-dom', function(event){
                 console.log("show dom");
             });
@@ -1161,7 +1146,6 @@ $.ajax({
                     };
                 }
             });
-
 
             Reveal.addEventListener('person-prototype', function(event){
                 console.log("person-prototype");
