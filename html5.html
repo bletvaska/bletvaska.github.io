@@ -622,8 +622,10 @@
                     // or as 'string'
                     let surname = 'Holmes';
                     let age = 33;
-                    // dont mix them! use "string" or 'string'
-                    let text = name + ' ' + surname + " is " + age + ' years old';
+                    // strings can be concatenated with '+' operator
+                    console.log(name + ' ' + surname + " is " + age + ' years old');
+                    // but you can use template literals instead
+                    console.log(`${name} ${surname} is ${age} years old`);
                     ```
                 </section>
 
@@ -632,14 +634,19 @@
                     ## Arrays
 
                     ```javascript
+                    // this is array
                     let numbers = [23, 42, 93, 34, 45];
                     let names = ['john', 'alice', 'lucy', 'tom'];
 
                     // working with arrays
-                    let len = numbers.length;
                     numbers.push(99);
-                    for(let i = 0; i &lt; len; i++){
+                    // traverse array traditional way
+                    for(let i = 0; i &lt; numbers.length; i++){
                         console.log(numbers[i]);
+                    }
+                    // or you can use "foreach" way
+                    for(let entry of numbers){
+                        console.log(entry);
                     }
                     ```
                 </section>
@@ -673,12 +680,24 @@
                 <section data-markdown>
                     ## Objects
 
+                    * An **object** is a collection of **properties**.
+                    * A **property** is an association between a **name** (or key) and a **value**.
+                    * Multiple ways to create an `Object`:
+                        * object constructor: `obj = new Object()`
+                        * object literal: `obj = {}`
+                        * inbuild method: `obj = Object.create()`
+                        * constructor function: `obj = new Person()`
+                </section>
+
+                <section data-markdown>
+                    ## Object Literal
+
                     ```javascript
                     let person = {
                         name: 'Sherlock',
                         surname: 'Holmes',
                         getName: function(){
-                            return this.name + ' ' + this.surname;
+                            return `${this.name} ${this.surname}`;
                         }
                     };
 
@@ -693,7 +712,7 @@
                         name: 'Sherlock',
                         surname: 'Holmes',
                         getName: function(){
-                            return this.name + ' ' + this.surname;
+                            return `${this.name} ${this.surname}`;
                         }
                     };
                 </script>
@@ -704,13 +723,14 @@
                     ## Constructor Function
 
                     ```javascript
+                    // definition
                     function Person(name, surname, sex = 'M'){
                         this.name = name;
                         this.surname = surname;
                         this.sex = sex;
 
                         this.getName = function(){
-                            return this.name + ' ' + this.surname;
+                            return `${this.name} ${this.surname}`;
                         };
                     }
 
@@ -730,7 +750,7 @@
                     }
 
                     Person.prototype.getName = function(){
-                        return this.name + ' ' + this.surname;
+                        return `${this.name} ${this.surname}`;
                     };
                     ```
                 </section>
