@@ -45,7 +45,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
                 <section data-markdown id="home">
-                    ### http://bit.ly/2IsaaV2
+                    ### http://bit.ly/2JExnbs
                 </section>
 
 
@@ -58,19 +58,10 @@
                 </section>
 
 
-                <section id="introduction">
-					<h1>JavaScript 101</h1>
-					<h3>The Introduction</h3>
-					<p>
-						<small>Created by mirek</small>
-					</p>
-				</section>
 
-
-
-                <section data-markdown id="javascript">
-					# HTML5 101
-					### JavaScript
+                <section data-markdown id="introduction">
+					## JavaScript 101
+					### The Introduction
 
 					Created by mirek
 				</section>
@@ -142,16 +133,39 @@
                 </script>
 
 
+                <section data-markdown id="objects">
+                    ## JavaScript 101
+                    ### The Objects
+
+                    Created by mirek
+                </section>
+
                 <section data-markdown>
-                    ## Objects
+                    ## What is an Object?
 
                     * An **object** is a collection of **properties**.
                     * A **property** is an association between a **name** (or key) and a **value**.
-                    * Multiple ways to create an `Object`:
-                        * object constructor: `obj = new Object()`
-                        * object literal: `obj = {}`
-                        * inbuild method: `obj = Object.create()`
-                        * constructor function: `obj = new Person()`
+                </section>
+
+                <section data-markdown>
+                    ## Object Creation
+
+                    * with **object constructor**
+                    ```javascript
+                    const obj = new Object();
+                    ```
+                    * with **object literal**
+                    ```javascript
+                    const obj = {};
+                    ```
+                    * with **inbuild method**
+                    ```javascript
+                    const obj = Object.create();
+                    ```
+                    * with **constructor function**
+                    ```javascript
+                    const obj = new Person();
+                    ```
                 </section>
 
                 <section data-markdown>
@@ -184,7 +198,7 @@
 
 
                 <!-- toString() -->
-                <section data-markdown data-state="constructor-function">
+                <section data-markdown id="constructor-function">
                     ## Constructor Function
 
                     ```javascript
@@ -204,7 +218,30 @@
                     ```
                 </section>
 
-                <section data-markdown data-state="person-prototype">
+
+                <section data-markdown id="this">
+                    ## `this` Keyword
+                </section>
+
+
+                <section data-markdown id="design-patterns">
+                        ## JavaScript 101
+                        ### Design Patterns
+
+                        Created by mirek
+                </section>
+
+                <!-- https://github.com/sohamkamani/javascript-design-patterns-for-humans -->
+
+
+                <section data-markdown>
+                    > **Design pattern** is reusable solution that can be applied to commonly occurring problems in software design
+                    > ([Wikipedia](https://en.wikipedia.org/wiki/Software_design_pattern))
+
+                </section>
+
+
+                <section data-markdown id="person-prototype">
                     ## Prototype
 
                     ```javascript
@@ -221,6 +258,12 @@
                 </section>
 
 
+                <section data-markdown>
+                    ## Prototype Chain
+
+                </section>
+
+
                 <!--
                     http://bonsaiden.github.io/JavaScript-Garden/#types
                 -->
@@ -230,381 +273,95 @@
 
 
                 <section data-markdown>
-                    ## DOM
-
-                    Document Object Model
+                    ## JavaScript 101
+                    ### Classes
                 </section>
+
 
                 <section data-markdown>
-                    ## Traversing DOM
+                    ## Features
+
+                    * available from ECMAScript 6 (2015)
+                    * more convenient syntax to create old-school constructor functions
+                    * support for class fields and instance fields
+                    * subclassing (class inheritance)
 
                 </section>
 
-
-				<section data-markdown id="jQuery">
-					# HTML5 101
-					### jQuery
-
-					Created by mirek
-				</section>
-
                 <!--
-                    http://youmightnotneedjquery.com/
+                    * http://2ality.com/2015/02/es6-classes-final.html
                 -->
 
 
                 <section data-markdown>
-                    ## Selectors
+                    ## Class Example
 
                     ```javascript
-                    let s = $('*');
-                    s = $('p');
-                    s = $('.active');
-                    s = $('#location');
-                    s = $('input:enabled');
-                    s = $('li[data-selected="true"');
-                    s = $('h1, #title');
-                    ```
-                </section>
-
-                <section data-markdown>
-                    ## Quizz
-
-                    Create selector to 
-                    1. get all ```h1``` elements
-                    2. ...
-                </section>
-
-
-                <section data-markdown>
-                    ## Selectors Tips
-
-                    * never use universal selector ```'*'```
-                    * use identifiers
-                    * use enough-specific selectors (but not too much)
-                    * use methods
-                </section>
-
-
-                <section data-markdown>
-                    ## ```.hide()``` and ```.show()```
-
-                    * [```.hide()```](http://api.jquery.com/hide/) - hide the matched elements
-                    * [```.show()```](http://api.jquery.com/show/) - display the matched elements
-                </section>
-
-
-
-                <section data-markdown>
-                    ## ```.append()``` and ```.prepend()```
-
-                    * [```.append()```](http://api.jquery.com/append/) - insert content, specified by the parameter, to the end of each element in the set of matched elements
-                    * [```.prepend()```](http://api.jquery.com/prepend/) - insert content, specified by the parameter, to the beginning of each element in the set of matched elements
-
-                    ```javascript
-                    // example usage
-                    $('h2').append(' STOP');
-                    $('h2').prepend('START ');
-                    $('ul').append('&lt;li>new entry&lt;/li>');
-                    $('ul').prepend('&lt;li>new entry&lt;/li>');
+                    class Account{
+                        constructor(balance = 0){
+                            this.balance = balance;
+                        }
+                        withdraw(amount){
+                            this.balance -= amount;
+                        }
+                        deposit(amount){
+                            this.balance += amount;
+                        }
+                        get_balance(){
+                            return this.balance;
+                        }
+                    }
                     ```
                 </section>
 
 
-                <section data-markdown id="html-text">
-                    ## ```.html()``` and ```.text()```
-
-                    * [```.html()```](http://api.jquery.com/html/) - get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element
-                    * [```.text()```](http://api.jquery.com/text/) - get the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements
+                <section data-markdown>
+                    ## Class Instantiation
 
                     ```javascript
-                    // example usage
-                    $('section#html-text').html();
-                    $('section#html-text').text();
-                    $('section#html-text h2').html('&lt;i>Heading&lt;/i>');
-                    $('section#html-text h2').text('&lt;i>Heading&lt;/i>');
+                    const account = new Account();
+                    account.get_balance();
+                    // 0
+                    const account2 = new Account(100);
+                    account2.get_balance();
+                    // 100
                     ```
                 </section>
 
 
-                <section data-markdown id="detach">
-                    ## ```.detach()```
+                <section data-markdown>
+                    ## Class Constructor
+                </section>
 
-                    * [```.detach()```](http://api.jquery.com/detach/) - remove the set of matched elements from the DOM
+
+                <section data-markdown>
+                    ## Getters and Setters
+                </section>
+
+
+                <section data-markdown>
+                    ## Subclassing
 
                     ```javascript
-                    // example usage
-                    $('li').detach();
-                    $('section#detach').detach();
+                    class SavingsAccount extends Account {
+                        constructor(balance = 0, overdraftLimit = 0) {
+                            super(balance);
+                            this.overdraftLimit = overdraftLimit;
+                        }
 
+                        withdraw(amount){
+                            if(this.balance - amount < this.overdraftLimit){
+                                throw 'Insufficient Funds';
+                            }else{
+                                super.withdraw(amount);
+                            }
+                        }
+                    }
                     ```
                 </section>
 
-                <section data-markdown data-background="#32332B">
-                    ## Event Loop
-                    ![Event Loop Overview](https://www.wikitechy.com/tutorials/node-js/img/nodejs-images/node-js-event-loop-event-driven-application.png)
-                </section>
-
                 <section data-markdown>
-                    ## jQuery Events Basics
-
-                    * **event** - user’s interaction, which can be handled
-                    * **event listener** -
-                    * **event handler** -
-                    * **event object** -
-                </section>
-
-
-                <section data-markdown>
-                    ## Event Types
-
-                    * **mouse events** - click, dblclick, mouseenter, mouseleave
-                    * **keyboard events** - keypress, keydown, keyup
-                    * **form events** - submit, change, focus, blur
-                    * **document/window events** - load, resize, scroll, unload
-
-                </section>
-
-
-                <section id="mouse-event-example">
-                    <h2>Mouse Event Example</h2>
-
-                    <pre>
-                        <code class="hljs javascript">// example code
-$(document).ready(function(){
-    $('section#mouse-event-example pre').on('mousemove', function(event){
-        let text = 'x: ' + event.clientX + ', y: ' + event.clientY;
-        $('section#mouse-event-example p').text(text);
-    });
-
-    $('section#mouse-event-example pre').on('mouseout', function(event){
-        $('section#mouse-event-example p').text('');
-    });
-
-});</code>
-                        </pre>
-
-                    <p>(move cursor to code)</p>
-
-                    <script>
-$(document).ready(function(){
-    $('section#mouse-event-example pre').on('mousemove', function(event){
-        $('section#mouse-event-example p').text('x: ' + event.clientX + ', y: ' + event.clientY);
-    });
-
-    $('section#mouse-event-example pre').on('mouseout', function(event){
-        $('section#mouse-event-example p').text('');
-    });
-});
-                    </script>
-                </section>
-
-
-                <section id="keyboard-event-example">
-                    <h2>Keyboard Event Example</h2>
-
-                    <input type="text" style="font-size: 1.5em" placeholder="Enter some text">
-                    <p>(nothing entered yet)</p>
-
-                    <pre><code class="hljs javascript">// example code
-$(document).ready(function(){
-    $('section#keyboard-event-example').on('keyup', function(event){
-        let content = $('section#keyboard-event-example input').val();
-        $('section#keyboard-event-example p').text(content);
-    });
-});</code></pre>
-
-                    <script>
-$(document).ready(function(){
-    $('section#keyboard-event-example').on('keyup', function(event){
-        let content = $('section#keyboard-event-example input').val();
-        $('section#keyboard-event-example p').text(content);
-    });
-});
-                    </script>
-                </section>
-
-
-                <section id="form-event-example">
-                    <h2>Form Event Example</h2>
-
-                    <form action="#">
-                        <input type="text" placeholder="Your name" style="font-size: 1.5em">
-                        <button type="submit" style="font-size: 1.5em">Send</button>
-                    </form>
-                    <p>&nbsp;</p>
-
-                    <pre><code class="hljs javascript">// example code
- $(document).ready(function(){
-    $('section#form-event-example').on('submit', function(event){
-        let name = $('section#form-event-example input').val();
-        if(name.trim().length == 0){
-            alert('Nothing entered');
-        }else{
-            $('section#form-event-example p').text('Welcome ' + name);
-        }
-        event.preventDefault();
-    });
-});</code></pre>
-
-                    <script>
-$(document).ready(function(){
-    $('section#form-event-example').on('submit', function(event){
-        let name = $('section#form-event-example input').val();
-        if(name.trim().length == 0){
-            alert('Nothing entered');
-        }else{
-            $('section#form-event-example p').text('Welcome ' + name);
-        }
-        event.preventDefault();
-    });
-});
-                    </script>
-                </section>
-
-
-                <section data-markdown>
-                    ### http://youmightnotneedjquery.com
-                </section>
-
-
-                <section data-markdown id="http-protocol">
-					# HTML5 101
-					### HTTP
-
-					Created by mirek
-                </section>
-
-
-                <section data-markdown id="http-intro">
-                    ## HTTP
-
-                    [Hypertext Transfer Protocol](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
-                </section>
-
-
-                <section data-markdown id="http-methods">
-                    ## Basic HTTP Methods
-
-                    * **`GET`** - vráti reprezentáciu zdroja na danej URL
-                    * **`HEAD`** - rovnako ako metóda `GET`, ale v odpovedi sa nebude nachádzať telo
-                    * **`POST`** - vytvorí nový zdroj z priložených dát
-                    * **`DELETE`** - odstráni zdroj s daným URL
-                    * **`PUT`** - aktualizuje zdroj na danej URL jeho úplným nahradením 
-                    * **`PATCH`** - aktualizuje vybrané časti zdroja na danej URL
-                </section>
-
-
-                <section data-markdown id="http-status-code">
-                    ## [HTTP Status Codes](https://httpstatuses.com/)
-                </section>
-
-
-                <section id="client-server">
-                    <h2>Client Server</h2>
-
-                    <div style="width: 35%; display: inline-flex;">
-                        <pre><code class="lang-bash hljs"># Client Request
-GET / HTTP/1.1
-Host: www.example.com</code></pre>
-                    </div>
-
-                    <div style="width: 55%; display: inline-flex;">
-                        <pre><code class="lang-bash hljs"># Server Response
-HTTP/1.1 200 OK
-Date: Thu, 22 Jun 2017 09:05:37 GMT
-Server: Apache/2.2.22 (Ubuntu)
-Last-Modified: Wed, 05 Feb 2014 12:13:29 GMT
-ETag: "a1469-481-4f1a7af493ac4"
-Accept-Ranges: bytes
-Content-Length: 1153
-Vary: Accept-Encoding
-Content-Type: text/html
-X-Pad: avoid browser bug
-
-&lt;!DOCTYPE html&gt;
-...
-Connection closed by foreign host.
-                        </code></pre>
-                    </div>
-                </section>
-
-                <section data-markdown id="http-lab">
-                    ## Lab: REST with Postman
-
-                    Vyskúšajte si jednoduché dopyty s aplikáciou Postman na serveri [http://httpbin.org/](http://httpbin.org/).
-                </section>
-
-
-				<section data-markdown id="Ajax">
-					# HTML5 101
-					### Ajax
-
-					Created by mirek
-				</section>
-
-
-                <section data-markdown>
-                    ## Ajax
-
-                    Asynchronous JavaScript and XML
-                </section>
-
-
-                <section data-markdown>
-                    ## JSON
-                </section>
-
-
-                <section data-markdown>
-                    http://api.openweathermap.org/data/2.5/weather?units=metric&APPID=3718d7f90e7b081ca8f46aa4305c05ea&q=kosice
-                </section>
-
-
-				<section>
-                    <div style="width: 35%; display: inline-flex;">
-                        <div id="SearchActivity" class="activity">
-                            <br><br><br><br>
-                            <input type="text" id="city">
-                            <br><br>
-
-                            <div id="search_button">Search</div>
-
-                        </div>
-
-                        <div id="ForecastActivity" class="activity">
-                            <br><br>
-                            <b><span id="location"></b><br/>
-                            Temp: <span id="temp"></span><br/>
-                            Wind: <span id="wind"></span><br/>
-                            Humidity: <span id="humidity"></span>
-                            <br><br>
-                            <div id="back_button">Back</div>
-                        </div>
-                    </div>
-
-                    <div style="width: 55%; display: inline-flex;">
-                        <pre><code class="lang-javascript hljs">let url = 'http://api.openweathermap.org/' + 
-          'data/2.5/weather?units=metric';
-let city = 'kosice';
-let appid = '08f5d8fd385c443eeff6608c643e0bc5';
-
-$.ajax({
-  url: url + '&q=' + city + '&APPID=' + appid,
-  success: function(data) {
-    console.log(data.name);
-    console.log(data.main.temp + '°C');
-    console.log(data.wind.speed + 'm/s ' + 
-        data.wind.deg + '°');
-    console.log(data.main.humidity + '%');
-  }
-});</code></pre>
-                    </div>
-				</section>
-
-
-                <section data-markdown id="cors">
-                    ## [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)
+                    ## Super-Constructor Calls
                 </section>
 
 
