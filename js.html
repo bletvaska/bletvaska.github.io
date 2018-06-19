@@ -172,7 +172,7 @@
                     ## Object Literal
 
                     ```javascript
-                    let person = {
+                    const person = {
                         name: 'Sherlock',
                         surname: 'Holmes',
                         getName: function(){
@@ -214,7 +214,7 @@
                     }
 
                     // usage
-                    let person = new Person('Sherlock', 'Holmes');
+                    const person = new Person('Sherlock', 'Holmes');
                     ```
                 </section>
 
@@ -260,7 +260,6 @@
 
                 <section data-markdown>
                     ## Prototype Chain
-
                 </section>
 
 
@@ -299,16 +298,16 @@
                     ```javascript
                     class Account{
                         constructor(balance = 0){
-                            this.balance = balance;
+                            this._balance = balance;
                         }
                         withdraw(amount){
-                            this.balance -= amount;
+                            this._balance -= amount;
                         }
                         deposit(amount){
-                            this.balance += amount;
+                            this._balance += amount;
                         }
-                        get_balance(){
-                            return this.balance;
+                        getBalance(){
+                            return this._balance;
                         }
                     }
                     ```
@@ -320,10 +319,10 @@
 
                     ```javascript
                     const account = new Account();
-                    account.get_balance();
+                    account.getBalance();
                     // 0
                     const account2 = new Account(100);
-                    account2.get_balance();
+                    account2.getBalance();
                     // 100
                     ```
                 </section>
@@ -335,22 +334,17 @@
 
 
                 <section data-markdown>
-                    ## Getters and Setters
-                </section>
-
-
-                <section data-markdown>
                     ## Subclassing
 
                     ```javascript
                     class SavingsAccount extends Account {
                         constructor(balance = 0, overdraftLimit = 0) {
                             super(balance);
-                            this.overdraftLimit = overdraftLimit;
+                            this._overdraftLimit = overdraftLimit;
                         }
 
                         withdraw(amount){
-                            if(this.balance - amount < this.overdraftLimit){
+                            if(this.balance - amount < this._overdraftLimit){
                                 throw 'Insufficient Funds';
                             }else{
                                 super.withdraw(amount);
@@ -358,6 +352,47 @@
                         }
                     }
                     ```
+                </section>
+
+
+                <section data-markdown>
+                    ## Getters and Setters I.
+
+                    ```javascript
+                    class SavingsAccount extends Account {
+                        // class content
+
+                        get overdraftLimit(){
+                            return this._overdraftLimit;
+                        }
+
+                        set overdraftLimit(amount){
+                            if(amount > 0){
+                                throw 'Overdraft limit must be negative.';
+                            }
+
+                            this._overdraftLimit = amount;
+                        }
+                    }
+                    ```
+                </section>
+
+                <section data-markdown>
+                    ## Getters and Setters II.
+
+                    ```javascript
+                    const account = new SavingsAccount();
+
+                    account.overdraftLimit = 100;
+                    // Error: Overdraft limit must be negative.
+                    account.overdraftLimit;
+                    // 0
+
+                    account.overdraftLimit = -100;
+                    account.overdraftLimit;
+                    // -100
+                    ```
+
                 </section>
 
                 <section data-markdown>
