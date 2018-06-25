@@ -1,0 +1,127 @@
+<!doctype html>
+
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process</title>
+
+		<meta name="description" content="Introduction to JavaScript.">
+		<meta name="author" content="mirek">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<style>
+		.reveal section img {
+			border:0;
+			background-color: transparent;
+		}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+                <section data-markdown id="title">
+                    ## Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process
+
+                    miroslav.binas@tuke.sk / [DisCo 2018](http://disconference.eu/)
+				</section>
+
+
+				<section data-markdown id="introduction">
+					<script type="text/template">
+					## Two topics
+
+					1. data analytics <!-- .element: class="fragment" data-fragment-index="1" -->
+					2. plagiarism detection <!-- .element: class="fragment" data-fragment-index="2" -->
+				</script>
+
+				</section>
+
+
+				<section data-markdown>
+					### It has never been easier to cheat than today.
+				</section>
+
+
+				<section data-markdown id="overview">
+					## _Programming_ Course
+
+					* introductory programming course (known as _CS0_ or _CS1_)
+					* 2nd semester of Bc study
+					* more than _500_ Students
+					* _5_ projects during semester
+				</section>
+
+				<section data-markdown id="data-science-process">
+					## Data Science Process
+
+					![Data Science Process](images/data.analytics.process.png)
+				</section>
+
+
+                <section data-markdown>
+                    ## Questions?
+				</section>
+
+
+                <section data-markdown id="home">
+					### http://bit.ly/2JExnbs
+				</section>
+			</div>
+
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
