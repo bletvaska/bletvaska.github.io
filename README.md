@@ -18,7 +18,7 @@ Presentation related to my introductory course about JavaScript.
 
 Presentations from various conferences, where I had some talks.
 
+* [DisCo 2018](http://disconference.eu/) - [Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process](http://bit.ly/2KkkwaK)
 * OSS Conf 2018 - Ako písať dobré bash skripty
 * OSS Conf 2018 - Zostavovanie LaTeX dokumentov ináč a využitie dedičnosti pri tvorbe šablón
 * OSS Conf 2018 - Čo všetko som sa pri programovaní Arduina naučil zle
-* DisCo 2018 - Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process
