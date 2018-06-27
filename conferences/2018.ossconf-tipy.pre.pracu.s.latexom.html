@@ -47,7 +47,7 @@
                 <section data-markdown id="introduction">
                     ## Zostavovanie LaTeX dokumentov ináč a využitie dedičnosti pri tvorbe šablón
 
-                    mirek @ [OSS Conf 2018](http://ossconf.soit.sk/)
+                    miroslav.binas@tuke.sk / **[OSS Conf 2018](http://ossconf.soit.sk/)**
 				</section>
 
 				<section data-markdown id="home">
@@ -193,6 +193,30 @@
 					* babel - language can differ
 				</section>
 
+				<section data-markdown id="translation">
+					## Translations
+
+					* [**babel**](https://ctan.org/pkg/babel) - Multilingual support
+					```tex
+					\usepackage[slovak,english]{babel}
+					\addto\captionsslovak{
+						\def\keywordstname{Kľúčové slová}
+					}
+					\selectlanguage{slovak}
+					\keywordsname{}
+					```
+
+					* [**translations**](https://ctan.org/pkg/translations) - I18n of $\LaTeX2ε$ packages
+					```tex
+					\usepackage{translations}
+					\DeclareTranslationFallback{keywords}{Keywords}
+					\DeclareTranslation{slovak}{keywords}{Kľúčové slová}
+					\GetTranslationFor{slovak}{keywords}
+					\selectlanguage{english}
+					\GetTranslation{keywords}
+					```
+				</section>
+
 				<section data-markdown>
 					## Handling Bibliography
 
@@ -205,7 +229,7 @@
 				</section>
 
 				<section data-markdown>
-					podakovat onemu za pomoc
+					## Dedicated to Pavel Stříž
 				</section>
 
 
