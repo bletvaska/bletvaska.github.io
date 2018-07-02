@@ -1,124 +1,80 @@
 <!doctype html>
-
 <html lang="en">
+<head>
+    <meta charset="utf-8">
 
-	<head>
-		<meta charset="utf-8">
+    <title>Ako písať dobré bash skripty</title>
 
-		<title>The JavaScript 101 Course</title>
+    <meta name="description" content="Introduction to JavaScript.">
+    <meta name="author" content="mirek">
 
-		<meta name="description" content="Introduction to JavaScript.">
-		<meta name="author" content="mirek">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
-
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-
-        <link rel="stylesheet" href="http://it4kt.cnl.sk/c/smart/2015/css/mrilko.css">
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-
-	<body>
-
-		<div class="reveal">
-
-			<div class="slides">
-                <section data-markdown id="home">
-                    ### http://bit.ly/2JExnbs
-                </section>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
 
 
-                <section data-markdown id="introduction">
-                    ## Ako písať dobré bash skripty
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
 
-                    mirek @ [OSS Conf 2018](http://ossconf.soit.sk/)
-				</section>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-markdown id="introduction">
+                ## Ako písať dobré bash skripty
+
+                miroslav.binas@tuke.sk / [**OSS Conf 2018**](http://ossconf.soit.sk/)
+            </section>
 
 
+            <section data-markdown>
+                ## Questions?
+            </section>
+        </div>
 
-                <section data-markdown>
-                    ## Questions?
-                </section>
-			</div>
+    </div>
 
-		</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
-        <script src="http://it4kt.cnl.sk/c/smart/2015/js/mrilko.js"></script>
+    <script>
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
-					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
-				]
-			});
-
-            Reveal.addEventListener('show-dom', function(event){
-                console.log("show dom");
-            });
-
-            Reveal.addEventListener('constructor-function', function(event){
-                console.log("constructor-function");
-                window.Person = function(name, surname, sex='M'){
-                    this.name = name;
-                    this.surname = surname;
-                    this.sex = sex;
-
-                    this.getName = function(){
-                        return this.name + ' ' + this.surname;
-                    };
-                }
-            });
-
-            Reveal.addEventListener('person-prototype', function(event){
-                console.log("person-prototype");
-                window.Person = function(name, surname, sex='M'){
-                    this.name = name;
-                    this.surname = surname;
-                    this.sex = sex;
-                };
-
-                Person.prototype.getName = function(){
-                    return this.name + ' ' + this.surname;
-                };
-            });
-
-		</script>
-	</body>
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [
+                { src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '../reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+</body>
 </html>
