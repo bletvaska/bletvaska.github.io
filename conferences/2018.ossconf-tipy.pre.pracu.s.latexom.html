@@ -30,10 +30,6 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
-        <link rel="stylesheet" href="http://it4kt.cnl.sk/c/smart/2015/css/mrilko.css">
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -45,16 +41,21 @@
 
 			<div class="slides">
                 <section data-markdown id="introduction">
-                    ## Zostavovanie LaTeX dokumentov ináč a využitie dedičnosti pri tvorbe šablón
+                    ## Zostavovanie $\LaTeX$ dokumentov ináč a využitie dedičnosti pri tvorbe šablón
 
                     miroslav.binas@tuke.sk / **[OSS Conf 2018](http://ossconf.soit.sk/)**
 				</section>
 
 				<section data-markdown id="home">
 					### Me, Myself and $\LaTeX$
-					
+
 					* I am not a regular $\LaTeX$ guy ;)
 						* I am only ocasional $\LaTeX$ guy
+					* template for diploma/bachelor thesis in 2016
+						* hard to maintain (by email only, once upon a time)
+						* big plans...
+					* almost gave up, when I took a closer look
+					* the result: https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex
                 </section>
 
 
@@ -65,7 +66,7 @@
 					* similar to `make` utility
 					* determines dependencies automatically
 					* can run continuously with suitable previewer
-						* `latex` is rerun whenever one of the source files is modified
+						* `latexmk` is rerun whenever one of the source files is modified
 						* preview is updated automatically
 				</section>
 
@@ -221,30 +222,28 @@
 				<section data-markdown>
 					## Handling Bibliography
 
-					http://www.ottobib.com/
+					* BibTex/BibLaTeX/Biber
+					* iso-690 positive
+					* http://www.ottobib.com/
 				</section>
 
-				<section data-markdown>
-					## Install New Document Class
-
-				</section>
 
 				<section data-markdown>
 					## Dedicated to Pavel Stříž
 				</section>
 
 
-
                 <section data-markdown>
-                    ## Questions?
+					## Questions?
+					(**http://bit.ly/2yYoDrA**)
                 </section>
 			</div>
 
 		</div>
 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
-        <script src="http://it4kt.cnl.sk/c/smart/2015/js/mrilko.js"></script>
 
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
