@@ -401,7 +401,92 @@
                     account.overdraftLimit;
                     // -100
                     ```
+                </section>
 
+                <section data-markdown id="json">
+                    ## JavaScript 101
+                    ### JSON
+                </section>
+
+                <section data-markdown>
+                    ## Overview
+
+                    * [JSON](https://www.json.org/) - JavaScript Object Notation
+                    * lightweight data-interchange format
+                        * plain text format
+                        * "self-describing" (human readable)
+                        * easy to understand
+                        * language and platform independent
+                </section>
+
+                <section data-markdown>
+                    ## JSON Example
+
+                    ```javascript
+                    {
+                        "firstName": "Sherlock",
+                        "lastName": "Holmes",
+                        "age": 42,
+                        "address": {
+                          "street": "221b, Baker Street",
+                          "city": "London",
+                          "country": "UK"
+                        },
+                        "cases": [
+                           "A Study in Scarlet (1887)",
+                           "The Sign of the Four (1890)",
+                           "A Scandal in Bohemia (1892)"
+                        ]
+                      }
+                    ```
+                </section>
+
+                <section data-markdown>
+                    ## [**`JSON.stringify()`**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+                    * converts a JavaScript value to a JSON string
+
+                    ```javascript
+                    JSON.stringify({ x: 5, y: 6 });
+                    // '{"x":5,"y":6}'
+                    ```
+                </section>
+
+
+                <section data-markdown>
+                    ## [**`JSON.parse()`**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
+
+                    * parses a JSON string, constructing the JavaScript value or object described by the string
+
+                    ```javascript
+                    var json = '{"result": true, "count": 42}';
+                    obj = JSON.parse(json);
+
+                    console.log(obj.count);
+                    // 42
+
+                    console.log(obj.result);
+                    // true
+                    ```
+                </section>
+
+                <section data-markdown>
+                    ## JavaScript 101
+                    ### LocalStorage
+                </section>
+
+                <section data-markdown>
+                    ## Introduction
+
+                    * spôsob, akým môžu webové stránky ukladať údaje vo forme key/value párov lokálne u klienta
+                    údaje sú trvácne
+                    nie sú posielané serveru
+                    natívna implementácia v klientovi
+                    * max. limit horný limit 5MB
+                </section>
+
+                <section data-markdown>
+                    ## JavaScript 101
+                    ### Ajax
                 </section>
 
                 <section data-markdown>

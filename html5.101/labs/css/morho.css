@@ -1,0 +1,108 @@
+
+
+.bold {
+    font-weight: bold;
+}
+
+#title {
+    font-size: 99px;
+    color: orange;
+}
+
+.red {
+    color: red;
+}
+
+
+h1 {
+    color: magenta;
+    font-size: 26pt;
+    font-weight: bold;
+    background-color: green;
+}
+
+img {
+    /* border: 15px solid yellow; */
+    border-width: 15px;
+    border-style: solid;
+    border-color: yellow;
+}
+
+a {
+    color: blue;
+}
+
+a:visited {
+    color: orange;
+}
+
+a:hover {
+    color: green;
+    /* font-size: 20pt; */
+    font-weight: bold;
+}
+
+/* p:nth-of-type(2){
+    font-weight: bold;
+} */
+
+p:nth-child(5){
+    font-weight: bold;
+    border: 3px solid red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* h1 {
+    font-size: 26pt;
+    color: magenta;
+    background-color: green;
+}
+
+img {
+    border: 20px solid black;
+}
+
+a:hover{
+    color: green;
+}
+
+p:nth-of-type(3){
+    font-weight: bold;
+}
+
+.red{
+    color: red;
+}
+ */
