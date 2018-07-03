@@ -37,10 +37,22 @@
 <body>
     <div class="reveal">
         <div class="slides">
-            <section data-markdown id="introduction">
+            <section data-markdown>
                 ## Ako písať dobré bash skripty
 
                 miroslav.binas@tuke.sk / [**OSS Conf 2018**](http://ossconf.soit.sk/)
+            </section>
+
+
+            <section data-markdown>
+                ## Miesto agendy
+
+                * nie som nadšený _bash ~~striptér~~ skriptér_
+                    * sú situácie, kedy sa použitie `bash`-u vyslovene nehodí
+                * je to však fantastický nástroj na prepájanie rozličných riešení
+                    * _glue_
+                    * _swiss army knife_ každého _DevOps_-áka
+                * nasledujúci zoznam odporúčaní nie je kompletný
             </section>
 
 
@@ -162,6 +174,8 @@ echo "this line will be executed too"
 
             <section data-markdown>
                 * miesto písania všetkého do jedného súboru ho uložte do viacerých (modulov)
+                    * jednoduchšia údržba a navigácia
+                    * logicky uzavretá (a oddelená) funkcionalita
                 * vkladanie/rozšírenie existujúceho skriptu o nový docielite príkazom `source`
                   ```bash
                   # ...
@@ -176,6 +190,7 @@ echo "this line will be executed too"
             </section>
 
             <section data-markdown>
+                * jedna z najčastejších (nevedomých) chýb
                 * najčastejšie `grep`, `awk`, `sed`, `bc`, `expr`, napr.:
                   ```bash
                   size=$(du -hs images/ | awk '{print $1}')
@@ -191,20 +206,20 @@ echo "this line will be executed too"
 
 
             <section data-markdown>
-                ## #X Píšte skripty tak, aby sa dali testovať
+                ## #7 Píšte skripty tak, aby sa dali testovať
             </section>
 
 
             <section data-markdown>
-                * všetko uzavrieť do funkcie:
+                * "mocný" prístup - všetko uzavrieť do funkcie
                   ```bash
                   #!/usr/bin/env bash
 
-                  _hello(){
+                  main(){
                       echo "Hello world!"
                   }
 
-                  _hello
+                  main
                   ```
                 * existuje mnoho nástrojov pre podporu testovania v bash-i (napr. [bats](https://github.com/sstephenson/bats))
                   ```bash
@@ -219,7 +234,7 @@ echo "this line will be executed too"
 
 
             <section data-markdown>
-                ## #X Používajte linter
+                ## #8 Používajte linter
             </section>
 
 
@@ -233,6 +248,7 @@ echo "this line will be executed too"
 
                 * Shell script analysis tool
                 * obsahuje tzv. [galériu zlého kódu](https://github.com/koalaman/shellcheck/blob/master/README.md#user-content-gallery-of-bad-code), ktorá vám ukáže, čo všetko vám môže `ShellCheck` pomôcť identifikovať
+                * nachádza sa vo vašej distribúcii
             </section>
 
 
@@ -243,11 +259,24 @@ echo "this line will be executed too"
                   ```bash
                   readonly var='immutable value'
                   ```
+                * písanie vlastných funkcií
+                  ```bash
+                  _greetings(){
+                      local name="$1"
+                      printf "%s\n" "${name}"
+                  }
+                  ```
             </section>
 
 
             <section data-markdown>
                 ## Questions?
+            </section>
+
+
+            <section data-markdown>
+                ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/2tWEK3e&size=300x300)
+
                 (**http://bit.ly/2tWEK3e**)
             </section>
         </div>
