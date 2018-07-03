@@ -51,7 +51,7 @@
 
             <section data-markdown>
                 <script type="text/template">
-                    ## _Hello world!_
+                    ### _Hello world!_
 
                     ```bash
                     #!/bin/bash
@@ -65,7 +65,7 @@
 
 
             <section data-markdown>
-                ## Prenositeľný _Hello world!_
+                ### Prenositeľný _Hello world!_
 
                 ```bash
                 #!/usr/bin/env bash
@@ -84,7 +84,7 @@
             </section>
 
             <section data-markdown>
-                ## Zlý skript
+                ### Zlý skript
 
                 ```bash
                 #!/usr/bin/env bash
@@ -97,7 +97,7 @@
 
 
             <section data-markdown>
-                ## Začnite takto
+                ### Začnite takto
 ```bash
 #!/usr/bin/env bash
 
@@ -121,6 +121,7 @@ echo "this line will be executed too"
 
 
             <section data-markdown>
+                * _escaping_
                 * úvodzovky pomôžu pri premenných, ktoré obsahujú medzery
                 * zložené zátvorky nie sú úplne potrebné, ale používajú sa pri tzv. _bash expansion_
                     * interpolácia reťazcov - `"${variable}.yml"`
@@ -131,19 +132,47 @@ echo "this line will be executed too"
 
             <section data-markdown>
                 ## #4 Používajte `[[ ]]` miesto `[ ]`
+
+                (`[[` - rozšírenie bash-u, `[` - skrátený zápis príkazu `test`)
             </section>
 
             <section data-markdown>
-                * `[[` rozšírenie bash-u, `[` je skrátený zápis príkazu `test`
+                ### Mocné vychytávky
+
                 * premenné netreba uzatvárať do úvodzoviek
                     ```bash
-                    [[ -f $file ]]  # [ -f "$file" ]
+                    [[ -f $file ]]  # vs. [ -f "$file" ]
+                    ```
+                * podporuje operátory `&&` a `||` a porovnávanie reťazcov pomocou operátorov `<` a `>`
+                * zaviedol operátor `=~` pre porovnávanie na základe regulárnych výrazov
+                    ```bash
+                    [[ $answer =~ ^y(es)?$ ]]
+                    ```
+                * podporuje _globbing_
+                    ```bash
+                    [[ $answer = y* ]]
                     ```
             </section>
 
 
             <section data-markdown>
-                ## #X Nepoužívajte nástroje, ktorých funkcie `bash` zvláda
+                ## #5 Píšte skripty modulárne
+            </section>
+
+
+            <section data-markdown>
+                * miesto písania všetkého do jedného súboru ho uložte do viacerých (modulov)
+                * vkladanie/rozšírenie existujúceho skriptu o nový docielite príkazom `source`
+                  ```bash
+                  # ...
+                  source "${DATADIR}/helper.sh"
+                  # ...
+                  ```
+            </section>
+
+
+            <section data-markdown>
+                ## #6 Nepoužívajte nástroje, ktorých funkcie `bash` zvláda
             </section>
 
             <section data-markdown>
@@ -157,6 +186,53 @@ echo "this line will be executed too"
                   size=${array[0]}
                   ```
                 * namiesto `seq 1 10` použite `{1..10}`
+                * používajte `$()` miesto ``
+            </section>
+
+
+            <section data-markdown>
+                ## #X Píšte skripty tak, aby sa dali testovať
+            </section>
+
+
+            <section data-markdown>
+                * všetko uzavrieť do funkcie:
+                  ```bash
+                  #!/usr/bin/env bash
+
+                  _hello(){
+                      echo "Hello world!"
+                  }
+
+                  _hello
+                  ```
+                * existuje mnoho nástrojov pre podporu testovania v bash-i (napr. [bats](https://github.com/sstephenson/bats))
+                  ```bash
+                  #!/usr/bin/env bats
+
+                  @test "when new folder is created, then exit status is 0" {
+                    run mkdir "$DIR"
+                    assert_equal "$status" 0
+                  }
+                  ```
+            </section>
+
+
+            <section data-markdown>
+                ## #X Používajte linter
+            </section>
+
+
+            <section data-markdown>
+                > **Linter** je program, ktorý skontroluje kód na prítomnosť _programátorských_ a _štýlových_ chýb, čím pomáha zvýšiť kvalitu kódu.
+            </section>
+
+
+            <section data-markdown>
+                ### [ShellCheck](https://www.shellcheck.net/)
+
+                * Shell script analysis tool
+                * obsahuje tzv. [galériu zlého kódu](https://github.com/koalaman/shellcheck/blob/master/README.md#user-content-gallery-of-bad-code), ktorá vám ukáže, čo všetko vám môže `ShellCheck` pomôcť identifikovať
             </section>
 
 
@@ -164,14 +240,15 @@ echo "this line will be executed too"
                 ## Ostatné odporúčania
 
                 * deklarácia konštánt
-                    ```bash
-                    readonly var='immutable value'
-                    ```
+                  ```bash
+                  readonly var='immutable value'
+                  ```
             </section>
 
 
             <section data-markdown>
                 ## Questions?
+                (**http://bit.ly/2tWEK3e**)
             </section>
         </div>
 
