@@ -73,6 +73,12 @@
 			</section>
 
 
+			<section data-markdown>
+				![the Arduino Guy](images/pavol.hudacko.jpg)
+				* Paľo - _the Arduino Guy_ ;)
+			</section>
+
+
 			<section data-markdown id="problem-1">
 				## 1. Nejednotnosť v pomenovávaní
 			</section>
@@ -153,7 +159,7 @@ void loop() {
 			</section>
 
 
-			<section data-markdown id="problem-2">
+			<section data-markdown id="problem-3">
 				## 3. Vynútené používanie globálnych premenných
 			</section>
 
@@ -211,7 +217,8 @@ int main(){
                 ```cpp
                 // ARDUINO_HOME/hardware/arduino/avr/cores/arduino/main.cpp
 
-                #ifndef ADVANCED
+                #ifndef _ADVANCED
+
                 int main(){
                    // runs once
                    setup();
@@ -223,11 +230,33 @@ int main(){
                 }
                 #endif
                 ```
-            </section>
+			</section>
+
+
+			<section data-markdown>
+				## `project.ino`
+				```cpp
+				#define _ADVANCED
+
+				int main(){
+					// setup
+					Serial.begin(9600);
+					pinMode(LED_BUILTIN, OUTPUT);
+
+					// loop
+					for(;;){
+						digitalWrite(LED_BUILTIN, HIGH);
+						delay(1000);
+						digitalWrite(LED_BUILTIN, LOW);
+						delay(1000);
+					}
+				}
+				```
+			</section>
 
 
             <section data-markdown>
-                ## 1. Atribút `weak`
+                ## 2. Atribút `weak`
 
                 ```cpp
                 // ARDUINO_HOME/hardware/arduino/avr/cores/arduino/main.cpp
@@ -243,7 +272,12 @@ int main(){
                 }
                 #endif
                 ```
-            </section>
+			</section>
+
+
+			<section data-markdown>
+				## Ta už nebaví :-(
+			</section>
 
 
 			<section data-markdown>

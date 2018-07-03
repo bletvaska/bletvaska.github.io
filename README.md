@@ -18,6 +18,8 @@ Presentation related to my introductory course about JavaScript.
 
 Presentations from various conferences, where I had some talks.
 
+### Year 2018
+
 * [DisCo 2018](http://disconference.eu/) - [Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process](http://bit.ly/2KkkwaK)
 * [OSS Conf 2018](http://ossconf.soit.sk/) - [Zostavovanie LaTeX dokumentov ináč a využitie dedičnosti pri tvorbe šablón](http://bit.ly/2yYoDrA)
 * [OSS Conf 2018](http://ossconf.soit.sk/) - [Ako písať dobré bash skripty](http://bit.ly/2tWEK3e)
