@@ -305,6 +305,9 @@ int main(){
 			history: true,
 			center: true,
 
+			// your allotted time for presentation
+  			allottedTime: 20 * 60 * 1000, // 20 minutes
+
 			transition: 'slide', // none/fade/slide/convex/concave/zoom
 
 			// More info https://github.com/hakimel/reveal.js#dependencies
@@ -314,7 +317,8 @@ int main(){
 				{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 				{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 				{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
-				{ src: '../reveal.js/plugin/notes/notes.js', async: true }
+				{ src: '../reveal.js/plugin/notes/notes.js', async: true },
+				{ src: '../reveal.js/plugin/elapsed-time-bar/elapsed-time-bar.js' }
 			]
 		});
 	</script>
