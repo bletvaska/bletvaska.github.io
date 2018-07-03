@@ -45,6 +45,132 @@
 
 
             <section data-markdown>
+                ## #1 Nezabúdajte na prenositeľnosť!
+            </section>
+
+
+            <section data-markdown>
+                <script type="text/template">
+                    ## _Hello world!_
+
+                    ```bash
+                    #!/bin/bash
+
+                    echo "Hello world!"
+                    ```
+
+                    ## zle Zle ZLE! <!-- .element: class="fragment" data-fragment-index="1" -->
+				</script>
+            </section>
+
+
+            <section data-markdown>
+                ## Prenositeľný _Hello world!_
+
+                ```bash
+                #!/usr/bin/env bash
+
+                echo "Hello world!"
+                ```
+
+                * `env` - run a program in a modified environment
+                    * ak je parametrom príkaz, nájde prvú binárku v premennej `PATH` a spustí ju
+                * spoľah na umiestnenie `/usr/bin/env`
+            </section>
+
+
+            <section data-markdown>
+                ## #2 Pri výskyte chyby sa musí skript zastaviť!
+            </section>
+
+            <section data-markdown>
+                ## Zlý skript
+
+                ```bash
+                #!/usr/bin/env bash
+
+                echo "start here"
+                VAR = "syntax error on this line"
+                echo "this line will be executed too"
+                ```
+            </section>
+
+
+            <section data-markdown>
+                ## Začnite takto
+```bash
+#!/usr/bin/env bash
+
+set -o errexit  # stop when error occurs
+set -o pipefail # if not, expressions like `error here | true`
+                # will always succeed
+set -o nounset  # detects uninitialised variables
+set -o xtrace   # prints every expression
+                # before executing it (debugging)
+
+echo "start here"
+VAR = "syntax error on this line"
+echo "this line will be executed too"
+```
+            </section>
+
+
+            <section data-markdown>
+                ## #3 Uzatvárajte premenné do `"${variable}"`
+            </section>
+
+
+            <section data-markdown>
+                * úvodzovky pomôžu pri premenných, ktoré obsahujú medzery
+                * zložené zátvorky nie sú úplne potrebné, ale používajú sa pri tzv. _bash expansion_
+                    * interpolácia reťazcov - `"${variable}.yml"`
+                    * predvolená (fallback) hodnota - `"${variable:-something_else}"`
+                    * náhrada reťazcov - `"${variable//from/to}"`
+            </section>
+
+
+            <section data-markdown>
+                ## #4 Používajte `[[ ]]` miesto `[ ]`
+            </section>
+
+            <section data-markdown>
+                * `[[` rozšírenie bash-u, `[` je skrátený zápis príkazu `test`
+                * premenné netreba uzatvárať do úvodzoviek
+                    ```bash
+                    [[ -f $file ]]  # [ -f "$file" ]
+                    ```
+            </section>
+
+
+            <section data-markdown>
+                ## #X Nepoužívajte nástroje, ktorých funkcie `bash` zvláda
+            </section>
+
+            <section data-markdown>
+                * najčastejšie `grep`, `awk`, `sed`, `bc`, `expr`, napr.:
+                  ```bash
+                  size=$(du -hs images/ | awk '{print $1}')
+                  ```
+                  vyriešiť pomocou
+                  ```bash
+                  array=($(du -hs images/))
+                  size=${array[0]}
+                  ```
+                * namiesto `seq 1 10` použite `{1..10}`
+            </section>
+
+
+            <section data-markdown>
+                ## Ostatné odporúčania
+
+                * deklarácia konštánt
+                    ```bash
+                    readonly var='immutable value'
+                    ```
+            </section>
+
+
+            <section data-markdown>
                 ## Questions?
             </section>
         </div>
