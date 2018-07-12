@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>IT Akademia</title>
+
+	<base href="https://bletvaska.github.io/">
+
+	<meta name="description" content="Introduction to JavaScript.">
+	<meta name="author" content="mirek">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<div class="slides">
+			<section data-markdown id="title">
+				## Začíname s IoT
+
+				miroslav.binas@tuke.sk / [**IT Akadémia**](http://itakademia.sk/sk/domov/)
+			</section>
+
+
+			<section data-markdown id="introduction">
+				## Wall
+				
+				http://bit.ly/2N3iuwv
+			</section>
+
+			<section data-markdown id="getting-started-with-rpi">
+				![Getting Started with Raspberry Pi](https://projects-static.raspberrypi.org/projects/raspberry-pi-getting-started/6adfaf6cdb631126c7992ae2737d06d45f58002f/en/images/getting-started-with-raspberry-pi.png)
+
+				### [Začíname s Raspberry Pi](https://projects.raspberrypi.org/en/projects/raspberry-pi-getting-started)
+			</section>
+
+			<section data-markdown id="connect-your-pi">
+				![Zapojte svoje RPi](https://projects-static.raspberrypi.org/projects/raspberry-pi-getting-started/6adfaf6cdb631126c7992ae2737d06d45f58002f/en/images/pi-plug-in.gif)
+
+				### Zapojte svoje Raspberry Pi
+			</section>
+
+
+			<section data-markdown id="magpi">
+				![Mag Pi](https://www.framboise314.fr/wp-content/uploads/2013/01/titre_magpi.png)
+				https://www.raspberrypi.org/magpi/
+			</section>
+
+
+			<section data-markdown id="hackspace">
+				![HackSpace](https://www.raspberrypi.org/magpi/wp-content/uploads/2017/11/Magazine-For-Makers.jpg)
+				https://hackspace.raspberrypi.org/
+			</section>
+
+
+			<section data-markdown id="hello world">
+				![Hello World](https://pbs.twimg.com/profile_images/819893729100238848/WcHfDwb7.jpg)
+
+				https://helloworld.raspberrypi.org/
+			</section>
+
+			<section data-markdown id="code-club">
+				![Code Club](https://blogcodeclub.files.wordpress.com/2017/08/logo-codeclub.png?w=646)
+
+				https://www.codeclub.org.uk/
+			</section>
+
+			<section data-markdown id="the-project">
+				## The Project
+				(https://www.codeclub.org.uk/projects)
+			</section>
+
+
+			<section data-markdown id="getting-started-with-minecraft-pi">
+				![Getting Started with Minecraft Pi](https://projects-static.raspberrypi.org/projects/getting-started-with-minecraft-pi/514dbc59d4a34923c07b34e798e3a2972c1d26ff/en/images/banner.png)
+
+				### [Začíname s Minecraft Pi](https://projects.raspberrypi.org/en/projects/getting-started-with-minecraft-pi)
+			</section>
+
+			<section data-markdown>
+				## Otázky?
+			</section>
+
+			<!-- <section data-markdown>
+				![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/http://bit.ly/2u1sPBh&size=300x300)
+
+				(**http://bit.ly/2u1sPBh**)
+			</section> -->
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
+
+	<script>
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			// your allotted time for presentation
+  			allottedTime: 20 * 60 * 1000, // 20 minutes
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '/reveal.js/plugin/notes/notes.js', async: true },
+				{ src: '/reveal.js/plugin/elapsed-time-bar/elapsed-time-bar.js' }
+			]
+		});
+	</script>
+</body>
+</html>
