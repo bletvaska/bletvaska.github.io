@@ -141,11 +141,11 @@
 
                 <!--
                     - html dokument sa sklada z mnoziny html znaciek / elementov
-                    - kazda znacka ma svoje meno, ktore piseme medzi znaky < a >
-                    - to, co sa nachadza medzi znackami, tvori obsah znacky
+                    - kazdy element ma svoje meno, ktore piseme medzi znaky < a >
+                    - to, co sa nachadza vo vnutri elementu, tvori jeho obsah
                 -->
                 <section data-transition="none">
-                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">         <znacka>Hello world</znacka></code></pre>
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html">        <element>Hello world</element></code></pre>
                 </section>
 
 
@@ -173,20 +173,28 @@
 
 
                 <!--
-                    - okrem samotneho nazvu a obsahu mozu mat znacky definovane aj dalsie atributy, ktorymi je mozne nastavit ich dalsie vlasnosti
-                    - napr. atributom class je mozne vybrat vizualny styl s nazvom big
+                    - okrem samotneho nazvu a obsahu mozu mat elementy definovane aj dalsie vlastnosti - atributy.
+                -->
+                <section data-transition="none">
+                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html"><element attr="val">Hello world</element></code></pre>
+                </section>
+
+
+                <!--
+                    - napriklad to moze byt cielova adresa odkazu - atribut href elementu <a>
+                -->
+                <section data-transition="none">
+                        <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html"><a href="adresa">Hello world</a></code></pre>
+                    </section>
+
+
+                <!--
+                    - alebo to moze byt vyber vizualneho stylu elementu pomocou atributu class (trieda) - v totom pripade vyber stylu s nazvom big
                 -->
                 <section data-transition="none">
                     <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html"> <h1 class="big">Hello world</h1></code></pre>
                 </section>
 
-                <!--
-                    - alebo to moze byt cielova adresa odkazu
-                -->
-                <section data-transition="none">
-                    <pre style="font-size: 32px; background:none; box-shadow:none;"><code class="hljs html"><a href="adresa">Hello world</a></code></pre>
-                    <!--<a href="adresa">Hello world</a>-->
-                </section>
 
                 <!--
                     - okrem toho, ze pozname parove znacky, pozname aj neparove znacky
@@ -789,16 +797,19 @@
 
 
                 <section data-markdown>
-                    ## Selectors
+                    ## CSS Selectors
 
                     ```javascript
                     let s = $('*');
                     s = $('p');
                     s = $('.active');
+                    s = $('li.active');
                     s = $('#location');
+                    s = $('div#location');
                     s = $('input:enabled');
                     s = $('li[data-selected="true"');
                     s = $('h1, #title');
+                    s = $('div#container>button');
                     ```
                 </section>
 
