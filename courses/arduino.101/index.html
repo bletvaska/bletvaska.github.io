@@ -189,11 +189,11 @@
         ## Úloha: Semafor
 
         Vytvorte jednoduchú implementáciu štandardného cyklu semaforu, teda:
-        1. Červená
-        2. Červená + Oranžová
-        3. Zelená (blikajúca zelená)
-        4. Oranžová
-        5. Červená
+        1. Červená (5s)
+        2. Červená + Oranžová (2s)
+        3. Zelená (blikajúca zelená) (5s)
+        4. Oranžová (2s)
+        5. Červená 
     </section>
 
 
@@ -342,8 +342,10 @@ void setup(void) {
 }
 
 void loop(void){
+   sensors.requestTemperatures();
    Serial.print("Temperature is: ");
-   Serial.println(sensors.getTempCByIndex(0));
+   Serial.print(sensors.getTempCByIndex(0));
+   Serial.println("C");
    delay(1000);
 }
         ```
