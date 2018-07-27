@@ -344,8 +344,7 @@ void setup(void) {
 void loop(void){
    sensors.requestTemperatures();
    Serial.print("Temperature is: ");
-   Serial.print(sensors.getTempCByIndex(0));
-   Serial.println("C");
+   Serial.println(sensors.getTempCByIndex(0));
    delay(1000);
 }
         ```

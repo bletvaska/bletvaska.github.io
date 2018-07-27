@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Gpiozero 101</title>
+
+	<meta name="description" content="Introduction to Gpiozero.">
+	<meta name="author" content="mirek">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<style>
+		h2.source {
+			font-family: courier;
+			font-weight: bold;
+		}
+
+		.reveal section img {
+			border-width: 0px;
+			background: none;
+			box-shadow: none;
+		}
+
+		code{
+			font-size: 20px;
+		}
+
+		section.inverted h2 {
+			color: black;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<div class="slides">
+			<section data-markdown id="title">
+				## GPIO Zero 101
+
+				miroslav.binas@tuke.sk / [**IT Akadémia**](http://itakademia.sk/sk/domov/)
+			</section>
+
+
+			<section data-markdown id="introduction">
+				## GPIO Zero
+
+				* a **friendly** Python API/library for physical computing
+				* created to **simplify** the process of physical computing, **helping** new coders to learn (and have fun)
+			</section>
+
+
+			<section data-markdown id="features">
+				## GPIO Zero features
+
+				* works with electronic components as Python objects
+				* support for plenty eletronic components - `LED()`, `RGBLED()`, `PWMLED()`, `Button()`, `PiCamera()`, `LEDBoard()`, `LEDBarGraph()`, `TrafficLights()`, `Buzzer()`, `MotionSensor()`, `LightSensor()`, `DistanceSensor()`, `Motor()`, `Robot()`, ...
+			</section>
+
+
+			<section data-markdown>
+				## GPIO Pins
+
+				* GPIO - General-Purpose Input/Output
+				* most models of the Raspberry Pi have _40_ pins
+					* 26 are GPIO pins
+					* the others are power or ground pins
+				* these pins are a physical interface between the Raspberry Pi and the outside world
+				* pins numbering
+					* GPIO numbering
+					* physical numbering
+
+				Note:
+					* https://www.futurelearn.com/courses/physical-computing-raspberry-pi-python/6/steps/348254
+			</section>
+
+			<section data-markdown id="pinout" class="inverted" data-background-color="#fff">
+				## GPIO Pinout
+
+				[![GPIO Pinout](https://pinout.xyz/resources/raspberry-pi-pinout.png)](https://pinout.xyz/#)
+
+				Note:
+					* https://pinout.xyz/#
+			</section>
+
+
+			<section data-markdown id="pin-numbering" class="inverted" data-background-color="#fff">
+					## GPIO Pin Numbering
+
+					![GPIO Pin Numbering](images/pin_layout.svg)
+
+					Note:
+						* https://gpiozero.readthedocs.io/en/stable/recipes.html
+				</section>
+
+
+			<section data-markdown>
+				## 1. Lighting an LED
+			</section>
+
+
+			<section data-markdown data-background-color="#fff" id="breadboard" class="inverted">
+				## Breadboard
+
+				![Breadboard](https://s3-eu-west-1.amazonaws.com/raspberrypi-education/teaching-physical-computing/breadboardxsection.png)
+
+				Note:
+				* way of connecting
+				* https://www.futurelearn.com/courses/physical-computing-raspberry-pi-python/6/steps/348257
+			</section>
+
+			<section data-markdown data-background-color="#fff" id="led" class="inverted">
+				## LED
+
+				![LED](https://s3-eu-west-1.amazonaws.com/raspberrypi-education/teaching-physical-computing/LEDcloseup.png)
+
+				Note:
+				* cathode is always something missing - either leg (it's shorter) or flat head
+				* https://www.futurelearn.com/courses/physical-computing-raspberry-pi-python/6/steps/348257
+			</section>
+
+
+			<section data-markdown data-background-color="#fff" id="simple-circuit" class="inverted">
+				## Simple Circuit
+
+				![Simple Circuit](https://s3-eu-west-1.amazonaws.com/raspberrypi-education/teaching-physical-computing/circuitcurrentflow.gif)
+
+				Note:
+				* Never connect LED alone! Always with resistor!
+				* LED should light, when connected. If not, check it's orientation.
+				* https://www.futurelearn.com/courses/physical-computing-raspberry-pi-python/6/steps/348257
+			</section>
+
+
+			<section data-markdown data-background-color="#fff" id="switching-LED" class="inverted">
+					## Switching LED
+
+					![Switching LED](https://s3-eu-west-1.amazonaws.com/raspberrypi-education/teaching-physical-computing/switchingcircuit.png)
+
+					Note:
+					* Connect the pin to GP17.
+					* The LED will not automaticaly turn on - we will code the behaviour.
+					* https://www.futurelearn.com/courses/physical-computing-raspberry-pi-python/6/steps/348257
+				</section>
+
+
+			<section data-markdown id="blink">
+				## Blink Code
+
+				```python
+from gpiozero import LED
+from time import sleep
+
+led = LED(17)
+
+while True:
+    led.on()
+    sleep(1)
+    led.off()
+    sleep(1)
+				```
+			</section>
+
+
+			<section data-markdown>
+				## 2. Getting Input from Button
+			</section>
+
+			<section data-markdown id="button" class="inverted" data-background-color="#fff">
+				![Button](https://s3-eu-west-1.amazonaws.com/raspberrypi-education/teaching-physical-computing/pushbutton.png)
+
+				Note:
+				* https://www.futurelearn.com/courses/physical-computing-raspberry-pi-python/6/steps/348267
+			</section>
+
+
+			<section data-markdown id="button-schematic" class="inverted" data-background-color="#fff">
+				![Button Schematic](https://projects-static.raspberrypi.org/projects/physical-computing/0cb2cbd34292a05a668aeea3f291ceb3c7d9cd83/en/images/button.png)
+
+				Note:
+				* https://projects.raspberrypi.org/en/projects/physical-computing/7
+			</section>
+
+
+			<section data-markdown>
+				## Getting Input from Button
+
+				```python
+				from gpiozero import Button
+
+				button = Button(2)
+
+				button.wait_for_press()
+				print('You pushed me')
+				```
+			</section>
+
+
+			<section data-markdown class="inverted" data-background-color="#fff">
+				## Controlling LED
+
+				![Button Schematic](https://www.raspberrypi.org/app/uploads/2015/11/GPIO_Zero_Diagram_3-500x369.png)
+
+				Note:
+				* https://www.raspberrypi.org/blog/gpio-zero-a-friendly-python-api-for-physical-computing/
+			</section>
+
+
+			<section data-markdown>
+				```python
+				from gpiozero import LED, Button
+				from time import sleep
+
+				led = LED(17)
+				button = Button(2)
+
+				while True:
+					button.wait_for_press()
+					led.toggle()
+					sleep(0.5)
+				```
+			</section>
+
+
+			<section data-markdown>
+				## 3. Buzzer
+			</section>
+
+
+			<section data-markdown id="connecting-buzzer" class="inverted" data-background-color="#fff">
+				![Connecting Buzzer](https://projects-static.raspberrypi.org/projects/physical-computing/0cb2cbd34292a05a668aeea3f291ceb3c7d9cd83/en/images/buzzer-circuit.png)
+
+				Note:
+				* https://projects.raspberrypi.org/en/projects/physical-computing/10
+			</section>
+
+
+			<section data-markdown>
+				```python
+				from gpiozero import Buzzer
+				from time import sleep
+
+				buzzer = Buzzer(17)
+
+				while True:
+					buzzer.on()
+					sleep(1)
+					buzzer.off()
+					sleep(1)
+
+					# insted you can used
+					# buzzer.beep()
+				```
+			</section>
+
+
+
+			<section data-markdown>
+				## 4. Passive Infra Red sensor (PIR)
+			</section>
+
+
+			<section data-markdown id="pir" class="inverted" data-background-color="#fff">
+				![PIR Sensor](https://s3-eu-west-1.amazonaws.com/raspberrypi-education/teaching-physical-computing/pir.png)
+
+				Note:
+				* https://www.futurelearn.com/courses/physical-computing-raspberry-pi-python/6/steps/348267
+			</section>
+
+
+			<section data-markdown id="wiring-pir" class="inverted" data-background-color="#fff">
+				![Wiring PIR Sensor](https://projects-static.raspberrypi.org/projects/physical-computing/0cb2cbd34292a05a668aeea3f291ceb3c7d9cd83/en/images/pir_wiring.png)
+
+				Note:
+				* https://projects.raspberrypi.org/en/projects/physical-computing/13
+			</section>
+
+
+			<section data-markdown id="detecting-motion">
+				## Detecting Motion
+
+				```python
+				from gpiozero import MotionSensor
+
+				pir = MotionSensor(4)
+
+				while True:
+					pir.wait_for_motion()
+					print("You moved")
+					pir.wait_for_no_motion()
+				```
+
+				Note:
+				* https://projects.raspberrypi.org/en/projects/physical-computing/13
+			</section>
+
+
+			<section data-markdown>
+					## 5. Sense Hat
+				</section>
+
+
+			<section data-markdown id="sense-hat" class="inverted" data-background-color="#fff">
+				![Sense Hat](https://s3-eu-west-1.amazonaws.com/raspberrypi-education/teaching-physical-computing/sensehat.png)
+
+				Note:
+				* https://www.futurelearn.com/courses/physical-computing-raspberry-pi-python/6/steps/348267
+			</section>
+
+			<section data-markdown>
+				## Sense Hat Components
+
+				* a gyroscope
+				* an accelerometer
+				* a magnetometer
+				* a temperature sensor
+				* a humidity sensor
+				* a pressure sensor (a barometer)
+			</section>
+
+
+			<section data-markdown>
+				## Questions?
+			</section>
+
+
+			<section data-markdown>
+				![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/http://bit.ly/2u1sPBh&size=300x300)
+
+				(**http://bit.ly/2u1sPBh**)
+			</section>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
+
+	<script>
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			// your allotted time for presentation
+  			allottedTime: 20 * 60 * 1000, // 20 minutes
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: '../../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: '../../reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../reveal.js/plugin/notes/notes.js', async: true },
+				{ src: '../../reveal.js/plugin/elapsed-time-bar/elapsed-time-bar.js' }
+			]
+		});
+	</script>
+</body>
+</html>
