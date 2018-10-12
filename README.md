@@ -13,9 +13,9 @@ Presentation related to my introductory course about JavaScript.
 
 [JavaScript 101](https://bletvaska.github.io/javascript.101/index.html)
 
-## Courses
+## Courses and Workshops
 
-[Courses](https://bletvaska.github.io/courses/)
+[GPIO Zero 101](https://bletvaska.github.io/courses/gpiozero.101) - introduction to GPIO Zero
 
 
 
