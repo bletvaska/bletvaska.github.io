@@ -30,3 +30,4 @@ Presentations from various conferences, where I had some talks.
 * [OSS Conf 2018](http://ossconf.soit.sk/) - [Ako písať dobré bash skripty](http://bit.ly/2tWEK3e)
 * [OSS Conf 2018](http://ossconf.soit.sk/) - [Čo všetko som sa pri programovaní Arduina naučil zle](http://bit.ly/2u1sPBh)
 * [OSS Víkend 2018](https://ossvikend.sk/) - [PyWeek 26: Herným vývojárom ľahko a rýchlo](http://bit.ly/2S29QSg)
+* [OSS Víkend 2018](https://ossvikend.sk/) - [Raspberry Pi Translation Project](http://bit.ly/2PFHQC9)
