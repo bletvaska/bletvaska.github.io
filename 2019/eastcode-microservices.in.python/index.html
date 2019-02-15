@@ -95,10 +95,14 @@
 
 			// More info https://github.com/hakimel/reveal.js#dependencies
 			dependencies: [
-				{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/markdown.min.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/highlight/highlight.min.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/classList.js',
+                    condition: function() { return !document.body.classList; } },
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/marked.js',
+                    condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/markdown.min.js',
+                    condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/highlight/highlight.min.js',
+                    async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 				// { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
 				// { src: '../reveal.js/plugin/notes/notes.js', async: true },
 				{ src: '../reveal.js/plugin/elapsed-time-bar/elapsed-time-bar.js' }

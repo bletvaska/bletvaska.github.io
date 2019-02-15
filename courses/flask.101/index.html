@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Flask 101</title>
+
+	<meta name="description" content="Introduction to JavaScript.">
+	<meta name="author" content="mirek">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<style>
+		.reveal section img {
+			border:0;
+			background-color: transparent;
+			box-shadow: 0 0 0;
+		}
+
+		.reveal section pre {
+			font-size: 15px;
+		}
+	</style>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<div class="slides">
+			<section data-markdown id="title">
+				## Flask 101
+
+				miroslav.binas@tuke.sk / [**IT Akadémia**](http://linka.na.stranku/)
+			</section>
+
+
+			<section data-markdown id="flask">
+				![Flask Logo](images/flask.png)
+
+			</section>
+
+
+			<section data-markdown id="introduction">
+                ## What is Flask?
+
+                Flask is a _microframework_ for Python based on [Werkzeug](http://werkzeug.pocoo.org/), [Jinja 2](http://jinja.pocoo.org/docs/2.10/) and good intentions. And before you ask: It's BSD licensed!
+
+                Notes:
+                * http://flask.pocoo.org/
+			</section>
+
+
+            <section data-markdown id="whats-in-the-box">
+                ## What’s in the Box?
+
+                * built-in development server and debugger
+                * integrated unit testing support
+                * RESTful request dispatching
+                * uses Jinja2 templating
+                * support for secure cookies (client side sessions)
+                * 100% WSGI 1.0 compliant
+                * Unicode based
+                * extensively documented 
+            </section>
+
+
+			<section data-markdown id="flask-is-fun">
+                ## Flask is Fun
+
+                ```python
+                from flask import Flask
+                app = Flask(__name__)
+
+                @app.route("/")
+                def hello():
+                    return "Hello World!"
+                ```
+
+                Notes:
+                * http://flask.pocoo.org/
+			</section>
+
+
+			<section data-markdown id="easy-to-setup">
+                ## And Easy to Setup
+
+                ```bash
+                $ pip install Flask
+                $ FLASK_APP=hello.py flask run
+                 * Running on http://localhost:5000/
+                ```
+
+                Notes:
+                * http://flask.pocoo.org/
+			</section>
+
+
+            <section id="debug-mode" data-markdown>
+                ## Debug Mode
+
+                * you would have to restart webserver manually after each change to your code
+                * if you enable debug support 
+                    * the server will reload itself on code changes 
+                    * it will also provide you with a helpful debugger
+
+                ```bash
+                $ export FLASK_ENV=development
+                $ flask run
+                ```
+
+                Notes:
+                * http://flask.pocoo.org/docs/1.0/quickstart/#debug-mode
+			</section>
+
+
+			<section data-markdown id="rendering-templates">
+                ## Rendering Templates
+
+                * Flask configures the Jinja2 template engine automatically
+                * to render a template use `render_template()` method
+
+                ```python
+                from flask import render_template
+
+                @app.route('/hello/')
+                @app.route('/hello/<name>')
+                def hello(name=None):
+                    return render_template('hello.html', name=name)
+                ```
+
+                Notes:
+                * http://flask.pocoo.org/docs/1.0/quickstart/#rendering-templates
+			</section>
+
+
+            <section data-markdown id="template-example">
+                ## Template Example 
+
+                ```html
+                &lt;!doctype html>
+                &lt;title>Hello from Flask&lt;/title>
+                {% if name %}
+                  &lt;h1>Hello {{ name }}!&lt;/h1>
+                {% else %}
+                  &lt;h1>Hello, World!&lt;/h1>
+                {% endif %}
+                ```
+
+            </section>
+
+
+			<section data-markdown id="flask-mqtt">
+                ## Flask and MQTT
+
+                `pip3 install Flask-MQTT`
+			</section>
+
+
+			<section data-markdown id="flask-mqtt-example">
+                ## Complex Example
+
+                ```python
+                from flask import Flask
+                from flask_mqtt import Mqtt
+                
+                app = Flask(__name__)
+                app.config['MQTT_BROKER_URL'] = '192.168.1.145'
+                
+                mqtt = Mqtt(app)
+                mqtt.subscribe('home/wc/light')
+                
+                @mqtt.on_message()
+                def on_message(client, data, message):
+                    payload = str(message.payload.decode('utf-8'))
+                
+                    if payload == 'on':
+                        turn_on()
+                    elif payload == 'off':
+                        turn_off()
+                ```
+			</section>
+
+
+
+
+			<section data-markdown>
+				## Questions?
+			</section>
+
+
+			<section data-markdown>
+				![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/2wKbheb&size=300x300)
+
+				(**http://bit.ly/2wKbheb**)
+			</section>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
+
+	<script>
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			// your allotted time for presentation
+  			allottedTime: 20 * 60 * 1000, // 20 minutes
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: '../../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: '../../reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../reveal.js/plugin/notes/notes.js', async: true },
+				{ src: '../../reveal.js/plugin/elapsed-time-bar/elapsed-time-bar.js' }
+			]
+		});
+	</script>
+</body>
+</html>
