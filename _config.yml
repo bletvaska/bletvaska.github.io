@@ -26,8 +26,8 @@ github_username:  jekyll
 
 # Build settings
 markdown: kramdown
-#theme: minima
-theme: jekyll-theme-cayman
+theme: minima
+#theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
 
@@ -42,3 +42,13 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+# defaults
+defaults:
+    -
+        scope:
+            path: "*/*/slides*html"
+        values:
+            theme: "night"
+            duration: 60
+            layout: "slide"
