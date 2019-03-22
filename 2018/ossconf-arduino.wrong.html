@@ -1,0 +1,254 @@
+---
+title: Čo všetko som sa pri programovaní Arduina naučil zle
+layout: slide
+duration: 20
+theme: night
+---
+<section data-markdown id="introduction">
+    ## Čo všetko som sa pri programovaní Arduina naučil zle
+
+    miroslav.binas@tuke.sk / [**OSS Conf 2018**](http://ossconf.soit.sk/)
+</section>
+
+
+<section data-markdown id="lets-meet">
+    ## Zoznamka
+
+    * som učiteľ ([KPI FEI TUKE](https://kpi.fei.tuke.sk/))
+    * predmet [Programovanie](http://it4kt.cnl.sk/c/pvjc) (v jazyku _C_)
+        * _3._ sezóna s _Arduino_-m
+        * posledné 3-4 týždne semestra
+        * záverečné zadanie [Logic/Mastermind](http://it4kt.cnl.sk/c/pvjc/2018/problemset.05.mastermind.html)
+    * automatizované testovanie zadaní
+        * experimentujeme aj s _Arduinom_
+</section>
+
+
+<section data-markdown id="true-title">
+    ## _"Prečo neznášam Arduino?"_
+
+    * pôvodný pracovný názov tohto príspevku :-)
+    * môj učiteľský pohľad zhrnutý v troch hlavných dôvodoch...
+    * ...pretože vás núti osvojiť si zlé návyky
+</section>
+
+
+<section data-markdown>
+    ![the Arduino Guy](images/pavol.hudacko.jpg)
+    * Paľo - _the Arduino Guy_ ;)
+</section>
+
+
+<section data-markdown id="problem-1">
+    ## 1. Nejednotnosť v pomenovávaní
+</section>
+
+<section id="blink">
+    <h2>Blink</h2>
+    <div style="width: 43%; display: inline-flex;">
+    <pre><code class="lang-cpp hljs">// version 2016
+int led = 13;
+
+void setup() {
+pinMode(led, OUTPUT);
+}
+
+void loop() {
+digitalWrite(led, HIGH);
+delay(1000);
+digitalWrite(led, LOW);
+delay(1000);
+}</code></pre>
+    </div>
+
+    <div style="width: 55%; display: inline-flex;">
+        <pre><code class="lang-cpp hljs">// version 2018
+
+
+void setup() {
+pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+digitalWrite(LED_BUILTIN, HIGH);
+delay(1000);
+digitalWrite(LED_BUILTIN, LOW);
+delay(1000);
+}</code></pre>
+    </div>
+</section>
+
+
+<section data-markdown>
+* `BUILTIN_LED` should be `LED_BUILTIN` [#1555](https://github.com/esp8266/Arduino/issues/1555)
+    * rok _2016_
+    * ```cpp
+    #define LED_BUILTIN 13
+    ```
+* ```cpp
+// examples/02.Digital/Button/Button.ino
+// examples/06.Sensors/Knock/Knock.ino
+const int ledPin =  13;
+```
+* ```cpp
+// examples/03.Analog/AnalogInput/AnalogInput.ino
+int ledPin = 13;
+```
+</section>
+
+
+<section data-markdown id="books">
+    [![Beginning C for Arduino](images/beginning.c.for.arduino.jpeg)](https://www.amazon.com/Beginning-Arduino-Second-Learn-Programming/dp/1484209419/ref=sr_1_2?ie=UTF8&qid=1530436970&sr=8-2&keywords=beginning+c+for+arduino)
+</section>
+
+
+<section data-markdown id="arduino-pouzivatelska-prirucka">
+    [![Arduino Používateľská príručka](images/arduino.pouzivatelska.prirucka.jpg)](https://www.martinus.sk/?uItem=249563)
+</section>
+
+
+<section data-markdown id="serial-arduino">
+    ## PC Revue: Seriál Arduino
+
+    [![Seriál Arduino](images/serial.arduino.png)](https://www.pcrevue.sk/a/ARDUINO-3)
+</section>
+
+
+<section data-markdown id="problem-2">
+    ## 2. Obchádzanie modulárneho prístupu
+</section>
+
+
+<section data-markdown id="problem-3">
+    ## 3. Vynútené používanie globálnych premenných
+</section>
+
+
+<section data-markdown id="global-variables-are-bad">
+    ![Global Variables Are Bad](images/global.variables.are.bad.mkay.jpeg)
+</section>
+
+
+<section data-markdown id="problem-overview">
+## Pôvod problému
+
+* inšpirácia z prostredia/jazyka [Processing](https://processing.org/)
+
+  ```cpp
+  void setup(){
+     // initialization function
+     // runs once
+  }
+
+  void loop(){
+     // main loop
+     // runs continuously
+  }
+  ```
+</section>
+
+
+<section id="main" data-markdown>
+## Skrytý (?!) ```main()```
+
+```
+// ARDUINO_HOME/hardware/arduino/avr/cores/arduino/main.cpp
+int main(){
+    // runs once
+    setup();
+
+    // runs continuosly
+    for (;;) {
+        loop();
+    }
+}
+```
+</section>
+
+
+<section data-markdown>
+    ## 2 riešenia
+</section>
+
+
+<section data-markdown>
+## 1. Include Guard
+
+```cpp
+// ARDUINO_HOME/hardware/arduino/avr/cores/arduino/main.cpp
+
+#ifndef _ADVANCED
+
+int main(){
+   // runs once
+   setup();
+
+   // runs continuosly
+   for (;;) {
+      loop();
+   }
+}
+#endif
+```
+</section>
+
+
+<section data-markdown>
+## `project.ino`
+
+```cpp
+#define _ADVANCED
+
+int main(){
+    // setup
+    Serial.begin(9600);
+    pinMode(LED_BUILTIN, OUTPUT);
+
+    // loop
+    for(;;){
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(1000);
+        digitalWrite(LED_BUILTIN, LOW);
+        delay(1000);
+    }
+}
+```
+</section>
+
+
+<section data-markdown>
+## 2. Atribút `weak`
+
+```cpp
+// ARDUINO_HOME/hardware/arduino/avr/cores/arduino/main.cpp
+
+int main() __attribute((weak))__{
+   // runs once
+   setup();
+
+   // runs continuosly
+   for (;;) {
+      loop();
+   }
+}
+#endif
+```
+</section>
+
+
+<section data-markdown>
+    ## Ta už nebaví :-(
+</section>
+
+
+<section data-markdown>
+    ## Questions?
+</section>
+
+
+<section data-markdown>
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/http://bit.ly/2u1sPBh&size=300x300)
+
+    (**http://bit.ly/2u1sPBh**)
+</section>
+

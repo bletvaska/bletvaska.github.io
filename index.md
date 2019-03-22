@@ -12,9 +12,9 @@ title: My Talks
 
 ## 2018
 
-* [DisCo 2018](http://disconference.eu/) - [Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process]()
-* [OSS Conf 2018](http://ossconf.soit.sk/) - [Zostavovanie LaTeX dokumentov ináč a využitie dedičnosti pri tvorbe šablón](http://bit.ly/2yYoDrA)
-* [OSS Conf 2018](http://ossconf.soit.sk/) - [Ako písať dobré bash skripty](http://bit.ly/2tWEK3e)
+* [DisCo 2018](http://disconference.eu/) - [Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process](2018/disco.html)
+* [OSS Conf 2018](http://ossconf.soit.sk/) - [Zostavovanie LaTeX dokumentov ináč a využitie dedičnosti pri tvorbe šablón](2018/ossconf-tipy.pre.pracu.s.latexom.html)
+* [OSS Conf 2018](http://ossconf.soit.sk/) - [Ako písať dobré bash skripty](2018/ossconf-piseme.dobre.bash.skripty.html)
 * [OSS Conf 2018](http://ossconf.soit.sk/) - [Čo všetko som sa pri programovaní Arduina naučil zle](2018/ossconf-arduino.wrong.html)
 * [OSS Víkend 2018](https://ossvikend.sk/) - [PyWeek 26: Herným vývojárom ľahko a rýchlo](2018/ossvikend-pyweek.html)
-* [OSS Víkend 2018](https://ossvikend.sk/) - [Raspberry Pi Translation Project](http://bit.ly/2PFHQC9)
+* [OSS Víkend 2018](https://ossvikend.sk/) - [Raspberry Pi Translation Project](2018/ossvikend-translators.html)

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Raspberry Pi Translation Project</title>
+
+	<meta name="description" content="Raspberry Pi Translation Project">
+	<meta name="author" content="mirek">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+
+    <style>
+            h2.source {
+                font-family: courier;
+                font-weight: bold;
+            }
+    
+            .reveal section img {
+                border-width: 0px;
+                background: none;
+                box-shadow: none;
+            }
+    
+            code{
+                font-size: 20px;
+            }
+     </style>
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<div class="slides">
+			<section data-markdown id="title">
+				## Raspberry Pi Translation Project
+
+				miroslav.binas@tuke.sk / [**OSS Víkend**](https://ossvikend.sk/)
+			</section>
+
+
+            <section data-markdown id="my-story">
+                ## My Story Behind
+            </section>
+
+
+			<section data-markdown id="international-translation-day">
+                ## International Translation Day
+
+                30th September
+			</section>
+
+
+            <section data-markdown id="celebrating-our-translators" data-background="https://www.raspberrypi.org/app/uploads/2018/09/Teachers1-500x262.png">
+                ## [Celebrating Our Translators!](https://www.raspberrypi.org/blog/celebrating-our-translators/)
+            </section>
+
+
+            <section id="video">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/yv38jLci9nM?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </section>
+
+
+            <section id="raspberry-pi-projects" data-markdown data-background="white">
+                [![Raspberry Pi Projects](images/raspberry.pi.projects.png)](https://projects.raspberrypi.org/en/)
+            </section>
+
+
+            <section id="lets-translate-something" data-markdown>
+                ## Lets Trenslejt Samsink!
+            </section>
+
+
+            <section id="google-sheets" data-markdown data-background="white">
+                [![Google Sheets](images/logo-google.sheets.png)](https://www.google.com/intl/sk/sheets/about/)
+            </section>
+
+
+            <section id="crowdin-translation-platform" data-markdown data-background="white">
+                [![Crowdin Translation Platform](images/logo-crowdin.png)](https://crowdin.com/)
+            </section>
+
+
+            <section id="slack-channel" data-markdown data-background="white">
+                [![Slack logo](images/logo-slack.png)](https://slack.com/)
+            </section>
+
+
+            <section id="flyer" data-markdown data-background="images/flyer.png">
+            </section>
+
+
+            <section id="join-the-translation-team" data-markdown>
+                ### https://rpf.io/translators
+            </section>
+
+
+			<section data-markdown>
+				## Questions?
+			</section>
+
+
+			<section data-markdown>
+				![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/2PFHQC9&size=300x300)
+
+				(**http://bit.ly/2PFHQC9**)
+			</section>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
+
+	<script>
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+
+			// your allotted time for presentation
+  			allottedTime: 25 * 60 * 1000, // 25 minutes
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../reveal.js/plugin/notes/notes.js', async: true },
+				{ src: '../reveal.js/plugin/elapsed-time-bar/elapsed-time-bar.js' }
+			]
+		});
+	</script>
+</body>
+</html>
