@@ -10,6 +10,7 @@ title: My Talks
 
 * [Pycon 2019](https://2019.pycon.sk/sk/) - [Tvorba hier s knižnicou Pygame Zero](2019/pycon/slides.html)
 * [Pycon 2019](https://2019.pycon.sk/sk/) - [Lightning Talk - Namakaný deň 2019](2019/pycon/lightning.talk-namakany.den.2019.html)
+* [Pycon 2019](https://2019.pycon.sk/sk/) - [Dobrodružstvá v Minecrafte s jazykom Python](2019/pycon/workshop-minecraft.html)
 
 ## 2018
 
