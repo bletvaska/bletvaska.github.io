@@ -1,0 +1,237 @@
+---
+title: MQTT 101
+layout: slide
+theme: night 
+description:
+    Úvod do práce s protokolom MQTT.
+---
+<section data-markdown id="title">
+    ## MQTT 101
+
+    miroslav.binas@tuke.sk / [**IT Akadémia**](http://linka.na.stranku/)
+</section>
+
+
+<section data-markdown id="m2m">
+    ## M2M
+</section>
+
+
+<section data-markdown id="introduction">
+    ## What is MQTT?
+
+    * [MQTT](https://en.wikipedia.org/wiki/MQTT) (Message Queue Telemetry Transport)
+    * lightweight publish-subscribe protocol that is used on top of TCP/IP
+    * designed to _M2M_ communications
+    * uses _publisher/subscriber pattern_ and _MQ model_
+    * becoming one of the main protocols for _IoT_
+
+    Notes:
+    * https://pagefault.blog/2017/03/02/using-local-mqtt-broker-for-cloud-and-interprocess-communication/
+    * https://www.youtube.com/watch?v=eS4nx6tLSLs
+    * http://www.steves-internet-guide.com/mqtt/
+</section>
+
+
+<section data-markdown id="publish-subscribe" data-background-color="#19B99A">
+    ![Publish-subscribe Architecture](images/publish-subscribe.architecture.png)
+
+    Notes:
+    * https://blog.securitycompass.com/publish-subscribe-threat-modeling-11add54f1d07
+</section>
+
+
+<section data-markdown>
+    ## The Basics
+
+    * broker
+    * topics
+    * publisher
+    * subscriber
+    * message 
+</section>
+
+
+<section data-background="#ffffff">
+    <h2 style="color:black">IoT Example</h2>
+
+    <img src="images/mqtt-overview.png" alt="MQTT Overview">
+</section>
+
+<section data-markdown id="mosquitto">
+    [![Mosquitto](images/logo-mosquitto.png)](https://mosquitto.org/)
+</section>
+
+<section data-markdown id="mosquitto-features">
+    ## [Eclipse Mosquitto™](https://mosquitto.org/)
+
+    * an open source lightweight MQTT broker
+    * implements the MQTT protocol versions 3.1 and 3.1.1
+    * install with
+
+      `sudo apt install mosquitto`
+
+      `sudo apt install mosquitto-clients`
+</section>
+
+<section data-markdown id="mosquitto_pub">
+    ## `mosquitto_pub`
+
+    * client for publishing simple messages
+    * syntax:
+
+      `mosquitto_pub -h host -t topic -m message`
+
+    Notes:
+    * man mosquitto_pub
+</section>
+
+<section data-markdown id="mosquitto_sub">
+## `mosquitto_sub`
+
+* client for subscribing to topics
+* syntax:
+
+  `mosquitto_sub -h host -t topic [-F format]`
+* example:
+
+  `mosquitto_sub -h localhost -t '#' -F "%t: %p"`
+
+Notes:
+* man mosquitto_sub
+</section>
+
+
+<section data-markdown id="topics">
+## Topics
+
+* string used by broker to filter messages
+* consist of one/more topic levels
+    * topic level separator is '`/`'
+* topics don't need to be initialized first
+* cAsE sEnsItIvE
+* allows to use wildcards when subscribing:
+    * '`#`' - multi level
+    * '`+'` - single level
+
+Notes:
+* https://www.hivemq.com/blog/mqtt-essentials-part-5-mqtt-topics-best-practices
+</section>
+
+<section id="topics-example-1">
+    <code>
+        Slovensko<span style="color:cyan">/</span>Košice<span style="color:cyan">/</span>Letná 9<span style="color:cyan">/</span>IoT Lab
+    </code>
+</section>
+
+<section id="topics-example-2">
+    <code>
+        home<span style="color:cyan">/</span>ground<span style="color:cyan">/</span>livingroom<span style="color:cyan">/</span>temperature
+    </code>
+</section>
+
+
+<section data-markdown id="paho-mqtt">
+## Paho MQTT
+
+* [Eclipse Paho](http://eclipse.org/paho/)
+* Python support for MQTT _3.1_ and _3.1.1_
+* [documentation](https://pypi.org/project/paho-mqtt/)
+* install:
+  `pip3 install paho-mqtt`
+
+Notes:
+* http://www.steves-internet-guide.com/mqtt/
+* https://pypi.org/project/paho-mqtt/
+</section>
+
+
+<section data-markdown id="paho-hello-world">
+### Hello World with Paho
+
+```python
+import paho.mqtt.client as mqtt
+
+client = mqtt.Client()
+client.connect('localhost', port=1883)
+
+client.publish('general', 'hello world')
+```
+</section>
+
+
+<section data-markdown id="paho-subscribing">
+### Paho: Subscribing to Topics
+
+```python
+import paho.mqtt.client as mqtt
+
+client = mqtt.Client()
+client.connect('localhost', port=1883)
+
+client.publish('general', 'hello world')
+client.subscribe('general')
+
+# EOF
+```
+</section>
+
+
+<section data-markdown id="paho-callbacks">
+### Paho `on_message()` Callback
+
+* called when a message has been received on a subscribed topic
+* example:
+  ```python
+  def on_message(client, userdata, message):
+      print("Received message '" + str(message.payload) + "' on topic '"
+              + message.topic + "' with QoS " + str(message.qos))
+
+  client.on_message = on_message
+  ...
+  ```
+
+Notes:
+* https://pypi.org/project/paho-mqtt/#callbacks
+</section>
+
+
+<section data-markdown id="paho-complete-example">
+    ### Paho: Complete Example
+
+    ```python
+import paho.mqtt.client as mqtt
+from time import sleep
+
+def on_message(client, userdata, message):
+text = str(message.payload.decode("utf-8"))
+print(f'Received message "{text}" in topic "{message.topic}"')
+
+if __name__ == '__main__':
+client = mqtt.Client()
+client.connect('localhost', port=1883)
+client.subscribe('general')
+client.on_message = on_message
+
+client.loop_start()  # non blocking call
+# or client.loop_forever() - blocking call (no need the rest of code)
+
+while True:
+# your job goes here
+sleep(1)
+
+client.loop_stop()
+    ```
+</section>
+
+
+<section data-markdown>
+    ## Questions?
+</section>
+
+
+<section data-markdown>
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/2wKbheb&size=300x300)
+
+    (**http://bit.ly/2wKbheb**)
+</section>
