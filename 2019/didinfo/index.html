@@ -18,6 +18,7 @@ authors:
         name: Matej Madeja
         email: matej.madeja@tuke.sk
         url: http://kpi.fei.tuke.sk
+short_url: http://bit.ly/2FOMpGU
 ---
 
 <section id="opening" data-markdown>
@@ -114,7 +115,7 @@ authors:
     * práca s elektronikou (jazyk _Python_ + _GPIO Zero_)
     * tvorba dynamických webových stránok (mikro webový rámec _Flask_)
     * databázové systémy (stačí _SQLite_, ale aj _MariaDB/MYSQL_, _PostgreSQL_)
-    * iné (_Java_ - _BlueJ_, _Greenfoot_; _Node-RED_; _Sonic Pi_, ...)
+    * iné (_Java_ - _BlueJ_, _Greenfoot_; _Node-RED_; _Sonic Pi_; ...)
 </section>
 
 
@@ -146,7 +147,7 @@ authors:
 
 
 <section data-markdown id="qr-code">
-    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/2Jx2Ht2&size=300x300)
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.short_url }}&size=300x300)
 
-    (**http://bit.ly/2Jx2Ht2**)
+    (**{{ page.short_url }}**)
 </section>
