@@ -184,8 +184,12 @@ client.subscribe('general')
 * example:
   ```python
   def on_message(client, userdata, message):
-      print("Received message '" + str(message.payload) + "' on topic '"
-              + message.topic + "' with QoS " + str(message.qos))
+    print(f'Received message "{}" on topic "{}" with QoS {}'.format(
+        str(message.payload), 
+        message.topic,
+        str(message.qos)
+        )
+    )
 
   client.on_message = on_message
   ...
@@ -197,31 +201,31 @@ Notes:
 
 
 <section data-markdown id="paho-complete-example">
-    ### Paho: Complete Example
+### Paho: Complete Example
 
-    ```python
+```python
 import paho.mqtt.client as mqtt
 from time import sleep
 
 def on_message(client, userdata, message):
-text = str(message.payload.decode("utf-8"))
-print(f'Received message "{text}" in topic "{message.topic}"')
+    text = str(message.payload.decode("utf-8"))
+    print(f'Received message "{text}" in topic "{message.topic}"')
 
 if __name__ == '__main__':
-client = mqtt.Client()
-client.connect('localhost', port=1883)
-client.subscribe('general')
-client.on_message = on_message
+    client = mqtt.Client()
+    client.connect('localhost', port=1883)
+    client.subscribe('general')
+    client.on_message = on_message
 
-client.loop_start()  # non blocking call
-# or client.loop_forever() - blocking call (no need the rest of code)
+    client.loop_start()  # non blocking call
+    # or client.loop_forever() - blocking call (no need the rest of code)
 
-while True:
-# your job goes here
-sleep(1)
+    while True:
+        # your job goes here
+        sleep(1)
 
-client.loop_stop()
-    ```
+    client.loop_stop()
+```
 </section>
 
 
