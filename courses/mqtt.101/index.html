@@ -184,8 +184,8 @@ client.subscribe('general')
 * example:
   ```python
   def on_message(client, userdata, message):
-    print(f'Received message "{}" on topic "{}" with QoS {}'.format(
-        str(message.payload), 
+    print('Message "{}" on topic "{}" with QoS {}'.format(
+        str(message.payload.decode('utf-8')), 
         message.topic,
         str(message.qos)
         )
