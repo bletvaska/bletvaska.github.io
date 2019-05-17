@@ -13,6 +13,7 @@ title: My Talks
 * [Pycon 2019](https://2019.pycon.sk/sk/) - [Dobrodružstvá v Minecrafte s jazykom Python](2019/pycon/workshop-minecraft.html)
 * [DIDINFO 2019](hhttp://www.didinfo.net/) - [Využitie minipočítača Raspberry Pi v informatických predmetoch na stredných školách](2019/didinfo/)
 * [Namakaný deň 2019](hhttp://www.namakanyden.sk/2019/) - [Do you Mu?](2019/namakany.den/slides.html)
+* [Y-Games 2019](https://yzone.sk/ygames-2019) - [Space Invaders in 60 Minutes](2019/y-games/slides.html)
 
 ## 2018
 
