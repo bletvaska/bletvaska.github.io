@@ -69,7 +69,42 @@ def draw():
 
 Po spustení sa zobrazí okno a v konzole budeme vidieť striedavo vypisovať dva riadky: `update` a `render`.
 
+## Actor
 
+* čo je to
+* kvíz - koľko aktérov vidíš na obrazovke?
+* základné vlastnosti
+  * obrázok
+  * pozícia x a y (pre fajnšmekrov .pos)
+* umiestnenie na pozíciu 0, 0
+* rozmer invadera - 103x84
+
+## Moving Actor
+
+* preletieť invaderom zľava doprava
+  * vyčistenie obrazovky cez `screen.clear()`
+* kde zmizol?
+* otočiť ho naspäť
+  * najprv odpočítam  a bude pendlovať na okraji
+  * objavíme deltu v x-ovej osi, ktorá bude hovoriť, ktorým smerom alien pôjde
+* aby invader prešiel celou obrazovkou
+  * posunieme ho o polovicu dolu, keď narazí na okraj obrazovky
+  * keď dorazí na spodok, ukončíme hru s _Game Over_
+
+## The Invaders
+
+* jeden invader je nuda. ako spravíme viac invaderov?
+  * začneme ich číslovať podľa počtu a vytvoríme X invaderov
+    * somarina. ak ich bude 100, tak 100x copy'n'pastujem?
+* použijeme zoznam
+  * z matematiky - množina viacerých objektov
+* vytvoríme zoznam s piatimi invadermi
+  * o koľko budem vykreslovať invadera vedľa invadera?
+  * aktualizujeme najprv len vykreslenie (bez `update()`-u)
+  * potom aktualizujeme aj funkciu `update()`
+  * hra sa ukončí, keď prvý invader vyletí z obrazovky, resp. dosiahne spodok obrazovky
+* čo tak dva rady invaderov?
+  * pridáme len riadok navyše - cyklus v cykle
 
 
 ## Additinal Links

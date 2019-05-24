@@ -3,12 +3,42 @@ title: Space Invaders in 60 mins
 subtitle: alebo herným vývojárom rýchlo a ľahko
 description:
     Automatová klasika Space Invaders v jazyku Python pomocou knižnice Pygame Zero. A to všetko za 60 minút. Rýchlo a ľahko ;)
-duration: 55
+duration: 50
 date: 16.05.2019
+bitly: http://bit.ly/2Hy2Jwn
 conference:
 - title: Y-Games 2019
 - url: https://yzone.sk/ygames-2019
 ---
+<style>
+body, html{
+  background-color: #222;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  position :absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast
+}
+</style>
+
+
+<section data-markdown>
+## Naprogramovanie hry v priamom prenose v jazyku Python
+</section>
+
 
 <section id="opening" data-markdown>
     ## Space Invaders
@@ -23,18 +53,32 @@ conference:
 </section>
 
 
-<section id="alien-isolation" data-markdown>
-    ![Assassins Creed](images/assassins.creed.jpg)
-</section>
-
-
-<section id="tis-100" data-markdown data-background="#ebebeb">
-    ![TIS-100](images/tis.100.jpg)
-</section>
-
-
 <section id="naprogramovali-ste-hru" data-markdown>
-    ## Naprogramovali ste si vlastnú počítačovú hru?
+## Naprogramovali ste si vlastnú počítačovú hru?
+</section>
+
+
+<section id="space-invaders" data-markdown data-background="#002983">
+    ![Space Invaders](images/banner-space.invaders.jpg)
+
+    Note:
+    * https://arcademarquee.com/?product=space-invaders-arcade-marquee-26-x-8
+</section>
+
+
+<section id="space-invaders-gameplay" data-background="black">
+    <iframe width="896" height="504" src="https://www.youtube.com/embed/kR2fjwr-TzA?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen data-autoplay></iframe>
+</section>
+
+
+<!--<section id="the-game">-->
+<!--<link href='https://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>-->
+<!--<canvas id="game-canvas" width="300" height="300"></canvas>-->
+<!--</section>-->
+
+
+<section id="collisions" data-markdown data-background="#2ECC71">
+    [![Kenney.nl](images/kenney-promo.png)](https://kenney.nl/)
 </section>
 
 
@@ -79,6 +123,12 @@ conference:
     * Raspberry Pi - builtin
     * `sudo dnf install pgzero mu`
     * `pip install pgzero mu-editor`
+</section>
+
+
+<section id="warning" data-markdown>
+## Warning!
+(no best practices provided)
 </section>
 
 
@@ -139,16 +189,15 @@ conference:
 </section>
 
 
-<section data-markdown id="qr-code">
-    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/2Jx2Ht2&size=300x300)
-
-    (**http://bit.ly/2Jx2Ht2**)
+<section id="where-to-go-next" data-markdown>
+## What's Next?
 </section>
 
 
 <section id="links" data-markdown>
     ## Links
 
+    * [assets](https://kenney.nl/assets/space-shooter-redux) - [Kenney.nl](https://kenney.nl)
     * [výsledný projekt]() - Space Invaders
     * [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
     * [Wireframe](https://wireframe.raspberrypi.org/) Magazine
@@ -156,3 +205,12 @@ conference:
     * [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
     * [Tvorba počítačových hier s Pygame Zero](https://legacy.gitbook.com/book/bletvaska/tvorba-pocitacovych-hier-s-pygame-zero/details) - poznámky ku tvorivej dielni
 </section>
+
+
+<section data-markdown id="qr-code">
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+    (**{{ page.bitly }}**)
+</section>
+
+<script src="js/invaders.js"></script>
