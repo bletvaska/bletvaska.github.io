@@ -209,7 +209,8 @@ from time import sleep
 
 def on_message(client, userdata, message):
     text = str(message.payload.decode("utf-8"))
-    print(f'Received message "{text}" in topic "{message.topic}"')
+    print('Received message "{}" in topic "{}"'.format(
+        text, message.topic))
 
 if __name__ == '__main__':
     client = mqtt.Client()

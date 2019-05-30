@@ -2,6 +2,7 @@
 title: Programovateľné mikroprocesorové stavebnice
 layout: page
 order: 1
+duration: 240
 ---
 
 ## Goals
@@ -16,3 +17,8 @@ order: 1
 * mikrokontrolér
 * mikropočítač
 
+## Prehľad populárnych riešení
+
+* Arduino UNO / ATmega 328P
+* ESP32
+* Raspberry Pi / Raspberry Pi Zero WH
