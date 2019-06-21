@@ -1,0 +1,247 @@
+---
+title: Game Developer in 120 Minutes
+subtitle: alebo herným vývojárom rýchlo a ľahko
+description:
+    Ako sa stať herným vývojárom rýchlo a ľahko s Pythonom a knižnicou Pygame Zero. A to všetko za 120 minút. Maňana.
+duration: 120
+date: 21.06.2019
+bitly: http://bit.ly/2Hy2Jwn
+conference:
+- title: Python Days 2019
+- url: https://spsmt.sk/2019/06/10/python-days-3-0/
+---
+<style>
+body, html{
+  background-color: #222;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  position :absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast
+}
+</style>
+
+
+
+<section id="opening" data-markdown>
+## {{ page.title }}
+#### {{ page.subtitle }}
+
+miroslav.binas@tuke.sk / [**{{ page.conference[0].title }}**]({{ page.conference[1].url}})
+</section>
+
+
+<section id="hrate-sa" data-markdown>
+## Hráte sa počítačové hry?
+</section>
+
+
+<section id="assassins-creed" data-markdown>
+![Assassin's Creed](images/assassins.creed.jpg)
+</section>
+
+
+<section id="tis-100" data-markdown>
+![Assassin's Creed](images/tis.100.jpg)
+</section>
+
+
+<section id="naprogramovali-ste-hru" data-markdown>
+## Naprogramovali ste si vlastnú počítačovú hru?
+</section>
+
+
+<section id="arkanoid-logo" data-markdown data-background="black">
+![Arkanoid Logo](images/arkanoid.logo.jpg)
+
+Note:
+* https://i.ytimg.com/vi/2bdFsD_0HXI/maxresdefault.jpg
+</section>
+
+
+<section id="arkanoid-arcade" data-background="black">
+    <iframe width="896" height="504" src="https://www.youtube.com/embed/Th-Z6QQ5AOQ?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen data-autoplay></iframe>
+</section>
+
+
+<section id="space-invaders" data-markdown data-background="#002983">
+![Space Invaders](images/banner-space.invaders.jpg)
+
+Note:
+* https://arcademarquee.com/?product=space-invaders-arcade-marquee-26-x-8
+</section>
+
+
+<section id="space-invaders-gameplay" data-background="black">
+    <iframe width="896" height="504" src="https://www.youtube.com/embed/kR2fjwr-TzA?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen data-autoplay></iframe>
+</section>
+
+<section id="flappy-bird" data-markdown data-background="#018695">
+![Flappy Bird](images/flappy.bird.jpg)
+
+Note:
+* http://eskipaper.com/flappy-bird-3.html#
+</section>
+
+
+<section id="flappy-bird-gameplay" data-background="black">
+    <iframe width="896" height="504" src="https://www.youtube.com/embed/EDG9vW_iz6s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen data-autoplay></iframe>
+</section>
+
+
+<section id="collisions" data-markdown data-background="#2ECC71">
+[![Kenney.nl](images/kenney-promo.png)](https://kenney.nl/)
+</section>
+
+
+<section id="pygame-zero" data-background="white">
+<a href="https://pygame-zero.readthedocs.io/">
+    <img src="images/logo-pygamezero.svg" width="600">
+</a>
+</section>
+
+
+<section id="pygame" data-markdown data-background="white">
+[![Pygame logo](images/logo-pygame.png)](https://www.pygame.org/news)
+</section>
+
+
+<section id="sdl" data-markdown data-background="white">
+[![SDL logo](images/logo-sdl.png)](https://www.libsdl.org/)
+
+Since 1998
+</section>
+
+
+<section id="steam" data-markdown data-background="black">
+![Steam logo](images/logo-steam.jpg)
+</section>
+
+
+<section id="pygame-zero-about" data-markdown>
+### Pygame Zero is for creating games without boilerplate.
+</section>
+
+
+<section id="pygame-zero-magpi" data-markdown data-background="images/magpi-35-pygamezero.jpg">
+Note:
+* https://www.raspberrypi.org/magpi/wp-content/uploads/2015/06/35_PygameZero.jpg
+</section>
+
+
+<section id="installation" data-markdown>
+## Installation
+
+* Raspberry Pi - builtin
+* `sudo dnf install pgzero mu`
+* `pip install pgzero mu-editor`
+</section>
+
+
+<section id="warning" data-markdown>
+## Warning!
+(no best practices provided)
+</section>
+
+
+<section id="game-loop" data-markdown data-background="#FEFCF6">
+![Game Loop](images/game-loop-simple.png)
+
+Note:
+* http://gameprogrammingpatterns.com/images/game-loop-simple.png
+</section>
+
+
+<section id="project-structure" data-markdown>
+## Project Structure
+
+```
+.
+├── invaders.py
+├── sounds/
+│   ├── beep.wav
+│   └── jingle.wav
+└── images/
+    ├── background.png
+    ├── invader.png
+    ├── laser.png
+    └── player.png
+```
+</section>
+
+
+<section id="2d-coordinate-system" data-markdown>
+## 2D Coordinate System
+
+![2D Coordinate System](images/2d.coordinate.system.png)
+</section>
+
+
+<section id="actor" data-markdown>
+![Actor](images/invader.png)
+</section>
+
+
+<section id="pygame-handles" data-markdown>
+## Pygame Handles 
+
+![Pygame Handles](images/handles.png)
+</section>
+
+
+<section id="collision-detections" data-markdown>
+    ## Collisioin Detection
+</section>
+
+
+<section id="collisions" data-markdown data-background="#fff">
+    ![Collisions](images/collisions.png)
+
+    Note:
+    * https://treadgaming.blogspot.com/2016/06/video-game-physics-tutorial-part-ii.html
+</section>
+
+
+<section id="questions" data-markdown>
+    ## Questions?
+</section>
+
+
+<section id="where-to-go-next" data-markdown>
+## What's Next?
+</section>
+
+
+<section id="links" data-markdown>
+    ## Links
+
+    * [assets](https://kenney.nl/assets/space-shooter-redux) - [Kenney.nl](https://kenney.nl)
+    * [výsledný projekt]() - Space Invaders
+    * [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
+    * [Wireframe](https://wireframe.raspberrypi.org/) Magazine
+    * [MagPi](https://www.raspberrypi.org/magpi/) Magazine
+    * [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
+    * [Tvorba počítačových hier s Pygame Zero](https://legacy.gitbook.com/book/bletvaska/tvorba-pocitacovych-hier-s-pygame-zero/details) - poznámky ku tvorivej dielni
+</section>
+
+
+<section data-markdown id="qr-code">
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+    (**{{ page.bitly }}**)
+</section>
+
+<script src="js/invaders.js"></script>
