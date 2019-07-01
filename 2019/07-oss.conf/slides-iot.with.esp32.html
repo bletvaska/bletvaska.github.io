@@ -1,0 +1,201 @@
+---
+title: Robíme IoT s ESP32 v jazyku MicroPython
+subtitle: Time to Say Goodbye to Arduino
+description:
+    Arduino je v súčasnosti asi najznámejšia prototypovacia doska, ktorá sa používa aj vo výučbe či už na výučbu programovania alebo sa pomocou nej študenti zoznamujú so základmi elektroniky. Jedno z nevýhod tejto dosky je však absencia komunikačného modulu, pomocou ktorého by bolo možné Arduino pripojiť do internetu. Dokúpením vhodných shield-ov sa však cena takéhoto riešenia môže aj zdvojnásobiť. V rámci príspevku sa vám pokúsim predstaviť dosku ESP32, ktorá odstraňuje uvedené problémy a pridáva ďalšiu výhodu, ktorou je možnosť programovať riadenie v jazyku MicroPython.
+duration: 20
+date: 03.07.2019
+bitly: http://bit.ly/2IWGAIR
+conference:
+- title: OSS Conf 2019
+- url: http://ossconf.soit.sk/
+---
+<style>
+body, html{
+  background-color: #222;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  position :absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast
+}
+</style>
+
+
+
+<section id="opening" data-markdown>
+## {{ page.title }}
+#### {{ page.subtitle }}
+
+miroslav.binas@tuke.sk / [**{{ page.conference[0].title }}**]({{ page.conference[1].url}})
+</section>
+
+
+<section id="hrate-sa" data-markdown>
+## Time to Say Goodbye to Arduino
+</section>
+
+<section id="arduino" data-markdown>
+![Arduino](images/arduino.png)
+</section>
+
+
+<section id="microbit" data-markdown>
+![micro:bit](images/microbit.png)
+
+Note:
+* https://www.womenofwearables.com/blogwrite/announcing-partnership-with-bbc-microbit-educational-foundation
+</section>
+
+
+<section id="esp-32" data-markdown>
+![ESP32](images/esp32.png)
+
+Notes:
+* https://www.mouser.co.uk/new/espressif/espressif-esp32-devkitc-boards/
+</section>
+
+
+<section id="esp-32-block-diagram" data-markdown data-background-color="#ebebeb">
+![ESP32 Block Diagram](images/esp32-block-diagram.png)
+
+
+Notes:
+* https://cdn.sparkfun.com/assets/home_page_posts/2/0/1/7/
+</section>
+
+
+<section id="micropython" data-markdown data-background-color="#fff">
+[![Micropython](images/logo-micropython.jpg)](https://micropython.org/)
+</section>
+
+
+<section id="repl" data-markdown>
+## REPL
+</section>
+
+
+<section id="blink" data-markdown>
+## Blink
+
+```python
+from machine import Pin
+from time import sleep
+
+led = Pin(23, Pin.OUT)
+
+while True:
+    led.on()
+    sleep(1)
+    led.off()
+    sleep(1)
+```
+</section>
+
+
+<section id="dht22" data-markdown>
+## DHT22
+
+```python
+from dht import DHT22
+from machine import Pin
+from time import sleep
+
+sensor = DHT22(Pin(22))
+
+while True:
+    sensor.measure()
+    print(sensor.temperature(), sensor.humidity())
+    sleep(5)
+```
+</section>
+
+
+<section id="wifi" data-markdown>
+## WiFi
+
+```python
+import network
+
+iface = network.WLAN(network.STA_IF)
+if not iface.isconnected():
+    print('connecting to network...')
+    iface.active(True)
+    iface.connect('ssid', 'password')
+    while not iface.isconnected():
+        pass
+
+print('network config:', iface.ifconfig())
+```
+</section>
+
+
+<section id="mqtt" data-markdown>
+## MQTT
+
+```python
+from umqtt.robust import MQTTClient
+
+# connecting to broker
+client = MQTTClient('client-id', 'broker-ip')
+client.connect()
+
+# publishing message
+client.publish('messages', 'hello world')
+```
+</section>
+
+
+<section id="ibm-watson-iot-platform" data-markdown>
+## [IBM Watson IoT](https://quickstart.internetofthings.ibmcloud.com/#/)
+</section>
+
+
+<section id="get-ready-with-upip" data-markdown>
+## Get Ready for Watson
+
+* no direct support for _Watson_
+* install appropriate package with `upip`
+    * _MicroPython_ version of `pip`
+    * packages for _MicroPython_ have prefix `micropython-`
+
+* install `micropython-watson-iot` package:
+  ```python
+  import upip
+  upip.install('micropython-watson-iot')
+  ```
+</section>
+
+
+<section id="questions" data-markdown>
+## Questions?
+</section>
+
+
+<section id="links" data-markdown>
+## Links
+
+* [Mu Editor](https://codewith.mu/)
+* [MicroPython](https://micropython.org/) - Python for microcontrollers
+* [rshell](https://github.com/dhylands/rshell) - Remote Shell for _MicroPython_
+</section>
+
+
+<section data-markdown id="qr-code">
+![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+(**{{ page.bitly }}**)
+</section>
