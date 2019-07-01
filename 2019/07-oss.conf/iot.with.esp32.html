@@ -7,7 +7,7 @@ duration: 20
 layout: slide
 theme: night
 date: 03.07.2019
-bitly: http://bit.ly/2IWGAIR
+bitly: http://bit.ly/2NrMSWq
 conference:
 - title: OSS Conf 2019
 - url: http://ossconf.soit.sk/
@@ -37,7 +37,6 @@ canvas {
 </style>
 
 
-
 <section id="opening" data-markdown>
 ## {{ page.title }}
 #### {{ page.subtitle }}
@@ -45,10 +44,6 @@ canvas {
 miroslav.binas@tuke.sk / [**{{ page.conference[0].title }}**]({{ page.conference[1].url}})
 </section>
 
-
-<section id="hrate-sa" data-markdown>
-## Time to Say Goodbye to Arduino
-</section>
 
 <section id="arduino" data-markdown>
 ![Arduino](images/arduino.png)
@@ -60,6 +55,13 @@ miroslav.binas@tuke.sk / [**{{ page.conference[0].title }}**]({{ page.conference
 
 Note:
 * https://www.womenofwearables.com/blogwrite/announcing-partnership-with-bbc-microbit-educational-foundation
+</section>
+
+
+<section id="mu" data-markdown>
+![Mu](images/mu.png)
+
+## [Mu](https://codewith.mu/): A Python Code Editor
 </section>
 
 
@@ -182,6 +184,44 @@ client.publish('messages', 'hello world')
 </section>
 
 
+<section id="esp32-with-watson" data-markdown>
+## ESP32 with Watson
+
+```python
+from watson_iot import Device
+
+device = Device(device_id='esp32-dht22',
+                device_type='my-device-type',
+                token='my-device-token')
+device.connect()
+
+device.publishEvent('temperature', {'degrees': 30.7, 'unit': 'C'})
+```
+</section>
+
+
+<section id="the-final-code" data-markdown>
+## The Final Code
+
+```python
+# imports ...
+
+sensor = DHT22(Pin(23))
+
+device = Device(device_id='esp32-with-dht22',
+                device_type='type', token='token')
+device.connect()
+
+while True:
+    sensor.measure()
+    temp = sensor.temperature()
+    device.publishEvent('temperature', {'degrees': temp,
+                        'unit': 'C'})
+    sleep(10)
+```
+</section>
+
+
 <section id="questions" data-markdown>
 ## Questions?
 </section>
@@ -192,7 +232,9 @@ client.publish('messages', 'hello world')
 
 * [Mu Editor](https://codewith.mu/)
 * [MicroPython](https://micropython.org/) - Python for microcontrollers
-* [rshell](https://github.com/dhylands/rshell) - Remote Shell for _MicroPython_
+* [MicroPython documentation](https://docs.micropython.org/en/latest/index.html)
+* [esptool](https://github.com/espressif/esptool), [ampy](https://github.com/pycampers/ampy), [rshell](https://github.com/dhylands/rshell) - tools for serial interaction with _ESP32_
+* [Random Nerd Tutorials](https://randomnerdtutorials.com/) - _MicroPython_ projects with _ESP32_
 </section>
 
 
