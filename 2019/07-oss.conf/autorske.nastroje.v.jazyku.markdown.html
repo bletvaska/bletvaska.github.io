@@ -1,0 +1,170 @@
+---
+title: Autorské nástroje v jazyku Markdown
+description:
+    Markdown je jednoduchý značkovací jazyk, ktorý bol vytvorený s cieľom umožniť používateľom písať dokumenty vo formáte, ktorý je jednoduchý na čítanie aj písanie s možnosťou ďalšieho exportu do jazyka HTML. Dnes to už nie je len HTML, ale z Markdown-u je možné exportovať dokumenty napr. aj do LaTeX-u, PDF alebo vytvárať knižky vo formáte ePub. V tomto príspevku vám predstavím nástroj Gitbook na tvorbu kompletných knižných publikácií a statický generátor stránok Jekyll, ktorý stránky umožňuje písať práve v tomto formáte.
+duration: 18
+layout: slide
+theme: night
+date: 02.07.2019
+bitly: http://bit.ly/2NrMSWq
+conference:
+- title: OSS Conf 2019
+- url: http://ossconf.soit.sk/
+---
+<style>
+body, html{
+  background-color: #222;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  position :absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast
+}
+</style>
+
+
+<section id="opening" data-markdown>
+## {{ page.title }}
+
+miroslav.binas@tuke.sk / [**{{ page.conference[0].title }}**]({{ page.conference[1].url}})
+</section>
+
+
+<section id="once-upon-a-time" data-markdown>
+## Once Upon a Time...
+
+* project [IT4KT](http://it4kt.kpi.fei.tuke.sk/)
+* goal - to create a format for edu with keywords common for teachers
+    * goal, step, task, task
+* based on _XML_
+    * has schema
+    * support in many tools
+    * conversions with XSLT transformations
+</section>
+
+
+<section id="what-is-markdown" data-markdown>
+## Markdown
+
+> **Markdown** is a lightweight markup language with plain text formatting syntax. Its design allows it to be converted to many output formats.
+> ([Wikipedia](https://en.wikipedia.org/wiki/Markdown))
+</section>
+
+
+<section id="markdown-example" data-markdown>
+```markdown
+# Heading
+
+## Sub-heading
+
+Paragraphs are separated by a blank line.
+
+Text attributes _italic_,  **bold**, `monospace`.
+
+Bullet list:
+
+  * apples
+  * oranges
+  * pears
+
+Numbered list:
+
+  1. wash
+  2. rinse
+  3. repeat
+
+An [example](http://example.com)
+
+![Image](Icon-pictures.png "icon")
+```
+</section>
+
+
+<section id="pandoc" data-markdown>
+## [Pandoc](https://pandoc.org/)
+
+* a universal document converter
+* usage:
+  ```bash
+  pandoc -f markdown -t html5 file.md
+  ```
+</section>
+
+
+<section id="gitbook" data-markdown data-background-color="#fff">
+[![GitBook Logo](images/logo-gitbook.png)](https://www.gitbook.com/)
+</section>
+
+
+<section id="gitbook-features" data-markdown>
+## GitBook Features
+
+* online authoring tool
+* extensible with [plugins](https://docs.gitbook.com/v2-changes/important-differences#plugins)
+* result as _HTML_, _PDF_ and _EPUB3_
+* sources available on [Github](https://github.com/)
+</section>
+
+
+<section id="gitbook-editor" data-markdown>
+[![GitBook Editor](images/gitbook.editor.png)](https://legacy.gitbook.com/editor)
+</section>
+
+
+<section id="gitbook-today" data-markdown>
+## GitBook Legacy
+
+* [GitBook](https://www.gitbook.com/) has changed :-(
+* [GitBook Legacy](https://legacy.gitbook.com/) is still available as [npm package](https://www.npmjs.com/package/gitbook)
+    * to install:
+      ```bash
+      npm install gitbook-cli -g
+      ```
+    * to use:
+      ```bash
+      gitbook init
+      gitbook serve
+      gitbook build
+      ```
+</section>
+
+<section id="jekyll" data-markdown data-background-color="#343433">
+[![jekyll](images/jekyll-og.png)](https://jekyllrb.com/)
+</section>
+
+
+<section id="github-pages" data-markdown>
+## Github Pages
+</section>
+
+
+<section id="questions" data-markdown>
+## Questions
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [Markdown Tutorial](https://www.markdowntutorial.com/)
+</section>
+
+
+<section data-markdown id="qr-code">
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+    (**{{ page.bitly }}**)
+</section>

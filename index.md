@@ -15,6 +15,8 @@ title: My Talks
 * [Namakaný deň 2019](hhttp://www.namakanyden.sk/2019/) - [Do you Mu?](2019/namakany.den/slides.html)
 * [Y-Games 2019](https://yzone.sk/ygames-2019) - [Space Invaders in 60 Minutes](2019/y-games/slides.html)
 * [Python Days 3.0](https://spsmt.sk/2019/06/10/python-days-3-0/) - [Game Developer in 90 Minutes](2019/06-python.days/slides.html)
+* [OSS Conf 2019](http://ossconf.soit.sk/) - [Autorské nástroje v jazyku Markdown](2019/07-oss.conf/autorske.nastroje.v.jazyku.markdown.html)
+* [OSS Conf 2019](http://ossconf.soit.sk/) - [Výučba programovania tvorbou počítačových hier](2019/07-oss.conf/vyucba.programovania.tvorbou.pocitacovych.hier.html)
 * [OSS Conf 2019](http://ossconf.soit.sk/) - [Robíme IoT s ESP32 v jazyku MicroPython](2019/07-oss.conf/iot.with.esp32.html)
 
 ## 2018
