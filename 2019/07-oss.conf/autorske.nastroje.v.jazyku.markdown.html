@@ -48,11 +48,11 @@ miroslav.binas@tuke.sk / [**{{ page.conference[0].title }}**]({{ page.conference
 
 * project [IT4KT](http://it4kt.kpi.fei.tuke.sk/)
 * goal - to create a format for edu with keywords common for teachers
-    * goal, step, task, task
+    * `goal`, `step`, `task`
 * based on _XML_
-    * has schema
-    * support in many tools
+    * has schema, support in many tools
     * conversions with XSLT transformations
+* building our own set of tools
 </section>
 
 
@@ -65,6 +65,8 @@ miroslav.binas@tuke.sk / [**{{ page.conference[0].title }}**]({{ page.conference
 
 
 <section id="markdown-example" data-markdown>
+## Markdown Example
+
 ```markdown
 # Heading
 
@@ -88,7 +90,7 @@ Numbered list:
 
 An [example](http://example.com)
 
-![Image](Icon-pictures.png "icon")
+![Image](images/markdown.png)
 ```
 </section>
 
@@ -97,9 +99,12 @@ An [example](http://example.com)
 ## [Pandoc](https://pandoc.org/)
 
 * a universal document converter
+* support for [dozens](https://pandoc.org/) of formats
 * usage:
   ```bash
   pandoc -f markdown -t html5 file.md
+  pandoc -f markdown -t latex file.md
+  pandoc -f markdown -t epub file.md
   ```
 </section>
 
@@ -141,25 +146,41 @@ An [example](http://example.com)
       ```
 </section>
 
+
+<section id="story-continues" data-markdown>
+## Story Continues...
+
+* Static Site Generators
+* [Static Gen](https://www.staticgen.com/) - A List of Static Site Generators for JAMstack Sites
+* looking for Static Gen written in Python...
+</section>
+
+
 <section id="jekyll" data-markdown data-background-color="#343433">
 [![jekyll](images/jekyll-og.png)](https://jekyllrb.com/)
 </section>
 
 
 <section id="github-pages" data-markdown>
-## Github Pages
+## [Github Pages](https://pages.github.com/)
+
+* support in Github and GitLab
+* easy integration with CI/CD
+</section>
+
+
+<section id="state-of-the-art" data-markdown>
+## (My) State of the Art
+
+* Jekyll powers this presentation
+* Jekyll powers two of my courses
+    * [Programovanie](https://kurzy.kpi.fei.tuke.sk/pvjc/)
+    * [Základy Internetu vecí](http://kpi.pages.kpi.fei.tuke.sk/iot1/)
 </section>
 
 
 <section id="questions" data-markdown>
 ## Questions
-</section>
-
-
-<section id="links" data-markdown>
-## Odkazy
-
-* [Markdown Tutorial](https://www.markdowntutorial.com/)
 </section>
 
 
