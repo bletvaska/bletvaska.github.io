@@ -1,5 +1,5 @@
 ---
-title: Digitálne vstupy a výstupy
+title: Analógové vstupy a výstupy
 layout: slide
 theme: night
 description:
@@ -162,65 +162,7 @@ while True:
 </section>
 
 
-<section id="indiana-jones-and-the-gold-idol">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aADExWV1bsM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</section>
 
-
-<section data-markdown id="dht11">
-## 3. Čítanie teploty a vlhkosti
-</section>
-
-
-<section id="dht-pinout" data-markdown data-background-color="white">
-[![DHT11 and DHT22 pinout](images/dht11.and.dht22.pinout.png)](https://lastminuteengineers.com/dht11-dht22-arduino-tutorial/)
-
-Note:
-* https://lastminuteengineers.com/dht11-dht22-arduino-tutorial/
-</section>
-
-
-<section id="dht11" data-markdown>
-| | DHT11 | DHT22 |
-|-|-------|-------|
-| Temp. range | 0-50°C / ±2°C | -40 - 80°C / ±0.5°C |
-| Humidity range | 20 - 80% ±5% | 0 - 100% ±2% |
-| Resolution | Humidity: 1% Temp: 1ºC | Humidity: 0.1% Temp: 0.1ºC |
-| Op. voltage | 3 – 5V | 3 – 5V |
-| Op. current | max. 2.5 mA | max. 2.5 mA |
-| Sampl. rate | 1Hz | 0.5Hz |
-
-Note:
-* https://lastminuteengineers.com/dht11-dht22-arduino-tutorial/
-* https://randomnerdtutorials.com/esp32-dht11-dht22-temperature-humidity-sensor-arduino-ide/
-</section>
-
-
-<section data-markdown id="dht-schematic" data-background-color="white">
-[![Meranie teploty s DHT11 a ESP32](images/esp32-dht.png)](https://randomnerdtutorials.com/esp32-dht11-dht22-temperature-humidity-sensor-arduino-ide/)
-
-Note:
-* https://randomnerdtutorials.com/esp32-dht11-dht22-temperature-humidity-sensor-arduino-ide/
-</section>
-
-
-<section id="dht-code" data-markdown>
-```python
-from dht import DHT11
-from machine import Pin
-from time import sleep
-
-sensor = DHT11(Pin(4))
-
-while True:
-    sensor.measure()
-    temp = sensor.temperature()
-    hum = sensor.humidity()
-
-    print(temp, hum)
-    sleep(10)
-```
-</section>
 
 
 <section data-markdown>

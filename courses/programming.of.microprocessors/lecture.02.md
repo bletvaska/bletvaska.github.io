@@ -18,20 +18,50 @@ outline:
 [![ESP-WROOM-32 Pinout](images/esp32-pinout.jpg)](https://www.flickr.com/photos/jgustavoam/40089095211/in/photostream/)
 
 
-## Digitálny výstup
+## Práca s GPIO pinom v ESP32
 
-```python
-from machine import Pin
-from time import sleep
+* trieda `machine.Pin`
 
-led = Pin(32)
+* `pin` objekt sa používa na riadenie GPIO pinu
 
-while True:
-    led.on()
-    sleep(1)
-    led.off()
-    sleep(1)
-```
+* je asociovaný s fyzickým pin-om
+
+* umožňuje
+    * nastaviť režim prístupu (`IN`, `OUT`, ...)
+    * čítanie/zápis na pin
+
+* použitie
+    ```python
+    from machine import Pin
+    pin = Pin(23, Pin.OUT)
+    pin.on()
+    ```
+
+## Rozsvietenie LED diódy
+
+* zapojenie nakresliť na tabuľu
+    * zapojiť led-ku medzi 3.3V a zem
+    * nezabudnúť na odpor a vypočítať jeho veľkosť podľa ohmovho zákona
+    * ak je všetko v poriadku, led-ka svieti
+
+* rozpojiť 3.3V a zapojiť ho podľa schémy na GPIO pin 5
+    ![Blink](images/esp32-blink.png)
+
+* naprogramovať
+    ```python
+    from machine import Pin
+    from time import sleep
+
+    print(autor)
+    led = Pin(5, Pin.OUT)
+
+    while True:
+        led.on()
+        sleep(1)
+        led.off()
+        sleep(0.5)
+    ```
+
 
 
 ## Let's Build a Python LED Class
@@ -57,3 +87,4 @@ while True:
 
 ## Linky
 * [ESP32 DevKit ESP32-WROOM GPIO Pinout](https://circuits4you.com/2018/12/31/esp32-devkit-esp32-wroom-gpio-pinout/)
+* [class Pin – control I/O pins](http://docs.micropython.org/en/latest/library/machine.Pin.html#machine-pin)
