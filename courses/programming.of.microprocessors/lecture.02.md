@@ -5,9 +5,17 @@ order: 2
 duration: 240
 outline:
 - Riadenie digitálnych vstupov a výstupov
-- Digitálne výstupy 
-- Digitálne vstupy 
+- Digitálne výstupy
+- Digitálne vstupy
 ---
+
+## GPIO Piny
+
+* skratka od _General Purpose Input Output_
+
+### ESP-WROOM-32 Pinout
+
+[![ESP-WROOM-32 Pinout](images/esp32-pinout.jpg)](https://www.flickr.com/photos/jgustavoam/40089095211/in/photostream/)
 
 
 ## Digitálny výstup
@@ -45,3 +53,7 @@ while True:
 * spravme zabezpečovací mechanizmus pre _Golden Idol_
 
 * ako však zabezpečili, aby ten mechanizmus fungoval aj po tisíckach rokov?
+
+
+## Linky
+* [ESP32 DevKit ESP32-WROOM GPIO Pinout](https://circuits4you.com/2018/12/31/esp32-devkit-esp32-wroom-gpio-pinout/)

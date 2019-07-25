@@ -1,0 +1,63 @@
+---
+title: Digitálne vstupy a výstupy
+layout: slide
+theme: night
+description:
+    O riadení digitálnych vstupov a výstupov, o digitálnych výstupoch a digitálnych vstupoch.
+bitly: http://bit.ly/
+---
+<section data-markdown id="title">
+## {{ page.title }}
+
+miroslav.binas@tuke.sk / [**IT Akadémia**](http://linka.na.stranku/)
+</section>
+
+
+<section data-markdown id="gpio-pins">
+## GPIO Pins
+
+* GPIO - General-Purpose Input/Output
+* pozor na označovanie!
+    * môžu sa líšiť v závislosti od výrobcu
+    * vždy overiť s datasheet-om a jeho rozložením pinov
+</section>
+
+
+<section data-markdown id="esp32-pinout" data-background-color="white">
+[![ESP-WROOM-32 Pinout](images/esp32-pinout.jpg)](https://www.flickr.com/photos/jgustavoam/40089095211/in/photostream/)
+
+Notes:
+* https://www.flickr.com/photos/jgustavoam/40089095211/in/photostream/
+</section>
+
+
+<section data-markdown id="gpio-pins-on-esp32">
+## GPIO Pins on ESP32
+
+* _ESP-WROOM-32_ má spolu _38_ pinov
+* GPIO piny: _0-19_, _21-23_, _25-27_, _32-39_
+    * piny _1_ a _3_ sú pre _REPL UART TX_ a _RX_
+    * piny _6_, _7_, _8_, _11_, _16_, a _17_ sa používajú pre pripojenie zabudovanej _flash_ a neodporúčajú sa pre iné použitie
+    * piny _34-39_ sú len vstupné a nemajú interné _pull-up_ rezistory
+
+Note:
+* https://circuits4you.com/2018/12/31/esp32-devkit-esp32-wroom-gpio-pinout/
+* http://docs.micropython.org/en/latest/esp32/quickref.html#pins-and-gpio
+</section>
+
+
+<section data-markdown id="blink-schematic">
+![](images/esp32-blink.png)
+</section>
+
+
+<section data-markdown>
+## Otázky?
+</section>
+
+
+<section data-markdown>
+![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+(**{{ page.bitly }}**)
+</section>
