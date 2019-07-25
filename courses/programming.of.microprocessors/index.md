@@ -23,11 +23,17 @@ duration: 240
 * Digitálne výstupy 
 * Digitálne vstupy 
 
+([slides](slides.02.html))
+([lecture](lecture.02.html))
+
 
 ### 3. Analógové vstupy/výstupy
 
 * Riadenie analógových vstupov a výstupov
 * Analógové vstupy a výstupy
+
+([slides](slides.03.html))
+([lecture](lecture.03.html))
 
 
 ### 4. Zobrazovacie jednotky
@@ -35,6 +41,8 @@ duration: 240
 * Využitie rôznych typov zobrazovacích jednotiek
 * Zobrazovacie jednotky (LCD displej, 7-segmentový displej a iné)
 
+([slides](slides.04.html))
+([lecture](lecture.04.html))
 
 ### 5. Motorové obvody
 
