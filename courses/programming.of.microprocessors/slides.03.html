@@ -13,7 +13,50 @@ miroslav.binas@tuke.sk / [**IT Akadémia**](http://linka.na.stranku/)
 </section>
 
 
+<section data-markdown>
+## AD na ESP32
 
+* má dva AD prevodníky
+    * jeden z nich však funguje len za špeciálnych podmienok
+    * ako analógové piny používať len piny _32-39_
+* rozlíšenie _12b_
+</section>
+
+
+<section data-markdown>
+## Ukážka použitia
+
+```python
+from machine import ADC, Pin
+
+adc = ADC(Pin(32))  # create ADC object on ADC pin
+adc.read()          # read values, range: 0-4095
+                    # voltage range 0.0V - 1.0V
+```
+</section>
+
+
+<section data-markdown>
+## Nastavenie útlmu
+
+* pomocou metódy `adc.atten()`
+* možné hodnoty:
+    * `ADC.ATTN_0DB` - útlm _0dB_, max. vstupné napätie _1.00V_, predvolené nastavenie
+    * `ADC.ATTN_2_5DB` - útlm _2.5dB_, max. vstupné napätie _1.34V_
+    * `ADC.ATTN_6DB` - útlm _6dB_, max. vstupné napätie _2.00V_
+    * `ADC.ATTN_11DB` - útlm _11dB_, max. vstupné napätie _3.6V_
+</section>
+
+<section data-markdown>
+## Nastavenie veľkosti výstupu
+
+* pomocou metódy `adc.width()`
+* možné hodnoty:
+    * `ADC.WIDTH_9BIT` - 9 bit data
+    * `ADC.WIDTH_10BIT` - 10 bit data
+    * `ADC.WIDTH_11BIT` - 11 bit data
+    * `ADC.WIDTH_12BIT` - 12 bit data, predvolené nastavenie
+</section>
 
 <section data-markdown>
 ## Otázky?
