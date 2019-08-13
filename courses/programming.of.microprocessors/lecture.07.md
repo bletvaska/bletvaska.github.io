@@ -49,8 +49,8 @@ def do_connect():
 * konfigurácia do `boot.py` spolu s funkciou, resp. s inicializáciou siete
 
 ```python
-ssid = 'IoTkurz'
-password = 'pivopivo'
+_ssid = 'IoTkurz'
+_password = 'pivopivo'
 
 def do_connect(ssid, password):
     import network
@@ -62,10 +62,65 @@ def do_connect(ssid, password):
         while not wlan.isconnected():
             pass
     print('network config:', wlan.ifconfig())
+
+do_connect(_ssid, _password)
 ```
 
 ## MQTT
 
+* Micropython pre ESP32 obsahuje priamu podporu pre MQTT - balík `umqtt`
+
+* [prezentácia o MQTT](http://bit.ly/2wKbheb)
+
+
+### Publikovanie správ do MQTT
+
+```python
+from umqtt.robust import MQTTClient
+
+# connecting to broker
+client = MQTTClient('client-id', 'broker-ip', port)
+
+# publishing message
+client.connect()
+client.publish('messages', 'hello world')
+client.disconnect()
+```
+
+
+### Prihlásenie sa na odber správ z MQTT
+
+
+## IBM Watson IoT
+
+* komplexná platforma pre IoT riešenia od IBM
+* my si ukážeme jednoduchosť použitia v režime [Quickstart](https://quickstart.internetofthings.ibmcloud.com/)
+    * do formuláru na stránke zadáme len identifikátor nášho zariadenia (_Device ID_)
+* podpora pre _IBM Watson IoT_ nie je na _ESP32_ natívna - je potrebné ju doinštalovať
+    * balík sa volá `micropython-watson-iot`)
+        * balíky pre _Micropython_ je možné vyhľadať cez [pypi](https://pypi.org/)
+        * majú prefix `micropython-*`
+    * doinštalovať niečo v Python-e je možné pomocou nástroja `pip`
+    * v _Micropython_-e je možné ďalšie balíky doinštalovať tiež pomocou nástroja `pip`, ale vo forme príkazov samotného jazyka:
+      ```python
+      import upip
+      upip.install('micropython-watson-iot')
+      ```
+    * balíky sa inštalujú do priečinku `lib/` priamo na _ESP32_
+        * po nainštalovaní sú dostupné aj po reštarte _ESP32_
+    * výhoda - je možné pripraviť kód tak, aby v prípade, že potrebné balíky neexistujú, tak sa najprv nainštalujú
+* po nainštalovaní je použitie podobné, ako v prípade `MQTT`:
+  ```python
+  from watson_iot import Device
+
+  device = Device(device_id='esp32-dht22',
+                  device_type='my-device-type',
+                  token='my-device-token')
+
+  device.connect()
+  device.publishEvent('temperature', {'degrees': 30.7, 'unit': 'C'})
+  device.disconnect()
+  ```
 
 ## Links
 

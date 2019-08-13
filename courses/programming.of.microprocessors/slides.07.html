@@ -4,7 +4,7 @@ layout: slide
 theme: night
 description:
     O komunikácii s okolím, s počítačom a ďalšími jednotkami (sériová linka, Bluetooth, wifi, IR a iné), komunikácii na internete, Internet vecí
-bitly: http://bit.ly/2yfs0ra
+bitly: http://bit.ly/2Z51DmB
 ---
 <section data-markdown id="title">
 ## {{ page.title }}
@@ -37,6 +37,79 @@ def do_connect():
     print('network config:', wlan.ifconfig())
 ```
 </section>
+
+
+<section data-markdown id="mqtt">
+## MQTT
+
+* [nie príliš stručný úvod do MQTT]((http://bit.ly/2wKbheb)
+* natívna podpora pre MQTT v balíku `umqtt`
+</section>
+
+
+<section data-markdown id="mqtt-publish">
+## MQTT: Publikovanie správ
+
+```python
+from umqtt.robust import MQTTClient
+
+# configure connection to broker
+client = MQTTClient('client-id', 'broker-ip')
+
+# publishing message
+client.connect()
+client.publish('messages', 'hello world')
+client.disconnect()
+```
+</section>
+
+
+<section data-markdown id="mqtt-subscribe">
+## MQTT: Odoberanie správ
+
+```python
+```
+</section>
+
+
+<section id="ibm-watson-iot-platform" data-markdown>
+## [IBM Watson IoT](https://quickstart.internetofthings.ibmcloud.com/#/)
+</section>
+
+
+<section id="get-ready-with-upip" data-markdown>
+## Get Ready for Watson
+
+* _ESP32_ nemá priamu podporu pre _Watson_-a
+* je potrebné nainštalovať vhodný balík cez `upip`
+    * `upip` je _MicroPython_ verzia príkazu `pip`
+    * balíky pre _MicroPython_ majú prefix `micropython-`
+* inštalácia balíka `micropython-watson-iot`:
+    ```python
+    import upip
+    upip.install('micropython-watson-iot')
+    ```
+</section>
+
+
+<section id="esp32-with-watson" data-markdown>
+## ESP32 with Watson
+
+```python
+from watson_iot import Device
+
+device = Device(device_id='esp32-dht22',
+                device_type='my-device-type',
+                token='my-device-token')
+
+# publishing message
+device.connect()
+device.publishEvent('temperature', {'degrees': 30.7, 'unit': 'C'})
+device.disconnect()
+```
+</section>
+
+
 
 
 <section data-markdown>
