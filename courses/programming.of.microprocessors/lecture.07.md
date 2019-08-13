@@ -90,6 +90,23 @@ client.disconnect()
 
 ### Prihlásenie sa na odber správ z MQTT
 
+```python
+from umqtt.robust import MQTTClient
+
+def on_message(topic, message):
+    print('Message "{}" received in topic "{}"'.format(topic, message))
+
+# connecting to broker
+client = MQTTClient('client-id', 'broker-ip', port)
+client.set_callback(on_message)
+
+client.connect()
+client.subscribe('topic')
+print('Waiting for message...')
+client.wait_msg()  # blocking call
+client.disconnect()
+```
+
 
 ## IBM Watson IoT
 
@@ -122,6 +139,24 @@ client.disconnect()
   device.disconnect()
   ```
 
+
+### Zoznam verejných MQTT brokerov, resp. IoT paltforiem
+
+|---------------------------------------------+----------+------+------|
+|                                             | **REST API** | **MQTT** | **pypi** |
+|=============================================+==========+======+======|
+| [io.adafruit.com](https://io.adafruit.com/) | [áno](https://io.adafruit.com/api/docs/#adafruit-io-http-api) | [áno](https://io.adafruit.com/api/docs/mqtt.html#adafruit-io-mqtt-api) |      |
+|---------------------------------------------+----------+------+------|
+| [Ubidots](https://ubidots.com/)             | [áno](https://ubidots.com/docs/sw/#tag/Datasources) | [áno](https://ubidots.com/docs/hw/#mqtt-authentication) |      |
+|---------------------------------------------+----------+------+------|
+| [IBM Watson IoT]()                          |          |      | [`micropython-watson-iot`](https://pypi.org/project/micropython-watson-iot/) |
+|---------------------------------------------+----------+------+--------------------------|
+| [ThingSpeak](https://thingspeak.com/)       | [áno](https://uk.mathworks.com/help/thingspeak/rest-api.html?s_tid=CRUX_lftnav) | [áno](https://uk.mathworks.com/help/thingspeak/mqtt-api.html) |      |
+|---------------------------------------------+----------+------+------|
+
+
 ## Links
 
 * [Micropython: Networking](https://docs.micropython.org/en/latest/esp32/quickref.html#networking)
+* [IoT Made Easy: ESP-MicroPython-MQTT-ThingSpeak](https://towardsdatascience.com/iot-made-easy-esp-micropython-mqtt-thingspeak-ce05eea27814)
+* [Connect your ESP32 to Ubidots over MQTT using MicroPython](https://help.ubidots.com/en/articles/1956065-connect-your-esp32-to-ubidots-over-mqtt-using-micropython)

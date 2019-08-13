@@ -68,6 +68,20 @@ client.disconnect()
 ## MQTT: Odoberanie správ
 
 ```python
+from umqtt.robust import MQTTClient
+
+def on_message(topic, message):
+    print('Message "{}" received in topic "{}"'.format(
+        topic, message))
+
+client = MQTTClient('client-id', 'broker-ip', port)
+client.set_callback(on_message)
+
+client.connect()
+client.subscribe('topic')
+print('Waiting for message...')
+client.wait_msg()  # blocking call
+client.disconnect()
 ```
 </section>
 
