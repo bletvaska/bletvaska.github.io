@@ -19,15 +19,18 @@ outline:
 ## Inštalácia
 
 * prejdite na stránku https://github.com/dhylands/python_lcd
+
 * z priečinku `lcd/` si do svojho _ESP32_ prekopírujte tieto súbory:
     * `esp8266_i2c_lcd.py`
     * `lcd_api.py`
+
 * odskúšať LCD display môžete súborom s príkladom `esp8266_i2c_lcd_test.py`
     * piny pre _I2C_ na riadok _14_ upravte podľa svojho zapojenia, napr:
 
        ```python
        i2c = I2C(scl=Pin(22), sda=Pin(21), freq=400000)
        ```
+
 * ak by sa vám náhodou nič nezobrazovalo a Python nebude vypisovať žiadne chyby, skúste si nastaviť kontrast pomocou potenciometra na zadnej strane:
 
     ![Nastavovanie kontrastu](images/lcd_adjust_pot.jpg)

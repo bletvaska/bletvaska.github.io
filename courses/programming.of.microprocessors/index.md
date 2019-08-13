@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Programovanie mikroprocesorových systémov pre SŠ
 duration: 240
 ---
@@ -60,6 +60,9 @@ duration: 240
 * Komunikácia s okolím
 * Komunikácia s počítačom a ďalšími jednotkami (sériová linka, Bluetooth, wifi, IR a iné)
 * Komunikácia na internete, Internet vecí
+
+([slides](slides.07.html))
+([lecture](lecture.07.html))
 
 
 ### 8. Programovateľné mikroprocesorové stavebnice v škole

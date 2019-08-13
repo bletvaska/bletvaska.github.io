@@ -1,0 +1,50 @@
+---
+title: Komunikačné rozhrania
+layout: slide
+theme: night
+description:
+    O komunikácii s okolím, s počítačom a ďalšími jednotkami (sériová linka, Bluetooth, wifi, IR a iné), komunikácii na internete, Internet vecí
+bitly: http://bit.ly/2yfs0ra
+---
+<section data-markdown id="title">
+## {{ page.title }}
+
+miroslav.binas@tuke.sk / [**IT Akadémia**](http://linka.na.stranku/)
+</section>
+
+
+<section data-markdown id="networking">
+## Networking
+
+* WiFi 802.11 b/g/n
+* podpora Bluetooth v4.2 BR/EDR a BLE
+</section>
+
+
+<section data-markdown id="network-config">
+## WiFi Config
+
+```python
+def do_connect():
+    import network
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    if not wlan.isconnected():
+        print('connecting to network...')
+        wlan.connect('essid', 'password')
+        while not wlan.isconnected():
+            pass
+    print('network config:', wlan.ifconfig())
+```
+</section>
+
+
+<section data-markdown>
+## Otázky?
+</section>
+
+<section data-markdown>
+![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+(**{{ page.bitly }}**)
+</section>

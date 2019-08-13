@@ -51,21 +51,70 @@ outline:
 * Pri práci je však potrebné zvážiť nastavenie dvoch hodnôt - **útlm** a **šírku**.
 
 
-## Analógový vstup
+## Labáky
+
+
+### Foto rezistor
+
+* do série s fotorezistorom pridať ešte _10k_ odpor
+* merať medzi oboma odpormi
 
 ```python
-from machine import Pin, ADC
 from time import sleep
+from machine import ADC, Pin
 
-sensor = ADC(Pin(32)
-
-while True:)
+sensor = ADC(Pin(32))
+sensor.atten(ADC.ATTN_11DB)
+while True:
     print(sensor.read())
     sleep(1)
 ```
 
 
-## Sound Sensor
+### Meranie výšky hladiny s klincami
+
+* vymeniť fotorezistor za dva klince
+* pre zvýšenie citlivosti pridať ešte jeden _10k_ odpor do série
+
+
+### Meranie vlhkosti zeminy v kvetináči s klincami
+
+* rovnaký spôsob sa dá využiť aj na meranie vlhkosti v kvetináči
+    * odpor sa znižuje zvyšovaním vlhkosti
+* klince sú jednoduchou náhradou za podobné senzory
+    * water sensor
+    * moisture sensor
+
+
+### Meranie baterky
+
+* pre potreby merania monočlánkov o veľkosti _1.5V_ je treba upraviť útlm na hodnotu `ADC.ATTN_6DB` (max. _2V_)
+* baterku stačí zapojiť priamo medzi zem a analógový pin
+
+```python
+from time import sleep
+from machine import ADC, Pin, I2C
+from esp8266_i2c_lcd import I2cLcd
+
+# nastaveine AD prevodnika
+sensor = ADC(Pin(32))
+sensor.atten(ADC.ATTN_6DB)
+
+# nastavenie I2C zbernice
+i2c = I2C(scl=Pin(22), sda=Pin(21))
+lcd = I2cLcd(i2c, 39, 2, 16)
+
+lcd.putstr('Merac bateriek')
+sleep(3)
+
+while True:
+    lcd.clear()
+    value = sensor.read() / 4096 * 2
+    lcd.putstr('{:.3f}V'.format(value))
+    sleep(1)
+```
+
+### Sound Sensor
 
 * má 4 piny:
     * `GND` - zem
