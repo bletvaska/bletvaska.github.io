@@ -4,17 +4,41 @@ layout: slide
 theme: night
 description:
     O riadení motorov, servách, jednosmerných motoroch, krokových motoroch a ich riadení
-bitly: http://bit.ly/2Z51DmB
+bitly: http://bit.ly/2ZggzhQ
 ---
 <section data-markdown id="title">
 ## {{ page.title }}
 
-miroslav.binas@tuke.sk / [**IT Akadémia**](http://linka.na.stranku/)
+miroslav.binas@tuke.sk / [**IT Akadémia**](http://itakademia.sk/)
 </section>
 
 
 <section data-markdown id="about-motor">
 ## Motor
+</section>
+
+
+<section data-markdown id="motor-types">
+## Typy motorov
+
+* rozličné spôsoby delenia
+    * podľa rýchlosti, podľa veľkosti, podľa sily, ...
+* my sa pozrieme na
+    * jednosmerné motory (DC Motors)
+    * servomotory (servo)
+    * krokové motory (stepper motor)
+</section>
+
+
+<section data-markdown id="dc-motor">
+## Jednosmerný motor
+
+* zapojenie pomocou dvoch vodičov (+ a -)
+* smer otáčania závisí od polarity pripojených vodičov
+* typy:
+    * uhlíkové, a
+    * bezuhlíkové
+* ovládanie rýchlosti otáčania pomocou PWM
 </section>
 
 
@@ -53,6 +77,44 @@ miroslav.binas@tuke.sk / [**IT Akadémia**](http://linka.na.stranku/)
 * riadenie smeru otáčania (servo) motorov
 * v telekomunikácii (kódovanie/dekódovanie údajov)
 * audio efekty a zosilňovanie
+</section>
+
+
+<section data-markdown id="servo-motor">
+## Servomotor
+
+* motor sa netočí dookola, ale sa natočí o daný uhol (obyčajne v rozsahu _0°-180°_)
+* nie je možné ovládať rýchlosť krútenia
+* konštrukcia obsahuje
+    * jednosmerný motor
+    * H-mostík
+    * prevodovku
+    * potenciometer
+* ovládanie uhla/natočenia pomocou PWM
+</section>
+
+
+<section data-markdown id="how-servo-works" data-background="white">
+![Princíp fungovania serva](images/servo-principle.jpg)
+
+Notes:
+* https://www.neoteo.com/como-funcionan-los-servomotores/
+</section>
+
+
+<section data-markdown id="controlling-servo" data-background="white">
+![Ovládanie otáčok serva](images/servo-control.png)
+
+Notes:
+* https://www.neoteo.com/como-funcionan-los-servomotores/
+</section>
+
+
+<section data-markdown id="stepper-motor">
+## Krokový motor
+
+* jednosmerný motor, ktorý sa otáča po krokoch
+    * presné ovládanie
 </section>
 
 
