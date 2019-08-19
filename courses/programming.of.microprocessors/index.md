@@ -10,7 +10,7 @@ duration: 240
 ### 1. Programovateľné mikroprocesorové stavebnice
 
 * Základy práce s programovateľnými mikroprocesorovými stavebnicami
-* Mikroprocesorové stavebnice (prehľad, porovnanie, elektronické prvky) 
+* Mikroprocesorové stavebnice (prehľad, porovnanie, elektronické prvky)
 * Softvérové vybavenie (vývojové prostredie, simulátor, základná štruktúra programu)
 
 ([slides](slides.01.html))
@@ -20,8 +20,8 @@ duration: 240
 ### 2. Digitálne vstupy/výstupy
 
 * Riadenie digitálnych vstupov a výstupov
-* Digitálne výstupy 
-* Digitálne vstupy 
+* Digitálne výstupy
+* Digitálne vstupy
 
 ([slides](slides.02.html))
 ([lecture](lecture.02.html))
@@ -47,6 +47,9 @@ duration: 240
 ### 5. Motorové obvody
 
 * Riadenie motorov Servá, jednosmerné motory, krokové motory a ich riadenie
+
+([slides](slides.05.html))
+([lecture](lecture.05.html))
 
 
 ### 6. Ďalšie typy senzorov a rozšírení
