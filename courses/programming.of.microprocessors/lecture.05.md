@@ -286,7 +286,39 @@ Následne je možné odpojiť USB kábel a priviesť _5V_ z H-mostíka _L298N_ n
 
 ### Diaľkový ovládač
 
+Ako ovládač budeme používať analógový joystick, ktorý pripojíme k _ESP32_. Na základe zmeny pohybu pomocou joystick-u sa budú posielať správy do _MQTT broker_-a. 
+
 ![Rozloženie pinov na joysticku](images/joystick-pinout.png)
+
+Joystick je možné pripojiť na priamo k _ESP32_. Zmena smeru je reprezentovaná analógovým signálom, ktorý je možné čítať z pinov `VRx` a `VRy` joysitcku. Výstupy z týchto pinov pripojíme na 2 analógové piny na _ESP32_  a to `32` a `33`. Joystick obsahuje aj tlačidlo, ktoré je možné stlačiť zatlačením joysticku. Jedná sa o digitálny výstup, ktorý je možné prečítať z pinu označeného ako `SW`. Ten pripojíme na pin `25` s parametrom `Pin.PULL_UP`.
+
+Veľkosť analógového signálu bude v rozmedzí od _0V_ po _3.3V_. Preto upravíme konfiguráciu analógových pinov tak, aby s tým rátali:
+
+```python
+pin.atten(ADC.ATTN_11DB)
+```
+
+Jednoduchý fragment kódu na otestovanie joysticku môže vyzerať nasledovne:
+
+```python
+from machine import Pin, ADC
+from time import sleep
+
+
+dx = ADC(Pin(32))
+dx.atten(ADC.ATTN_11DB)
+
+dy = ADC(Pin(33))
+dy.atten(ADC.ATTN_11DB)
+
+button = Pin(25, Pin.IN, Pin.PULL_UP)
+
+while True:
+    print("dy: {} dx: {} button: {}".format(dy.read(), dx.read(), button.value()))
+    sleep(0.5)
+```
+
+Následne už len kód upravíme tak, aby v príslušných smeroch sme poslali správnu správu do _MQTT broker_-a:
 
 ```python
 from machine import Pin, ADC
@@ -326,6 +358,8 @@ while True:
     print("dy: {} dx: {} button: {}".format(dy.read(), dx.read(), button.value()))
     sleep(0.5)
 ```
+
+**Poznámka:** V závislosti od kvality joysticku je dobré uvažovať aj o istej tolerancii smeru. Teda pri tolerancii _100_ používať miesto absolútnych hodnôt _0_ a _4095_ porovnávať hodnotu _<100_ miesto _0_ a porovnávať hodnotu _>3995_ miesto _4095_. 
 
 ## Links
 
