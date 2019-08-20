@@ -1,6 +1,6 @@
 ---
 title: Zobrazovacie jednotky
-layout: page
+layout: default
 order: 4
 duration: 240
 outline:

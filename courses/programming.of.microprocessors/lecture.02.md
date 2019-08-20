@@ -1,6 +1,6 @@
 ---
 title: Digitálne vstupy a výstupy
-layout: page
+layout: default
 order: 2
 duration: 240
 outline:
