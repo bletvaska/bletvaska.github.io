@@ -1,6 +1,6 @@
 ---
 title: Analógové vstupy a výstupy
-layout: layout
+layout: default
 order: 3
 duration: 240
 outline:

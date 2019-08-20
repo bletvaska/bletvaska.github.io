@@ -1,6 +1,6 @@
 ---
 title: Programovateľné mikroprocesorové stavebnice
-layout: layout
+layout: default 
 order: 1
 duration: 240
 ---
