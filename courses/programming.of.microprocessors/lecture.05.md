@@ -247,7 +247,10 @@ class DCMotor:
         return duty_cycle
 
 motor1 = DCMotor(pin1=Pin(12), pin2=Pin(14), enable_pin=PWM(Pin(13)))
+motor1.stop()
+
 motor2 = DCMotor(pin1=Pin(15), pin2=Pin(16), enable_pin=PWM(Pin(17)))
+motor2.stop()
 
 def on_message(topic, message):
     topic = topic.decode("utf-8")
