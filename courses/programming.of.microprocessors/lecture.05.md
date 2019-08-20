@@ -1,6 +1,6 @@
 ---
 title: Motorové obvody
-layout: page
+layout: default
 order: 4
 outline:
 - Riadenie motorov
