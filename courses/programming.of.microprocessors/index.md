@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Programovanie mikroprocesorových systémov pre SŠ
 duration: 240
 ---

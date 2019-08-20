@@ -1,6 +1,6 @@
 ---
 title: Komunikačné rozhrania
-layout: page
+layout: default
 order: 4
 duration: 240
 outline:
