@@ -55,7 +55,7 @@ outline:
 
 ## Labák: Diaľkové robotické autíčko
 
-Autíčko bude ovládané pomocou príkazov posielaných cez MQTT na diaľku.
+Autíčko bude ovládané pomocou príkazov posielaných cez MQTT na diaľku. Pri stavbe sa predpokladá, že _ESP32_ je má funkčné internetové spojenie.
 
 Zoznam materiálu:
 
