@@ -18,6 +18,7 @@ title: My Talks
 * [OSS Conf 2019](http://ossconf.soit.sk/) - [Autorské nástroje v jazyku Markdown](2019/07-oss.conf/autorske.nastroje.v.jazyku.markdown.html)
 * [OSS Conf 2019](http://ossconf.soit.sk/) - [Výučba programovania tvorbou počítačových hier](2019/07-oss.conf/vyucba.programovania.tvorbou.pocitacovych.hier.html)
 * [OSS Conf 2019](http://ossconf.soit.sk/) - [Robíme IoT s ESP32 v jazyku MicroPython](2019/07-oss.conf/iot.with.esp32.html)
+* [LSTME 2019](http://www.lstme.sk/) - [Programovanie počítačových hier](2019/08-lstme/slides.html)
 
 ## 2018
 
