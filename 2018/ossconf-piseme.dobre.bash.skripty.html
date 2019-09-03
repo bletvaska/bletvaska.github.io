@@ -1,312 +1,257 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
+---
+title: Ako písať dobré bash skripty
+subtitle: Time to Say Goodbye to Arduino
+description:
+duration: 18
+layout: slide
+theme: night
+date: 03.07.2018
+bitly: 
+conference:
+- title: OSS Conf 2018
+- url: http://bit.ly/2tWEK3e
+---
 
-    <title>Ako písať dobré bash skripty</title>
+<section data-markdown>
+## Ako písať dobré bash skripty
 
-    <meta name="description" content="Introduction to JavaScript.">
-    <meta name="author" content="mirek">
+miroslav.binas@tuke.sk / [**OSS Conf 2018**](http://ossconf.soit.sk/)
+</section>
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<section data-markdown>
+    ## Miesto agendy
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
+    * nie som nadšený _bash ~~striptér~~ skriptér_
+        * sú situácie, kedy sa použitie `bash`-u vyslovene nehodí
+    * je to však fantastický nástroj na prepájanie rozličných riešení
+        * _glue_
+        * _swiss army knife_ každého _DevOps_-áka
+    * nasledujúci zoznam odporúčaní nie je kompletný
+</section>
 
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
 
-    <!-- Printing and PDF exports -->
-    <script>
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
+<section data-markdown>
+    ## #1 Nezabúdajte na prenositeľnosť!
+</section>
+
+
+<section data-markdown>
+    <script type="text/template">
+        ### _Hello world!_
+
+        ```bash
+        #!/bin/bash
+
+        echo "Hello world!"
+        ```
+
+        ## zle Zle ZLE! <!-- .element: class="fragment" data-fragment-index="1" -->
     </script>
+</section>
 
 
-    <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
-    <![endif]-->
-</head>
+<section data-markdown>
+    ### Prenositeľný _Hello world!_
 
-<body>
-    <div class="reveal">
-        <div class="slides">
-            <section data-markdown>
-                ## Ako písať dobré bash skripty
+    ```bash
+    #!/usr/bin/env bash
 
-                miroslav.binas@tuke.sk / [**OSS Conf 2018**](http://ossconf.soit.sk/)
-            </section>
+    echo "Hello world!"
+    ```
 
-
-            <section data-markdown>
-                ## Miesto agendy
-
-                * nie som nadšený _bash ~~striptér~~ skriptér_
-                    * sú situácie, kedy sa použitie `bash`-u vyslovene nehodí
-                * je to však fantastický nástroj na prepájanie rozličných riešení
-                    * _glue_
-                    * _swiss army knife_ každého _DevOps_-áka
-                * nasledujúci zoznam odporúčaní nie je kompletný
-            </section>
+    * `env` - run a program in a modified environment
+        * ak je parametrom príkaz, nájde prvú binárku v premennej `PATH` a spustí ju
+    * spoľah na umiestnenie `/usr/bin/env`
+</section>
 
 
-            <section data-markdown>
-                ## #1 Nezabúdajte na prenositeľnosť!
-            </section>
+<section data-markdown>
+    ## #2 Pri výskyte chyby sa musí skript zastaviť!
+</section>
+
+<section data-markdown>
+    ### Zlý skript
+
+    ```bash
+    #!/usr/bin/env bash
+
+    echo "start here"
+    VAR = "syntax error on this line"
+    echo "this line will be executed too"
+    ```
+</section>
 
 
-            <section data-markdown>
-                <script type="text/template">
-                    ### _Hello world!_
-
-                    ```bash
-                    #!/bin/bash
-
-                    echo "Hello world!"
-                    ```
-
-                    ## zle Zle ZLE! <!-- .element: class="fragment" data-fragment-index="1" -->
-				</script>
-            </section>
-
-
-            <section data-markdown>
-                ### Prenositeľný _Hello world!_
-
-                ```bash
-                #!/usr/bin/env bash
-
-                echo "Hello world!"
-                ```
-
-                * `env` - run a program in a modified environment
-                    * ak je parametrom príkaz, nájde prvú binárku v premennej `PATH` a spustí ju
-                * spoľah na umiestnenie `/usr/bin/env`
-            </section>
-
-
-            <section data-markdown>
-                ## #2 Pri výskyte chyby sa musí skript zastaviť!
-            </section>
-
-            <section data-markdown>
-                ### Zlý skript
-
-                ```bash
-                #!/usr/bin/env bash
-
-                echo "start here"
-                VAR = "syntax error on this line"
-                echo "this line will be executed too"
-                ```
-            </section>
-
-
-            <section data-markdown>
-                ### Začnite takto
+<section data-markdown>
+    ### Začnite takto
 ```bash
 #!/usr/bin/env bash
 
 set -o errexit  # stop when error occurs
 set -o pipefail # if not, expressions like `error here | true`
-                # will always succeed
+    # will always succeed
 set -o nounset  # detects uninitialised variables
 set -o xtrace   # prints every expression
-                # before executing it (debugging)
+    # before executing it (debugging)
 
 echo "start here"
 VAR = "syntax error on this line"
 echo "this line will be executed too"
 ```
-            </section>
+</section>
 
 
-            <section data-markdown>
-                ## #3 Uzatvárajte premenné do `"${variable}"`
-            </section>
+<section data-markdown>
+    ## #3 Uzatvárajte premenné do `"${variable}"`
+</section>
 
 
-            <section data-markdown>
-                * _escaping_
-                * úvodzovky pomôžu pri premenných, ktoré obsahujú medzery
-                * zložené zátvorky nie sú úplne potrebné, ale používajú sa pri tzv. _bash expansion_
-                    * interpolácia reťazcov - `"${variable}.yml"`
-                    * predvolená (fallback) hodnota - `"${variable:-something_else}"`
-                    * náhrada reťazcov - `"${variable//from/to}"`
-            </section>
+<section data-markdown>
+    * _escaping_
+    * úvodzovky pomôžu pri premenných, ktoré obsahujú medzery
+    * zložené zátvorky nie sú úplne potrebné, ale používajú sa pri tzv. _bash expansion_
+        * interpolácia reťazcov - `"${variable}.yml"`
+        * predvolená (fallback) hodnota - `"${variable:-something_else}"`
+        * náhrada reťazcov - `"${variable//from/to}"`
+</section>
 
 
-            <section data-markdown>
-                ## #4 Používajte `[[ ]]` miesto `[ ]`
+<section data-markdown>
+    ## #4 Používajte `[[ ]]` miesto `[ ]`
 
-                (`[[` - rozšírenie bash-u, `[` - skrátený zápis príkazu `test`)
-            </section>
+    (`[[` - rozšírenie bash-u, `[` - skrátený zápis príkazu `test`)
+</section>
 
-            <section data-markdown>
-                ### Mocné vychytávky
+<section data-markdown>
+    ### Mocné vychytávky
 
-                * premenné netreba uzatvárať do úvodzoviek
-                    ```bash
-                    [[ -f $file ]]  # vs. [ -f "$file" ]
-                    ```
-                * podporuje operátory `&&` a `||` a porovnávanie reťazcov pomocou operátorov `<` a `>`
-                * zaviedol operátor `=~` pre porovnávanie na základe regulárnych výrazov
-                    ```bash
-                    [[ $answer =~ ^y(es)?$ ]]
-                    ```
-                * podporuje _globbing_
-                    ```bash
-                    [[ $answer = y* ]]
-                    ```
-            </section>
-
-
-            <section data-markdown>
-                ## #5 Píšte skripty modulárne
-            </section>
+    * premenné netreba uzatvárať do úvodzoviek
+        ```bash
+        [[ -f $file ]]  # vs. [ -f "$file" ]
+        ```
+    * podporuje operátory `&&` a `||` a porovnávanie reťazcov pomocou operátorov `<` a `>`
+    * zaviedol operátor `=~` pre porovnávanie na základe regulárnych výrazov
+        ```bash
+        [[ $answer =~ ^y(es)?$ ]]
+        ```
+    * podporuje _globbing_
+        ```bash
+        [[ $answer = y* ]]
+        ```
+</section>
 
 
-            <section data-markdown>
-                * miesto písania všetkého do jedného súboru ho uložte do viacerých (modulov)
-                    * jednoduchšia údržba a navigácia
-                    * logicky uzavretá (a oddelená) funkcionalita
-                * vkladanie/rozšírenie existujúceho skriptu o nový docielite príkazom `source`
-                  ```bash
-                  # ...
-                  source "${DATADIR}/helper.sh"
-                  # ...
-                  ```
-            </section>
+<section data-markdown>
+    ## #5 Píšte skripty modulárne
+</section>
 
 
-            <section data-markdown>
-                ## #6 Nepoužívajte nástroje, ktorých funkcie `bash` zvláda
-            </section>
-
-            <section data-markdown>
-                * jedna z najčastejších (nevedomých) chýb
-                * najčastejšie `grep`, `awk`, `sed`, `bc`, `expr`, napr.:
-                  ```bash
-                  size=$(du -hs images/ | awk '{print $1}')
-                  ```
-                  vyriešiť pomocou
-                  ```bash
-                  array=($(du -hs images/))
-                  size=${array[0]}
-                  ```
-                * namiesto `seq 1 10` použite `{1..10}`
-                * používajte `$()` miesto ``
-            </section>
+<section data-markdown>
+    * miesto písania všetkého do jedného súboru ho uložte do viacerých (modulov)
+        * jednoduchšia údržba a navigácia
+        * logicky uzavretá (a oddelená) funkcionalita
+    * vkladanie/rozšírenie existujúceho skriptu o nový docielite príkazom `source`
+      ```bash
+      # ...
+      source "${DATADIR}/helper.sh"
+      # ...
+      ```
+</section>
 
 
-            <section data-markdown>
-                ## #7 Píšte skripty tak, aby sa dali testovať
-            </section>
+<section data-markdown>
+    ## #6 Nepoužívajte nástroje, ktorých funkcie `bash` zvláda
+</section>
+
+<section data-markdown>
+    * jedna z najčastejších (nevedomých) chýb
+    * najčastejšie `grep`, `awk`, `sed`, `bc`, `expr`, napr.:
+      ```bash
+      size=$(du -hs images/ | awk '{print $1}')
+      ```
+      vyriešiť pomocou
+      ```bash
+      array=($(du -hs images/))
+      size=${array[0]}
+      ```
+    * namiesto `seq 1 10` použite `{1..10}`
+    * používajte `$()` miesto ``
+</section>
 
 
-            <section data-markdown>
-                * "mocný" prístup - všetko uzavrieť do funkcie
-                  ```bash
-                  #!/usr/bin/env bash
-
-                  main(){
-                      echo "Hello world!"
-                  }
-
-                  main
-                  ```
-                * existuje mnoho nástrojov pre podporu testovania v bash-i (napr. [bats](https://github.com/sstephenson/bats))
-                  ```bash
-                  #!/usr/bin/env bats
-
-                  @test "when new folder is created, then exit status is 0" {
-                    run mkdir "$DIR"
-                    assert_equal "$status" 0
-                  }
-                  ```
-            </section>
+<section data-markdown>
+    ## #7 Píšte skripty tak, aby sa dali testovať
+</section>
 
 
-            <section data-markdown>
-                ## #8 Používajte linter
-            </section>
+<section data-markdown>
+    * "mocný" prístup - všetko uzavrieť do funkcie
+      ```bash
+      #!/usr/bin/env bash
+
+      main(){
+          echo "Hello world!"
+      }
+
+      main
+      ```
+    * existuje mnoho nástrojov pre podporu testovania v bash-i (napr. [bats](https://github.com/sstephenson/bats))
+      ```bash
+      #!/usr/bin/env bats
+
+      @test "when new folder is created, then exit status is 0" {
+        run mkdir "$DIR"
+        assert_equal "$status" 0
+      }
+      ```
+</section>
 
 
-            <section data-markdown>
-                > **Linter** je program, ktorý skontroluje kód na prítomnosť _programátorských_ a _štýlových_ chýb, čím pomáha zvýšiť kvalitu kódu.
-            </section>
+<section data-markdown>
+    ## #8 Používajte linter
+</section>
 
 
-            <section data-markdown>
-                ### [ShellCheck](https://www.shellcheck.net/)
-
-                * Shell script analysis tool
-                * obsahuje tzv. [galériu zlého kódu](https://github.com/koalaman/shellcheck/blob/master/README.md#user-content-gallery-of-bad-code), ktorá vám ukáže, čo všetko vám môže `ShellCheck` pomôcť identifikovať
-                * nachádza sa vo vašej distribúcii
-            </section>
+<section data-markdown>
+    > **Linter** je program, ktorý skontroluje kód na prítomnosť _programátorských_ a _štýlových_ chýb, čím pomáha zvýšiť kvalitu kódu.
+</section>
 
 
-            <section data-markdown>
-                ## Ostatné odporúčania
+<section data-markdown>
+    ### [ShellCheck](https://www.shellcheck.net/)
 
-                * deklarácia konštánt
-                  ```bash
-                  readonly var='immutable value'
-                  ```
-                * písanie vlastných funkcií
-                  ```bash
-                  _greetings(){
-                      local name="$1"
-                      printf "%s\n" "${name}"
-                  }
-                  ```
-            </section>
+    * Shell script analysis tool
+    * obsahuje tzv. [galériu zlého kódu](https://github.com/koalaman/shellcheck/blob/master/README.md#user-content-gallery-of-bad-code), ktorá vám ukáže, čo všetko vám môže `ShellCheck` pomôcť identifikovať
+    * nachádza sa vo vašej distribúcii
+</section>
 
 
-            <section data-markdown>
-                ## Questions?
-            </section>
+<section data-markdown>
+    ## Ostatné odporúčania
+
+    * deklarácia konštánt
+      ```bash
+      readonly var='immutable value'
+      ```
+    * písanie vlastných funkcií
+      ```bash
+      _greetings(){
+          local name="$1"
+          printf "%s\n" "${name}"
+      }
+      ```
+</section>
 
 
-            <section data-markdown>
-                ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/2tWEK3e&size=300x300)
+<section data-markdown>
+    ## Questions?
+</section>
 
-                (**http://bit.ly/2tWEK3e**)
-            </section>
-        </div>
 
-    </div>
+<section data-markdown>
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/2tWEK3e&size=300x300)
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
+    (**http://bit.ly/2tWEK3e**)
+</section>
 
-    <script>
-        // More info https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            controls: true,
-            progress: true,
-            history: true,
-            center: true,
-
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-            // More info https://github.com/hakimel/reveal.js#dependencies
-            dependencies: [
-                { src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                { src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
-                { src: '../reveal.js/plugin/notes/notes.js', async: true }
-            ]
-        });
-    </script>
-</body>
-</html>
