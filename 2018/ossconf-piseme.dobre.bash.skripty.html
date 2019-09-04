@@ -97,48 +97,48 @@ set -o xtrace   # prints every expression
 
 echo "start here"
 VAR = "syntax error on this line"
-echo "this line will be executed too"
+echo "this line is now not reachable"
 ```
 </section>
 
 
 <section data-markdown>
-    ## #3 Uzatvárajte premenné do `"${variable}"`
+## #3 Uzatvárajte premenné do `"${variable}"`
 </section>
 
 
 <section data-markdown>
-    * _escaping_
-    * úvodzovky pomôžu pri premenných, ktoré obsahujú medzery
-    * zložené zátvorky nie sú úplne potrebné, ale používajú sa pri tzv. _bash expansion_
-        * interpolácia reťazcov - `"${variable}.yml"`
-        * predvolená (fallback) hodnota - `"${variable:-something_else}"`
-        * náhrada reťazcov - `"${variable//from/to}"`
+* _escaping_
+* úvodzovky pomôžu pri premenných, ktoré obsahujú medzery
+* zložené zátvorky nie sú úplne potrebné, ale používajú sa pri tzv. _bash expansion_
+    * interpolácia reťazcov - `"${variable}.yml"`
+    * predvolená (fallback) hodnota - `"${variable:-something_else}"`
+    * náhrada reťazcov - `"${variable//from/to}"`
 </section>
 
 
 <section data-markdown>
-    ## #4 Používajte `[[ ]]` miesto `[ ]`
+## #4 Používajte `[[ ]]` miesto `[ ]`
 
-    (`[[` - rozšírenie bash-u, `[` - skrátený zápis príkazu `test`)
+(`[[` - rozšírenie bash-u, `[` - skrátený zápis príkazu `test`)
 </section>
 
 <section data-markdown>
-    ### Mocné vychytávky
+### Mocné vychytávky
 
-    * premenné netreba uzatvárať do úvodzoviek
-        ```bash
-        [[ -f $file ]]  # vs. [ -f "$file" ]
-        ```
-    * podporuje operátory `&&` a `||` a porovnávanie reťazcov pomocou operátorov `<` a `>`
-    * zaviedol operátor `=~` pre porovnávanie na základe regulárnych výrazov
-        ```bash
-        [[ $answer =~ ^y(es)?$ ]]
-        ```
-    * podporuje _globbing_
-        ```bash
-        [[ $answer = y* ]]
-        ```
+* premenné netreba uzatvárať do úvodzoviek
+  ```bash
+  [[ -f ${file} ]]  # vs. [ -f "${file}" ]
+  ```
+* podporuje operátory `&&` a `||` a porovnávanie reťazcov pomocou operátorov `<` a `>`
+* zaviedol operátor `=~` pre porovnávanie na základe regulárnych výrazov
+  ```bash
+  [[ ${answer} =~ ^y(es)?$ ]]
+  ```
+* podporuje _globbing_
+  ```bash
+  [[ ${answer} = y* ]]
+  ```
 </section>
 
 
@@ -148,15 +148,15 @@ echo "this line will be executed too"
 
 
 <section data-markdown>
-    * miesto písania všetkého do jedného súboru ho uložte do viacerých (modulov)
-        * jednoduchšia údržba a navigácia
-        * logicky uzavretá (a oddelená) funkcionalita
-    * vkladanie/rozšírenie existujúceho skriptu o nový docielite príkazom `source`
-      ```bash
-      # ...
-      source "${DATADIR}/helper.sh"
-      # ...
-      ```
+* miesto písania všetkého do jedného súboru ho uložte do viacerých (modulov)
+    * jednoduchšia údržba a navigácia
+    * logicky uzavretá (a oddelená) funkcionalita
+* vkladanie/rozšírenie existujúceho skriptu o nový docielite príkazom `source`
+  ```bash
+  # ...
+  source "${DATADIR}/helper.sh"
+  # ...
+  ```
 </section>
 
 
@@ -164,83 +164,84 @@ echo "this line will be executed too"
     ## #6 Nepoužívajte nástroje, ktorých funkcie `bash` zvláda
 </section>
 
+
 <section data-markdown>
-    * jedna z najčastejších (nevedomých) chýb
-    * najčastejšie `grep`, `awk`, `sed`, `bc`, `expr`, napr.:
-      ```bash
-      size=$(du -hs images/ | awk '{print $1}')
-      ```
-      vyriešiť pomocou
-      ```bash
-      array=($(du -hs images/))
-      size=${array[0]}
-      ```
-    * namiesto `seq 1 10` použite `{1..10}`
-    * používajte `$()` miesto ``
+* jedna z najčastejších (nevedomých) chýb
+* najčastejšie `grep`, `awk`, `sed`, `bc`, `expr`, napr.:
+  ```bash
+  size=$(du -hs images/ | awk '{print $1}')
+  ```
+  vyriešiť pomocou
+  ```bash
+  array=($(du -hs images/))
+  size=${array[0]}
+  ```
+* namiesto `seq 1 10` použite `{1..10}`
+* používajte `$()` miesto ``
 </section>
 
 
 <section data-markdown>
-    ## #7 Píšte skripty tak, aby sa dali testovať
+## #7 Píšte skripty tak, aby sa dali testovať
 </section>
 
 
 <section data-markdown>
-    * "mocný" prístup - všetko uzavrieť do funkcie
-      ```bash
-      #!/usr/bin/env bash
+* "mocný" prístup - všetko uzavrieť do funkcie
+  ```bash
+  #!/usr/bin/env bash
 
-      main(){
-          echo "Hello world!"
-      }
+  main(){
+      echo "Hello world!"
+  }
 
-      main
-      ```
-    * existuje mnoho nástrojov pre podporu testovania v bash-i (napr. [bats](https://github.com/sstephenson/bats))
-      ```bash
-      #!/usr/bin/env bats
+  main
+  ```
+* existuje mnoho nástrojov pre podporu testovania v bash-i (napr. [bats](https://github.com/sstephenson/bats))
+  ```bash
+  #!/usr/bin/env bats
 
-      @test "when new folder is created, then exit status is 0" {
-        run mkdir "$DIR"
-        assert_equal "$status" 0
-      }
-      ```
+  @test "when new folder is created, then exit status is 0" {
+    run mkdir "${dir}"
+    assert_equal "${status}" 0
+  }
+  ```
 </section>
 
 
 <section data-markdown>
-    ## #8 Používajte linter
+## #8 Používajte linter
 </section>
 
 
 <section data-markdown>
-    > **Linter** je program, ktorý skontroluje kód na prítomnosť _programátorských_ a _štýlových_ chýb, čím pomáha zvýšiť kvalitu kódu.
+> **Linter** je program, ktorý skontroluje kód na prítomnosť _programátorských_ a _štýlových_ chýb, čím pomáha zvýšiť kvalitu kódu.
 </section>
 
 
 <section data-markdown>
-    ### [ShellCheck](https://www.shellcheck.net/)
+### [ShellCheck](https://www.shellcheck.net/)
 
-    * Shell script analysis tool
-    * obsahuje tzv. [galériu zlého kódu](https://github.com/koalaman/shellcheck/blob/master/README.md#user-content-gallery-of-bad-code), ktorá vám ukáže, čo všetko vám môže `ShellCheck` pomôcť identifikovať
-    * nachádza sa vo vašej distribúcii
+* Shell script analysis tool
+* obsahuje tzv. [galériu zlého kódu](https://github.com/koalaman/shellcheck/blob/master/README.md#user-content-gallery-of-bad-code), ktorá vám ukáže, čo všetko vám môže `ShellCheck` pomôcť identifikovať
+* nachádza sa vo vašej distribúcii
 </section>
 
 
 <section data-markdown>
-    ## Ostatné odporúčania
+## Ostatné odporúčania
 
-    * deklarácia konštánt
-      ```bash
-      readonly var='immutable value'
-      ```
-    * písanie vlastných funkcií
-      ```bash
-      _greetings(){
-          local name="$1"
-          printf "%s\n" "${name}"
-      }
-      ```
+* deklarácia konštánt
+  ```bash
+  readonly var='immutable value'
+  ```
+* písanie vlastných funkcií
+  ```bash
+  _greetings(){
+      local name="$1"
+      printf "%s\n" "${name}"
+  }
+  ```
 </section>
 
 
