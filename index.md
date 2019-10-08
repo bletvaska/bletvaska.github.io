@@ -6,6 +6,11 @@ layout: default
 title: My Talks
 ---
 
+<!--{% assign slides = site.pages | where: "layout", "slide" | sort: "date" %}-->
+<!--{% for item in slides %}-->
+<!--<li>{{ item.title }}</li>-->
+<!--{% endfor %}-->
+
 ## 2019
 
 * [Pycon 2019](https://2019.pycon.sk/sk/) - [Tvorba hier s knižnicou Pygame Zero](2019/pycon/slides.html)
@@ -19,6 +24,7 @@ title: My Talks
 * [OSS Conf 2019](http://ossconf.soit.sk/) - [Výučba programovania tvorbou počítačových hier](2019/07-oss.conf/vyucba.programovania.tvorbou.pocitacovych.hier.html)
 * [OSS Conf 2019](http://ossconf.soit.sk/) - [Robíme IoT s ESP32 v jazyku MicroPython](2019/07-oss.conf/iot.with.esp32.html)
 * [LSTME 2019](http://www.lstme.sk/) - [Programovanie počítačových hier](2019/08-lstme/slides.html)
+* [Hands Off 2019](http://kpi.pages.kpi.fei.tuke.sk/hands-off/) - [Programovanie počítačových hier](2019/10-hands.off/slides.html)
 
 ## 2018
 
