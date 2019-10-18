@@ -11,5 +11,6 @@ title: Micropython with ESP32
 2. [Lab](lab.html)
 
 
-## Download
+## Resources
 
+* [http://bit.ly/2qolIER](http://bit.ly/2qolIER)
