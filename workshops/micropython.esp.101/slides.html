@@ -1,0 +1,160 @@
+---
+title: Internet vecí
+subtitle: (workshop)
+layout: slide
+theme: night
+description:
+    Úvod do problematiky.
+bitly: http://bit.ly/2Y63vvT
+---
+<section data-markdown id="title">
+## {{ page.title }}
+### {{ page.subtitle }}
+
+miroslav.binas@tuke.sk / [**IT Akadémia**](http://itakademia.sk/)
+</section>
+
+
+<section data-markdown id="what-is-iot">
+## Čo je to IoT?
+</section>
+
+
+<section data-markdown id="iot-definition">
+> The Internet of Things (IoT) is a system of interrelated computing devices, mechanical and digital machines, objects, animals or people that are provided with unique identifiers and the ability to transfer data over a network without requiring human-to-human or human-to-computer interaction.
+</section>
+
+
+<section id="raspberry-pi" data-markdown data-background-color="white">
+![Raspberry Pi](images/pi-plug-in.gif)
+
+Notes:
+* https://projects.raspberrypi.org/en/projects/raspberry-pi-getting-started
+</section>
+
+
+<section id="arduino" data-markdown>
+![Arduino](images/arduino.png)
+</section>
+
+
+<section id="microbit" data-markdown>
+![micro:bit](images/microbit.png)
+
+Note:
+* https://www.womenofwearables.com/blogwrite/announcing-partnership-with-bbc-microbit-educational-foundation
+</section>
+
+
+<section id="esp-32" data-markdown>
+![ESP32](images/esp32.png)
+
+Notes:
+* https://www.mouser.co.uk/new/espressif/espressif-esp32-devkitc-boards/
+</section>
+
+
+<section id="comparision" data-markdown>
+| RPi Zero W | Arduino Uno | ESP32 |
+|------|------|--------|
+| ARM BCM 2835 | AVR ATmega328P | Tensilica Xtensa LX6 |
+| 32b | 8b | 32b |
+| 1 core | 1 core | 2 cores |
+| 1 GHz | 20 MHz | 240 MHz |
+| 512 MB RAM | 2kB RAM | 520 kB RAM |
+| MicroSD | 32kB Flash | 16 MB Flash |
+</section>
+
+
+<section id="esp-32-block-diagram" data-markdown data-background-color="#ebebeb">
+![ESP32 Block Diagram](images/esp32-block-diagram.png)
+
+Notes:
+* https://cdn.sparkfun.com/assets/home_page_posts/2/0/1/7/
+</section>
+
+
+<section id="esp32-specifications" data-markdown>
+## ESP32
+
+* WiFi, Bluetooth LE
+* Tensilica Xtensa Dual-Core 32-bit LX6 microprocessor (160/240 MHz), low power
+* RAM, ROM
+* 3V3
+</section>
+
+
+<section id="esp32-peripherals" data-markdown>
+## ESP32 periférie
+
+* 18 ADC channels
+* 2 DAC
+* 10 Capacitive sensing GPIOs
+* 3 UART interfaces
+* 3 SPI interfaces
+* 2 I2C interfaces
+* 16 PWM output channels
+* 2 I2S interfaces
+
+
+Notes:
+* https://en.wikipedia.org/wiki/ESP32
+* https://circuits4you.com/2018/12/31/esp32-devkit-esp32-wroom-gpio-pinout/
+</section>
+
+
+<section id="micropython" data-markdown data-background-color="#fff">
+[![Micropython](images/logo-micropython.jpg)](https://micropython.org/)
+</section>
+
+
+<section id="flash-micropython" data-markdown>
+## Flash Micropython
+
+1. najprv zmazať obsah flash pamäte
+```
+esptool.py --port /dev/ttyUSB0 \
+              --chip esp32 erase_flash
+```
+
+2. stiahnuť [firmvér pre ESP32](https://micropython.org/download#esp32)
+
+3. nahrať (flash-núť) firmvér
+```
+esptool.py --port /dev/ttyUSB0 \
+              --chip esp32 -z 0x1000 \
+              --baud 460800 write_flash \
+              esp32-20190529-v1.11.bin
+```
+</section>
+
+
+<section id="mu" data-markdown>
+![Mu](images/mu.png)
+
+## [Mu](https://codewith.mu/): A Python Code Editor
+</section>
+
+
+<section id="REPL" data-markdown>
+## REPL
+</section>
+
+
+<section id="modules" data-markdown>
+```python
+help('modules')
+```
+</section>
+
+
+<section data-markdown>
+## Otázky?
+</section>
+
+
+<section data-markdown>
+![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+(**{{ page.bitly }}**)
+</section>
