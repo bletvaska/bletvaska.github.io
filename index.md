@@ -34,3 +34,7 @@ title: My Talks
 * [OSS Conf 2018](http://ossconf.soit.sk/) - [Čo všetko som sa pri programovaní Arduina naučil zle](2018/ossconf-arduino.wrong.html)
 * [OSS Víkend 2018](https://ossvikend.sk/) - [PyWeek 26: Herným vývojárom ľahko a rýchlo](2018/ossvikend-pyweek.html)
 * [OSS Víkend 2018](https://ossvikend.sk/) - [Raspberry Pi Translation Project](2018/ossvikend-translators.html)
+
+## Other Links
+
+* [YouTube Channel](https://www.youtube.com/user/bletvaska)
