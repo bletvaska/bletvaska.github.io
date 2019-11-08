@@ -25,6 +25,7 @@ title: My Talks
 * [OSS Conf 2019](http://ossconf.soit.sk/) - [Robíme IoT s ESP32 v jazyku MicroPython](2019/07-oss.conf/iot.with.esp32.html)
 * [LSTME 2019](http://www.lstme.sk/) - [Programovanie počítačových hier](2019/08-lstme/slides.html)
 * [Hands Off 2019](http://kpi.pages.kpi.fei.tuke.sk/hands-off/) - [Programovanie počítačových hier](2019/10-hands.off/slides.html)
+* [Veda v meste (Rožňava)]() - [Programovanie počítačových hier](2019/11-veda.v.meste/slides.html)
 
 ## 2018
 

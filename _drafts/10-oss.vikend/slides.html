@@ -1,0 +1,82 @@
+---
+title: Bash skriptovanie a programovanie riadené testami
+description:
+    asdf
+duration: 30
+date: 19.10.2019
+bitly: xxx
+conference:
+- title: OSS Víkend 2019
+- url: https://ossvikend.sk/
+---
+<style>
+body, html{
+  background-color: #222;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  position :absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast
+}
+</style>
+
+
+
+<section id="opening" data-markdown>
+## {{ page.title }}
+#### {{ page.subtitle }}
+
+miroslav.binas@tuke.sk / [**{{ page.conference[0].title }}**]({{ page.conference[1].url}})
+</section>
+
+
+<section id="tdd" data-markdown>
+## TDD
+</section>
+
+
+<section id="bats" data-markdown>
+## [Bats](https://github.com/sstephenson/bats)
+(Bash Automated Testing System)
+
+Notes:
+* https://opensource.com/article/19/2/testing-bash-bats
+</section>
+
+
+<section id="test-example" data-markdown>
+```bash
+@test "if chsh.sh is not ab" {
+    run date
+
+    # assert
+    [[ ${output} =~ ^.*$
+}
+```
+</section>
+
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section data-markdown id="qr-code">
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+    (**{{ page.bitly }}**)
+</section>
