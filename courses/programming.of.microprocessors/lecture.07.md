@@ -145,7 +145,7 @@ client.disconnect()
 |---------------------------------------------+----------+------+------|
 |                                             | **REST API** | **MQTT** | **pypi** |
 |=============================================+==========+======+======|
-| [io.adafruit.com](https://io.adafruit.com/) | [áno](https://io.adafruit.com/api/docs/#adafruit-io-http-api) | [áno](https://io.adafruit.com/api/docs/mqtt.html#adafruit-io-mqtt-api) |      |
+| [io.adafruit.com](https://io.adafruit.com/) | [áno](https://io.adafruit.com/api/docs/#adafruit-io-http-api) | [áno](https://io.adafruit.com/api/docs/mqtt.html#adafruit-io-mqtt-api) | [`adafruit-io`](https://pypi.org/project/adafruit-io/) |
 |---------------------------------------------+----------+------+------|
 | [Ubidots](https://ubidots.com/)             | [áno](https://ubidots.com/docs/sw/#tag/Datasources) | [áno](https://ubidots.com/docs/hw/#mqtt-authentication) |      |
 |---------------------------------------------+----------+------+------|
@@ -153,6 +153,58 @@ client.disconnect()
 |---------------------------------------------+----------+------+--------------------------|
 | [ThingSpeak](https://thingspeak.com/)       | [áno](https://uk.mathworks.com/help/thingspeak/rest-api.html?s_tid=CRUX_lftnav) | [áno](https://uk.mathworks.com/help/thingspeak/mqtt-api.html) |      |
 |---------------------------------------------+----------+------+------|
+
+
+#### io.adafruit.com
+
+* je potrebné sa zaregistrovať, čím je možné získať username a AIO Key
+
+* buď používať autententifikovaný prístup cez MQTT alebo ich knižnicu:
+    ```bash
+    pip3 install adafruit-io
+    ```
+    * [dokumentácia](https://adafruit-io-python-client.readthedocs.io/en/latest/index.html)
+
+* táto knižnica má vlastné API pre prístup, ale taktiež aj vlastného MQTT klienta, čím je možné zabezpečiť aj odchytávanie udalostí z dashboard-u
+
+* príklad použitia vlastného API [`adafruit-io`](https://adafruit-io-python-client.readthedocs.io/en/latest/quickstart.html):
+
+    ```python
+    from Adafruit_IO import Client
+    aio = Client('YOUR ADAFRUIT USER', 'YOUR ADAFRUIT IO KEY')
+
+    # Send the value 100 to a feed called 'Foo'.
+    aio.send('Foo', 100)
+
+    # Retrieve the most recent value from the feed 'Foo'.
+    data = aio.receive('Foo')
+    print('Received value: {0}'.format(data.value))
+    ```
+
+* príklad použitia MQTT klienta:
+
+    ```python
+    from time import sleep
+    from Adafruit_IO import MQTTClient
+
+    def on_message(client, feed_id, payload): 
+        print(f'Feed {feed_id} received new value: {payload}')
+
+    client = MQTTClient('username', 'AIO Key')
+    client.on_message = on_message
+    client.connect()
+
+    client.subscribe('light')
+    client.loop_background() # client.loop_blocking()
+
+    while True:
+        print('>> turning ON')
+        client.publish('light', 'ON')
+        sleep(5)
+        print('>> turning OFF')
+        client.publish('light', 'OFF')
+        sleep(5)
+    ```
 
 
 ## Links
