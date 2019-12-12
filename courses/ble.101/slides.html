@@ -19,7 +19,88 @@ bitly: http://bit.ly/2YAmr2G
     * known as _Bluetooth Smart_
     * light-weight subset of classic Bluetooth 
     * introduced as part of the Bluetooth 4.0 (2010)
+    * the easiest way to design something that can talk to any modern mobile platform
 
+
+    Notes:
+    * https://learn.adafruit.com/introduction-to-bluetooth-low-energy/introduction#
+</section>
+
+
+<section data-markdown>
+## Device Roles 
+
+* **Peripheral devices** -  small, low power, resource contrained devices that can connect to a much more powerful central device
+    * e.g. heart rate monitor, a BLE enabled proximity tag, etc.
+* **Central devices** - usually the mobile phone or tablet that you connect to with far more processing power and memory
+
+Notes:
+* https://learn.adafruit.com/introduction-to-bluetooth-low-energy/gap
+</section>
+
+
+<section data-markdown id="ble-gatt-overview" data-background="white">
+    ![BLE GATT Overview](images/ble-gatt-overview.png)
+    
+    Notes:
+    * https://www.slideshare.net/LarsAlexanderBlumber/ble-with-raspberry-pi
+</section>
+
+
+<section data-markdown id="ble-gatt-detail" data-background="white">
+    ![BLE Service Detail](images/ble-gatt-detail.png)
+    
+    Notes:
+    * https://www.slideshare.net/LarsAlexanderBlumber/ble-with-raspberry-pi
+</section>
+
+
+<section data-markdown id="" data-background="white">
+![GATT Structure](images/gatt.structure.png)
+
+Notes:
+* https://learn.adafruit.com/introduction-to-bluetooth-low-energy/gatt
+</section>
+
+
+<section data-markdown id="ble-discovery" data-background="white">
+    ![BLE Discovery](images/ble-discovery.png)
+    
+    Notes:
+    * https://www.slideshare.net/LarsAlexanderBlumber/ble-with-raspberry-pi
+</section>
+
+
+
+
+<section data-markdown id="advertising" data-background="white">
+    ![BLE Advertising](images/advertising.png)
+    
+    Notes:
+    * https://www.slideshare.net/LarsAlexanderBlumber/ble-with-raspberry-pi
+</section>
+
+
+<section data-markdown id="advertising-process">
+## Advertising Process
+
+* **advertising packet**
+    * send by peripheral device
+    * bytes
+    * retransmitted when advertising interval passes
+* **advertising interval**
+    * from ms to secs
+    * longer delays saves power, but feels less responsive
+
+Notes:
+* https://learn.adafruit.com/introduction-to-bluetooth-low-energy/gap
+</section>
+
+<section data-markdown id="ble-connection" data-background="white">
+    ![BLE Connection](images/ble-connection.png)
+    
+    Notes:
+    * https://www.slideshare.net/LarsAlexanderBlumber/ble-with-raspberry-pi
 </section>
 
 
