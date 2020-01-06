@@ -97,3 +97,7 @@ bleno.startAdvertisingWithEIRData(advertisementData, scanData)
 ## Links
 
 * [USING BLE DEVICES WITH A RASPBERRY PI](https://www.argenox.com/library/bluetooth-low-energy/using-raspberry-pi-ble/)
+
+* [microbit-ble](https://github.com/alcir/microbit-ble) - How to read data from micro:bit via Bluetooth on Linux.
+
+* [pybleno](https://github.com/Adam-Langley/pybleno) - A direct port of the Bleno bluetooth LE peripheral role library to Python2/3
