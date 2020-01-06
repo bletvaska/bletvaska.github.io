@@ -143,10 +143,16 @@ class DCMotor:
 Pre testovanie môžete z príkazového riadku vytvoriť inštanciu motora, zavolať metódu `forward()`, `backwards()` a `stop()`, aby ste otestovali funkčnosť ako vášho zapojenia, tak aj implementácie:
 
 ```python
+from time import sleep
+
 motor1 = DCMotor(pin1=Pin(12, Pin.OUT), pin2=Pin(14, Pin.OUT), enable_pin=PWM(Pin(13, Pin.OUT)))
+
 motor1.forward(50)
+sleep(2)
 motor1.stop()
+
 motor1.backwards(50)
+sleep(2)
 motor1.stop()
 ```
 
