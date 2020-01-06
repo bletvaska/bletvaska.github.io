@@ -94,50 +94,42 @@ Zapojenie jedného motorčeka je znázornené na nasledujúcej schéme. Mikrokon
 
 ![Zapojenie jedného motora](images/esp32-with.l298n.png)
 
-Pre opis motorčeka použijeme triedu `DCMotor` ukradnutú zo stránok [Random Nerd Tutorials](https://randomnerdtutorials.com/). Jej výpis sa nachádza nižšie:
+Pre opis motorčeka použijeme triedu `DCMotor`, ktorá je modifikáciou dvoch implementácií uvedených v zdrojoch. Jej výpis sa nachádza nižšie:
 
 ```python
 from machine import Pin, PWM
 
 
-class DCMotor:
-    # the min_duty and max_duty are defined for 15000Hz frequency
-    # you can pass as arguments
-    def __init__(self, pin1, pin2, enable_pin, min_duty=750, max_duty=1023):
-        self.pin1 = pin1
-        self.pin2 = pin2
-        self.enable_pin = enable_pin
-        self.min_duty = min_duty
-        self.max_duty = max_duty
+class DCMotor(object):
+    def __init__(self, pin1, pin2, enable_pin):
+        self.pin1 = Pin(pin1, Pin.OUT)
+        self.pin2 = Pin(pin2, Pin.OUT)
+        self.pwm = PWM(Pin(enable_pin, Pin.OUT))
 
-    # speed value can be between 0 and 100
-    def forward(self, speed):
-        self.speed = speed
-        self.enable_pin.duty(self.duty_cycle(self.speed))
-        self.pin1.value(1)
-        self.pin2.value(0)
+    def forward(self):
+        self.pin1.on()
+        self.pin2.off()
 
-    def backwards(self, speed):
-        self.speed = speed
-        self.enable_pin.duty(self.duty_cycle(self.speed))
-        self.pin1.value(0)
-        self.pin2.value(1)
+    def backwards(self):
+        self.pin1.off()
+        self.pin2.on()
 
     def stop(self):
-        self.enable_pin.duty(0)
-        self.pin1.value(0)
-        self.pin2.value(0)
+        self.pin1.off()
+        self.pin2.off()
 
-    def duty_cycle(self, speed):
-        if self.speed <= 0 or self.speed > 100:
-            duty_cycle = 0
+    def speed(self, ratio=None):
+        if ratio is None:
+            return self.pwm.duty()
+        elif ratio < 0:
+            self.pwm.duty(0)
+        elif ratio <= 1.0:
+            self.pwm.duty(int(1024*ratio))
         else:
-            duty_cycle = int(
-                self.min_duty
-                + (self.max_duty - self.min_duty) * ((self.speed - 1) / (100 - 1))
-            )
+            self.pwm.duty(1024)
 
-        return duty_cycle
+    def __str__(self):
+        return 'p1:{} p2:{} duty:{}'.format(self.pin1.value(), self.pin2.value(), self.pwm.duty())
 ```
 
 Pre testovanie môžete z príkazového riadku vytvoriť inštanciu motora, zavolať metódu `forward()`, `backwards()` a `stop()`, aby ste otestovali funkčnosť ako vášho zapojenia, tak aj implementácie:
@@ -145,16 +137,20 @@ Pre testovanie môžete z príkazového riadku vytvoriť inštanciu motora, zavo
 ```python
 from time import sleep
 
-motor1 = DCMotor(pin1=Pin(12, Pin.OUT), pin2=Pin(14, Pin.OUT), enable_pin=PWM(Pin(13, Pin.OUT)))
+motor1 = DCMotor(pin1=12, pin2=14, enable_pin=13)
+motor1.speed(0.9)
 
-motor1.forward(50)
+motor1.forward()
 sleep(2)
 motor1.stop()
 
-motor1.backwards(50)
+motor1.backwards()
 sleep(2)
 motor1.stop()
 ```
+
+
+**Poznámka:** Ak budete program testovať opätovným spúšťaním a vytváraním tak novej inštancie motora, je pravdepodobné, že budete musieť zakaždým váš mikrokontrolér reštartovať. Zrejme kvôli zmene nastaveniam PWM pin-u.
 
 Podobným spôsobom zapojíme aj druhý motorček, a vytvoríme druhú inštanciu motora.
 
@@ -171,17 +167,17 @@ def on_message(topic, message):
     print('Message "{}" received in topic "{}"'.format(topic, message))
 
     if message == 'dopredu':
-        motor1.forward(50)
-        motor2.forward(50)
+        motor1.forward()
+        motor2.forward()
     elif message == 'stop':
         motor1.stop()
         motor2.stop()
     elif message == 'dolava':
-        motor1.forward(50)
+        motor1.forward()
         motor2.stop()
     elif message == 'doprava':
         motor1.stop()
-        motor2.forward(50)
+        motor2.forward()
 
 
 client = MQTTClient("mirek-car", "mqtt.kpi.fei.tuke.sk", 80)
@@ -213,49 +209,43 @@ from machine import Pin, PWM
 from umqtt.robust import MQTTClient
 
 
-class DCMotor:
-    # the min_duty and max_duty are defined for 15000Hz frequency
-    # you can pass as arguments
-    def __init__(self, pin1, pin2, enable_pin, min_duty=750, max_duty=1023):
-        self.pin1 = pin1
-        self.pin2 = pin2
-        self.enable_pin = enable_pin
-        self.min_duty = min_duty
-        self.max_duty = max_duty
+class DCMotor(object):
+    def __init__(self, pin1, pin2, enable_pin):
+        self.pin1 = Pin(pin1, Pin.OUT)
+        self.pin2 = Pin(pin2, Pin.OUT)
+        self.pwm = PWM(Pin(enable_pin, Pin.OUT))
 
-    # speed value can be between 0 and 100
-    def forward(self, speed):
-        self.speed = speed
-        self.enable_pin.duty(self.duty_cycle(self.speed))
-        self.pin1.value(1)
-        self.pin2.value(0)
+    def forward(self):
+        self.pin1.on()
+        self.pin2.off()
 
-    def backwards(self, speed):
-        self.speed = speed
-        self.enable_pin.duty(self.duty_cycle(self.speed))
-        self.pin1.value(0)
-        self.pin2.value(1)
+    def backwards(self):
+        self.pin1.off()
+        self.pin2.on()
 
     def stop(self):
-        self.enable_pin.duty(0)
-        self.pin1.value(0)
-        self.pin2.value(0)
+        self.pin1.off()
+        self.pin2.off()
 
-    def duty_cycle(self, speed):
-        if self.speed <= 0 or self.speed > 100:
-            duty_cycle = 0
+    def speed(self, ratio=None):
+        if ratio is None:
+            return self.pwm.duty()
+        elif ratio < 0:
+            self.pwm.duty(0)
+        elif ratio <= 1.0:
+            self.pwm.duty(int(1024*ratio))
         else:
-            duty_cycle = int(
-                self.min_duty
-                + (self.max_duty - self.min_duty) * ((self.speed - 1) / (100 - 1))
-            )
+            self.pwm.duty(1024)
 
-        return duty_cycle
+    def __str__(self):
+        return 'p1:{} p2:{} duty:{}'.format(self.pin1.value(), self.pin2.value(), self.pwm.duty())
 
-motor1 = DCMotor(pin1=Pin(12, Pin.OUT), pin2=Pin(14, Pin.OUT), enable_pin=PWM(Pin(13, Pin.OUT)))
+motor1 = DCMotor(pin1=12, pin2=14, enable_pin=13)
+motor1.speed(0.9)
 motor1.stop()
 
-motor2 = DCMotor(pin1=Pin(15, Pin.OUT), pin2=Pin(16, Pin.OUT), enable_pin=PWM(Pin(17, Pin.OUT)))
+motor2 = DCMotor(pin1=15, pin2=16, enable_pin=17)
+motor2.speed(0.9)
 motor2.stop()
 
 def on_message(topic, message):
@@ -265,17 +255,17 @@ def on_message(topic, message):
     print('Message "{}" received in topic "{}"'.format(topic, message))
 
     if message == 'dopredu':
-        motor1.forward(50)
-        motor2.forward(50)
+        motor1.forward()
+        motor2.forward()
     elif message == 'stop':
         motor1.stop()
         motor2.stop()
     elif message == 'dolava':
-        motor1.forward(50)
+        motor1.forward()
         motor2.stop()
     elif message == 'doprava':
         motor1.stop()
-        motor2.forward(50)
+        motor2.forward()
 
 
 client = MQTTClient("mirek-car", "mqtt.kpi.fei.tuke.sk", 80)
