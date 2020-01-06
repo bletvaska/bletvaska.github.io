@@ -71,9 +71,21 @@ duration: 240
   esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash
   ```
 
+* ak používate OS Windows, ako port uveďte príslušný sériový port (`COMx`):
+  ```bash
+  esptool.py --chip esp32 --port /COM3 erase_flash
+  ```
+
+* **Poznámka:** Na niektorých moduloch je potrebné držať stlačené tlačidlo `BOOT`, aby sa mikrokontrolér pripojil.
+
 * vypečte firmvér pomocou
   ```bash
   esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 write_flash -z 0x1000 esp32-20190125-v1.10.bin
+  ```
+
+  alebo v OS Windows takto:
+  ```bash
+  esptool.py --chip esp32 --port /COM3 --baud 460800 write_flash -z 0x1000 esp32-20190125-v1.10.bin
   ```
 
 * reštartnite dosku _ESP32_
