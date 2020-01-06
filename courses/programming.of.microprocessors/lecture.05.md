@@ -150,7 +150,7 @@ motor1.stop()
 ```
 
 
-**Poznámka:** Ak budete program testovať opätovným spúšťaním a vytváraním tak novej inštancie motora, je pravdepodobné, že budete musieť zakaždým váš mikrokontrolér reštartovať. Zrejme kvôli zmene nastaveniam PWM pin-u.
+**Poznámka:** Ak budete program testovať opätovným spúšťaním a vytváraním tak novej inštancie motora, motor sa nebude otáčať. To je spôsobené tým, že _PWM_ pin je potrebné deinicializovať (zavolať nad ním metódu `.deinit()`). Buď to budete robiť ako posledný riadok programu alebo mikrokontrolér po každej zmene reštartujete.
 
 Podobným spôsobom zapojíme aj druhý motorček, a vytvoríme druhú inštanciu motora.
 
