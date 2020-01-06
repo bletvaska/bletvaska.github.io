@@ -252,10 +252,10 @@ class DCMotor:
 
         return duty_cycle
 
-motor1 = DCMotor(pin1=Pin(12), pin2=Pin(14), enable_pin=PWM(Pin(13)))
+motor1 = DCMotor(pin1=Pin(12, Pin.OUT), pin2=Pin(14, Pin.OUT), enable_pin=PWM(Pin(13, Pin.OUT)))
 motor1.stop()
 
-motor2 = DCMotor(pin1=Pin(15), pin2=Pin(16), enable_pin=PWM(Pin(17)))
+motor2 = DCMotor(pin1=Pin(15, Pin.OUT), pin2=Pin(16, Pin.OUT), enable_pin=PWM(Pin(17, Pin.OUT)))
 motor2.stop()
 
 def on_message(topic, message):
@@ -376,3 +376,4 @@ while True:
 * [ESP32 with DC Motor and L298N Motor Driver – Control Speed and Direction](https://randomnerdtutorials.com/esp32-dc-motor-l298n-motor-driver-control-speed-direction/)
 * [Interface L298N DC Motor Driver Module with Arduino](https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/)
 * [How 2-Axis Joystick Works & Interface with Arduino + Processing](https://lastminuteengineers.com/joystick-interfacing-arduino-processing/)
+* [L298N with ESP8266](https://out-of-cheese-error.netlify.com/l298n-with-esp8266.html) - Driving a DC motor with Huzzah
