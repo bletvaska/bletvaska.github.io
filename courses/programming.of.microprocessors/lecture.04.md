@@ -13,12 +13,12 @@ outline:
 
 * Použijeme LCD display s dvoma riadkami a 16-imi stĺpcami. Pre pripojenie budeme používať I2C adaptér, ktorým je osadený.
 
-    ![LCD display](images/i2c_lcd.jpg)
+    ![LCD display](images/i2c-lcd-front.jpg)
 
 
 ## Inštalácia
 
-* prejdite na stránku https://github.com/dhylands/python_lcd
+* prejdite na stránku [https://github.com/dhylands/python_lcd](https://github.com/dhylands/python_lcd)
 
 * z priečinku `lcd/` si do svojho _ESP32_ prekopírujte tieto súbory:
     * `esp8266_i2c_lcd.py`
@@ -86,5 +86,5 @@ lcd.putstr('Hello world!')
 ## Links
 
 * [How to Use I2C LCD with ESP32 on Arduino IDE (ESP8266 compatible)](https://randomnerdtutorials.com/esp32-esp8266-i2c-lcd-arduino-ide/)
-* https://github.com/dhylands/python_lcd
+* [python_lcd](https://github.com/dhylands/python_lcd) - Python based library for talking to character based LCDs.
 
