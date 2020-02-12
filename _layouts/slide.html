@@ -23,6 +23,13 @@
 	<!-- Theme used for syntax highlighting of code -->
 	<link rel="stylesheet" href="/assets/lib/css/zenburn.css">
 
+    {% if page.styles.size > 0 %}
+    <!-- custom styles -->
+    {% for style in page.styles %}
+    <link rel="stylesheet" href="{{ style }}">
+    {% endfor %}
+    {% endif %}
+
 	<!-- Printing and PDF exports -->
 	<script>
 		var link = document.createElement( 'link' );

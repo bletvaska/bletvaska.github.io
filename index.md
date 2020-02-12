@@ -11,6 +11,10 @@ title: My Talks
 <!--<li>{{ item.title }}</li>-->
 <!--{% endfor %}-->
 
+## 2020
+
+* [DIDINFO 2020](hhttp://www.didinfo.net/) - [Využitie minipočítača Raspberry Pi v informatických predmetoch na stredných školách](2020/02-didinfo/)
+
 ## 2019
 
 * [Pycon 2019](https://2019.pycon.sk/sk/) - [Tvorba hier s knižnicou Pygame Zero](2019/pycon/slides.html)
