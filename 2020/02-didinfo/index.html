@@ -2,7 +2,7 @@
 title: Python ako hlavný nástroj vo výučbe informatických predmetov na stredných školách
 description:
     description
-duration: 25
+duration: 15
 date: 13.02.2020
 conference:
     title: DIDINFO 2020
@@ -22,8 +22,6 @@ authors:
         name: Danka Bruothová
         email: gta.bruothova@gmail.com
 short_url: http://bit.ly/2OMWgCk
-styles:
-    style.css
 ---
 
 <section id="opening" data-markdown>
@@ -31,12 +29,6 @@ styles:
 
     miroslav.binas@tuke.sk, matej.madeja@tuke.sk, gta.bruothova@gmail.com / [**{{ page.conference.title }}**]({{ page.conference.url}})
 </section>
-
-
-<section id="intro" class="intro" data-markdown>
-    A long time ago, in a galaxy far,<br> far away....
-</section>
-
 
 
 <section id="why-python" data-markdown>
@@ -85,11 +77,11 @@ notes:
 <section id="repetition" data-markdown>
 
 | predmet                   |pomer  | %   |
-|---------------------------|-------|-----|       
-| algoritmizacia            |       |     |
-| objektove programovanie   | 16/60 | 27% |
-| webove stranky            | 16/60 | 27% |
-| mikrokontrolery           | 16/60 | 27% |
+|---------------------------|-------|-----|
+| [Algoritmizácia](http://itakademia.sk/wp-content/uploads/2018/07/Riesenie_problemov_a_programovanie.pdf)            |       |     |
+| [Objektové programovanie](http://itakademia.sk/wp-content/uploads/2018/07/Objektovy_pristup_k_rieseniu_problemov.pdf)   | 14/66 | 21% |
+| [Programovanie web. stránok](http://itakademia.sk/wp-content/uploads/2018/07/Programovanie_webovych_stranok.pdf)            | 18/66 | 27% |
+| [IoT](http://itakademia.sk/wp-content/uploads/2018/07/Internet_veci.pdf) a [Mikrokontroléry](http://itakademia.sk/wp-content/uploads/2018/09/A-15.pdf)           | 16/66 | 24% |
 
 notes:
 * opakujeme sa
@@ -101,16 +93,16 @@ notes:
 <section id="one-ide" data-markdown>
 ## 2. Jedno IDE
 
-* nemusí byť PyCharm
-* rozhodne nie IDLE!
-* Mu vs Thonny
+* nemusí byť nutne topka ([PyCharm](https://www.jetbrains.com/pycharm/))
+* určite sa vyhnite IDLE!
+* [Mu](https://codewith.mu) vs [Thonny](https://thonny.org)
 
 notes:
 * novy jazyk/technologia = nove IDE
-    * nove klavesove skratky, 
-    * nove umiestnenia uz znamych veci, 
-    * instalacia, 
-    * riesenie problemov, 
+    * nove klavesove skratky,
+    * nove umiestnenia uz znamych veci,
+    * instalacia,
+    * riesenie problemov,
     * ...
 </section>
 
@@ -137,14 +129,14 @@ notes:
 
 
 <section id="example-class" data-markdown>
-## Ukážková trieda
+## [Špeciálna trieda](http://itakademia.sk/model-specialnej-triedy-so-zameranim-na-informatiku/)
 
 | predmet                   | jazyk |
 |---------------------------|-------|
-| algoritmizacia            | Python      |
-| objektove programovanie   | Java  |
-| webove stranky            | PHP, HTML5, MySQL, JS |
-| IoT, mikrokontrolery      | C, Blockly |
+| [Algoritmizácia](http://itakademia.sk/wp-content/uploads/2018/07/Riesenie_problemov_a_programovanie.pdf)            | Python      |
+| [Objektové programovanie](http://itakademia.sk/wp-content/uploads/2018/07/Objektovy_pristup_k_rieseniu_problemov.pdf)   | Java  |
+| [Programovanie web. stránok](http://itakademia.sk/wp-content/uploads/2018/07/Programovanie_webovych_stranok.pdf) | PHP, HTML5, MySQL, JS |
+| [IoT](http://itakademia.sk/wp-content/uploads/2018/07/Internet_veci.pdf) a [Mikrokontroléry](http://itakademia.sk/wp-content/uploads/2018/09/A-15.pdf) | C, Blockly |
 
 notes:
 * vyhli sme sa mobilnym aplikaciam a UI, aj ked Python ma zastupenie aj v tejto oblasti
@@ -155,11 +147,14 @@ notes:
 ## Úvodné kurzy programovania
 
 * motivačný faktor - hry
-* Oliver a Minecraft
+    * Oliver a Minecraft
 * v hrách sa riešia zaujímavé problémy
     * častokrát sú herní developeri lepší programátori ako programátori IS
-* podpora kreativity
+* podpora kreativity - projekty na GTA
 * nápady sa dajú rozvíjať
+* [Reeborg](http://reeborg.ca/index_en.html), 
+  [Pygame Zero](https://pygame-zero.readthedocs.io/en/stable/), 
+  [Minecraft](https://github.com/martinohanlon/mcpi), ...
 
 notes:
 * hovoril som vlani
@@ -174,11 +169,11 @@ notes:
 <section id="oop" data-markdown>
 ## Objektovo orientované programovanie
 
-* Greenfoot
+* [Greenfoot](https://www.greenfoot.org/door)
     * Objects first approach
 * Python je objektovo orientovaný
-* obecne sa objektom nevyhnete
-* OOP nie je ani tak o programovaní, ako skôr o návrhu/architektúre
+    * obecne sa objektom nevyhnete
+* OOP nie je ani tak o programovaní (často UI), ako skôr o návrhu/architektúre
 </section>
 
 
@@ -187,13 +182,19 @@ notes:
 
 * najhorší možný výber - PHP
     * jazyk, ktorý je určený len na tvorbu dynamických webov
-    * (vraj skritpy a UI)
+    * ([vraj skritpy a UI](https://www.php.net/manual/en/intro-whatcando.php))
     * štýl programovania ako pred 20 rokmi (žiadne MVC/MTV)
 * Python má dva typy webových rámcov
-    * micro webové rámce (napr. Flask)
-    * plnohodnotné webové rámce (napr. Django)
+    * micro webové rámce
+    * plnohodnotné webové rámce
 </section>
 
+
+<section id="flask-vs-django" data-markdown>
+![Flask vs Django](images/flask.vs.django.jpeg)
+
+[Flask](https://palletsprojects.com/p/flask/) vs [Django](https://www.djangoproject.com)
+</section>
 
 <section id="iot-and-ucontrollers" data-markdown>
 ## IoT a Mikrokontroléry
@@ -201,16 +202,16 @@ notes:
 * Arduino a jazyk C
     * dlho topka
 * špeciálne verzie Python-u
-    * Micro Python - ESP32, micro:bit
-    * Circuit Python
-    * GPIO Zero - RPi
+    * [MicroPython](http://micropython.org) - ESP32, micro:bit
+    * [CircuitPython](https://circuitpython.org)
+    * [GPIO Zero](https://gpiozero.readthedocs.io/en/stable/) - RPi
 </section>
 
 
 <section id="interconnection" data-markdown>
 ## 5. Vzájomné prepojenie tém
 
-* ukážky
+* hra s herným ovládačom, diaľkový ovládač, ovládanie hw cez webovú stránku, ...
 </section>
 
 
@@ -224,12 +225,12 @@ notes:
 
 
 <section id="namakany.den.2019" data-markdown data-background="white">
-    [![Namakany den 2019](images/namakany.den.png)](http://www.namakanyden.sk)
+    [![Namakany den 2020](images/namakany.den.2020.png)](http://www.namakanyden.sk)
 </section>
 
 
 <section id="questions" data-markdown>
-## Questions?
+## Otázky?
 </section>
 
 
