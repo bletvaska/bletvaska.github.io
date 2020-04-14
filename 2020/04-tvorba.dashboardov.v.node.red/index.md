@@ -94,7 +94,7 @@ Najpodstatnejší riadok bude tento:
 14 Apr 13:11:41 - [info] Server now running at http://127.0.0.1:1880/
 ```
 
-Ten hovorí o tom, že na uvedenej adrese a porte sa Node-RED spustil. Ak teda otvoríte prehliadač, mali by ste Node-RED vidieť.
+Ten hovorí o tom, že na adrese `[http://127.0.0.1:1880/](http://127.0.0.1:1880/)` sa Node-RED spustil. Ak teda túto adresu otvoríte v prehliadači, mali by ste Node-RED vidieť.
 
 
 ## Links
