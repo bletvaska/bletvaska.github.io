@@ -40,10 +40,11 @@ v12.10.0
 Príkaz zobrazí verziu nainštalovaného `node`. Číslo verzie sa samozrejme môže líšiť od spôsobu inštalácie.
 
 Overte tiež, či máte nainštalovaný nástroj `npm`, pomocou ktorého následne nainštalujeme Node-RED:
-    ```bash
-    $ npm --version
-    6.14.4
-    ```
+
+```bash
+$ npm --version
+6.14.4
+```
 
 
 ### Inštalácia Node-RED
