@@ -4,6 +4,25 @@ title: Installation
 duration: 120
 ---
 
+## Potrebný softvér
+
+Na workshope budeme pracovať v editore [Mu](https://codewith.mu). Samozrejme môžete použiť akýkoľvek iný editor, ktorý vie s mikrokontrolérom _ESP32_ pracovať.
+
+Editor stiahnite z [domovskej stránky](https://codewith.mu/) z časti [Downloads](https://codewith.mu/en/download)
+
+Tu však pozor! Stiahnite si **nie stabilnú** verziu, ale **alfa verziu**, pretože:
+    * podporuje _ESP32_ (stabilná verzia ju nepodporuje), a teda nebudete môcť pracovať
+    * hovorí po slovensky
+    * obsahuje aj iné mocné veci
+
+Ak ste používatelia _OS Linux_, tak stabilnú verziu potrebujete stiahnuť ručne zo stránky porjektu na [GitHub](https://github.com/mu-editor/mu)-e. Okrem toho sa uistite, že ste v skupine `dialout`
+
+
+### Windowsaci
+
+* používatelia windowsu si musia stiahnuť ovládač pre _CP210x USB to UART Bridge_
+  * [download drivers](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers)
+
 
 ## Inštalácia firmvéru
 
@@ -35,22 +54,6 @@ duration: 120
 * reštartnite dosku _ESP32_
 
 
-## Editor Mu
-
-* editor stiahnite z [domovskej stránky](https://codewith.mu/) z časti [Downloads](https://codewith.mu/en/download)
-
-* stiahnite si **nie stabilnú** verziu, ale **alfa verziu** !!!
-    * podpora pre ESP32
-    * slovenčina
-    * iné mocné veci
-
-* Linuxáci - uistite sa, že ste v skupine `dialout`
-
-
-### Windowsaci
-
-* používatelia windowsu si musia stiahnuť ovládač pre _CP210x USB to UART Bridge_
-  * [download drivers](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers)
 
 
 ## Links
