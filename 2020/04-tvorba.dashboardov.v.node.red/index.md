@@ -26,16 +26,16 @@ Pre používateľov OS Windows existujú v príncípe dve základné možnosti:
 
 2. použite na inštaláciu balíčkovací systém [Chocolatey](https://chocolatey.org), kde následne stačí v príkazovom riadku ako administrátor napísať:
 
-    ```bash
-    choco install nodejs-lts
-    ```
+   ```bash
+   choco install nodejs-lts
+   ```
 
 To, či máte `nodejs` nainštalovaný správne, si overíte spustením príkazového riadku a napísaním do neho príkazu:
 
-    ```bash
-    $ node --version
-    v12.10.0
-    ```
+```bash
+$ node --version
+v12.10.0
+```
 
 Príkaz zobrazí verziu nainštalovaného `node`. Číslo verzie sa samozrejme môže líšiť od spôsobu inštalácie.
 
