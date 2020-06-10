@@ -1,0 +1,142 @@
+---
+title: Node-RED a databázy pre IoT
+layout: slide
+duration: 60
+theme: night
+---
+<section data-markdown>
+### Ako zvládnuť webinár
+
+* pomenuj svojho avatara
+    * napr. dvojkliknutím na svoje meno vpravo hore
+* nevysielaj obraz, pokiaľ nemusíš
+    * ušetríš linku ostatným ;)
+* vypni mikrofón, keď nehovoríš
+    * ušetríš linku ostatným ;)
+    * minimalizuješ vzruchy
+* pýtaj sa, ak máš nejasnosti
+    * stlač medzerník a drž ho, kým rozprávaš (ako na vysielačke) alebo použi chat
+</section>
+
+
+<section data-markdown id="introduction">
+    ## {{ page.title }}
+
+    mirek@cnl.sk / [**Namakaný deň - webinár**](http://www.namakanyden.sk/)
+</section>
+
+
+<section data-markdown id="oznamy">
+## Oznamy
+
+* https://fred.sensetecnic.com
+* témy nabudúce:
+    * 3D tlač (Michal Sedláček)
+    * Testovanie (Milan Varga)
+    * Low-Power
+</section>
+
+
+<section data-markdown id="iot-architecture-overview" data-background="white">
+    ![IoT Architecture Overview](images/iot.architecture-overview.png)
+</section>
+
+
+<section data-markdown>
+## SQL vs NoSQL
+</section>
+
+
+<section data-markdown id="scaling" data-background="white">
+    ![Scale Out vs Scale Up](images/scale.out.vs.scale.up.png)
+</section>
+
+
+<section data-markdown id="price-of-scalability" data-background="white">
+![Cost difference in vertical vs horizontal scalability](images/price.of.scalability.png)
+</section>
+
+
+<section data-markdown id="tsdb">
+## Time Series Databases
+</section>
+
+
+<section data-markdown id="popularity" data-background="white">
+![DB-Engines Score by DB Category](images/db-engines.score.png)
+</section>
+
+
+<section data-markdown id="regular-vs-irregular-time-series" data-background="white">
+![Regular vs Irregular Time Series](images/regular.vs.irregular.time.series.png)
+</section>
+
+
+<section data-markdown id="influxdb">
+[![InfluxDB](images/logo-influxdb.png)](https://www.influxdata.com)
+</section>
+
+
+<section data-markdown id="influxql">
+## [InfluxQL](https://docs.influxdata.com/influxdb/v1.8/query_language/)
+
+* SQL-like query language for interacting with InfluxDB
+* similar to SQL
+</section>
+
+
+<section data-markdown id="influxdb-api">
+## [InfluxDB API](https://docs.influxdata.com/influxdb/v1.8/tools/api/)
+</section>
+
+
+<section data-markdown id="sqlite" data-background="white">
+## [![SQLite](images/logo-sqlite.png)](https://www.sqlite.org/index.html)
+</section>
+
+
+<section data-markdown id="sqlite-features-i">
+## SQLite Features I.
+
+* Transactions are atomic, consistent, isolated, and durable (ACID) even after system crashes and power failures.
+* Zero-configuration.
+* Full-featured SQL implementation with advanced capabilities.
+* A DB is stored in a single cross-platform disk file.
+* Supports terabyte-sized databases and gigabyte-sized strings and blobs.
+</section>
+
+
+<section data-markdown id="sqlite-features-ii">
+## SQLite Features II.
+
+* Simple, easy to use API.
+* Fast
+* Written in ANSI-C
+* Well-commented source code with 100% branch test coverage.
+* Self-contained: no external dependencies.
+* Cross-platform
+* Comes with a standalone CLI client.
+</section>
+
+
+<section data-markdown id="suggested-usage">
+## Suggested Uses
+
+* Database For The Internet Of Things
+* Application File Format
+* Website Database
+* Stand-in For An Enterprise RDBMS (for demonstration purposes or for testing)
+</section>
+
+
+<section data-markdown>
+## Otázky?
+</section>
+
+
+<section data-markdown>
+![qr code](https://api.qrserver.com/v1/create-qr-code/?data=https://bit.ly/2XTcjCc&size=300x300)
+
+(**https://bit.ly/2XTcjCc**)
+</section>
+
