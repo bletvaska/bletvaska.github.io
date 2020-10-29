@@ -1,0 +1,131 @@
+---
+title: (Not Too) Short Introduction to Kubernetes
+description:
+    Pri vývoji aplikácií, ktoré budú nasadené a dostupné v prostredí internetu, je dobré už v návrhu myslieť na to, že raz prestanú stačiť obsluhovať všetky prichádzajúce požiadavky. Otázkou však je, čo robiť potom? Rozšíriť hardvérové komponenty aktuálneho servera? Kúpiť nový, ktorý bude silnejší? Doplatiť za lepšie parametre v prípade externého hostingu? To všetko je síce možné, ale ak aplikácia stále zostane na jednom zariadení, problém sa len oddiali.
+
+    Riešenie, ktorým je možné tomuto problému predísť, je použiť službu na orchestráciu kontajnerov, ktorá sa postará o rozloženie záťaže medzi viacero zariadení, bude monitorovať ich stav na základe požiadaviek a zabezpečí bezproblémovú aktualizáciu na novú verziu aplikácie.
+
+    V tomto webinári sa pozrieme na možnosti technológie Kubernetes, ktorá patrí medzi najpoužívanejšie a najpopulárnejšie riešenia v tejto oblasti v súčasnosti.
+layout: slide
+duration: 75
+theme: sky
+bitly: xxx
+event:
+    name: Aktuálne trendy v informatike
+    url: https://kpi.fei.tuke.sk/sk/aktualne-trendy-v-informatike
+---
+
+
+<section data-markdown id="introduction">
+## {{ page.title }}
+
+mirek@cnl.sk / [**{{ page.event.name }}**]({{ page.event.url }})
+</section>
+
+
+<section data-markdown id="the-problem">
+## The Problem
+</section>
+
+
+<section data-markdown id="scaling">
+![Scale Out vs Scale Up](images/scale.out.vs.scale.up.png)
+</section>
+
+
+<section data-markdown id="kubernetes">
+[![Kubernetes](images/logo.kubernetes.png)](https://kubernetes.io)
+</section>
+
+
+<section data-markdown id="what-is-kubernetes">
+**Kubernetes** (K8s) is an open-source system for automating **deployment**, **scaling**, and **management** of containerized applications.
+</section>
+
+
+<section data-markdown id="container-orchestration">
+## Container Orchestration
+
+Notes:
+* container orchestrator - make many servers act like one
+</section>
+
+
+<section data-markdown id="orchestration" data-background="#000">
+![Orchestration](images/orchester.jpg)
+
+Notes:
+* container orchestrator - make many servers act like one
+* K8s and Swarm are popular container orchestrators
+</section>
+
+
+<section data-markdown id="kubernetes-architecture" data-background="#E2EBF4">
+![Kubernetes Architecture](images/kubernetes.architecture.png)
+</section>
+
+
+<section data-markdown id="kubernetes-master" data-background="#E2EBF4">
+![Kubernetes Master](images/kubernetes.master.png)
+</section>
+
+
+<section data-markdown id="kubernetes-node" data-background="#E2EBF4">
+![Kubernetes Node](images/kubernetes.node.png)
+</section>
+
+
+<section data-markdown id="example-1">
+## Live Demo #1
+### Creating a Pod/Deployment/Service in K8s
+</section>
+
+
+<section data-markdown id="imperative-approach">
+## The Imperative Approach
+</section>
+
+
+<section data-markdown id="kubectl">
+## `kubectl`
+</section>
+
+
+<section data-markdown id="deployment">
+## Deployment
+</section>
+
+
+<section data-markdown id="service">
+## Service
+</section>
+
+
+<section data-markdown id="example-2">
+## Live Demo #2
+### Updating a Service in K8s
+</section>
+
+
+<section data-markdown id="declarative-approach">
+## The Declarative Approach
+</section>
+
+
+<section data-markdown id="example-3">
+## Live Demo #3
+### Deploying a WordPress Application
+</section>
+
+
+<section data-markdown id="questions">
+## Questions?
+</section>
+
+
+<section data-markdown>
+![qr code](https://api.qrserver.com/v1/create-qr-code/?data=https://bit.ly/{{ page.bitly }}&size=300x300)
+
+(**https://bit.ly/{{ page.bitly }}**)
+</section>
+
