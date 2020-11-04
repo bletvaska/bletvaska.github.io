@@ -1,7 +1,4 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
 title: My Talks
 ---
@@ -13,7 +10,8 @@ title: My Talks
 
 ## 2020
 
-* [DIDINFO 2020](hhttp://www.didinfo.net/) - [Využitie minipočítača Raspberry Pi v informatických predmetoch na stredných školách](2020/02-didinfo/)
+* [Namakaný deň 2020 - Webináre](hhttp://www.namakanyden.sk/webinare/2020/11/03/webove-stranky-vo-fastapi.htm) - [Tvorba dynamických webových stránok v jazyku Python](2020/11-fastapi/)
+* [DIDINFO 2020](http://www.didinfo.net/) - [Využitie minipočítača Raspberry Pi v informatických predmetoch na stredných školách](2020/02-didinfo/)
 
 ## 2019
 

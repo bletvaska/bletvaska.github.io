@@ -20,15 +20,22 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 port: 5555
-twitter_username: jekyllrb
-github_username:  jekyll
+#twitter_username: jekyllrb
+github_username:  bletvaska
+remote_theme: fongandrew/hydeout
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-cayman
+theme: jekyll-theme-hydeout
+#theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
   #- jekyll-paginate
+
+#collections:
+  #- talks
+
+#permalink: pretty
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

@@ -1,0 +1,233 @@
+---
+title: Tvorba webových stránok v jazyku Python
+layout: slide
+duration: 60
+theme: night
+bitly: xxx
+---
+
+<section data-markdown>
+### Ako zvládnuť webinár
+
+* pomenuj svojho avatara
+    * napr. dvojkliknutím na svoje meno vpravo hore
+* nevysielaj obraz, pokiaľ nemusíš
+    * ušetríš linku ostatným ;)
+* vypni mikrofón, keď nehovoríš
+    * ušetríš linku ostatným ;)
+    * minimalizuješ vzruchy
+* pýtaj sa, ak máš nejasnosti
+    * stlač medzerník a drž ho, kým rozprávaš (ako na vysielačke) alebo použi chat
+</section>
+
+
+<section data-markdown id="introduction">
+## {{ page.title }}
+
+mirek@cnl.sk / [**Namakaný deň**](https://namakanyden.sk)
+</section>
+
+
+<section data-markdown id="fastapi">
+[![FastAPI](images/logo.fastapi.png)](https://fastapi.tiangolo.com)
+
+FastAPI framework, high performance, easy to learn, fast to code, ready for production
+</section>
+
+
+<section data-markdown id="features">
+## Features
+
+[Fast](https://www.techempower.com/benchmarks/#section=test&runid=7464e520-0dc2-473d-bd34-dbdfd7e85911&hw=ph&test=query&l=z8kflr-v&a=2), 
+Fast to code, Fewer bugs, Intuitive, Easy, Short, Robust, Standards-based
+
+</section>
+
+
+<section id="talk-python-to-me">
+<iframe width="100%" height="700" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/904573510&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/talkpython" title="Talk Python To Me Podcast" target="_blank" style="color: #cccccc; text-decoration: none;">Talk Python To Me Podcast</a> · <a href="https://soundcloud.com/talkpython/modern-and-fast-apis-with-fastapi" title="Modern and fast APIs with FastAPI" target="_blank" style="color: #cccccc; text-decoration: none;">Modern and fast APIs with FastAPI</a></div>
+</section>
+
+
+<section data-markdown id="the-plan">
+## The Plan
+
+0. installation
+1. introduction
+2. web templates
+3. REST API
+</section>
+
+
+<section data-markdown id="instalation">
+## #0 Installation
+
+```bash
+$ pip install fastapi uvicorn
+```
+</section>
+
+
+<!--<section>-->
+    <!--<div id="termynal" data-termynal>-->
+        <!--<span data-ty="input">pip install spacy</span>-->
+        <!--<span data-ty="progress"></span>-->
+        <!--<span data-ty>Successfully installed spacy</span>-->
+        <!--<span data-ty></span>-->
+        <!--<span data-ty="input">python -m spacy download en</span>-->
+        <!--<span data-ty="progress"></span>-->
+        <!--<span data-ty>Installed model 'en'</span>-->
+        <!--<span data-ty></span>-->
+        <!--<span data-ty="input">python</span>-->
+        <!--<span data-ty="input" data-ty-prompt=">>>">import spacy</span>-->
+        <!--<span data-ty="input" data-ty-prompt=">>>">nlp = spacy.load('en')</span>-->
+        <!--<span data-ty="input" data-ty-prompt=">>>">doc = nlp(u'Hello world')</span>-->
+        <!--<span data-ty="input" data-ty-prompt=">>>">print([(w.text, w.pos_) for w in doc])</span>-->
+        <!--<span data-ty>[('Hello', 'INTJ'), ('world', 'NOUN')]</span>-->
+    <!--</div>-->
+
+<!--</section>-->
+
+
+<section data-markdown id="introduction">
+## #1 Introduction
+</section>
+
+
+<section data-markdown id="hello-world-code">
+## Code...
+
+```python
+# file: hello.py
+from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/")
+def hello():
+    return {"Hello": "World"}
+```
+</section>
+
+
+<section data-markdown id="hello-world-run">
+## ...and Run!
+
+```bash
+$ uvicorn hello:app --reload
+```
+</section>
+
+
+<section id="fastapi-vs-flask">
+    <h2><a href="https://fastapi.tiangolo.com#create-it">FastAPI</a> vs <a href="https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application">Flask</a></h2>
+
+<div style="display: flex;">
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-python hljs">
+from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/")
+def hello():
+    return {"Hello": "World"}
+      </code>
+      </pre>
+  </div>
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-python hljs">
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+      </code>
+      </pre>
+  </div>
+</div>
+</section>
+
+
+<section data-markdown id="key-difference">
+## Key Difference...
+
+...API First Approach
+</section>
+
+
+<section data-markdown id="use-case">
+## The Use Case
+
+simple sensor dashboard
+</section>
+
+
+<section data-markdown id="web-templates">
+## #2 Web Templates
+
+* you can use any template engine you want
+* we will use [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/)
+    * "native" support in Flask
+    * very popular
+</section>
+
+
+<section data-markdown id="jinja2" data-background="#fff">
+[![Jinja2 Logo](images/logo.jinja2.png)](https://jinja.palletsprojects.com/en/2.11.x/)
+</section>
+
+
+<section data-markdown id="jinja2-installation">
+## Installing Jinja2
+
+```bash
+$ pip install jinja2
+```
+</section>
+
+
+<section data-markdown id="jinja2-introduction">
+## Jinja2 Introduction
+
+```python
+from jinja2 import Template
+
+template = Template('Hello {% raw %}{{ name }}{% endraw %}!')
+print(template.render(name='John Doe'))
+# 'Hello John Doe!'
+```
+</section>
+
+
+<section data-markdown id="mtv-logo" data-background="#000">
+![MTV](images/logo.mtv.jpg)
+</section>
+
+
+<section data-markdown id="mtv">
+## Model Template View
+
+web version of MVC
+</section>
+
+
+<section data-markdown id="bootstrap" data-background="#573B7D">
+[![Bootstrap](https://www.fullstackpython.com/img/logos/bootstrap.png)](https://getbootstrap.com)
+</section>
+
+
+
+<section data-markdown>
+## Otázky?
+</section>
+
+
+<section data-markdown>
+![qr code](https://api.qrserver.com/v1/create-qr-code/?data=https://bit.ly/{{ page.bitly }}&size=300x300)
+
+(**https://bit.ly/{{ page.bitly }}**)
+</section>
+
+<script src="js/termynal.js" data-termynal-container="#termynal"></script>
