@@ -1,9 +1,11 @@
 ---
-title: Tvorba webových stránok v jazyku Python
+title: Tvorba webových stránok v jazyku Python I.
 layout: slide
 duration: 60
 theme: night
-bitly: xxx
+bitly: https://bit.ly/2HSPYkr
+todo:
+- swagger OpenAPI
 ---
 
 <section data-markdown>
@@ -40,27 +42,38 @@ FastAPI framework, high performance, easy to learn, fast to code, ready for prod
 
 [Fast](https://www.techempower.com/benchmarks/#section=test&runid=7464e520-0dc2-473d-bd34-dbdfd7e85911&hw=ph&test=query&l=z8kflr-v&a=2), 
 Fast to code, Fewer bugs, Intuitive, Easy, Short, Robust, Standards-based
+</section>
 
+
+<section data-markdown id="sebastian-ramirez">
+![Sebastian Ramirez](images/sebastian.ramirez.jpg)]
+## [Sebastian Ramirez](https://github.com/tiangolo)
 </section>
 
 
 <section id="talk-python-to-me">
-<iframe width="100%" height="700" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/904573510&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/talkpython" title="Talk Python To Me Podcast" target="_blank" style="color: #cccccc; text-decoration: none;">Talk Python To Me Podcast</a> · <a href="https://soundcloud.com/talkpython/modern-and-fast-apis-with-fastapi" title="Modern and fast APIs with FastAPI" target="_blank" style="color: #cccccc; text-decoration: none;">Modern and fast APIs with FastAPI</a></div>
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/904573510&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/talkpython" title="Talk Python To Me Podcast" target="_blank" style="color: #cccccc; text-decoration: none;">Talk Python To Me Podcast</a> · <a href="https://soundcloud.com/talkpython/modern-and-fast-apis-with-fastapi" title="Modern and fast APIs with FastAPI" target="_blank" style="color: #cccccc; text-decoration: none;">Modern and fast APIs with FastAPI</a></div>
 </section>
 
 
 <section data-markdown id="the-plan">
 ## The Plan
 
+### One Time
+
 0. installation
 1. introduction
 2. web templates
-3. REST API
+
+### Next Time
+
+3. REST API 
+4. Open API (Swagger)
 </section>
 
 
 <section data-markdown id="instalation">
-## #0 Installation
+## #1 Installation
 
 ```bash
 $ pip install fastapi uvicorn
@@ -90,7 +103,7 @@ $ pip install fastapi uvicorn
 
 
 <section data-markdown id="introduction">
-## #1 Introduction
+## #2 Introduction
 </section>
 
 
@@ -114,6 +127,29 @@ def hello():
 
 ```bash
 $ uvicorn hello:app --reload
+```
+</section>
+
+
+
+<section data-markdown id="hello-world-all-in-one">
+## Run from Code
+
+```python
+# file: hello2.py
+from fastapi import FastAPI
+import uvicorn
+app = FastAPI()
+
+@app.get("/")
+def hello():
+    return {"Hello": "World"}
+
+if __name__ == "__main__":
+    uvicorn.run('hello:app', 
+                host="0.0.0.0", 
+                port=5000,  # default port is 8000
+                reload=True)
 ```
 </section>
 
@@ -157,6 +193,26 @@ def hello_world():
 </section>
 
 
+<section data-markdown id="curl">
+```bash
+$ curl -v http://localhost:5000
+* Connected to localhost (127.0.0.1) port 5000 
+> GET / HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/7.71.1
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< date: Wed, 04 Nov 2020 09:46:48 GMT
+< server: uvicorn
+< content-length: 17
+< content-type: application/json
+< 
+{"Hello":"World"}
+```
+</section>
+
+
 <section data-markdown id="use-case">
 ## The Use Case
 
@@ -164,8 +220,16 @@ simple sensor dashboard
 </section>
 
 
+<section data-markdown id="components-of-url" data-background="#fff">
+![Components of URL](images/url.format.explained.png)
+
+Notes:
+* https://bind.media/cro/how-to-setup-hotjar-basic-account/
+</section>
+
+
 <section data-markdown id="web-templates">
-## #2 Web Templates
+## #3 Web Templates
 
 * you can use any template engine you want
 * we will use [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/)
@@ -213,18 +277,109 @@ web version of MVC
 </section>
 
 
+<section data-markdown id="jinja-with-fastapi">
+## Jinja2 with FastAPI
+
+```python
+# file: dashboard.start.py
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI()
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/dashboard", response_class=HTMLResponse)
+async def view_dashboard(request: Request):
+    return templates.TemplateResponse(
+        "dashboard.html",
+        {"request": request, "title": "My Dashboard"}
+    )
+```
+</section>
+
+
 <section data-markdown id="bootstrap" data-background="#573B7D">
 [![Bootstrap](https://www.fullstackpython.com/img/logos/bootstrap.png)](https://getbootstrap.com)
 </section>
 
 
-
 <section data-markdown>
-## Otázky?
+## Getting the Data from JSON File
+
+```python
+import json
+
+@app.get("/dashboard", response_class=HTMLResponse)
+async def view_dashboard(request: Request):
+    data = json.load(open('data.json'))
+    return templates.TemplateResponse(
+        "dashboard.html",
+        {
+            "request": request, 
+            "title": "Magic Dashboard!", 
+            "temperature": data['temperature'], 
+            "timestamp": data['timestamp']
+        }
+    )
+```
 </section>
 
 
 <section data-markdown>
+## Rendering Form
+
+```python
+@app.get("/form", response_class=HTMLResponse)
+async def view_form(request: Request):
+    return templates.TemplateResponse(
+        "form.html", 
+        {"request": request}
+    )
+```
+</section>
+
+
+<section data-markdown>
+## Processing Form Data
+
+```python
+# imports!
+
+@app.post("/form")
+async def process_form(request: Request, 
+                       temperature: float = Form(...)):
+    now = datetime.now()
+    data = {
+        'temperature': str(temperature), 
+        'timestamp': now.strftime("%d.%m.%Y %H:%M:%S")
+    }
+    with  open('data.json', 'w+') as file:
+        json.dump(data, file)
+
+    return RedirectResponse(url='/dashboard', 
+                            status_code=HTTP_303_SEE_OTHER)
+```
+
+</section>
+
+
+<section data-markdown id="questions">
+## Questions?
+</section>
+
+
+<section data-markdown id="links">
+## Links
+
+* [FastAPI Homepage](https://fastapi.tiangolo.com)
+* [sources](src/) - example codes
+* [templates](templates/) - HTML templates
+</section>
+
+
+<section data-markdown id="qr-code">
 ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=https://bit.ly/{{ page.bitly }}&size=300x300)
 
 (**https://bit.ly/{{ page.bitly }}**)
