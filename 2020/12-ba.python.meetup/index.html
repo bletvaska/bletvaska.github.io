@@ -1,0 +1,253 @@
+---
+title: Tvorba počítačových hier v jazyku Python
+description:
+    Ako sa stať herným vývojárom rýchlo a ľahko s Pythonom a knižnicou Pygame Zero. A to všetko za 90 minút. Maňana.
+duration: 90
+date: 1.12.2020
+bitly: http://bit.ly/2IWGAIR
+layout: slide
+theme: night
+author:
+    name: mirek
+    email: mirek@cnl.sk
+conference:
+    title: 41. Bratislavský Python Meetup
+    url: https://www.meetup.com/pyconsk/events/274709044/
+---
+<style>
+#arkanoid-game {
+  margin: 0;
+  display: flex;
+
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+
+  /* This centers our sketch vertically. */
+  align-items: center;
+}
+
+#actor img {
+    width: 1em;
+}
+</style>
+
+
+
+<section id="opening" data-markdown>
+## {{ page.title }}
+
+{{ page.author.email}} / [**{{ page.conference.title }}**]({{ page.conference.url }})
+</section>
+
+
+<section id="hrate-sa" data-markdown>
+## Hráte sa počítačové hry?
+</section>
+
+
+<section id="uncharted" data-markdown>
+![Uncharted: Drake's Fortune](images/uncharted.jpg)
+</section>
+
+
+<section id="naprogramovali-ste-hru" data-markdown>
+## Naprogramovali ste si vlastnú počítačovú hru?
+</section>
+
+
+<section id="arkanoid-logo" data-markdown data-background="black">
+![Arkanoid Logo](images/arkanoid.logo.jpg)
+
+Note:
+* https://i.ytimg.com/vi/2bdFsD_0HXI/maxresdefault.jpg
+</section>
+
+
+<section id="arkanoid-game" data-background="black">
+</section>
+
+
+<!--<section id="arkanoid-arcade" data-background="black">-->
+    <!--<iframe width="896" height="504" src="https://www.youtube.com/embed/Th-Z6QQ5AOQ?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen data-autoplay></iframe>-->
+<!--</section>-->
+
+
+<section id="collisions" data-markdown data-background="#2ECC71">
+[![Kenney.nl](images/kenney-promo.png)](https://kenney.nl/)
+</section>
+
+
+<section id="pygame-zero" data-background="white">
+<a href="https://pygame-zero.readthedocs.io/">
+    <img src="images/logo-pygamezero.svg" width="600">
+</a>
+</section>
+
+
+<section id="pygame" data-markdown data-background="white">
+[![Pygame logo](images/logo-pygame.png)](https://www.pygame.org/news)
+</section>
+
+
+<section id="sdl" data-markdown data-background="white">
+[![SDL logo](images/logo-sdl.png)](https://www.libsdl.org/)
+
+Since 1998
+</section>
+
+
+<section id="steam" data-markdown data-background="black">
+![Steam logo](images/logo-steam.jpg)
+</section>
+
+
+<section id="pygame-zero-about" data-markdown>
+### Pygame Zero is for creating games without boilerplate.
+</section>
+
+
+<section id="pygame-zero-magpi" data-markdown data-background="images/magpi-35-pygamezero.jpg">
+Note:
+* https://www.raspberrypi.org/magpi/wp-content/uploads/2015/06/35_PygameZero.jpg
+</section>
+
+
+<section id="installation" data-markdown>
+## Installation
+
+* Raspberry Pi - builtin
+* `sudo dnf install pgzero mu`
+* `pip install pgzero mu-editor`
+</section>
+
+
+<section id="installation-workaround" data-markdown>
+## Installation Workaround
+
+...because of last version 1.2 is from 2018
+
+```bash
+pip install pygame==2.0.0 
+pip install pgzero --no-deps
+```
+</section>
+
+
+<section id="warning" data-markdown>
+## Warning!
+(no best practices provided)
+</section>
+
+
+<section id="game-loop" data-markdown data-background="#FEFCF6">
+![Game Loop](images/game-loop-simple.png)
+
+Note:
+* http://gameprogrammingpatterns.com/images/game-loop-simple.png
+</section>
+
+
+<section id="project-structure" data-markdown>
+## [Project Structure](resources/project.zip)
+
+```
+.
+├── game.py
+├── sounds/
+│   ├── hit.01.wav
+│   └── hit.02.wav
+└── images/
+    ├── background.png
+    ├── ball.png
+    ├── brick.purple.png
+    ├── brick.red.png
+    └── paddle.png
+```
+</section>
+
+
+<section id="2d-coordinate-system" data-markdown>
+## 2D Coordinate System
+
+![2D Coordinate System](images/2d.coordinate.system.png)
+</section>
+
+
+<section id="actor" data-markdown>
+![Actor](images/ball.png)
+</section>
+
+
+<section id="actor-fields-and-methods" data-markdown>
+## Actor Fields and Methods
+
+* `actor.x`, `actor.y`, `actor.pos`
+* `actor.image`
+* `actor.width`, `actor.height`
+* `actor.draw()`
+</section>
+
+
+<section id="pygame-handles" data-markdown>
+## Pygame Handles 
+
+![Pygame Handles](images/pygame.handles.png)
+</section>
+
+
+<section id="collision-detections" data-markdown>
+    ## Collisioin Detection
+</section>
+
+
+<section id="collisions" data-markdown data-background="#fff">
+    ![Collisions](images/collisions.png)
+
+    Note:
+    * https://treadgaming.blogspot.com/2016/06/video-game-physics-tutorial-part-ii.html
+</section>
+
+
+<section id="questions" data-markdown>
+## Questions?
+</section>
+
+
+<section id="where-to-go-next" data-markdown>
+## What's Next?
+</section>
+
+
+<section id="resources" data-markdown>
+## Used Resources
+
+* [javascript-arkanoid](https://github.com/aruvham/javascript-arkanoid) - rendition of the classic NES game Arkanoid using [p5.js](https://p5js.org/)
+* Kenney: [Puzzle Pack](https://www.kenney.nl/assets/puzzle-pack) - original assets from Kenney
+* [assets](game.assets.zip) - stolen from [Kenney.nl](https://kenney.nl)
+* [výsledný projekt](resources/arkanoid.py)
+</section>
+
+
+<section id="links" data-markdown>
+## Links
+
+* [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
+* [Wireframe](https://wireframe.raspberrypi.org/) and [MagPi](https://www.raspberrypi.org/magpi/) Magazines
+* [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
+* [Tvorba počítačových hier s Pygame Zero](https://bletvaska.gitbooks.io/tvorba-pocitacovych-hier-s-pygame-zero/content/) - poznámky ku tvorivej dielni
+* [PyWeek](https://pyweek.org/) - Python Game Programming Challenge
+* [Retro Gaming with Raspberry Pi](https://magpi.raspberrypi.org/books/retro-gaming) - 164 pages of Video Game Projects (ebook)
+</section>
+
+
+<section data-markdown id="qr-code">
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+    (**{{ page.bitly }}**)
+</section>
+
+
+<script src="./libs/p5.min.js"></script>
+<script src="./libs/p5.sound.min.js"></script>
+<script src="levels.js"></script>
+<script src="game.js"></script>

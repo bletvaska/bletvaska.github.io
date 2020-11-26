@@ -10,7 +10,8 @@ title: My Talks
 
 ## 2020
 
-* [Namakaný deň 2020 - Webináre](hhttp://www.namakanyden.sk/webinare/2020/11/03/webove-stranky-vo-fastapi.htm) - [Tvorba dynamických webových stránok v jazyku Python](2020/11-fastapi/)
+* [41. Bratislava Python Meetup](https://www.meetup.com/pyconsk/events/274709044/) - [Gamedev](2020/12-ba.python.meetup/)
+* [Namakaný deň 2020 - Webináre](http://www.namakanyden.sk/webinare/2020/11/03/webove-stranky-vo-fastapi.htm) - [Tvorba dynamických webových stránok v jazyku Python](2020/11-fastapi/)
 * [DIDINFO 2020](http://www.didinfo.net/) - [Využitie minipočítača Raspberry Pi v informatických predmetoch na stredných školách](2020/02-didinfo/)
 
 ## 2019
