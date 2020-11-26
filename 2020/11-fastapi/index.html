@@ -30,6 +30,30 @@ mirek@cnl.sk / [**Namakaný deň**](https://namakanyden.sk)
 </section>
 
 
+<section id="newsletter">
+    <h2>Newsletter</h2>
+
+    <!-- Begin Mailchimp Signup Form -->
+    <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+
+    <div id="mc_embed_signup">
+        <form action="https://namakanyden.us19.list-manage.com/subscribe/post?u=2be0bc7fd4b16338d9a99b465&amp;id=41a1b70536"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+
+            <div id="mc_embed_signup_scroll">
+                <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Prihláste sa na odoberanie noviniek emailom" required>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_2be0bc7fd4b16338d9a99b465_41a1b70536" tabindex="-1" value=""></div>
+                <div>
+                    <input type="submit" value="Prihlásiť" name="subscribe" id="mc-embedded-subscribe" class="button">
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--End mc_embed_signup-->
+</section>
+
+
 <section data-markdown id="fastapi">
 [![FastAPI](images/logo.fastapi.png)](https://fastapi.tiangolo.com)
 
@@ -361,7 +385,86 @@ async def process_form(request: Request,
     return RedirectResponse(url='/dashboard', 
                             status_code=HTTP_303_SEE_OTHER)
 ```
+</section>
 
+
+<section data-markdown id="rest-api">
+## REST API
+
+* one endpoint for two HTTP methods
+    * `GET /api/temp/` - get curren temperature
+    * `POST /api/temp/` - add new measurement
+</section>
+
+
+<section data-markdown id="get-example">
+## `GET /api/temp`
+
+```python
+@app.get('/api/temp')
+def get_latest_value():
+    file = open('data.json')
+    data = json.load(file)
+    return data
+```
+</section>
+
+
+<section data-markdown id="documentation">
+## Documentation
+
+* builtin support for
+    * [Swagger/OpenAPI](https://github.com/swagger-api/swagger-ui)
+    * [ReDoc](https://github.com/Redocly/redoc)
+* accessing the doc on `http://URL/docs`
+</section>
+
+
+<section data-markdown id="pydantic">
+## [Pydantic](https://pydantic-docs.helpmanual.io)
+
+Data validation and settings management using python type annotations.
+</section>
+
+
+<section data-markdown id="pydantic-model">
+## `Payload` Model
+
+```python
+from datetime import datetime
+from pydantic import BaseModel
+
+class Payload(BaseModel):
+    temperature: float
+    created: datetime = datetime.now().isoformat()
+```
+</section>
+
+
+<section data-markdown id="post-example">
+## `POST /api/temp`
+
+```python
+@app.post('/api/temp', status_code = 201)
+def add_new_value(data: Payload):
+    with open('data.json', 'w+') as file:
+        json.dump(data.dict(), file)
+    return data
+```
+</section>
+
+
+<section data-markdown id="testing">
+## Testing/Using
+
+```python
+import requests
+
+url = 'http://localhost:8000/api/temp'
+r = requests.post(url, json={'temperature': -3})
+print(r.status_code)
+# 201 Created
+```
 </section>
 
 
@@ -376,6 +479,7 @@ async def process_form(request: Request,
 * [FastAPI Homepage](https://fastapi.tiangolo.com)
 * source codes - [hello.py](src/hello.py), [dashboard.1.py](src/dashboard.1.py), [dashboard.2.py](src/dashboard.2.py)
 * templates - [dashboard.html](templates/dashboard.html), [form.html](templates/form.html)
+* code on [codeshare](https://codeshare.io/a3LwOL)
 </section>
 
 
@@ -386,3 +490,6 @@ async def process_form(request: Request,
 </section>
 
 <script src="js/termynal.js" data-termynal-container="#termynal"></script>
+
+<!-- mailchimp -->
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/2be0bc7fd4b16338d9a99b465/304ea24ea1a61ae8158844207.js");</script>
