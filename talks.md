@@ -1,10 +1,9 @@
 ---
-layout: default
+layout: page
 title: My Talks
 sidebar_link: true
+permalink: /talks/
 ---
-
-# My Talks
 
 List of my latest talks. Mostly in Slovak language.
 

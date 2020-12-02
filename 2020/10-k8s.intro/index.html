@@ -9,20 +9,19 @@ description:
 layout: slide
 duration: 75
 theme: sky
-bitly: 31Tk5ik
+bitly: https://bit.ly/31Tk5ik
 event:
     title: Aktuálne trendy v informatike
     url: https://kpi.fei.tuke.sk/sk/aktualne-trendy-v-informatike
 date: 2020-10-29
 categories: talk
+video: https://youtu.be/uvNQgsJLnvE
+author:
+    name: mirek
+    email: mirek@cnl.sk
 ---
 
-
-<section data-markdown id="introduction">
-## {{ page.title }}
-
-mirek@cnl.sk / [**{{ page.event.title }}**]({{ page.event.url }})
-</section>
+{% include first.slide.html %}
 
 
 <section data-markdown id="the-problem">
@@ -125,9 +124,4 @@ Notes:
 </section>
 
 
-<section data-markdown>
-![qr code](https://api.qrserver.com/v1/create-qr-code/?data=https://bit.ly/{{ page.bitly }}&size=300x300)
-
-(**https://bit.ly/{{ page.bitly }}**)
-</section>
-
+{% include qr.html %}
