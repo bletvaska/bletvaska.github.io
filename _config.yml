@@ -32,6 +32,10 @@ plugins:
   - jekyll-feed
   #- jekyll-paginate
 
+hydeout:
+  git: https://github.com
+  youtube: https://www.youtube.com/channel/UCdoiG8gq9p8m7MXCkgFnKZg?view_as=subscriber
+
 #collections:
   #- talks
 
