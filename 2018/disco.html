@@ -1,275 +1,197 @@
-<!doctype html>
+---
+title: Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process
+duration: 20
+date: 2018-06-25
+bitly: https://bit.ly/2KkkwaK
+layout: slide
+categories: talk
+theme: night
+author:
+    name: mirek
+    email: mirek@cnl.sk
+event:
+    title: DisCo 2018
+    url: https://disconference.eu/
+---
 
-<html lang="en">
+{% include first.slide.html %}
 
-	<head>
-		<meta charset="utf-8">
+<section data-markdown id="introduction">
+    <script type="text/template">
+    ## Two topics
 
-		<title>Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process</title>
+    1. data analytics <!-- .element: class="fragment" data-fragment-index="1" -->
+    2. plagiarism detection <!-- .element: class="fragment" data-fragment-index="2" -->
+</script>
 
-		<meta name="description" content="Introduction to JavaScript.">
-		<meta name="author" content="mirek">
+</section>
 
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<section data-markdown>
+    ### It has never been easier to cheat than today.
+</section>
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/night.min.css" id="theme">
+<section data-markdown id="cheating-is-bad">
+    ![Cheating is bad](images/cheating.is.bad.jpg)
+</section>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+<section data-markdown id="interaction">
+    ## Don't Forget to Interact with the Audience!
+    (Manager)
+</section>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/pdf.min.css' : 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/print/paper.min.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
+<section data-markdown id="overview">
+    ## [Programming](http://it4kt.cnl.sk/c/pvjc) Course
 
-		<style>
-		.reveal section img {
-			border:0;
-			background-color: transparent;
-		}
+    * ~~not very~~ introductory programming course
+        * known as _CS0_ or _CS1_
+        * _C_ language, so not so easy
+    * 2nd semester of Bc study
+    * more than _600_ students
+    * _5_ projects during semester
+</section>
 
-		.reveal section pre {
-			font-size: 15px;
-		}
-		</style>
-	</head>
 
-	<body>
+<section data-markdown id="goal">
+    ## The Goal is Clear
 
-		<div class="reveal">
+    > learn to code
 
-			<div class="slides">
-                <section data-markdown id="title">
-                    ## Affecting Students’ Behavior with Plagiarism Detection in Evaluation Process
+    (including thinking, problem solving, having fun, but **NO CHEATING!**)
+</section>
 
-                    miroslav.binas@tuke.sk / [DisCo 2018](http://disconference.eu/)
-				</section>
 
+<section data-markdown id="data-science-process">
+    ## Data Science Process
 
-				<section data-markdown id="introduction">
-					<script type="text/template">
-					## Two topics
+    ![Data Science Process](images/data.analytics.process.png)
+</section>
 
-					1. data analytics <!-- .element: class="fragment" data-fragment-index="1" -->
-					2. plagiarism detection <!-- .element: class="fragment" data-fragment-index="2" -->
-				</script>
 
-				</section>
+<section data-markdown id="acquiring-data">
+    ## During Last 5 Years
+
+    * process of heavy **data acrquiring**
+    * development of test platform _Arena_
+    * application of **TDD** and **CI** with [Git](https://git-scm.com/) and [Gitlab](https://about.gitlab.com/)
+    * over than _200.000_ entries
+</section>
 
 
-				<section data-markdown>
-					### It has never been easier to cheat than today.
-				</section>
+<section data-markdown id="data-interpretation">
+    ## Let the Data Talk
 
-				<section data-markdown id="cheating-is-bad">
-					![Cheating is bad](images/cheating.is.bad.jpg)
-				</section>
+    * (real time) data **analysis** and **interpretation**
+        * when the students work
+        * what is the [score distribution](https://arena.kpi.fei.tuke.sk/arena/courses/prog.2018) during the time
+        * what is the [pattern of they behavior](https://arena.kpi.fei.tuke.sk/arena/courses/prog.2018)
+    * setting **predictions** and **hypothesis**
+        * according to the work of student during the semester, what will be his grade on the final exam?
+        * is there corelation between the qualithy of teacher and his students?
+</section>
 
-				<section data-markdown id="interaction">
-					## Don't Forget to Interact with the Audience!
-					(Manager)
-				</section>
 
+<section data-markdown id="missing-part">
+    ## The Missing Part
 
-				<section data-markdown id="overview">
-					## [Programming](http://it4kt.cnl.sk/c/pvjc) Course
-
-					* ~~not very~~ introductory programming course
-						* known as _CS0_ or _CS1_
-						* _C_ language, so not so easy
-					* 2nd semester of Bc study
-					* more than _600_ students
-					* _5_ projects during semester
-				</section>
-
-
-				<section data-markdown id="goal">
-					## The Goal is Clear
-
-					> learn to code
-
-					(including thinking, problem solving, having fun, but **NO CHEATING!**)
-				</section>
-
-
-				<section data-markdown id="data-science-process">
-					## Data Science Process
-
-					![Data Science Process](images/data.analytics.process.png)
-				</section>
-
-
-				<section data-markdown id="acquiring-data">
-					## During Last 5 Years
-
-					* process of heavy **data acrquiring**
-					* development of test platform _Arena_
-					* application of **TDD** and **CI** with [Git](https://git-scm.com/) and [Gitlab](https://about.gitlab.com/)
-					* over than _200.000_ entries
-				</section>
-
-
-				<section data-markdown id="data-interpretation">
-					## Let the Data Talk
-
-					* (real time) data **analysis** and **interpretation**
-						* when the students work
-						* what is the [score distribution](https://arena.kpi.fei.tuke.sk/arena/courses/prog.2018) during the time
-						* what is the [pattern of they behavior](https://arena.kpi.fei.tuke.sk/arena/courses/prog.2018)
-					* setting **predictions** and **hypothesis**
-						* according to the work of student during the semester, what will be his grade on the final exam?
-						* is there corelation between the qualithy of teacher and his students?
-				</section>
-
-
-				<section data-markdown id="missing-part">
-					## The Missing Part
-
-					* automatic detection of plagiarism in students source codes :-(
-						* we have the tools ([JPlag](https://github.com/jplag))
-						* we have the [honor code](http://it4kt.cnl.sk/c/pvjc/honor.code.html)
-						* simple rule to follow: _Don't copy/use foreign code and don't allow anyone to copy your code._
-						* it's easy to interpret/work with the data
-					* we are too ~~lazy~~ busy to implement the service
-				</section>
-
-
-				<section data-markdown id="results-1" data-transition="none">
-					## The Results
-
-					| Assignment        | Min. Level |  Students  | %  |
-					| ------------------|:----------:| ----------:|:--:|
-					| K                 | 80%        |  548/47/77 | 14 |
-				</section>
-
-				<section data-markdown id="results-2" data-transition="none">
-					## The Results
-
-					| Assignment        | Min. Level |  Students  | %  |
-					| ------------------|:----------:| ----------:|:--:|
-					| K                 | 80%        |  548/47/77 | 14 |
-					| Top Secret        | 80%        | 504/102/86 | 17 |
-				</section>
-
-				<section data-markdown id="results-3" data-transition="none">
-					## The Results
-
-					| Assignment        | Min. Level |  Students  | %  |
-					| ------------------|:----------:| ----------:|:--:|
-					| K                 | 80%        |  548/47/77 | 14 |
-					| Top Secret        | 80%        | 504/102/86 | 17 |
-					| Problems to Solve | 70%        | 449/150/51 | 11 |
-				</section>
-
-
-				<section data-markdown id="results-4" data-transition="none">
-					## The Results
-
-					| Assignment        | Min. Level |  Students  | %  |
-					| ------------------|:----------:| ----------:|:--:|
-					| K                 | 80%        |  548/47/77 | 14 |
-					| Top Secret        | 80%        | 504/102/86 | 17 |
-					| Problems to Solve | 70%        | 449/150/51 | 11 |
-					| Adventure         | 60%        | 166/434/14 |  8 |
-				</section>
-
-				<section data-markdown id="results-5" data-transition="none">
-					## The Results
-
-					| Assignment        | Min. Level |  Students  | %  |
-					| ------------------|:----------:| ----------:|:--:|
-					| K                 | 80%        |  548/47/77 | 14 |
-					| Top Secret        | 80%        | 504/102/86 | 17 |
-					| Problems to Solve | 70%        | 449/150/51 | 11 |
-					| Adventure         | 60%        | 166/434/14 |  8 |
-					| Mastermind        | --         | -/-/-      |  - |
-				</section>
-
-
-
-				<section data-markdown id="distribution">
-					## Distribution of Plagiarism Pairs in K
-
-					```
-					90% - 100% 141   #
-					80% - 90%  37    #
-					70% - 80%  87    #
-					60% - 70%  437   #
-					50% - 60%  1088  #
-					40% - 50%  3811  #####
-					30% - 40%  11657 ################
-					20% - 30%  27935 #######################################
-					10% - 20%  52464 ###########################################################################
-					 0% - 10%  52221 ##########################################################################
-					```
-
-				</section>
-
-
-				<section data-markdown id="results-interpretation">
-					## Results Interpretation
-
-					* 5 years ago...
-						* ~~confessions~~ essays about the topic _"Why I cheated?"_
-						* funny stories behind
-					* surveys
-						* most of the respondents strongly agree...
-						* ...except the situation, if it is about them (personally)
-					* habbits from high school or from previous semester?
-				</section>
-
-
-                <section data-markdown>
-					## Questions?
-                </section>
-
-
-                <section data-markdown>
-				    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/http://bit.ly/2KkkwaK&size=300x300)
-                    
-                    (**http://bit.ly/2KkkwaK**)
-				</section>
-
-			</div>
-
-		</div>
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
-
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
-
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
-					{ src: '../reveal.js/plugin/notes/notes.js', async: true }
-				]
-			});
-		</script>
-	</body>
-</html>
+    * automatic detection of plagiarism in students source codes :-(
+        * we have the tools ([JPlag](https://github.com/jplag))
+        * we have the [honor code](http://it4kt.cnl.sk/c/pvjc/honor.code.html)
+        * simple rule to follow: _Don't copy/use foreign code and don't allow anyone to copy your code._
+        * it's easy to interpret/work with the data
+    * we are too ~~lazy~~ busy to implement the service
+</section>
+
+
+<section data-markdown id="results-1" data-transition="none">
+    ## The Results
+
+    | Assignment        | Min. Level |  Students  | %  |
+    | ------------------|:----------:| ----------:|:--:|
+    | K                 | 80%        |  548/47/77 | 14 |
+</section>
+
+<section data-markdown id="results-2" data-transition="none">
+    ## The Results
+
+    | Assignment        | Min. Level |  Students  | %  |
+    | ------------------|:----------:| ----------:|:--:|
+    | K                 | 80%        |  548/47/77 | 14 |
+    | Top Secret        | 80%        | 504/102/86 | 17 |
+</section>
+
+<section data-markdown id="results-3" data-transition="none">
+    ## The Results
+
+    | Assignment        | Min. Level |  Students  | %  |
+    | ------------------|:----------:| ----------:|:--:|
+    | K                 | 80%        |  548/47/77 | 14 |
+    | Top Secret        | 80%        | 504/102/86 | 17 |
+    | Problems to Solve | 70%        | 449/150/51 | 11 |
+</section>
+
+
+<section data-markdown id="results-4" data-transition="none">
+    ## The Results
+
+    | Assignment        | Min. Level |  Students  | %  |
+    | ------------------|:----------:| ----------:|:--:|
+    | K                 | 80%        |  548/47/77 | 14 |
+    | Top Secret        | 80%        | 504/102/86 | 17 |
+    | Problems to Solve | 70%        | 449/150/51 | 11 |
+    | Adventure         | 60%        | 166/434/14 |  8 |
+</section>
+
+<section data-markdown id="results-5" data-transition="none">
+    ## The Results
+
+    | Assignment        | Min. Level |  Students  | %  |
+    | ------------------|:----------:| ----------:|:--:|
+    | K                 | 80%        |  548/47/77 | 14 |
+    | Top Secret        | 80%        | 504/102/86 | 17 |
+    | Problems to Solve | 70%        | 449/150/51 | 11 |
+    | Adventure         | 60%        | 166/434/14 |  8 |
+    | Mastermind        | --         | -/-/-      |  - |
+</section>
+
+
+
+<section data-markdown id="distribution">
+    ## Distribution of Plagiarism Pairs in K
+
+    ```
+    90% - 100% 141   #
+    80% - 90%  37    #
+    70% - 80%  87    #
+    60% - 70%  437   #
+    50% - 60%  1088  #
+    40% - 50%  3811  #####
+    30% - 40%  11657 ################
+    20% - 30%  27935 #######################################
+    10% - 20%  52464 ###########################################################################
+     0% - 10%  52221 ##########################################################################
+    ```
+
+</section>
+
+
+<section data-markdown id="results-interpretation">
+    ## Results Interpretation
+
+    * 5 years ago...
+        * ~~confessions~~ essays about the topic _"Why I cheated?"_
+        * funny stories behind
+    * surveys
+        * most of the respondents strongly agree...
+        * ...except the situation, if it is about them (personally)
+    * habbits from high school or from previous semester?
+</section>
+
+
+<section data-markdown>
+    ## Questions?
+</section>
+
+
+{% include qr.html %}

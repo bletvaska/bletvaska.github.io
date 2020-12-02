@@ -1,5 +1,6 @@
 ---
 title: "PyWeek 26: Herným vývojárom ľahko a rýchlo"
+subtitle: Herným vývojárom ľahko a rýchlo
 layout: slide
 duration: 55
 theme: night
@@ -8,14 +9,20 @@ date: 2018-10-21
 event:
     title: OSS Víkend 
     url: https://ossvikend.sk/index.html
+description: |
+    PyWeek je týždňová súťaž pre všetkých, ktorí si chcú zmerať svoje sily a nápady vo vývoji počítačových hier v jazyku Python. Má za sebou už 12-ročnú históriu, ale samotný formát sa odvtedy veľmi nezmenil. Počas tohto seminára vám ukážem, ako sa dá príspevok do súťaže napísať v knižnici Pygame Zero, ktorá je pre rýchly vývoj hier ideálna. Seminár však pojmem pedagogicky a druhou cieľovou skupinou budú učitelia, ktorým chcem ukázať, ako sa dá vyučovať objektové programovanie v Pythone tvorbou hier.
+author:
+    email: mirek@cnl.sk
+    name: Miroslav Biňas
+bitly: https://bit.ly/2S29QSg
+video: https://youtu.be/4PFkBpZrJQs
 ---
 
+<section id="opening" data-markdown>
+## {{ page.title }}
+#### {{ page.subtitle }}
 
-<section data-markdown id="title">
-    # PyWeek 26
-    #### Herným vývojárom ľahko a rýchlo
-
-    miroslav.binas@tuke.sk / [**{{ page.event.title }}**]({{ page.event.url }})
+{{ page.author.email}} / [**{{ page.event.title }}**]({{ page.event.url }})
 </section>
 
 
@@ -168,10 +175,10 @@ event:
 </section>
 
 
-<section data-markdown>
-    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data=http://bit.ly/2S29QSgh&size=300x300)
+<section data-markdown id="qr-code">
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
 
-    (**http://bit.ly/2S29QSg**)
+    (**{{ page.bitly }}**)
 </section>
 
 

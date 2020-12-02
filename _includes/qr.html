@@ -1,0 +1,7 @@
+{% if page.bitly %}
+<section data-markdown id="qr-code">
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
+
+    (**{{ page.bitly }}**)
+</section>
+{% endif %}

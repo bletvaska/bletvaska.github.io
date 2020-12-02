@@ -1,0 +1,12 @@
+<div>
+    <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+
+    <p>{{ item.description }}</p>
+
+    <i class="far fa-calendar-alt"></i> {{ item.date | date: "%d.%m.%Y" }}
+    - <a href="{{ item.event.url }}">{{ item.event.title }}</a>
+
+    {% if item.video %}
+    <a href="{{ item.video }}"><i class="fab fa-youtube"></i></a>
+    {% endif %}
+</div>

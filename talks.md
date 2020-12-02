@@ -6,6 +6,9 @@ sidebar_link: true
 
 # My Talks
 
+List of my latest talks. Mostly in Slovak language.
+
+
 {% assign year = 9999 %}
 {% assign slides = site.pages | where: "layout", "slide" | where: "categories", "talk" | sort: "date" | reverse  %}
 
@@ -17,11 +20,7 @@ sidebar_link: true
 ## {{ year }}
 {% endif %}
 
-<div>
-<b><a href="{{ item.url }}">{{ item.title }}</a></b> (<a href="{{ item.event.url }}">{{ item.event.title }}</a>) 
-
-<p>{{ item.description }}</p>
-</div>
+{% include talk.html item=item %}
 
 {% endfor %}
 

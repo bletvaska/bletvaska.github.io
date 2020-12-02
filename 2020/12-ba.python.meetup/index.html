@@ -14,6 +14,7 @@ author:
 event:
     title: 41. Bratislavský Python Meetup
     url: https://www.meetup.com/pyconsk/events/274709044/
+video: https://youtu.be/6SYP-XXZyTI
 ---
 <style>
 #arkanoid-game {
@@ -33,12 +34,7 @@ event:
 </style>
 
 
-
-<section id="opening" data-markdown>
-## {{ page.title }}
-
-{{ page.author.email}} / [**{{ page.event.title }}**]({{ page.event.url }})
-</section>
+{% include first.slide.html %}
 
 
 <section id="hrate-sa" data-markdown>
@@ -240,11 +236,7 @@ Note:
 </section>
 
 
-<section data-markdown id="qr-code">
-    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
-
-    (**{{ page.bitly }}**)
-</section>
+{% include qr.html %}
 
 
 <script src="./libs/p5.min.js"></script>
