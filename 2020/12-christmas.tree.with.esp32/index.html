@@ -33,7 +33,6 @@ bitly: http://bit.ly/2KtBJUa
 * riešenie: ESP8266 + Arduino IDE + HTTP server + PHP stránka
 * článok: [Technické zákulisie interaktívneho vianočného stromčeka](https://www.sos.sk/articles/sos-supplier-of-solution/technicke-zakulisie-interaktivneho-vianocneho-stromceka-2119) (15.2.2018)
 * Namakaný deň 2018: [Ako pripojiť vianočný stromček na internet](http://www.namakanyden.sk/2018/#main-track) ([video](https://archive.tp.cvtisr.sk/?31959103))
-
 </section>
 
 
@@ -84,6 +83,27 @@ bitly: http://bit.ly/2KtBJUa
         Your browser does not support the video tag.
     </video>
     </a>
+</section>
+
+
+<section data-markdown id="ws2812">
+## NeoPixel je WS2812
+
+![WS2812](images/ws2812.jpg)
+</section>
+
+<section data-markdown id="ws2812-module" data-background="#AAE0E6">
+## Modul WS2812B
+![WS2812B Module](images/ws2812b.module.png)
+
+Notes:
+* https://freesvg.org/ws2812b-led-strip
+</section>
+
+
+<section data-markdown id="ws2812-led-strip" data-background="#FB9191">
+## LED pásik s WS2812B
+![WS2812B Led Strip](images/ws2812b.led.strip.png)
 </section>
 
 
@@ -348,8 +368,6 @@ def cycle(pixels, r, g, b, wait):
 </section> 
 
 
-
-
 <section data-markdown>
 ## Otázky?
 </section>
@@ -389,6 +407,8 @@ def cycle(pixels, r, g, b, wait):
 * [Controlling NeoPixels](https://docs.micropython.org/en/latest/esp8266/tutorial/neopixel.html) - uPython dokumentácia pre modul `neopixel`
 
 * [MicroPython: WS2812B Addressable RGB LEDs with ESP32 and ESP8266](https://randomnerdtutorials.com/micropython-ws2812b-addressable-rgb-leds-neopixel-esp32-esp8266/)
+
+* [Datasheet](http://www.world-semi.com/solution/list-4-1.html) - pre rozličné verzie WS2812
 </section>
 
 
