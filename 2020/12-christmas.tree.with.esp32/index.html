@@ -15,7 +15,7 @@ authors:
 event:
     title: Namakaný deň - Webináre
     url: http://www.namakanyden.sk/webinare/
-bitly: 
+bitly: http://bit.ly/2KtBJUa
 ---
 
 {% include first.slide.html %}
@@ -36,6 +36,20 @@ bitly:
 
 </section>
 
+
+<section data-markdown id="esp32" data-background="#CA0B02">
+[![ESP32](images/esp32.jpg)](https://www.espressif.com/en/products/socs/esp32)
+</section>
+
+
+<section data-markdown id="micropython" data-background="#FFFFFF">
+[![MicroPython](images/logo-micropython.jpg)](http://micropython.org)
+</section>
+
+
+<section data-markdown id="mqtt">
+[![MQTT](images/logo-mqtt.svg)](https://mqtt.org)
+</section>
 
 
 <section data-markdown id="neopixel">
@@ -275,13 +289,42 @@ while True:
 </section>
 
 
-<section data-markdown id="python-generators" data-background="#AAE0E6">
-[![Python Generators](images/python.generators.webp)](https://realpython.com/introduction-to-python-generators/)
+<section data-markdown id="on-message-callback">
+## `on_message() Callback`
+
+```python
+def on_message(topic, message):
+    print('>> {}: {}'.format(topic, message))
+    
+    if message == b'cycle':
+        cycle(np, 255, 0, 0, 100)
+    elif message == b'bounce':
+        bounce(np, 0, 255, 0, 100)
+    elif message == b'rainbow':
+        rainbow_cycle(np, 100)
+    else:
+        print('>> Error: unknown effect {}!'.format(message))
+```
+</section>
+
+
+<section data-markdown id="houston-we-have-a-problem">
+## Houston, we have a problem
+</section>
+
+
+<section data-markdown id="generators">
+## Generátory
 </section>
 
 
 <section data-markdown id="python-generators-illustration" data-background="#FB9191">
 ![How Generators Work?](images/tape.png)
+</section>
+
+
+<section data-markdown id="python-generators" data-background="#AAE0E6">
+[![Python Generators](images/python.generators.webp)](https://realpython.com/introduction-to-python-generators/)
 </section>
 
 
@@ -292,14 +335,15 @@ while True:
 def cycle(pixels, r, g, b, wait):
     clear(pixels)
 
-    for pos in range(pixels.n):
-        pixels[pos] = (r, g, b)
-        pixels.write()
-        sleep_ms(wait)
-        pixels[pos] = (0, 0, 0)
-        yield
-    else:
-        pixels.write()
+    while True:
+        for pos in range(pixels.n):
+            pixels[pos] = (r, g, b)
+            pixels.write()
+            sleep_ms(wait)
+            pixels[pos] = (0, 0, 0)
+            yield
+        else:
+            pixels.write()
 ```
 </section> 
 
