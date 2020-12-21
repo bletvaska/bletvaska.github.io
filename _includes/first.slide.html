@@ -4,6 +4,17 @@
 #### {{ page.subtitle }}
 {% endif %}
 
-{{ page.author.email}} / [**{{ page.event.title }}**]({{ page.event.url }})
+
+{% if page.authors.size == 1 %}
+{% if page.authors[0].url -%}
+[{{ page.authors[0].name }}]({{ page.authors[0].url }})
+{%- else %}
+{{ page.authors[0].name }}
+{%- endif %}
+{% else %}
+{{ page.authors.size }}
+{% endif -%}
+
+/ [**{{ page.event.title }}**]({{ page.event.url }})
 </section>
 

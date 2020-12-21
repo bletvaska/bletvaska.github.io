@@ -1,0 +1,365 @@
+---
+title: Vianočné svetielka
+subtitle: alebo ako ovládať vianočné svetlá na diaľku cez MQTT s ESP32
+duration: 60
+date: 2020-12-22
+layout: slide
+categories: talk
+theme: night
+description: |
+    Na tomto webinári si ukážeme, ako spraviť moderný vianočný stromček v duchu DIY, teda - urob si sám. Náš vianočný stromček bude vybavený svetlami NeoPixel a všetky efekty napísané v jazyku MicroPython bude ovládať mikrokontrolér ESP32. A aby to nebolo málo, vyrobíme k tomu namakanú webovú stránku, z ktorej si budete môcť jednotlivé efekty vyberať. To všetko so živým vysielaním a diaľkovou komunikáciou pomocou protokolu MQTT.
+authors:
+    - name: mirek
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+event:
+    title: Namakaný deň - Webináre
+    url: http://www.namakanyden.sk/webinare/
+bitly: 
+---
+
+{% include first.slide.html %}
+
+
+<section data-markdown id="motivation">
+## Motivácia
+</section>
+
+
+<section data-markdown id="matus-copik">
+## Interaktívny vianočný stromček v SOS
+
+* autor: Matúš Čopík
+* riešenie: ESP8266 + Arduino IDE + HTTP server + PHP stránka
+* článok: [Technické zákulisie interaktívneho vianočného stromčeka](https://www.sos.sk/articles/sos-supplier-of-solution/technicke-zakulisie-interaktivneho-vianocneho-stromceka-2119) (15.2.2018)
+* Namakaný deň 2018: [Ako pripojiť vianočný stromček na internet](http://www.namakanyden.sk/2018/#main-track) ([video](https://archive.tp.cvtisr.sk/?31959103))
+
+</section>
+
+
+
+<section data-markdown id="neopixel">
+## NeoPixel
+</section>
+
+
+<section id="neopixel-strip" data-background="#030105">
+    <a href="https://www.adafruit.com/category/168">
+    <video width="50%" autoplay preload="auto" muted loop poster="https://cdn-shop.adafruit.com/product-videos/320x240/2867-07.jpg">
+        <source src="https://cdn-shop.adafruit.com/product-videos/320x240/2867-07.mp4">
+        Your browser does not support the video tag.
+    </video>
+    </a>
+</section>
+
+
+<section id="neopixel-ring" data-background="#2E2A38">
+    <a href="https://www.adafruit.com/category/168">
+    <video width="50%" autoplay preload="auto" muted loop poster="https://cdn-shop.adafruit.com/product-videos/320x240/2862-01.jpg">
+        <source src="https://cdn-shop.adafruit.com/product-videos/320x240/2862-01.mp4">
+        Your browser does not support the video tag.
+    </video>
+    </a>
+</section>
+
+
+<section id="neopixel-matrix" data-background="#020003">
+    <a href="https://www.adafruit.com/category/168">
+    <video autoplay width="50%" preload="auto" muted loop poster="https://cdn-shop.adafruit.com/product-videos/320x240/2612-03.jpg">
+        <source src="https://cdn-shop.adafruit.com/product-videos/320x240/2612-03.mp4">
+        Your browser does not support the video tag.
+    </video>
+    </a>
+</section>
+
+
+<section id="neopixel-and-micropython" data-markdown>
+## NeoPixel a uPython
+
+* modul [`neopixel`](https://docs.micropython.org/en/latest/esp8266/tutorial/neopixel.html)
+    * obsahuje triedu `NeoPixel`
+* inicializácia:
+
+  ```python
+  from machine import Pin
+  from neopixel import NeoPixel
+
+  np = NeoPixel(Pin(12), 50)
+  ```
+</section>
+
+
+<section id="controlling-individual-pixels" data-markdown data-background="white" class="theme-white">
+## Ovládanie pixelov
+
+![Controlling Individual Pixels](images/control.leds.png)
+</section>
+
+
+<section id="controlling-individual-pixels-code" data-markdown>
+```python
+from machine import Pin
+from neopixel import NeoPixel
+
+np = NeoPixel(Pin(12), 50)
+
+np[0] = (255, 0, 0)             # prvy pixel
+np[3] = (125, 204, 223)
+np[7] = (120, 153, 23)
+np[10] = (255, 0, 153)
+
+np[-1] = (0, 0, 255)            # posledny pixel
+np[np.n // 2] = (0, 255, 0)     # prostredny pixel
+
+np.write()
+```
+</section>
+
+
+<section id="lighting-effects" data-markdown>
+## Svetelné efekty
+</section>
+
+
+<section id="clear-all-pixels" data-markdown data-background="white" class="theme-white">
+## Zmazanie všetkých pixelov
+
+![Clear All Pixels](images/effect-clear.png)
+</section>
+
+
+<section id="clear-all-pixels-code" data-markdown>
+```python
+def clear(pixels):
+    for i in range(pixels.n):
+        pixels[i] = (0, 0, 0)
+    pixels.write()
+```
+</section>
+
+
+<section id="set-color-to-all-pixels" data-markdown data-background="white" class="theme-white">
+## Nastavenie všetkých pixelov na jednu farbu
+
+![Set All Pixels to the Same Color](images/effect-set.color.png)
+</section>
+
+
+<section id="set-color-to-all-pixels-code" data-markdown>
+```python
+def set_color(pixels, r, g, b):
+    for i in range(pixels.n):
+        pixels[i] = (r, g, b)
+    pixels.write()
+```
+</section>
+
+
+<section id="cycle-bounce" data-markdown data-background="white" class="theme-white">
+## Cycle efekt
+
+![Cycle Effect](images/effect-cycle.png)
+</section>
+
+
+<section id="effect-cycle-code" data-markdown>
+```python
+def cycle(pixels, r, g, b, wait):
+    clear(pixels)
+
+    for pos in range(pixels.n):
+        pixels[pos] = (r, g, b)
+        pixels.write()
+        sleep_ms(wait)
+        pixels[pos] = (0, 0, 0)
+    else:
+        pixels.write()
+```
+</section>
+
+
+<section id="effect-bounce" data-markdown data-background="white" class="theme-white">
+## Bounce efekt
+
+![Bounce Effect](images/effect-bounce.png)
+</section>
+
+
+<section id="effect-bounce-code" data-markdown>
+```python
+def bounce(pixels, r, g, b, wait):
+    set_color(pixels, r, g, b)
+
+    for pos in range(pixels.n):
+        pixels[pos] = (0, 0, 0)
+        pixels.write()
+        sleep_ms(wait // 2)
+        pixels[pos] = (r, g, b)
+        pixels.write()
+        sleep_ms(wait // 2)
+
+    for pos in range(pixels.n - 1, -1, -1):
+        pixels[pos] = (0, 0, 0)
+        pixels.write()
+        sleep_ms(wait // 2)
+        pixels[pos] = (r, g, b)
+        pixels.write()
+        sleep_ms(wait // 2)
+```
+</section>
+
+
+<section data-markdown>
+```python
+def bounce(pixels, r, g, b, wait):
+    set_color(pixels, r, g, b)
+
+    for i in range(2 * pixels.n - 1):
+        if (i // pixels.n) % 2 == 0:
+            pos = i % pixels.n
+        else:
+            pos = pixels.n - 1 - (i % pixels.n) - 1
+
+        pixels[pos] = (0, 0, 0)
+        pixels.write()
+        sleep_ms(wait)
+        pixels[pos] = (r, g, b)
+    else:
+        pixels.write()
+```
+</section>
+
+
+<section data-markdown id="and-now-for-something-completely-different">
+## And Now for Something Completely Different
+</section>
+
+
+<section data-markdown id="remote-control-with-mqtt">
+## Ďiaľkové ovládanie
+
+cez *Internet* pomocou *MQTT*
+</section>
+
+
+<section data-markdown id="mqtt-in-micropython">
+## MQTT a uPython
+
+* obsahuje moduly [`umqtt.simple`](https://pypi.org/project/micropython-umqtt.simple/) a [`umqtt.robust`](https://pypi.org/project/micropython-umqtt.robust/) vo verzii *1.0*
+    * existujú aj novšie verzie *2.0*
+* použijeme verejný broker [`broker.hivemq.com`](http://www.mqtt-dashboard.com)
+    * online [MQTT Websocket client](http://www.hivemq.com/demos/websocket-client/)
+* topic pre správy: `iotlab/things/stromcek`
+</section>
+
+
+<section data-markdown id="connecting">
+## Pripojenie
+
+```python
+from umqtt.robust import MQTTClient
+
+
+# connect to WiFi
+do_connect('ssid', 'password')
+
+# connect to MQTT broker
+client = MQTTClient('client-id', 'broker-ip', 1883)
+client.set_callback(on_message)
+client.connect()
+client.subscribe('iotlab/things/stromcek')
+
+while True:
+    client.wait_msg()
+```
+</section>
+
+
+<section data-markdown id="python-generators" data-background="#AAE0E6">
+[![Python Generators](images/python.generators.webp)](https://realpython.com/introduction-to-python-generators/)
+</section>
+
+
+<section data-markdown id="python-generators-illustration" data-background="#FB9191">
+![How Generators Work?](images/tape.png)
+</section>
+
+
+<section data-markdown id="generator-example">
+## Cycle ako Generátor
+
+```python
+def cycle(pixels, r, g, b, wait):
+    clear(pixels)
+
+    for pos in range(pixels.n):
+        pixels[pos] = (r, g, b)
+        pixels.write()
+        sleep_ms(wait)
+        pixels[pos] = (0, 0, 0)
+        yield
+    else:
+        pixels.write()
+```
+</section> 
+
+
+
+
+<section data-markdown>
+## Otázky?
+</section>
+
+
+<section id="newsletter">
+    <h2>Namakaný Newsletter</h2>
+
+    <p>
+    Ak nechcete, aby vám ušli akcie organizované makačmi okolo <a href="http://namakanyden.sk/">Namakaného dňa</a>, odoberajte newsletter. Vždy vám dáme vedieť, keď budeme niečo namakané organizovať.
+    </p>
+
+    <!-- Begin Mailchimp Signup Form -->
+    <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+
+    <div id="mc_embed_signup">
+        <form action="https://namakanyden.us19.list-manage.com/subscribe/post?u=2be0bc7fd4b16338d9a99b465&amp;id=41a1b70536"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+
+            <div id="mc_embed_signup_scroll">
+                <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Prihláste sa na odoberanie noviniek emailom" required>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_2be0bc7fd4b16338d9a99b465_41a1b70536" tabindex="-1" value=""></div>
+                <div>
+                    <input type="submit" value="Prihlásiť" name="subscribe" id="mc-embedded-subscribe" class="button">
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--End mc_embed_signup-->
+</section>
+
+
+<section data-markdown id="resources">
+## Ďalšie zdroje
+
+* [Controlling NeoPixels](https://docs.micropython.org/en/latest/esp8266/tutorial/neopixel.html) - uPython dokumentácia pre modul `neopixel`
+
+* [MicroPython: WS2812B Addressable RGB LEDs with ESP32 and ESP8266](https://randomnerdtutorials.com/micropython-ws2812b-addressable-rgb-leds-neopixel-esp32-esp8266/)
+</section>
+
+
+<section data-markdown id="thanks-to">
+## Poďakovanie
+
+* **Matúš Čopík** - za nápad, podnety, svetielka a pomoc pri realizácii
+* **Bianka Rujáková** - za mocnú podobu webovej stránky
+</section>
+
+
+{% include qr.html %}
+
+<style>
+.theme-white h2 {
+    color: black;
+}
+</style>
