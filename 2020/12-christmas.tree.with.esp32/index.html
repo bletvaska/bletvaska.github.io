@@ -6,6 +6,7 @@ date: 2020-12-22
 layout: slide
 categories: talk
 theme: night
+language: slovak
 description: |
     Na tomto webinári si ukážeme, ako spraviť moderný vianočný stromček v duchu DIY, teda - urob si sám. Náš vianočný stromček bude vybavený svetlami NeoPixel a všetky efekty napísané v jazyku MicroPython bude ovládať mikrokontrolér ESP32. A aby to nebolo málo, vyrobíme k tomu namakanú webovú stránku, z ktorej si budete môcť jednotlivé efekty vyberať. To všetko so živým vysielaním a diaľkovou komunikáciou pomocou protokolu MQTT.
 authors:
@@ -374,6 +375,41 @@ def cycle(pixels, r, g, b, wait):
             pixels.write()
 ```
 </section> 
+
+
+<section data-markdown id="main-loop-update">
+## Aktualizácia
+
+* zo všetkých efektov spraviť generátory
+    * nekonečná slučka a `yield`
+* aktualizovať `on_message()`
+    * globálna premenná `animation`
+    * priradiť jej príslušnú animáciu
+* upraviť hlavnú slučku
+    ```python
+    global animation
+    animation = bounce(np, 255, 0, 0, 100)
+
+    while True:
+        client.check_msg()
+        next(animation)
+    ```
+</section>
+
+
+<section data-markdown id="warning" data-background="#fff">
+![Warning](images/warning.png)
+</section>
+
+
+<section data-markdown id="web-ui">
+## Webové rozhranie
+</section>
+
+
+<section data-markdown id="live-streaming">
+## Živý stream
+</section>
 
 
 <section data-markdown>
