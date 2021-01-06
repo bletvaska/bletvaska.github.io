@@ -17,11 +17,20 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<link rel="stylesheet" href="/assets/css/reveal.css">
-    <link rel="stylesheet" href="/assets/css/theme/{{ page.theme }}.css" id="theme">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.min.css" 
+        rel="stylesheet" 
+        integrity="sha512-zu0eodDPCBAZf1vnIgwZ6qchMBt1xqgGkS9vBjVmunoH8pU7cc9OQKBiSQCclpvqySupy9Y1pLZc87VB40G4Sw==" 
+        crossorigin="anonymous" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/theme/{{ page.theme }}.min.css" 
+        rel="stylesheet" 
+        integrity="sha512-kUvEY90IMFRvVVJhTFb0Ad49g0zu+7mNFwDmy4SKoOQNfJVU5KSvmly0vlrFVuo+yr4UqQ9fWSP2h3q4eCx7hw==" 
+        crossorigin="anonymous" />
 
 	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="/assets/lib/css/zenburn.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/highlight/zenburn.min.css" 
+        rel="stylesheet" 
+        integrity="sha512-JPxjD2t82edI35nXydY/erE9jVPpqxEJ++6nYEoZEpX2TRsmp2FpZuQqZa+wBCen5U16QZOkMadGXHCfp+tUdg==" 
+        crossorigin="anonymous" />
 
     {% if page.styles.size > 0 %}
     <!-- custom styles -->
@@ -54,17 +63,21 @@
 </head>
 
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" 
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
+        crossorigin="anonymous">
+    </script>
+	<script src="/assets/lib/js/head.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.min.js" 
+        integrity="sha512-Xu/cezKABTI81MGnaBm64vdiS7XkttHeYGOgr2Mdga0bTplSBGongLq2lhK2HwL79wefKM0u4uTCLD0ha1sRzQ==" 
+        crossorigin="anonymous">
+    </script>
 
 	<div class="reveal">
-
 		<div class="slides">
 {{ content }}
 		</div>
 	</div>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="/assets/lib/js/head.min.js"></script>
-	<script src="/assets/js/reveal.js"></script>
 
 	<script>
 		// More info https://github.com/hakimel/reveal.js#configuration

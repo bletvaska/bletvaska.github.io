@@ -1,0 +1,55 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js" 
+    integrity="sha512-lteuRD+aUENrZPTXWFRPTBcDDxIGWe5uu0apPEn+3ZKYDwDaEErIK9rvR0QzUGmUQ55KFE2RqGTVoZsKctGMVw==" 
+    crossorigin="anonymous"></script>
+
+<script>
+window.addEventListener('load', function(ev){
+    let message = '{{ include.text }}';
+
+    $("#{{ include.id }}").countdown("{{ include.deadline }}", function (event) {
+        if (event.elapsed) {
+            $(this).html("Udalosť už prebehla.");
+        } else {
+            // start with message
+            {% if page.layout != "slides" %}
+                if(message.length == 0){
+                    message = "Do odovzdania zostáva <br/>";
+                }
+            {% endif %}
+
+            $(this).html(message);
+
+            let span = $('<span>').css({
+                "font-family": "courier",
+                "font-weight": "bolder",
+            });
+
+            // format output
+            if(event.offset.totalDays == 0){
+                span.text(
+                    event.strftime('%H:%M:%S')
+                );
+            }else if(event.offset.totalDays == 1){
+                span.text(
+                    event.strftime('%D deň %H:%M:%S')
+                );
+            } else if(event.offset.totalDays >= 2 && event.offset.totalDays <= 4){
+                span.text(
+                    event.strftime('%D dni %H:%M:%S')
+                );
+            } else {
+                span.text(
+                    event.strftime('%D dní %H:%M:%S')
+                );
+            }
+
+            // append time to message
+            $(this).append(span);
+        }
+
+        $(this).css({
+            "text-align" : "center"
+        });
+    });
+});
+</script>
