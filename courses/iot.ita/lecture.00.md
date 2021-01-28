@@ -60,10 +60,15 @@ Je na vás, pre aký spôsob používania sa rozhodnete. Zo skúseností však v
 
 4. Kliknite na tlačidlo *Flash from file* a vyberte stiahnutý súbor v kroku 2 s obrazom operačného systému *Raspberry Pi OS*.
 
+   ![Etcher: Výber obrazu operačného systému](images/etcher-select.image.png)
+
 5. Pokiaľ aplikácia nevyberie automaticky váš USB kľúč, kliknite na tlačidlo *Select target* a vyberte ho ručne.
+
+   ![Etcher: Výber cieľa inštalácie](images/etcher-select.target.png)
 
 6. Nakoniec kliknite na tlačidlo *Flash!*, čím sa začne systém nahrávať na váš USB kľúč. Táto operácia bude trvať niekoľko minút a po jej skončení vás na to aplikácia upozorní.
 
+   ![Etcher: Spustenie nahrávania](images/etcher-flash.png)
 
 ### Zavedenie systému z vášho USB kľúča
 
@@ -109,9 +114,14 @@ Po opätovnom spustení systému bude jeho prostredie lokalizované.
 
 V rámci školenia sa hráme aj s elektronikou a programujeme aj mikrokontroléry. Tým, že teraz nebudeme spolu v labáku, neviem vám poskytnúť vlastné pomôcky. Pre absolvovanie kurzu ich však nebudete potrebovať, pretože sa bez nich nakoniec zaobídeme. 
 
-V prípade, že ale máte záujem si doma niečo vyskúšať sami, odporúčam si kúpiť:
+V prípade, že ale máte záujem si doma niečo vyskúšať sami, odporúčam si kúpiť mikrokontrolér ESP32, ideálne *ESP-WROOM-32* (okolo 10 Eur).
 
-* mikrokontrolér ESP32
+![ESP-WROOM-32](images/esp-wroom-32.jpg)
+
+**Poznámka:** Na školení o *IoT* nebudeme používať prototypovacie dosky *Arduino*, pretože sa nedajú pripojiť do internetu.
+
+Okrem samotného mikrokontroléra je dobré mať aspoň základnú sadu vecí, ako:
+
 * kontaktné pole
 * sadu prepojovacích káblov MALE-FEMALE a MALE-MALE (čím viac tým lepšie, FEMALE-FEMALE asi používať nebudeme)
 * LED diódy rozličných farieb (aspoň po kuse červená, zelená, orandžová)
@@ -119,3 +129,14 @@ V prípade, že ale máte záujem si doma niečo vyskúšať sami, odporúčam s
 * tlačítka
 * foto rezistor
 * senzor teploty a vlhkosti (ideálne DHT11/22)
+
+Kupovať to však po kusoch dá zabrať a ak to myslíte vážne, skôr vám odporučam kúpiť si nejakú sadu, ktorá to všetko obsahuje. Výhodou je už len fakt, že všetky súčiastky budete mať rovno v kufríku/krabici. Nie je však veľa sád, ktoré obsahujú mikrokontrolér *ESP32*. Tých, ktoré však majú *Arduino* je kopec. Svojim študentom obecne odporúčam túto sadu označovanú ako *RFID Starter Kit for Arduino UNO R3* (cena okolo 30 Eur), s obsahom ktorej by sme sa hrali aj počas školenia. 
+
+![RFID Starter Kit for Arduino UNO R3](images/rfid.starter.kit.for.arduino.jpg)
+
+
+Kúpiť si ju môžete napríklad na týchto stránkach:
+
+* [Techfun.sk](https://techfun.sk/produkt/arduino-uno-basic-kit/)
+* [RLX](https://rlx.sk/sk/arduino-kit/3453-leaper-upgraded-rfid-stepper-driver-learning-kit-for-arduino-er-ak55865rf.html)
+* [Aliexpress](https://www.aliexpress.com/item/1005001653349193.html?spm=a2g0o.productlist.0.0.3c173b34qWpB0V&algo_pvid=5988b2cb-d077-4c69-9a19-064f575c1ea8&algo_expid=5988b2cb-d077-4c69-9a19-064f575c1ea8-7&btsid=2100bdf016118557452563960e7943&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_)
