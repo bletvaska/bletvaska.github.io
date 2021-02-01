@@ -133,7 +133,7 @@ Okrem samotného mikrokontroléra je dobré mať aspoň základnú sadu vecí, a
 
 * kontaktné pole
 * sadu prepojovacích káblov MALE-FEMALE a MALE-MALE (čím viac tým lepšie, FEMALE-FEMALE asi používať nebudeme)
-* LED diódy rozličných farieb (aspoň po kuse červená, zelená, orandžová)
+* LED diódy rozličných farieb (aspoň po kuse červená, zelená, oranžová)
 * sadu odporov
 * tlačítka
 * foto rezistor
