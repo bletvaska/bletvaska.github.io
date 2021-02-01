@@ -55,8 +55,10 @@ Je na vás, pre aký spôsob používania sa rozhodnete. Zo skúseností však v
 1. Zo stránky [www.balena.io/etcher](https://www.balena.io/etcher/) si stiahnite a nainštalujte nástroj *Etcher* pre váš operačný systém.
 
    **Poznámka:** Používatelia *OS Windows* majú k dispozícii dve verzie:
+
    1. Installer - Stiahnete si inštalátor aplikácie, pomocou ktorého nainštalujete *Etcher* ako súčasť vášho systému.
    2. Portable - Aplikáciu *Etcher* budete môcť spustiť bez nutnosti jej inštalovania. To je výhodné, ak napríklad nemáte admin práva v systéme.
+
    Je jedno, aký spôsob inštalácie zvolíte.
 
 2. Zo stránky [Raspberry Pi Desktop for PC and Mac](https://www.raspberrypi.org/software/raspberry-pi-desktop/) si stiahnite obraz operačného systému (veľkosť je okolo 3GB). Priamy odkaz na stiahnutie je [tu](https://downloads.raspberrypi.org/rpd_x86/images/rpd_x86-2021-01-12/2021-01-11-raspios-buster-i386.iso).
