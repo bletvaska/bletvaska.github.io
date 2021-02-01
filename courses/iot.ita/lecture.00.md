@@ -88,7 +88,9 @@ Je na vás, pre aký spôsob používania sa rozhodnete. Zo skúseností však v
 
    ![Raspberry Pi Desktop Boot Options](images/raspberry.pi.desktop-boot.png)
    
-4. Vždy systém spúšťajte s prvou voľbou `Run with persistence`. Tým pádom neprídete o svoju prácu, ktorú si uložíte, ale zostane bezpečne uložená na vašom USB disku.
+4. Vždy systém spúšťajte s prvou voľbou `Run with persistence`! Tým pádom neprídete o svoju prácu, ktorú si uložíte, pretože zostane bezpečne uložená na vašom USB disku.
+
+   **Poznámka:** Určite zo zoznamu nevyberajte možnosť inštalovať systém! Môžete si totiž preinštalovať váš existujúci systém na počítači a to naozaj nechcete ;) Ak by ste omylom túto voľbu vybrali, nemusíte sa báť - počítač len reštartujte. K spusteniu samotnej inštalácie na pevný disk nedôjde okamžite, ale až o niekoľko ďalších obrazoviek v sprievodcovi inštaláci.
 
 5. Po chvíli sa systém zavedie a vy sa ocitnete v prostredí operačného systému *Raspberry Pi OS* na vašom domácom počítači.
 
