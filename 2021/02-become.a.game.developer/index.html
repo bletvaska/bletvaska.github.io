@@ -1,0 +1,150 @@
+---
+title: Herným vývojárom za 90 minút
+description:|
+    Počítačové hry sa radi hráme, pretože pri nich vieme relaxovať, ale rovnako tak zažívať rozličné neuveriteľné dobrodružstvá s našimi avatarmi. Vieme pri nich tráviť hodiny a hodiny času a máme problém sa od nich odtrhnúť a vrátiť späť do reality. Napadlo vás však, čo asi obnáša vytvoriť takú počítačovú hru? A napadlo vás vytvoriť si vlastnú hru? A čo ak by som na vlastnú počítačovú hru zbalil spolužiačku/spolužiaka? A čo ak sa to dá zvládnuť za 90 min? Hmm... tak poďme na to!
+
+duration: 90
+date: 2020-02-12
+event:
+    title: IT čajovňa
+    url: http://itakademia.sk/
+bitly:
+categories: talk
+---
+
+{% include first.slide.html %}
+
+
+
+<section id="hrate-sa" data-markdown>
+    ## Hráte sa počítačové hry?
+</section>
+
+
+<section id="assassins-creed" data-markdown>
+    ![Assassins Creed Black Flag](images/assassins.creed.jpg)
+</section>
+
+
+<section id="tis-100" data-markdown data-background="#ebebeb">
+    ![TIS-100](images/tis.100.jpg)
+</section>
+
+
+<section id="naprogramovali-ste-hru" data-markdown>
+    ## Naprogramovali ste si vlastnú počítačovú hru?
+</section>
+
+
+<section id="pygame-zero" data-background="white">
+    <a href="https://pygame-zero.readthedocs.io/">
+        <img src="images/logo-pygamezero.svg" width="600">
+    </a>
+</section>
+
+
+<section id="pygame" data-markdown data-background="white">
+[![Pygame logo](images/logo-pygame.png)](https://www.pygame.org/news)
+</section>
+
+
+<section id="sdl" data-markdown data-background="white">
+[![SDL logo](images/logo-sdl.png)](https://www.libsdl.org/)
+
+Since 1998
+</section>
+
+
+<section id="steam" data-markdown data-background="black">
+![Steam logo](images/logo-steam.jpg)
+</section>
+
+
+<section id="pygame-zero-about" data-markdown>
+### Pygame Zero is for creating games without boilerplate.
+</section>
+
+
+<section id="flappybird-gameplay" data-markdown>
+![Flappy Bird](images/flappy.gif)
+</section>
+
+
+<section id="project-structure" data-markdown>
+## [Štruktúra projektu](resources/project.zip)
+
+```
+.
+├── game.py
+└── images/
+    ├── background.png
+    ├── flappy.png
+    ├── pipe.lower.png
+    └── pipe.upper.png
+```
+</section>
+
+
+<section id="game-loop" data-markdown data-background="#FEFCF6">
+![Herná slučka](images/game-loop-simple.png)
+
+Note:
+* http://gameprogrammingpatterns.com/images/game-loop-simple.png
+</section>
+
+
+<section id="2d-coordinate-system" data-markdown>
+## 2D Súradnicový systém
+
+![2D Coordinate System](images/2d.coordinate.system.png)
+</section>
+
+
+
+<section id="analysis" data-markdown>
+    ![Game Analysis](images/analysis.png)
+
+    Note:
+    * https://www.researchgate.net/publication/324066514_Playing_Flappy_Bird_with_Deep_Reinforcement_Learning
+</section>
+
+
+<section id="pygame-handles" data-markdown>
+## Pygame Handles 
+
+![Pygame Handles](images/handles.png)
+</section>
+
+
+<section id="collision-detections" data-markdown>
+## Detekcia kolízií
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="resources" data-markdown>
+## Použité zdroje
+
+* Kenney: [Puzzle Pack](https://www.kenney.nl/assets/puzzle-pack) - original assets from Kenney
+* [výsledný projekt](resources/game.py)
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
+* [Wireframe](https://wireframe.raspberrypi.org/) Magazine
+* [MagPi](https://www.raspberrypi.org/magpi/) Magazine
+* [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
+* [Tvorba počítačových hier s Pygame Zero](https://legacy.gitbook.com/book/bletvaska/tvorba-pocitacovych-hier-s-pygame-zero/details) - poznámky ku tvorivej dielni
+* [Retro Gaming with Raspberry Pi](https://magpi.raspberrypi.org/books/retro-gaming) - 164 pages of Video Game Projects (ebook)
+* [Pygame Zero: snadno použitelný nástroj určený pro výuku programování](https://www.root.cz/clanky/pygame-zero-snadno-pouzitelny-nastroj-urceny-pro-vyuku-programovani/) - časť seriálu [Jazyky pro výuku programování](https://www.root.cz/serialy/jazyky-pro-vyuku-programovani/) na portáli [root.cz](https://www.root.cz)
+</section>
+
+
+{% include qr.html %}
