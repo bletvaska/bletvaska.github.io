@@ -14,7 +14,14 @@ authors:
     - name: mirek
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
+bitly: http://bit.ly/2MPJeX1
 ---
+<section>
+    Začíname už za
+    <div id="countdown" style="font-size: 3em"></div>
+</section>
+
+{% include countdown.html id="countdown" text=" " deadline="2021-02-12 13:05:00" %}
 
 {% include first.slide.html %}
 
@@ -73,6 +80,14 @@ Since 1998
 </section>
 
 
+<section id="analysis" data-markdown data-background="#52C2CA">
+![Game Analysis](images/analysis.png)
+
+Note:
+* https://www.researchgate.net/publication/324066514_Playing_Flappy_Bird_with_Deep_Reinforcement_Learning
+</section>
+
+
 <section id="project-structure" data-markdown>
 ## [Štruktúra projektu](resources/project.zip)
 
@@ -100,15 +115,6 @@ Note:
 ## 2D Súradnicový sys.
 
 ![2D Coordinate System](images/2d.coordinate.system.png)
-</section>
-
-
-
-<section id="analysis" data-markdown>
-    ![Game Analysis](images/analysis.png)
-
-    Note:
-    * https://www.researchgate.net/publication/324066514_Playing_Flappy_Bird_with_Deep_Reinforcement_Learning
 </section>
 
 

@@ -5,7 +5,7 @@ layout: default
 
 # {{ page.title }}
 
-Online verzia školenia *Internet vecí pre stredné školy*.
+Online verzia školenia *Internet vecí pre stredné školy*. Stretávať sa budeme cez videokonferenčný systém Jitsi tu: [https://meet.jit.si/ita-iot](https://meet.jit.si/ita-iot).
 
 
 ## TOC
