@@ -7,12 +7,19 @@ layout: default
 
 Online verzia školenia *Internet vecí pre stredné školy*. Stretávať sa budeme cez videokonferenčný systém Jitsi tu: [https://meet.jit.si/ita-iot](https://meet.jit.si/ita-iot).
 
+Záznam zo školenia nájdete na Dropbox-e. Zmažem ho vždy na začiatku dalšieho školenia.
+
 
 ## TOC
 
-### 1. Príprava účastníka
+### 0. Príprava účastníka
 
 * [lecture](lecture.00.html)
+
+
+### 1. Programovanie v jazyku Python
+
+* [lecture](lecture.01.html)
 
 
 ## Zdroje
