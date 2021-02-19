@@ -7,7 +7,7 @@ layout: default
 
 Online verzia školenia *Internet vecí pre stredné školy*. Stretávať sa budeme cez videokonferenčný systém Jitsi tu: [https://meet.jit.si/ita-iot](https://meet.jit.si/ita-iot).
 
-Záznam zo školenia nájdete na Dropbox-e. Zmažem ho vždy na začiatku dalšieho školenia.
+Záznam zo školenia nájdete [na Dropbox-e](https://www.dropbox.com/sh/90gc81kk0x6uki7/AACom714hvKLGWQtDNgnp5pIa?dl=0). Zmažem ho vždy na začiatku dalšieho školenia.
 
 
 ## TOC
