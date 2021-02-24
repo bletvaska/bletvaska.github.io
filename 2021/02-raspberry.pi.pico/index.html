@@ -1,0 +1,205 @@
+---
+title: Začíname s Raspberry Pi Pico
+description: |
+    Raspberry Pi Foundation uviedlo koncom januára 2021 nový prírastok do rodiny svojich zariadení. Tentokrát to nie je nová verzia minipočítača Raspberry Pi, ako sme u nich zvyknutí, ale mikrokontrolér Raspberry Pi Pico. Už pri uvedení zaujal hneď niekoľkokrát: svojimi vlastnosťami, podporou u svojich partnerou a hlavne cenou $4.
+    
+    Aké teda Pico je? Oplatí sa za tú cenu? V čom ho môžem programovať? Je to vhodné zariadenie pre IoT? Naozaj už Arduinu odzvonilo? Na všetky tieto otázky sa pokúsim odpovedať počas tohto webinára.
+duration: 90
+date: 2021-02-24
+layout: slide
+event:
+    title: Namakaný deň - Webináre
+    url: http://www.namakanyden.sk
+categories: talk
+theme: night
+authors:
+    - name: mirek
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+bitly: 
+---
+
+{% include first.slide.html %}
+
+<section id="we-did-it-again" data-markdown>
+[Oops!... We Did It Again](https://www.raspberrypi.org/blog/raspberry-pi-silicon-pico-now-on-sale/)
+</section>
+
+<section id="pico-on-hackspace" data-markdown data-background="images/pico.on.hackspace.jpg">
+</section>
+
+<section id="pico-with-rp2040" data-markdown data-background="white">
+## RP2040
+
+![Raspberry Pi Pico with RP2040](images/pico.with.rp2040.jpg)
+</section>
+
+
+<section id="rp2040-features-i" data-markdown>
+## Vlastnosti RP2040 I.
+
+* Dual-core Arm Cortex-M0+ @ 133MHz
+* 264KB pamäť SRAM
+* 16MB flash pamäť
+* DMA radič
+* Interpolator and integer divider peripherals
+</section>
+
+
+<section id="rp2040-features-ii" data-markdown>
+## Vlastnosti RP2040 II.
+
+* 30 GPIO pinov, z toho 4 analógové piny
+* 2 × UARTs, 2 × SPI, 2 × I2C
+* 16 × PWM 
+* 1 × USB 1.1 radič a PHY, s podporou pre host a device
+* 8 × Raspberry Pi Programmable I/O (PIO) state machines
+* USB mass-storage boot mode with UF2 support, s možnosťou drag'n'drop programovania
+</section>
+
+
+<section id="rpi-pico" data-background="images/rpi.pico.jpg"></section>
+
+
+<section id="rp2040-vs-atmega" data-markdown data-background="images/pico.vs.arduino.jpg">
+</section>
+
+
+<section id="rp2040-vs-atmega-features" data-markdown>
+|           | RP2040        | ATmega 328 |
+|-----------|---------------|------------|
+| arch      | 32b           | 8b         |
+| cores     | 2             | 1          |
+| freq      | 48 - 133MHz   | 16MHz      |
+| SRAM      | 264kB         | 2kB        |
+| flash     | 16M           | 32kB       |
+| op. volt. | 3V3           | 3V3 / 5V   |
+</section>
+
+
+<section id="rpi-pico-overview" data-markdown data-background="white">
+![Raspberry Pi Pico Overview](images/pico.overview.jpg)
+</section>
+
+
+<section id="pico-pinout" data-markdown data-background="white">
+![Pinout](images/pico.r3.pinout.svg)
+</section>
+
+
+<section id="pico-programming" data-markdown>
+## [V čom sa Pico programuje?](https://www.raspberrypi.org/documentation/pico/getting-started/)
+
+* [MicroPython](https://www.raspberrypi.org/documentation/pico/getting-started/#getting-started-with-micropython) (Thonny, VS Code, [rshell](https://github.com/dhylands/rshell))
+* [Adafruit CircuitPython](https://learn.adafruit.com/getting-started-with-raspberry-pi-pico-circuitpython)
+* [jazyk C/C++](https://www.raspberrypi.org/documentation/pico/getting-started/#getting-started-with-c) (Arduino IDE, VS Code)
+* experimentálne:
+    * [Rust](https://www.seeedstudio.com/blog/2021/02/05/rust-rt-thread-os-freertos-come-to-the-raspberry-pi-pico/)
+    * [JavaScript](https://blog.moddable.com/blog/pico/)
+</section>
+
+
+<section id="micropython" data-markdown data-background="#2B2728">
+![MicroPython](images/logo-micropython.png)
+
+* preferovaná voľba od RPi Foundation
+* podpora v [Thonny](https://thonny.org) a [VS Code](https://code.visualstudio.com) ([Pico-Go](https://marketplace.visualstudio.com/items?itemName=ChrisWood.pico-go), [Pymakr](https://marketplace.visualstudio.com/items?itemName=pycom.Pymakr)?)
+</section>
+
+
+<section id="pico-book" data-markdown data-background="images/pico.book.jpg">
+</section>
+
+
+<section id="other-books" data-markdown>
+## [Ďalšie knižné zdroje](https://www.raspberrypi.org/documentation/pico/getting-started/)
+
+* [Getting started with Raspberry Pi Pico](https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf) - C/C++ development with Raspberry Pi Pico and other RP2040-based microcontroller boards
+* [Raspberry Pi Pico C/C++ SDK](https://datasheets.raspberrypi.org/pico/raspberry-pi-pico-c-sdk.pdf) - Libraries and tools for C/C++ development on RP2040 microcontrollers
+* [Raspberry Pi Pico Python SDK](https://datasheets.raspberrypi.org/pico/raspberry-pi-pico-python-sdk.pdf) - A MicroPython environment for RP2040 microcontrollers
+</section>
+
+
+<section id="live-demo" data-markdown>
+## Živá ukážka
+
+1. začíname s RPi Pico
+    * miesto na kontaktnom poli vs ESP32
+    * inštalácia
+2. blikneme (aj zabudovanou) LED-kou
+3. ~~vianočné svetielka~~
+4. zabudovaný teplotný senzor
+</section>
+
+
+<section id="partners" data-markdown>
+## [Partners](https://www.raspberrypi.org/blog/raspberry-pi-silicon-pico-now-on-sale/)
+
+tvorba rozšírení a ďalších dosiek niekoľko mesiacov pred oficiálnym vydaním s ďalšími partnermi
+</section>
+
+<section id="partners-adafruit" data-markdown>
+![Adafruit](images/logo-adafruit.png)
+
+* [Adafruit Feather RP 2040](https://adafruit.com/feather2040)
+* [Adafruit ItsyBitsy RP 2040](https://adafruit.com/itsybitsy2040)
+</section>
+
+
+<section id="partners-arduino" data-markdown>
+## Arduino
+
+![Arduino Nano RP2040 Connect](images/arduino.nano.rp2040.connect.png)
+
+[Arduino Nano RP2040 Connect](https://blog.arduino.cc/2021/01/20/welcome-raspberry-pi-to-the-world-of-microcontrollers/)
+
+</section>
+
+
+<section id="partners-pimoroni" data-markdown data-background="white">
+![Pimoroni](images/logo-pimoroni.png)
+
+* [Pico System](https://pimoroni.com/picosystem)
+* [Pico Explorer Base](https://pimoroni.com/picoexplorer)
+</section>
+
+
+<section id="partners-sparkfun" data-markdown>
+![Sparkfun](images/logo-sparkfun.png)
+
+* [Thing Plus – RP2040](https://www.sparkfun.com/products/17745)
+* [Pro Micro – RP2040](https://www.sparkfun.com/products/17717)
+* [MicroMod RP2040 Processor](https://www.sparkfun.com/products/17720)
+</section>
+
+
+<section id="partners-waveshare" data-markdown data-background="white">
+![Waveshare](images/logo-waveshare.jpg)
+
+[![Dual GPIO Expander for Raspberry Pi Pico, Two Sets of Male Headers](images/waveshare.pico.expander.jpg)](https://www.waveshare.com/pico-dual-expander.htm)
+</section>
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [Meet Raspberry Silicon: Raspberry Pi Pico now on sale at $4](https://www.raspberrypi.org/blog/raspberry-pi-silicon-pico-now-on-sale/)
+* [Get Started with MicroPython on Raspberry Pi Pico](https://hackspace.raspberrypi.org/books/micropython-pico)
+* [Raspberry Pi Pico Pinout](https://datasheets.raspberrypi.org/pico/Pico-R3-A4-Pinout.pdf)
+</section>
+
+
+<section id="where-to-buy" data-markdown>
+## Kde kúpiť?
+
+* [RPishop.cz](https://rpishop.cz/pico/3352-675-raspberry-pi-pico-0617588405587.html#/188-prislusenstvi-bez_prislusenstvi) - 4.18 Eur
+* [RLX.sk](https://rlx.sk/sk/raspberry-pi-pico/8016-raspberry-pi-pico-low-cost-high-performance-microcontroller-board.html) - 4.50 Eur
+* [Alza.sk](https://www.alza.sk/raspberry-pi-pico-d6313108.htm?o=1) - 6.79 Eur
+</section>
+
+
+{% include qr.html %}
