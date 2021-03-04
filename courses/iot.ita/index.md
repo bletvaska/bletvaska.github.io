@@ -14,12 +14,17 @@ Záznam zo školenia nájdete [na Dropbox-e](https://www.dropbox.com/sh/90gc81kk
 
 ### 0. Príprava účastníka
 
-* [lecture](lecture.00.html)
+* ([lecture](lecture.00.html))
 
 
 ### 1. Programovanie v jazyku Python
 
-* [lecture](lecture.01.html)
+* ([lecture](lecture.01.html)) ([slides](../../2020/12-ba.python.meetup/))
+
+
+### 2. Node-RED
+
+* ([lecture](lecture.02.html)) ([slides](slides.02.html))
 
 
 ## Zdroje
