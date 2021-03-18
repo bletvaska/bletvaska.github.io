@@ -3,6 +3,8 @@ title: Pygame Zero
 layout: default
 ---
 
+[![Logo: Pygame Zero](images/logo-pygame.zero.svg)](https://pygame-zero.readthedocs.io/en/stable/)
+
 # {{ page.title }}
 
 Programovanie počítačových hier pomocou knižnice Pygame Zero.
