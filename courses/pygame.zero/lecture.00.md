@@ -39,6 +39,8 @@ layout: default
 
    ![Editor Mu: Voľba balíkov tretích strán](images/mu-third.party.packages.selection.png)
 
+   **Poznámka:** Ak sa vám zobrazí prázdne okno bez ničoho, vypnite a zapnite editor a skúste to znova.
+
 7. Následne prebehne inštalácia, po ktorej sa v okne zobrazí nápis: `FINISHED`. Okno zavriete kliknutím na tlačidlo `OK`.
 
    ![Editor Mu: Stav inštalácie balíkov tretích strán](images/mu-finished.installation.of.packages.png)
