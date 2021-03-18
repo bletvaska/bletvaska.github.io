@@ -17,7 +17,9 @@ layout: default
 
 2. Z domovskej stránky [editora Mu](https://codewith.mu) si v časti [Download](https://codewith.mu/en/download) stiahnite a nainštalujte editor *Mu*.
 
-3. Spustite si nainštalovaný editor *Mu*.
+3. Spustite si nainštalovaný editor *Mu*. 
+
+   *Poznámka:* Prvé spustenie bude chvíľu trvať. Buďte preto trpezliví.
 
 4. Pri prvom spustení vás privíta obrazovka s voľbou režimu práce. Vyberte si režime *Pygame Zero*.
 
