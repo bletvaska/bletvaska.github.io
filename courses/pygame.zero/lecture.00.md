@@ -17,7 +17,7 @@ layout: default
 
 2. Z domovskej stránky [editora Mu](https://codewith.mu) si v časti [Download](https://codewith.mu/en/download) stiahnite a nainštalujte editor *Mu*.
 
-3. Spustite si nainštalovaný editor *Mu*. 
+3. Spustite si nainštalovaný editor *Mu* z ponuky *Štart*. 
 
    *Poznámka:* Prvé spustenie bude chvíľu trvať. Buďte preto trpezliví.
 
@@ -27,9 +27,11 @@ layout: default
 
    **Poznámka:** Ak si vyberiete nesprávny režim alebo omylom okno zavriete, nevadí. Režim práce si viete zmeniť vždy kliknutím na prvé tlačidlo v paneli s názvom *Režim*.
 
-5. V pravom dolnom rohu obrazovky editora kliknite vedľa nápisu *Pygame Zero* na zubaté koliesko a vyberte si kartu *Balíky tretích strán*
+5. V pravom dolnom rohu obrazovky editora kliknite vedľa nápisu *Pygame Zero* na zubaté koliesko.
 
-6. Dovnútra napíšte text:
+   ![Editor Mu: Nastavenia Mu](images/mu-settings.png)
+
+6. Vyberte si kartu *Balíky tretích strán* a dovnútra napíšte text:
 
    ```bash
    pgzero
