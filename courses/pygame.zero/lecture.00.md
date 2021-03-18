@@ -19,7 +19,7 @@ layout: default
 
 3. Spustite si nainštalovaný editor *Mu* z ponuky *Štart*. 
 
-   *Poznámka:* Prvé spustenie bude chvíľu trvať. Buďte preto trpezliví.
+   **Poznámka:** Prvé spustenie bude chvíľu trvať. Buďte preto trpezliví.
 
 4. Pri prvom spustení vás privíta obrazovka s voľbou režimu práce. Vyberte si režime *Pygame Zero*.
 
