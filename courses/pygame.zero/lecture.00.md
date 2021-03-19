@@ -56,3 +56,24 @@ layout: default
 10. Okno zavrite.
 
 11. Práve ste pripravení na zvládnutie webináru a na odštartovanie svojej vlastnej kariéry herného vývojára ;)
+
+
+## Stiahnutie grafiky pre hru Flappy Bird
+
+1. Stiahnite a rozbaľte si [tento balík](../../2021/02-become.a.game.developer/resources/project.zip) napr. na plochu, aby ste ho nemali ďaleko. Vznikne vám teda priečinok `flappy/`, ktorého obsah vyzerá nasledovne:
+
+    ```
+    flappy
+    ├── game.py
+    └── images
+        ├── background.png
+        ├── flappy.png
+        ├── pipe.lower.png
+        └── pipe.upper.png
+    ```
+
+2. Následne v editore otvorte súbor `game.py` z tohto priečinku.
+
+3. Ak následne kliknete na tlačidlo `Obrázky`, zobrazí sa vám prehliadač súborov s obrázkami pre hru *Flappy Bird*. 
+
+    ![Editor Mu: Otvorenie obrázkov z hry *Flappy Bird*](images/mu-flappy.bird.images.png)
