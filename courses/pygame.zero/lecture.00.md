@@ -60,7 +60,7 @@ layout: default
 
 ## Stiahnutie grafiky pre hru Flappy Bird
 
-1. Stiahnite a rozbaľte si [tento balík](../../2021/02-become.a.game.developer/resources/project.zip) napr. na plochu, aby ste ho nemali ďaleko. Vznikne vám teda priečinok `flappy/`, ktorého obsah vyzerá nasledovne:
+1. Stiahnite a rozbaľte si [tento balík](resources/project-flappy.bird.zip) napr. na plochu, aby ste ho nemali ďaleko. Po jeho rozbalení vznikne priečinok `flappy/`, ktorého obsah vyzerá nasledovne:
 
     ```
     flappy
