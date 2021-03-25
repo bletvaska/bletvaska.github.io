@@ -27,6 +27,11 @@ Záznam zo školenia nájdete [na Dropbox-e](https://www.dropbox.com/sh/90gc81kk
 * ([lecture](lecture.02.html)) ([slides](slides.02.html))
 
 
+### 3. MQTT
+
+* ([resources](../mqtt.101/))
+
+
 ## Zdroje
 
 * [Welcome to Pygame Zero](https://pygame-zero.readthedocs.io/en/stable/) - domovská stránka knižnice *Pygame Zero* na tvorbu hier ([slovenský preklad dokumentácie](https://pygame-zero.readthedocs.io/sk/latest/index.html))
