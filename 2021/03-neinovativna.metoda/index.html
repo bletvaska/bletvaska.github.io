@@ -1,0 +1,266 @@
+---
+title: Neinovatívna metóda výučby programovania pomocou tvorby hier
+description:
+    Neúspešný herný vývojár hovorí o tom, ako detiská učiť programovať robením počítačových hier.
+duration: 90
+date: 2021-03-30
+bitly: 
+layout: slide
+categories: talk
+theme: night
+authors:
+    - name: mirek
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+event:
+    title: eTeacher
+    url: https://www.facebook.com/eTeacherOZ
+video:
+---
+<style>
+#arkanoid-game {
+  margin: 0;
+  display: flex;
+
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+
+  /* This centers our sketch vertically. */
+  align-items: center;
+}
+
+#actor img {
+    width: 1em;
+}
+</style>
+
+
+<section>
+    Začíname už za
+    <div id="countdown" style="font-size: 3em"></div>
+
+    Ak chcete programovať spolu s lektorom, pokyny pre inštaláciu potrebného softvéru nájdete na adrese <a href="http://bit.ly/2P3E4au">http://bit.ly/2P3E4au</a>
+</section>
+
+{% include countdown.html id="countdown" text=" " deadline="2021-03-30 18:05:00" %}
+
+
+{% include first.slide.html %}
+
+
+<section id="hrate-sa" data-markdown>
+## Hráte sa počítačové hry?
+</section>
+
+<section id="assassins-creed" data-markdown>
+![Assassins Creed Black Flag](images/assassins.creed.jpg)
+</section>
+
+
+<section id="tis-100" data-markdown data-background="#ebebeb">
+![TIS-100](images/tis.100.jpg)
+</section>
+
+
+<section id="naprogramovali-ste-hru" data-markdown>
+## Naprogramovali ste si vlastnú počítačovú hru?
+</section>
+
+
+<section id="arkanoid-logo" data-markdown data-background="black">
+![Arkanoid Logo](images/arkanoid.logo.jpg)
+
+Note:
+* https://i.ytimg.com/vi/2bdFsD_0HXI/maxresdefault.jpg
+</section>
+
+
+<section id="arkanoid-game" data-background="black">
+</section>
+
+
+<!--<section id="arkanoid-arcade" data-background="black">-->
+    <!--<iframe width="896" height="504" src="https://www.youtube.com/embed/Th-Z6QQ5AOQ?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen data-autoplay></iframe>-->
+<!--</section>-->
+
+
+<section id="collisions" data-markdown data-background="#2ECC71">
+[![Kenney.nl](images/kenney-promo.png)](https://kenney.nl/)
+</section>
+
+
+<section id="pygame-zero" data-background="white">
+<a href="https://pygame-zero.readthedocs.io/">
+    <img src="images/logo-pygamezero.svg" width="600">
+</a>
+</section>
+
+
+<section id="pygame" data-markdown data-background="white">
+[![Pygame logo](images/logo-pygame.png)](https://www.pygame.org/news)
+</section>
+
+
+<section id="sdl" data-markdown data-background="white">
+[![SDL logo](images/logo-sdl.png)](https://www.libsdl.org/)
+
+Since 1998
+</section>
+
+
+<section id="steam" data-markdown data-background="black">
+![Steam logo](images/logo-steam.jpg)
+</section>
+
+
+<section id="pygame-zero-about" data-markdown>
+### Pygame Zero is for creating games without boilerplate.
+</section>
+
+
+<section id="pygame-zero-magpi" data-markdown data-background="images/magpi-35-pygamezero.jpg">
+Note:
+* https://www.raspberrypi.org/magpi/wp-content/uploads/2015/06/35_PygameZero.jpg
+</section>
+
+
+<section id="installation" data-markdown>
+## Installation
+
+* Raspberry Pi - builtin
+* `sudo dnf install pgzero mu`
+* `pip install pgzero mu-editor`
+</section>
+
+
+<section id="installation-workaround" data-markdown>
+## Installation Workaround
+
+...because of last version 1.2 is from 2018
+
+```bash
+pip install pygame==2.0.0 
+pip install pgzero --no-deps
+```
+</section>
+
+
+<section id="warning" data-markdown>
+## Warning!
+(no best practices provided)
+</section>
+
+
+<section id="game-loop" data-markdown data-background="#FEFCF6">
+![Game Loop](images/game-loop-simple.png)
+
+Note:
+* http://gameprogrammingpatterns.com/images/game-loop-simple.png
+</section>
+
+
+<section id="project-structure" data-markdown>
+## [Project Structure](resources/project.zip)
+
+```
+.
+├── game.py
+├── sounds/
+│   ├── hit.01.wav
+│   └── hit.02.wav
+└── images/
+    ├── background.png
+    ├── ball.png
+    ├── brick.purple.png
+    ├── brick.red.png
+    └── paddle.png
+```
+</section>
+
+
+<section id="2d-coordinate-system" data-markdown>
+## 2D Coordinate System
+
+![2D Coordinate System](images/2d.coordinate.system.png)
+</section>
+
+
+<section id="actor" data-markdown>
+![Actor](images/ball.png)
+</section>
+
+
+<section id="actor-fields-and-methods" data-markdown>
+## Actor Fields and Methods
+
+* `actor.x`, `actor.y`, `actor.pos`
+* `actor.image`
+* `actor.width`, `actor.height`
+* `actor.draw()`
+</section>
+
+
+<section id="pygame-handles" data-markdown>
+## Pygame Handles 
+
+![Pygame Handles](images/pygame.handles.png)
+</section>
+
+
+<section id="collision-detections" data-markdown>
+    ## Collisioin Detection
+</section>
+
+
+<section id="collisions" data-markdown data-background="#fff">
+    ![Collisions](images/collisions.png)
+
+    Note:
+    * https://treadgaming.blogspot.com/2016/06/video-game-physics-tutorial-part-ii.html
+</section>
+
+
+<section id="questions" data-markdown>
+## Questions?
+</section>
+
+
+<section id="where-to-go-next" data-markdown>
+## What's Next?
+</section>
+
+
+<section id="resources" data-markdown>
+## Used Resources
+
+* [javascript-arkanoid](https://github.com/aruvham/javascript-arkanoid) - rendition of the classic NES game Arkanoid using [p5.js](https://p5js.org/)
+* Kenney: [Puzzle Pack](https://www.kenney.nl/assets/puzzle-pack) - original assets from Kenney
+* [výsledný projekt](resources/game.py)
+* [ukážkový projekt](resources/arkanoid.py)
+</section>
+
+
+<section id="links-i" data-markdown>
+## Links I.
+
+* [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
+* [Tvorba počítačových hier s Pygame Zero](https://bletvaska.gitbooks.io/tvorba-pocitacovych-hier-s-pygame-zero/content/) - poznámky ku tvorivej dielni
+* [PyWeek](https://pyweek.org/) - Python Game Programming Challenge
+* [Pygame Zero: snadno použitelný nástroj určený pro výuku programování](https://www.root.cz/clanky/pygame-zero-snadno-pouzitelny-nastroj-urceny-pro-vyuku-programovani/) - časť seriálu [Jazyky pro výuku programování](https://www.root.cz/serialy/jazyky-pro-vyuku-programovani/) na portáli [root.cz](https://www.root.cz)
+</section>
+
+<section id="links-ii" data-markdown>
+## Links II.
+
+* [Wireframe](https://wireframe.raspberrypi.org/) and [MagPi](https://www.raspberrypi.org/magpi/) Magazines
+* [Code the Classics – Volume 1](https://wireframe.raspberrypi.org/books/code-the-classics1)
+* [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
+</section>
+
+{% include qr.html %}
+
+
+<script src="./libs/p5.min.js"></script>
+<script src="./libs/p5.sound.min.js"></script>
+<script src="levels.js"></script>
+<script src="game.js"></script>
