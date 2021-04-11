@@ -1,0 +1,131 @@
+---
+title: Node-RED
+description: |
+    Legendy hovoria, že Internet vecí sa na stredných školách týka len programovania Arduín a BBC micro:bit-ov. Tam to však len začína a my na tomto webinári budeme rozhodne pokračovať. Síce bez mikrokontrolérov, ale to nás nezastaví v tom, aby sme urobili jednoduchú meteo službu. Dáta ukradneme (tí kreatívnejší alebo lenivejší si ich vymyslia), zobrazíme ich na mape Slovenska a hneď uvidíme, aké meteorologické podmienky majú jednotliví účastníci webinára doma. A to všetko len s prehliadačom, nadšením, chuťou experimentovať, vymýšľať... Proste si ukážeme silu integrácie existujúcich nástrojov a služieb bez toho, aby sme napísali čo i len riadok kódu. No skús neprísť ;-)
+duration: 90
+date: 2021-04-12
+layout: slide
+event:
+    title: Učiteľské fórum
+    url: http://itakademia.sk
+categories: talk
+theme: night
+authors:
+    - name: mirek
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: http://bit.ly/3dIRnrh
+---
+
+{% include first.slide.html %}
+
+
+<section id="what-is-node-red" data-markdown data-background="#8F1200">
+    ## Čo je Node-RED I.?
+
+    > Node-RED is a **visual tool** for **wiring** the Internet of Things. (2016)
+
+    > **Flow-based programming** for the Internet of Things. (2017)
+
+    > **Low-code programming** for **event-driven applications**. (2019)
+</section>
+
+
+<section id="what-is-node-red" data-markdown data-background="#8F1200">
+    ## Čo je to Node-RED II.?
+
+    > [Node-RED](https://nodered.org) is a **programming tool** for **wiring** together hardware devices, APIs and online services in new and interesting ways. ([homepage](https://nodered.org))
+</section>
+
+
+<section id="nodered-features" data-markdown data-background="#8F1200">
+## A okrem toho...
+
+* open source (zadarmo)
+* platformovo nezávislý ([nodejs](https://nodejs.org/))
+    * aplikácia v prehliadači
+</section>
+
+
+<section id="iot-development" data-markdown>
+## "Tradičné" požiadavky na vývoj IoT riešení
+
+* programovanie v nízkoúrovňových jazykoch
+* zručnosti na úrovni návrhu hardvéru
+* rozumieť elektronike
+* znalosti komplexných API pre integrovanie externých služieb
+* znalosti TSDB systémov pre prácu s dátami
+* znalosti z oblastí ako DA alebo ML pre aplikovanie poznatkov z uložených dát
+</section>
+
+<section id="nodered-help" data-markdown data-background="#8F1200">
+Node-RED sa postará o technické aspekty vášho riešenia a pomôže vám sústrediť sa na váš workflow.
+</section>
+
+
+<section id="fred" data-markdown data-background="#8F1200">
+## [Welcome to FRED](https://fred.sensetecnic.com)
+We're hosting Node-RED so you don't have to
+</section>
+
+
+<section id="hello-world" data-markdown data-background="#8F1200">
+## Hello world!
+</section>
+
+
+<section id="what-is-flow-based-programming" data-markdown data-background="#8f1200">
+## Čo je to FBP?
+
+> **Flow-Based Programming** is a programming paradigm that defines applications as **networks** of "black box" processes, which exchange data across predefined **connections** by **message passing**, where the connections are specified **externally** to the processes. ([Wikipedia](https://en.wikipedia.org/wiki/Flow-based_programming))
+</section>
+
+
+<section id="message" data-markdown data-background="#8f1200">
+## Prenášaná správa
+
+```json
+{
+    "_msgid": "89cbb063.7f7a7",
+    "payload": "Hello world!",
+    "topic": "Greetings!"
+}
+```
+</section>
+
+
+<section id="meteo-service" data-markdown data-background="#8F1200">
+## Meteo Service
+</section>
+
+
+<section id="worldmap-node" data-markdown data-background="#8f1200">
+[![node-red-contrib-web-worldmap](images/worldmap.node.gif)](https://flows.nodered.org/node/node-red-contrib-web-worldmap)
+[node-red-contrib-web-worldmap](https://flows.nodered.org/node/node-red-contrib-web-worldmap)
+</section>
+
+<section id="openweathermap-node" data-markdown data-background="#8f1200">
+[![OpenWeatherMap.org](images/logo-openweathermap.png)](https://openweathermap.org)
+
+* uzol: [node-red-node-openweathermap](https://flows.nodered.org/node/node-red-node-openweathermap)
+* API kľúč: `08f5d8fd385c443eeff6608c643e0bc5`
+</section>
+
+
+<section id="mqtt" data-markdown data-background="#8f1200">
+## MQTT
+</section>
+
+
+<section id="mqtt-explained" data-markdown data-background="white">
+![How MQTT Works](images/how.mqtt.works.png)
+
+Notes:
+* https://www.eclipse.org/community/eclipse_newsletter/2014/october/article2.php
+</section>
+
+
+<section id="questions" data-markdown data-background="#8F1200">
+## Otázky?
+</section>
+
