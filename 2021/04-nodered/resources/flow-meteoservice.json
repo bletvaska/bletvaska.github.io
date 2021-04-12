@@ -1,0 +1,151 @@
+[
+    {
+        "id": "78b56a24.336674",
+        "type": "tab",
+        "label": "Meteo servis",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d8fffdd0.84eae",
+        "type": "worldmap",
+        "z": "78b56a24.336674",
+        "name": "",
+        "lat": "49.239647",
+        "lon": "19.266837",
+        "zoom": "15",
+        "layer": "OSM",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "path": "/worldmap",
+        "x": 500,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "38b99eb7.5026c2",
+        "type": "inject",
+        "z": "78b56a24.336674",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "84e8084b.343c28"
+            ]
+        ]
+    },
+    {
+        "id": "84e8084b.343c28",
+        "type": "openweathermap",
+        "z": "78b56a24.336674",
+        "name": "",
+        "wtype": "current",
+        "lon": "",
+        "lat": "",
+        "city": "Dolny Kubin",
+        "country": "Slovakia",
+        "language": "en",
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "dd48cf0.73f083"
+            ]
+        ]
+    },
+    {
+        "id": "dd48cf0.73f083",
+        "type": "template",
+        "z": "78b56a24.336674",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"name\": \"Mirek na chalupke\",\n    \"lat\": 49.239647,\n    \"lon\": 19.266837,\n    \"ttl\": 30,\n    \"photoUrl\": \"https://bletvaska.github.io/assets/mirek.na.hackathone.jpg\",\n    \"weblink\": {\n        \"name\": \"homepage\",\n        \"url\": \"https://bletvaska.github.io\",\n        \"target\": \"_new\"\n    },\n    \"temperature\": \"{{ payload.tempc }}°C\",\n    \"humidity\": \"{{ payload.humidity }}%\"\n}",
+        "output": "json",
+        "x": 500,
+        "y": 280,
+        "wires": [
+            [
+                "ef9d308a.45669"
+            ]
+        ]
+    },
+    {
+        "id": "ef9d308a.45669",
+        "type": "mqtt out",
+        "z": "78b56a24.336674",
+        "name": "",
+        "topic": "mpc/iot/meteo",
+        "qos": "",
+        "retain": "",
+        "broker": "6cfce82e.1e0f68",
+        "x": 680,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "febea96f.35d3a8",
+        "type": "mqtt in",
+        "z": "78b56a24.336674",
+        "name": "",
+        "topic": "mpc/iot/meteo",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "6cfce82e.1e0f68",
+        "x": 300,
+        "y": 120,
+        "wires": [
+            [
+                "d8fffdd0.84eae"
+            ]
+        ]
+    },
+    {
+        "id": "6cfce82e.1e0f68",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]

@@ -3,7 +3,7 @@ title: Úvod do internetu vecí
 subtitle: nástroje, ukážky a nápady
 description: |
     Legendy hovoria, že Internet vecí sa na stredných školách týka len programovania Arduín a BBC micro:bit-ov. Tam to však len začína a my na tomto webinári budeme rozhodne pokračovať. Síce bez mikrokontrolérov, ale to nás nezastaví v tom, aby sme urobili jednoduchú meteo službu. Dáta ukradneme (tí kreatívnejší alebo lenivejší si ich vymyslia), zobrazíme ich na mape Slovenska a hneď uvidíme, aké meteorologické podmienky majú jednotliví účastníci webinára doma. A to všetko len s prehliadačom, nadšením, chuťou experimentovať, vymýšľať... Proste si ukážeme silu integrácie existujúcich nástrojov a služieb bez toho, aby sme napísali čo i len riadok kódu. No skús neprísť ;-)
-duration: 90
+duration: 120
 date: 2021-04-12
 layout: slide
 event:
@@ -18,6 +18,13 @@ authors:
 bitly: https://bit.ly/3uBhK7w
 openweathermap_apikey: 08f5d8fd385c443eeff6608c643e0bc5
 ---
+
+<section>
+    Začíname už za
+    <div id="countdown" style="font-size: 3em"></div>
+</section>
+
+{% include countdown.html id="countdown" text=" " deadline="2021-04-12 14:30:00" %}
 
 {% include first.slide.html %}
 
@@ -154,8 +161,31 @@ Notes:
 </section>
 
 
+<section id="what-can-nodered-do" data-markdown data-background="#8F1200">
+## Čo ešte Node-RED dokáže?
+
+* vlastné webové stránky
+* vlastné REST API
+* vlastné dashboard-y
+* integrácia s DB systémami
+* integrácia s ďalšími službami (napr. Twitter, Slack, ...)
+* programovať uzly (natívne v JavaScript-e, ale aj v Python-e)
+* a iné
+</section>
+
+
 <section id="questions" data-markdown data-background="#8F1200">
 ## Otázky?
+</section>
+
+
+<section id="resources" data-markdown data-background="#8f1200">
+## Zdroje
+
+* [domovská stránka nástroja Node-RED](https://nodered.org)
+* [flow s výslednou službou](resources/flow-meteoserice.json)
+* [Node-RED kanál na YouTube](https://www.youtube.com/channel/UCQaB8NXBEPod7Ab8PPCLLAA)
+* videozáznam z webinára
 </section>
 
 
