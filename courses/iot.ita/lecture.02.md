@@ -19,7 +19,7 @@ layout: default
   ```bash
   $ sudo apt update
   $ sudo apt install npm
-  $ sudo npm install node-red
+  $ sudo npm install -g --unsafe-perm node-red
   ```
 
 * ak chcete Node-RED dostať do Windows-ov, tak postupujte napríklad podľa [tohto návodu](http://www.namakanyden.sk/webinare/2020/05/21/tvorba-webovych-aplikacii-v-node-red.html)
