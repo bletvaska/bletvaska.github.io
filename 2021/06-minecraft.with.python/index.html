@@ -1,0 +1,157 @@
+---
+title: Zaži dobrodružstvo v Minecrafte s jazykom Python
+subtitle: 
+description: |
+    Minecraft je dnes fenomén. To dokazuje aj fakt, že aj napriek 10 rokom, počas ktorých je na trhu, sa jedná stále o “Áčkový” titul. Jeho grafika je síce otrasne kockatá a hráčov súčasných peciek ako Cyberpunk alebo Fortnite nijako neohúri, ale aj tak na YouTube nájdete tisícky “júťúberov” s obrovským množstvom odberateľov, ktorí sa dokážu pozerať hodiny na videá, ako Minecraft hrá niekto iný.
+
+    Ako učitelia (a rodičia) sa často na hry pozeráme ako na zavrženiahodné zlo. Vnímame len to, že pri tých hrách “zabíjajú” svoj čas, ale neuvedomujeme si potenciál, ktorý so sebou nesú. Pretože ich nemusíme nijako nútiť k tomu, aby sa hrali.
+
+    O čom teda bude webinár? Spolu s najzorientovanejším “majnkraftistom” v okolí Oliverom, ktorý má veľmi dobrý prehľad aj v československej YouTube scéne, vám ukážeme, že Minecraft vie byť skvelým prostredím aj vo výučbe programovania. Predstavíme si základné koncepty práce s knižnicou mcpi v jazyku Python, vykreslíme pár blokov, ale ukážeme si aj komplexnejšie úlohy, ktoré môžu byť pre detiská tou ozajstnou výzvou. A to všetko úplne zadarmo!
+duration: 120
+date: 2021-06-02
+layout: slide
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk
+categories: talk
+theme: night
+authors:
+    - name: Oliver a Mirek Biňasovci
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+#bitly: https://bit.ly/3uBhK7w
+#video: https://youtu.be/coqzmKypHyE
+---
+<style>
+#trinket > p > img,
+#sense-hat-assembly > p > img
+{
+    width: 50%
+}
+
+#astropi-projectxxx
+{
+    background-blend-mode: darken;
+    background-color: rgba(0,43,63,0.65);
+}
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="welcome" data-markdown data-background="images/minecraft.jpg">
+</section>
+
+
+<section id="buy-minecraft" data-markdown data-background="images/buy.minecraft.jpg">
+</section>
+
+
+<section id="markus-notch-persson" data-markdown data-background="#060107">
+![Markus "Notch" Persson](images/markus.notch.persson.jpg)
+
+[Markus "Notch" Persson](https://en.wikipedia.org/wiki/Markus_Persson)
+</section>
+
+
+<section id="minecraft-pi" data-markdown>
+[![Minecraft Pi](images/minecraft.pi.edition.png)](https://www.minecraft.net/en-us/edition/pi)
+
+vydané: 11.2.2013 pre RPi 1 (256/512MB)
+</section>
+
+
+<section id="what-is-minecraft" data-markdown>
+## Čo je Minecraft?
+</section>
+
+
+<section id="minecraft-pi-controls" data-markdown data-background="white">
+## Ovládanie Minecraft Pi
+
+![Minecraft Pi Controls](images/minecraft.pi.controls.png)
+</section>
+
+
+<section id="minetest" data-markdown>
+[![Minetest](images/banner-minetest.png)](https://www.minetest.net)
+</section>
+
+
+<section data-markdown id="hello-world">
+### Hello world!
+
+```python
+from mcpi.minecraft import Minecraft
+
+mc = Minecraft.create()
+
+mc.postToChat("Hello world")
+```
+</section>
+
+
+<section id="coordinate-system" data-markdown>
+![Coordinte System](images/coordinate.system.png)
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="resources" data-markdown>
+## Zdroje
+</section>
+
+
+<section data-markdown id="getting-started-with-minecraft-pi">
+[![Getting Started with Minecraft Pi](images/banner-getting.started.png)](https://projects.raspberrypi.org/sk-SK/projects/getting-started-with-minecraft-pi)
+
+### [Začíname s Minecraft Pi](https://projects.raspberrypi.org/sk-SK/projects/getting-started-with-minecraft-pi)
+</section>
+
+
+<section id="stuff-about-code">
+    <h2><a href="https://www.stuffaboutcode.com/">&lt;Stuff about="code" /&gt;</a></h2>
+
+    <ul>
+        <li>domovská stránka Martina O'Hanlona</li>
+        <li>Raspberry Pi a Minecraft</li>
+        <li><a href="https://www.stuffaboutcode.com/p/minecraft-api-reference.html">Minecraft API</a></li>
+    </ul>
+</section>
+
+
+<section id="book1" data-markdown>
+[![Adventures in Minecraft](images/cover-adventures.in.minecraft.jpg)](https://www.stuffaboutcode.com/p/adventures-in-minecraft.html)
+</section>
+
+
+<section id="book2" data-markdown>
+[![Learn to Program with Minecraft](images/cover-learn.to.program.with.minecraft.png)](https://www.humblebundle.com/books/learn-you-more-python-books?hmb_source=humble_home&hmb_medium=product_tile&hmb_campaign=mosaic_section_2_layout_index_2_layout_type_twos_tile_index_1_c_learnyoumorepython_bookbundle)
+</section>
+
+
+<section id="other-resources" data-markdown>
+## Ostatné zdroje
+
+* [Blocks and Items](https://minecraft-ids.grahamedgecombe.com/)
+</section>
+
+
+<section id="whats-next" data-markdown>
+## A čo ďalej s Minecraft Pi Edition?
+</section>
+
+
+<section data-markdown>
+[![](images/minecraft.pi.edition.0.6.1.png)](https://dev.to/thebrokenrail/how-minecraft-pi-edition-was-brought-back-from-the-dead-2mah)
+
+[How Minecraft: Pi Edition Is Being Brought Back From The Dead](https://dev.to/thebrokenrail/how-minecraft-pi-edition-was-brought-back-from-the-dead-2mah)
+</section>
+
+
+{% include qr.html %}
+

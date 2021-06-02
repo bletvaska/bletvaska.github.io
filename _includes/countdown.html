@@ -9,6 +9,7 @@ window.addEventListener('load', function(ev){
     $("#{{ include.id }}").countdown("{{ include.deadline }}", function (event) {
         if (event.elapsed) {
             $(this).html("Udalosť už prebehla.");
+            Reveal.next();
         } else {
             // start with message
             {% if page.layout != "slides" %}
