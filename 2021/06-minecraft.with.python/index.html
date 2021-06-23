@@ -19,22 +19,9 @@ authors:
     - name: Oliver a Mirek Biňasovci
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
-#bitly: https://bit.ly/3uBhK7w
+bitly: https://bit.ly/2Rk54Eg
 #video: https://youtu.be/coqzmKypHyE
 ---
-<style>
-#trinket > p > img,
-#sense-hat-assembly > p > img
-{
-    width: 50%
-}
-
-#astropi-projectxxx
-{
-    background-blend-mode: darken;
-    background-color: rgba(0,43,63,0.65);
-}
-</style>
 
 {% include first.slide.html %}
 
@@ -54,15 +41,15 @@ authors:
 </section>
 
 
+<section id="what-is-minecraft" data-markdown>
+## Čo je Minecraft?
+</section>
+
+
 <section id="minecraft-pi" data-markdown>
 [![Minecraft Pi](images/minecraft.pi.edition.png)](https://www.minecraft.net/en-us/edition/pi)
 
 vydané: 11.2.2013 pre RPi 1 (256/512MB)
-</section>
-
-
-<section id="what-is-minecraft" data-markdown>
-## Čo je Minecraft?
 </section>
 
 
@@ -75,6 +62,34 @@ vydané: 11.2.2013 pre RPi 1 (256/512MB)
 
 <section id="minetest" data-markdown>
 [![Minetest](images/banner-minetest.png)](https://www.minetest.net)
+</section>
+
+
+<section id="how-it-works" data-markdown data-background="#232123">
+[![How It Works](images/how.it.works.png)](https://www.youtube.com/watch?v=-WauwNqzpHU)
+
+Notes:
+* https://www.youtube.com/watch?v=-WauwNqzpHU
+</section>
+
+
+<section id="communication-protocol" data-markdown>
+## [Komunikačný protokol](https://github.com/martinohanlon/Minecraft-Pi-API)
+
+### Priamo cez `telnet`
+
+```bash
+$ telnet server 4711
+chat.post(Ahoj svet)
+player.getTile()
+```
+
+### Cez `mcpi`
+
+```python
+mc.events.conn.send(b'chat.post(jano)\n')
+mc.events.conn.lastSent
+```
 </section>
 
 
@@ -96,10 +111,49 @@ mc.postToChat("Hello world")
 </section>
 
 
+<section id="challenge" data-markdown>
+## Majnkrafťák vs Pajtonista
+</section>
+
+
+<section id="task-1" data-markdown>
+## 1. Vytvor blok
+</section>
+
+
+<section id="task-2" data-markdown>
+## 2. Vytvor stĺp
+</section>
+
+
+<section id="task-3" data-markdown>
+## 3. Vytvor stenu
+</section>
+
+
+<section id="task-3" data-markdown>
+## 4. Nakresli obrázok
+</section>
+
+
+<section id="results" data-markdown>
+## Výsledky?
+</section>
+
+
+<section id="other-ideas" data-markdown>
+## Ďalšie nápady
+</section>
+
+
 <section id="questions" data-markdown>
 ## Otázky?
 </section>
 
+
+<section id="motivation" data-markdown>
+## Nebojte sa, ak neviete pracovať s Minecraftom - vaše detiská vám poradia!
+</section>
 
 <section id="resources" data-markdown>
 ## Zdroje

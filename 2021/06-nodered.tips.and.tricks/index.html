@@ -1,0 +1,206 @@
+---
+title: |
+    Node-RED: Tipy a triky #1
+subtitle: 
+description: |
+    Prehliadka tipov a trikov pre nástroj Node-RED.
+duration: 120
+date: 2021-06-23
+layout: slide
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk
+categories: talk
+theme: night
+authors:
+    - name: D. Bruothová, P. Bálint, M. Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/2Rk54Eg
+#video: https://youtu.be/coqzmKypHyE
+---
+
+{% include first.slide.html %}
+
+<section id="node-red" data-markdown data-background="#8f1200">
+[![Node-RED Logo](images/logo-node.red.png)](https://nodered.org)
+</section>
+
+
+<section id="what-is-node-red" data-markdown data-background="#8F1200">
+## Čo je Node-RED I.?
+
+> Node-RED is a **visual tool** for **wiring** the Internet of Things. (2016)
+
+> **Flow-based programming** for the Internet of Things. (2017)
+
+> **Low-code programming** for **event-driven applications**. (2019)
+</section>
+
+
+<section id="what-is-node-red" data-markdown data-background="#8F1200">
+## Čo je to Node-RED II.?
+
+> [Node-RED](https://nodered.org) is a **programming tool** for **wiring** together hardware devices, APIs and online services in new and interesting ways. ([homepage](https://nodered.org))
+</section>
+
+
+<section id="nodered-features" data-markdown data-background="#8F1200">
+## A okrem toho...
+
+* open source (zadarmo)
+* platformovo nezávislý ([nodejs](https://nodejs.org/))
+    * aplikácia v prehliadači
+</section>
+
+
+<section id="running-under-docker" data-markdown data-background="#8F1200">
+## Tip #1
+### Spustenie ako Docker kontajner
+</section>
+
+
+<section id="running-under-docker-about" data-markdown data-background="#8F1200">
+## Skúsenosti a vlastnosti
+
+* skúsenosti na predmet [Základy IoT](https://kurzy.kpi.fei.tuke.sk/iot1/)
+* výhody spustenia v kontajneri
+    * izolované a bezpečné
+    * posledná verzia
+    * "prenositeľné" riešenie
+* oficiálna [dokumentácia](https://nodered.org/docs/getting-started/docker)
+* [(oficiálny) obraz na hub.docker.com](https://hub.docker.com/r/nodered/node-red/)
+</section>
+
+
+<section id="running-under-docker-cmd" data-markdown data-background="#8F1200">
+## Spustenie
+```bash
+$ docker container run -it --rm \
+    --publish 1880:1880 \
+    --volume $(pwd)/data:/data \
+    --name nodered \
+    nodered/node-red
+```
+</section>
+
+
+<section id="loading-data-from-csv" data-markdown data-background="#8F1200">
+## Tip #2
+### Použitie dát z externého CSV súboru
+</section>
+
+
+<section id="loading-data-from-csv-the-problem" data-markdown data-background="#8F1200">
+## Houston, we have a problem
+</section>
+
+
+<section id="loading-data-from-csv-the-description" data-markdown data-background="#8F1200">
+## Riešenie problému
+
+1. kde získať dáta?
+    * vlastná príprava v tabuľkovom procesore
+    * vlastné reálne získané dáta
+    * stiahnuť z internetu (napr. [Kaggle](https://www.kaggle.com/))
+
+2. použitie zabudovaného uzla `csv` z kategórie `parser`
+</section>
+
+
+<section id="loading-data-from-csv-the-flow" data-markdown data-background="#8F1200">
+## Výsledný flow
+
+![Reading data from CSV file](images/reading.csv.file.png)
+</section>
+
+
+<section id="nodered-and-gpio-on-rpi" data-markdown data-background="#8F1200">
+## Tip #3
+### Node-RED na Raspberry Pi
+</section>
+
+
+<section id="nodered-on-raspberry-pi-os" data-markdown data-background="#8f1200">
+## Node-RED na RPi OS
+
+* je súčasťou obrazu [RPi OS with desktop and recommended software](https://www.raspberrypi.org/software/operating-systems/)
+  * môžete si ho doinštalovať:
+    ```bash
+    $ sudo apt update
+    $ sudo apt install nodered
+    ```
+* spustíte ho z menu `Programming`
+</section>
+
+
+<section id="nodered-on-raspberry-pi-difference" data-markdown data-background="#8f1200">
+![Difference on RPi](images/nodered.on.rpi.png)
+</section>
+
+
+<section id="nodered-on-raspberry-pi-play-audio" data-markdown data-background="#8f1200">
+### [`node-red-contrib-play-audio`](https://flows.nodered.org/node/node-red-contrib-play-audio)
+
+A node-red node for playing audio in the browser
+</section>
+
+
+<section id="nodered-on-raspberry-pi-play-audio-example" data-markdown data-background="#8f1200">
+### Uzol `play audio` 
+
+![Ukážka použitia uzla `play audio`](images/play.audio.png)
+</section>
+
+
+<section id="nodered-on-raspberry-pi-gpio" data-markdown data-background="#8f1200">
+### [`node-red-node-pi-gpio`](https://flows.nodered.org/node/node-red-node-pi-gpio)
+
+The basic Node-RED node for Pi GPIO
+</section>
+
+
+<section id="nodered-and-gpio-pionout-rpi" data-markdown data-background="#fff">
+[![RPi GPIO Pinout](images/rpi.gpio.pinout.png)](https://www.raspberrypi.org/documentation/usage/gpio/)
+</section>
+
+
+<section id="nodered-on-raspberry-pi-mouse-and-keyboard-example" data-markdown data-background="#8f1200">
+### Uzly `Pi Keyboard` a `Pi Mouse`
+
+![Ukážka použitia uzlov `Pi Keyboard` a `Pi Mouse`](images/keyboard.and.mouse.png)
+</section>
+
+
+<section id="nodered-on-raspberry-pi-gpio-out-example" data-markdown data-background="#8f1200">
+### Uzol `gpio out`
+
+![Ukážka použitia uzlu `gpio out`](images/gpio.out.png)
+</section>
+
+
+<section id="nodered-on-raspberry-pi-gpio-in-example" data-markdown data-background="#8f1200">
+### Uzol `gpio in`
+
+![Ukážka použitia uzlu `gpio in`](images/gpio.in.png)
+</section>
+
+
+<section id="questions" data-markdown data-background="#8f1200">
+## Otázky?
+</section>
+
+
+<section id="resources" data-markdown data-background="#8f1200">
+## Zdroje
+
+* [domovská stránka nástroja Node-RED](https://nodered.org)
+* [flow s výslednou službou](resources/flow-meteoserice.json)
+* [Node-RED kanál na YouTube](https://www.youtube.com/channel/UCQaB8NXBEPod7Ab8PPCLLAA)
+* [Úvod do Internetu vecí](https://youtu.be/coqzmKypHyE)
+* [Getting started with Node-RED](https://projects.raspberrypi.org/en/projects/getting-started-with-node-red)
+</section>
+
+
+{% include qr.html %}
+
