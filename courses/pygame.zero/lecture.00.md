@@ -77,3 +77,29 @@ layout: default
 3. Ak následne kliknete na tlačidlo `Obrázky`, zobrazí sa vám prehliadač súborov s obrázkami pre hru *Flappy Bird*. 
 
     ![Editor Mu: Otvorenie obrázkov z hry *Flappy Bird*](images/mu-flappy.bird.images.png)
+
+
+
+## Stiahnutie grafiky pre hru Arkanoid / Breakout
+
+1. Stiahnite a rozbaľte si [tento balík](resources/project-arkanoid.zip) napr. na plochu, aby ste ho nemali ďaleko. Po jeho rozbalení vznikne priečinok `arkanoid/`, ktorého obsah vyzerá nasledovne:
+
+    ```
+    flappy
+    ├── game.py
+    ├── sounds/
+    │   ├── hit.01.wav
+    │   └── hit.02.wav
+    └── images/
+        ├── background.png
+        ├── ball.png
+        ├── brick.purple.png
+        ├── brick.red.png
+        └── paddle.png
+    ```
+
+2. Následne v editore otvorte súbor `game.py` z tohto priečinku.
+
+3. Ak následne kliknete na tlačidlo `Obrázky`, zobrazí sa vám prehliadač súborov s obrázkami pre hru *Arkanoid*. 
+
+    ![Editor Mu: Otvorenie obrázkov z hry *Arkanoid*](images/mu-arkanoid.images.png)
