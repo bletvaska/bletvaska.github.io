@@ -85,7 +85,7 @@ layout: default
 1. Stiahnite a rozbaľte si [tento balík](resources/project-arkanoid.zip) napr. na plochu, aby ste ho nemali ďaleko. Po jeho rozbalení vznikne priečinok `arkanoid/`, ktorého obsah vyzerá nasledovne:
 
     ```
-    flappy
+    arkanoid
     ├── game.py
     ├── sounds/
     │   ├── hit.01.wav
