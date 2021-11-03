@@ -251,7 +251,9 @@ note:
       echo "Hello world!"
   }
 
-  main
+  if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main
+  fi
   ```
 
 * many tools for testing in bash are available (e.g. [bats](https://github.com/sstephenson/bats))
