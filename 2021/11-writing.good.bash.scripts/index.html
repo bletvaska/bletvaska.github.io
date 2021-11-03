@@ -195,6 +195,24 @@ note:
   ```
 </section>
 
+<section data-markdown>
+## Detect Sourcing
+
+* detect, if the script is being run directly, or if it is just being sourced
+
+  ```bash
+  # call the funct only if the script is executed directly
+  if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main
+  fi
+  ```
+
+* script can be executed normally, but if it's sourced, only the function definitions will be imported without doing anything else
+
+note:
+* https://advancedweb.hu/unit-testing-bash-scripts/
+</section>
+
 
 <section data-markdown>
 ## #6 Don't Use Tools whose Functions `bash` Handles
