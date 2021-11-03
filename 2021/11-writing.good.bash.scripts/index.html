@@ -1,0 +1,298 @@
+---
+title: Writing Good Bash Scripts v2021
+description: |
+    Some recommendations for bash scripters about writing their scripts better than before.
+permalink: /2021/writing-good-bash-scripts
+duration: 60
+layout: slide
+theme: night
+date: 2021-11-03
+# bitly: http://bit.ly/2ku8ZO6
+#event:
+#    title: OSS Conf 2018
+#    url: http://ossconf.soit.sk/
+categories: talk
+authors:
+    - name: Mirek Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+---
+
+{% include first.slide.html %}
+
+
+<section data-markdown>
+## Intro
+
+* I am not an enthusiastic _bash ~~stripter~~ scripter_
+* bash is not suitable for every problem
+* it's great tool for piping of different solutions/tools
+    * works as **glue**
+    * it's **swiss army knife** of every _DevOps_
+* following list is not complete
+</section>
+
+
+<section data-markdown>
+## #1 Don't forget about portability!
+</section>
+
+
+<section data-markdown>
+<script type="text/template">
+    ### `Hello world!`
+
+    ```bash
+    #!/bin/bash
+
+    echo "Hello world!"
+    ```
+
+    ## wrong Wrong WRONG! <!-- .element: class="fragment" data-fragment-index="1" -->
+</script>
+</section>
+
+
+<section data-markdown>
+### Portable `Hello world!`
+
+```bash
+#!/usr/bin/env bash
+
+echo "Hello world!"
+```
+
+* `env` - run a program in a modified environment
+    * looks for interpreter in `$PATH`
+</section>
+
+
+<section data-markdown>
+## #2 Stop on Error!
+</section>
+
+
+<section data-markdown>
+### Wrong Script
+
+```bash
+#!/usr/bin/env bash
+
+echo "start here"
+VAR = "syntax error on this line"
+echo "this line will be executed too"
+```
+</section>
+
+
+<section data-markdown>
+### Start This Way
+
+```bash
+#!/usr/bin/env bash
+
+set -o errexit  # stop when error occurs
+set -o pipefail # if not, expressions like `error here | true`
+                # will always succeed
+set -o nounset  # detects uninitialised variables
+set -o xtrace   # prints every expression
+                # before executing it (debugging)
+
+echo "start here"
+VAR = "syntax error on this line"
+echo "this line is now not reachable"
+```
+</section>
+
+
+<section data-markdown>
+## #3 Enclose Vars as `"${variable}"`
+</section>
+
+
+<section data-markdown>
+* _escaping_
+* the `'"'` helps with variables with spaces
+* the `'{}'` are not necessary, but are used in _bash expansion_:
+    * string interpolation: 
+      ```bash
+      "${variable}.yml"
+      ```
+    * default (fallback) value: 
+      ```bash
+      "${variable:-something_else}"
+      ```
+    * string replacement: 
+      ```bash
+      "${variable//from/to}"
+      ```
+</section>
+
+
+<section data-markdown>
+## #4 Use `[[ expr ]]` instead of `[ expr ]`
+
+note:
+* `[[` - extension of bash
+* `[` - short for `test`
+</section>
+
+
+<section data-markdown>
+## Cool Features I.
+
+* no need to enclose variables into quotes
+
+  ```bash
+  [[ -f ${file} ]]  # vs. [ -f "${file}" ]
+  ```
+
+* support for operators `"&&"` and `"||"`  
+
+  ```bash
+  [[ ${USERNAME} == "root" && $(id -g) == 1 ]]
+  ```
+
+* string comparision with `"<"` and `">"`
+
+  ```bash
+  [[ "apple" < "banana" ]]
+  ```
+</section>
+
+<section data-markdown>
+## Cool Features II.
+
+* operator `"=~"` for regex comparisions
+
+  ```bash
+  [[ ${answer} =~ ^y(es)?$ ]]
+  ```
+* supports _globbing_
+
+  ```bash
+  [[ ${answer} = y* ]]
+  ```
+</section>
+
+
+<section data-markdown>
+## #5 Use Modular Approach
+</section>
+
+
+<section data-markdown>
+* write scripts in modules (not a single file)
+    * easy maintenance
+    * easy navigation
+    * modules are separated by functionality
+
+* script can be extended with new funkcionality with `source`
+  ```bash
+  # ...
+  source "${DATADIR}/helper.sh"
+  # ...
+  ```
+</section>
+
+
+<section data-markdown>
+## #6 Don't Use Tools whose Functions `bash` Handles
+</section>
+
+
+<section data-markdown>
+* one of the most common (unconscious) mistakes
+
+* most common `grep`, `awk`, `sed`, `bc`, `expr`, e.g.:
+  ```bash
+  size=$(du -hs images/ | awk '{print $1}')
+  ```
+  can be solved with bash as
+  ```bash
+  array=($(du -hs images/))
+  size=${array[0]}
+  ```
+* instead of `seq 1 10` use `{1..10}`
+
+* use `$(cmd)` instead of `cmd`
+</section>
+
+
+<section data-markdown>
+## #7 Write Scripts so That They can be Tested
+</section>
+
+
+<section data-markdown>
+* close everything to the function (approach)
+  ```bash
+  #!/usr/bin/env bash
+
+  main(){
+      echo "Hello world!"
+  }
+
+  main
+  ```
+
+* many tools for testing in bash are available (e.g. [bats](https://github.com/sstephenson/bats))
+  ```bash
+  #!/usr/bin/env bats
+
+  @test "when new folder is created, then exit status is 0" {
+    run mkdir "${dir}"
+    assert_equal "${status}" 0
+  }
+  ```
+</section>
+
+
+<section data-markdown>
+## #8 Use Linter
+</section>
+
+
+<section data-markdown>
+> **Lint** or a **linter**, is a static code analysis tool used to flag programming errors, bugs, stylistic errors and suspicious constructs. It helps to increase the quality of code.
+>
+> -- [Wikipedia](https://en.wikipedia.org/wiki/Linter_%28software%29)
+</section>
+
+
+<section data-markdown>
+### [ShellCheck](https://www.shellcheck.net/)
+
+* Shell script analysis tool
+* contains [Gallery of bad code](https://github.com/koalaman/shellcheck/blob/master/README.md#user-content-gallery-of-bad-code)
+    * shows, what kind of things does ShellCheck look for
+* in your Linux distro
+</section>
+
+
+<section data-markdown>
+## Other Recommendations
+
+* constants declaration
+
+  ```bash
+  readonly var='immutable value'
+  ```
+
+* writing own functions
+
+  ```bash
+  _greetings(){
+      local name="$1"
+      printf "Hello %s!\n" "${name}"    
+  }
+  ```
+</section>
+
+
+<section data-markdown>
+## Questions?
+</section>
+
+{% include qr.html %}
+
