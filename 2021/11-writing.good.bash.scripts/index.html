@@ -112,7 +112,19 @@ echo "this line is now not reachable"
 
 <section data-markdown>
 * _escaping_
-* the `'"'` helps with variables with spaces
+
+* the `'"'` helps with variables with white spaces
+  ```bash
+  $ track="with or without you.mp3"
+  $ file $track
+  with:    cannot open `with' (No such file or directory)
+  or:      cannot open `or' (No such file or directory)
+  without: cannot open `without' (No such file or directory)
+  you.mp3: cannot open `you.mp3' (No such file or directory)
+  ```
+</section>
+
+<section data-markdown>
 * the `'{}'` are not necessary, but are used in _bash expansion_:
     * string interpolation: 
       ```bash
@@ -144,7 +156,8 @@ note:
 * no need to enclose variables into quotes
 
   ```bash
-  [[ -f ${file} ]]  # vs. [ -f "${file}" ]
+  [[ -f ${file} ]]    # vs. [ -f "${file}" ]
+  [[ $var = "joe" ]]  # vs. [ $var = "joe" ]
   ```
 
 * support for operators `"&&"` and `"||"`  
@@ -158,6 +171,11 @@ note:
   ```bash
   [[ "apple" < "banana" ]]
   ```
+
+note:
+```bash
+[ $var = "joe" ]
+```
 </section>
 
 <section data-markdown>
@@ -187,7 +205,7 @@ note:
     * easy navigation
     * modules are separated by functionality
 
-* script can be extended with new funkcionality with `source`
+* script can be extended with new functionality with `source`
   ```bash
   # ...
   source "${DATADIR}/helper.sh"
@@ -291,24 +309,67 @@ note:
 
 
 <section data-markdown>
-## Other Recommendations
+## #9 Use Variable Annotations
+</section>
 
-* constants declaration
+<section data-markdown>
+
+* `readonly` - for readonly (constant) variables
 
   ```bash
   readonly var='immutable value'
   ```
 
-* writing own functions
+* `local` - for local variables inside of functions
 
   ```bash
   _greetings(){
       local name="$1"
-      printf "Hello %s!\n" "${name}"    
+      printf "Hello %s!\n" "${name}"
   }
   ```
 </section>
 
+
+<section data-markdown>
+## #10 Avoid Temporary Files
+</section>
+
+
+<section data-markdown>
+* some commands expect filenames as params
+    * pipelining does not work
+
+* operator `&lt;()`
+
+  ```bash
+  jq .main.temp &lt;(http https://openweathermap.org)
+  ```
+
+* _here documents_
+
+  ```bash
+  cat &lt;&lt;EOF
+     This is
+     Here
+     Document.
+  EOF
+  ```
+</section>
+
+
+<section data-markdown>
+## Other Tips
+</section>
+
+
+<section data-markdown>
+* add `||` to commands expected to fail
+
+  ```bash
+  ls /root || echo "Error" >&2 && exit 99
+  ```
+</section>
 
 <section data-markdown>
 ## Questions?
