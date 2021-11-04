@@ -367,8 +367,14 @@ note:
 * add `||` to commands expected to fail
 
   ```bash
-  ls /root || echo "Error" >&2 && exit 99
+  ls /root || {
+    echo "Error" >&2 
+    exit 1
+  }
   ```
+  
+note:
+* https://linuxhint.com/bash_error_handling/
 </section>
 
 <section data-markdown>
