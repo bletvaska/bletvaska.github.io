@@ -1,0 +1,262 @@
+---
+title: Ako som metódou Leanpub začal vytvárať knižky
+description: |
+    Ako som v lete zo svojich poznámok ku prednáškam vygeneroval dva formáty knižiek. Aké nástroje som na to použil, ako som to zautomatizoval a ako som našiel názov pre to, čo robím.
+permalink: /2021/lean-publishing
+duration: 60
+layout: slide
+theme: night
+date: 2021-11-09
+#bitly: https://bit.ly/31skY47
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk/
+categories: talk
+authors:
+    - name: Mirek Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+---
+
+<style>
+#books img {
+    height: 600px;
+}
+</style>
+
+<base href="/2021/11-lean.publishing/">
+
+{% include first.slide.html %}
+
+
+<section data-markdown id="about-me">
+    ![To som ja](../../images/mirek.na.hackathone.jpg)
+</section>
+
+
+<section data-markdown>
+## aj toto som ja
+
+* odporný asistent na TUKE
+* priamo prednášam / učím
+    * [Programovanie v jazyku C](https://kurzy.kpi.fei.tuke.sk/pvjc)
+    * [Vývoj aplikácií pre chytré zariadenia](https://kurzy.kpi.fei.tuke.sk/smart)
+    * [Základy Internetu vecí](https://kurzy.kpi.fei.tuke.sk/iot1)
+* mám prsty v iných predmetoch: [Základy algoritmizácie a programovania](https://kurzy.kpi.fei.tuke.sk/zap/), [Objetkové programovanie](https://kurzy.kpi.fei.tuke.sk/oop/), [Databázové systémy](https://kurzy.kpi.fei.tuke.sk/dbs/)
+* (príležitostný) inštruktor - Python, DevOps, testing, Linux
+</section>
+
+
+<section data-markdown id="y2010">
+## ~2010
+</section>
+
+
+<section data-markdown id="it4kt">
+## História
+
+* XML formát a XML transformácie
+    * šéfova robota napísaná v Jave
+    * štruktúrovaný matroš
+* začal som písať veľa
+    * distraction free editors vs word procesory
+</section>
+
+
+<section data-markdown id="y2013">
+## 2013
+</section>
+
+
+<section data-markdown>
+* začal som "za trest" prednášať _Programovanie_
+    * ako by som sa to chcel učiť ja?
+* výsledok
+    * odkukal som štýl
+    * začal som písať ešte viac
+    * začal som si vytvárať **vlastný toolbox**
+</section>
+
+
+<section data-markdown id="toolbox">
+## Toolbox
+
+* stále XML a XSLT transformácie
+    * vlastné transformácie
+    * hľadanie lepšieho formátu
+    * XML je ukecaný
+* počiatky automatizácie
+* pokusy o CI/CD s Gitlab-om
+* objavený potenciál
+</section>
+
+
+<section data-markdown id="y2017">
+## 2017
+</section>
+
+
+<section data-markdown id="markdown" data-background="white">
+[![Markdown](images/logo-markdown.png)](https://www.markdownguide.org/)
+</section>
+
+
+<section data-markdown id="pandoc" data-background="white">
+[![Pandoc](images/logo-pandoc.png)](https://pandoc.org/)
+
+a universal document converter
+
+notes:
+* `pandoc --list-output-formats`
+* `pandoc hello.md -o hello.html`
+* `pandoc hello.md -o hello.pdf`
+* `pandoc hello.md --metadata title="Hello world!" -o hello.epub`
+</section>
+
+
+<section data-markdown id="year-2019">
+## 2019
+</section>
+
+
+<section data-markdown data-background="#343433" id="jekyll">
+[![Jekyll](images/banner-jekyll.png)](https://jekyllrb.com/)
+
+notes:
+* z kramdown do pandoc
+</section>
+
+
+<section data-markdown>
+## CI/CD cez Gitlab
+</section>
+
+
+<section data-markdown id="year-2021">
+## 2021
+</section>
+
+
+<section data-markdown id="pdf-and-epub" data-background="white">
+![PDF and ePub](images/pdf.epub.jpg)
+</section>
+
+
+<section data-markdown>
+## Obrázky na titulku?
+</section>
+
+
+<section data-markdown data-background="black" id="komiks">
+[![Janka](images/komiks.png)](https://www.root.cz/clanky/komiks-posledny/)
+
+[Jana Slebodníková](https://www.root.cz/autori/jana-slebodnikova/) @ [root.cz](https://www.root.cz/)
+
+2014 - 2018
+</section>
+
+
+<section data-markdown id="licencia">
+## A čo licencia?
+
+notes:
+* text je môj, ale 
+    * ukradnutie textov je jednoduche
+* "kradnutie" obrazkov
+    * nestaci len pridavat zdroj, odkial som to ukradol ja
+    * wikimedia
+</section>
+
+
+<section data-markdown id="creative-commons" data-background="white">
+[![Creative Commons](images/logo-cc.jpg)](https://creativecommons.org/)
+</section>
+
+
+<section data-markdown id="creative-commons-licences" data-background="white">
+![CC Licences](images/cc.licences.jpg)
+</section>
+
+
+<section data-markdown id="cc-by-nc-sa" data-background="white">
+[![CC BY-NC-SA](images/logo-cc.by.nc.sa.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.cs)
+
+[**Uveďte pôvod-Nepoužívajte dielo komerčne-Zachovajte licenciu 4.0**](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.cs)
+
+Medzinárodná (CC BY-NC-SA 4.0)
+</section>
+
+
+<section data-markdown id="blitz" data-background="white">
+[![Blitz](images/logo-blitz.png)](https://friendsofepub.github.io/Blitz/)
+</section>
+
+
+<section data-markdown>
+## Napíšem knihu v latexe
+</section>
+
+
+<section data-markdown id="latex" data-background="white">
+[![LaTeX](images/logo-latex.png)](https://www.latex-project.org/)
+</section>
+
+
+<section data-markdown id="books">
+[![Jiří Rybička: Průvodce tvorbou dokumentů](images/rybicka-pruvodce.tvorbou.dokumentu.jpg)](https://www.striz.cz/43pruvodce.php)
+[![Jiří Rybička: Latex pro začátečníky](images/rybicka-latex.pro.zacatecniky.jpg)](https://www.databazeknih.cz/knihy/latex-pro-zacatecniky-249759)
+</section>
+
+
+<section data-markdown id="problems">
+## Problémy
+
+* pevná šírka stránky/normostrana
+    * fixná šírka zdrojových kódov
+* animované obrázky
+    * animáky pre web a statické obrázky pre pdf
+</section>
+
+
+<section data-markdown id="isbn">
+## ISBN
+</section>
+
+
+<section data-markdown data-background="white">
+[![Leanpub](images/logo-leanpub.png)](https://leanpub.com/)
+</section>
+
+
+<section data-markdown>
+## Lean Publishing
+
+[Publish Early, Publish Often](https://leanpub.com/)
+</section>
+
+
+<section data-markdown id="gitbook" data-background="white">
+[![Gitbook](images/logo-gitbook.png)](https://www.gitbook.com/)
+
+([legacy](https://github.com/GitbookIO/gitbook))
+</section>
+
+
+<section data-markdown id="the-plan">
+## The Plan
+
+* Programovanie mikrokontrolérov
+    * primárne MicroPython
+    * rozličné mikrokontroléry
+    * rozličné jazyky 
+* Programujeme s nástrojom Node-RED
+* Programovanie počítačových hier v rámci Pygame Zero
+</section>
+
+
+<section data-markdown>
+## Otázky?
+</section>
+
+{% include qr.html %}
+

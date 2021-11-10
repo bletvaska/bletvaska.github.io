@@ -1,6 +1,6 @@
 ---
 title: Vývoj aplikácií pre chytré zariadenia
-year: 2020
+year: 2021
 subtitle: Poznámky z prednášok 2020
 cover: smart.2020.png
 edition: 1

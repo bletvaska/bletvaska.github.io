@@ -37,8 +37,6 @@ hydeout:
   git: https://github.com
   youtube: https://www.youtube.com/channel/UCdoiG8gq9p8m7MXCkgFnKZg?view_as=subscriber
 
-#collections:
-  #- talks
 
 #permalink: pretty
 
@@ -72,3 +70,4 @@ header_pages:
 
 collections:
   - books
+  #- talks

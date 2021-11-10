@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module xmlns="http://kpi.fei.tuke.sk/practices"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns:j="http://kpi.fei.tuke.sk/tjava"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://kpi.fei.tuke.sk/practices ../practices.xsd
+            http://kpi.fei.tuke.sk/tjava ../tjava.xsd
+            http://www.w3.org/1999/xhtml ../xhtml1-strict.xsd">
+
+    <title>Lab #2: Red Alert: Reactor Overheat!</title>
+    <subtitle>reaktor, v ktorom nadmerne stúpne teplota, vie narobiť riadnu paseku</subtitle>
+
+    <!-- navigation -->
+    <next>alienbreed.03.html</next>
+    <prev>alienbreed.01.html</prev>
+
+    <!-- About ============================================================= -->
+    <about>
+        <p>
+            Vitaj vo výcvikovom stredisku kadet, kde z teba počas 12 týždňového tréningu spravíme ozajstného chlapa (rozumej <emph>objektového programátora</emph>)! O formu a podobu tvojho výcviku sa bude starať náš taktický a strategický tím, ktorý má s výcvikom kadetov tvojho formátu dlhoročné skúsenosti a rozhodne ťa nenechá vydýchnuť. Tvoj výcvik je totiž jeho prioritou.
+        </p>
+
+        <p>
+            Dnes to bude len zahrievacie kolo, v ktorom uvidíme, čo si zač, čo v tebe je a čo od teba teda môžeme očakávať. Aj keď sa jedná len o zahrievacie kolo, mnoho kadetov trhá tím a zostáva pri plnení dnešnej misie ešte niekoľko týždňov. Veríme, že ty partiu trhať nebudeš!
+        </p>
+
+        <p>
+            Z operačného strediska zdraví <emph>Manager</emph>.
+        </p>
+
+        <lecturer>
+            <p>
+                Cvičenie treba začať analýzou problému - modelovaním reaktora (pri prehrievaní treba spomenuť Černobyľ, jeho opravovaním (pri kladive treba spomenúť Armagedon) a pri vypínači sa dajú spomenúť káble vedúce od vypínača ku reaktoru ako dôvod existencie parametra v konštruktore).
+            </p>
+
+            <p>
+                Problémy:
+                <ul>
+                    <li>
+                        nenainštalovaná IDEA
+                    </li>
+                    <li>
+                        neznámy problém s nastavením cesty ku rules.xml pre easypmd
+                    </li>
+                </ul>
+            </p>
+        </lecturer>
+    </about>
+
+    <objectives>
+        <objective id="goal1">
+            Naučiť sa vytvárať vlastné triedy.
+        </objective>
+        <objective id="goal2">
+            Naučiť sa vytvárať inštancie objektov z vytvorených tried.
+        </objective>
+        <objective id="goal3">
+            Naučiť sa skrývať členské premenné (zapúzdrovanie údajov).
+        </objective>
+        <objective id="goal4">
+            Naučiť sa riadiť viditeľnosť členských premenných a metód.
+        </objective>
+        <objective id="goal5">
+            Naučiť sa vytvárať metódy tried.
+        </objective>
+        <objective id="goal6">
+            Naučiť sa vytvárať vlastné konštruktory.
+        </objective>
+    </objectives>
+
+    <!-- Content =========================================================== -->
+    <content>
+
+
+        <!-- Step 01 ======================================================= -->
+        <step>
+            <title>Warming up</title>
+            <description>
+                Kadet! Aby tvoj výcvik mohol začať, musíš si najprv pripraviť svoje prostredie. Stiahneš si kostru projektu, v ktorom budeš pracovať.
+            </description>
+
+            <task>
+                <problem>
+                    Stiahnite si <link href="resources/download/training.project.zip">balíček s projektom</link>, rozbaľte ho a otvorte vo vývojom prostredí <link href="https://www.jetbrains.com/idea/">IntelliJ IDEA</link>.
+                </problem>
+
+                <description>
+                    <comment>
+                        Predpokladom pre spustenie IntelliJ IDEA, ako aj nášho projektu je nainštalovaný Java Development Kit (JDK) verzie 1.8. Možete ho stiahnuť z <link href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">tejto stránky</link>, alebo využiť balíčkovací systém vášho operačného systému.
+                    </comment>
+
+                    <p>
+                        Pri otváraní projektu môže dôjsť v niektorých prípadoch ku problému, keď prostredie nerozpozná, resp. nenastaví požadovanú JDK platformu. Že k problému došlo spoznáte tak, že vedľa názvu projektu "training.project" v pravom hornom rohu okna prostredia je ikona s červeným krížikom.
+                    </p>
+
+                    <p>
+                        Problém vyriešite nasledovne:
+                    </p>
+
+                    <ol>
+                        <li>Otvorte <emph>Project Structure</emph> v menu File.</li>
+                        <li>V ľavej lište kliknite na <emph>Project</emph>.</li>
+                        <li>Zvoľte existujúce SDK, alebo vytvorte nové pomocou tlačidla <emph>New...</emph>. Podporované sú JDK verzie 1.8.</li>
+                        <li>Nastavte <emph>Project language level</emph> tak, aby zodpovedal použitému JDK (8 pre JDK 1.8).</li>
+                        <li>Potvrďte zmeny tlačidlom <emph>OK</emph> vpravo dole.</li>
+                    </ol>
+
+                    <p>
+                        Pri korektnom postupe by zo spomínanej ikony mal zmiznúť červený krížik.
+                    </p>
+
+                    <p>
+                        Pre overenie funkčnosti projektu ho spustite kliknutím na zelenú šípku vpravo hore v okne prostredia, alebo pomocou skratky <emph>Shift+F10</emph>. Ak je všetko v poriadku, zobrazí sa vám východzia mapa tohto <emph>Levelu</emph> (cvičenia) spolu s oknom inšpektora.
+
+                        <figure>
+                            <image>alienbreed.02-01.png</image>
+                            <caption>Východzia podoba levelu</caption>
+                        </figure>
+                    </p>
+                </description>
+            </task>
+        </step>
+
+        <step>
+            <title>Reactor Class</title>
+            <description>
+                Tvojou úlohou je vytvoriť triedu, ktorá bude reprezentovať reaktor. Jeho stav bude reprezentovaný aktuálnou teplotou jadra, celkovým poškodením reaktora a animáciou, ktorá aktuálny stav vizualizuje.
+
+                <figure>
+                    <image src="http://yuml.me/diagram/scruffy;/class/[&lt;&lt;abstract>>;AbstractActor]^-[Reactor].svg"/>
+                    <caption>
+                        Diagram tried, ktorý vyjadruje vzťah triedy <class>Reactor</class> s triedou <class>AbstractActor</class>.
+                    </caption>
+                </figure>
+            </description>
+
+            <task>
+                <problem>
+                    V balíčku <package>sk.tuke.oop.aliens</package> vytvorte triedu <class>Reactor</class>, ktorá bude potomkom triedy <class>AbstractActor</class>.
+                </problem>
+
+                <description>
+                    <p>
+                        Trieda <class>AbstractActor</class> je súčasťou softvérového rámca <emph>AlienLib</emph>, ktorý používate. Nie je preto potrebné vytvárať ju samostatne! Je ju potrebné len <emph>importovať</emph> do vášho projektu (obdoba príkazu <keyword>include</keyword> v jazyku <emph>C</emph>). V tom vám ale značne uľahčí život samotné vývojové prostredie.
+                    </p>
+
+                    <p>
+                        Keďže o dedičnosti toho ešte veľa neviete, zápis, ktorý hovorí o tom, že trieda <class>A</class> je potomkom triedy <class>B</class>, je nasledovný:
+
+                        <code lang="java">class A extends B</code>
+                    </p>
+
+                    <comment>
+                        Keď budete potrebovať importovať nejakú triedu zo softvérového rámca a prostredie vám ponúkne na výber z niekoľkých možností, tú správnu vždy identifikujete prefixom balíčka <package>sk.tuke.oop.framework</package>.
+                    </comment>
+                </description>
+
+                <lecturer>
+                    <solution>
+                        <code lang="java">
+package sk.tuke.oop.aliens;
+
+import sk.tuke.oop.aliens.actor.AbstractActor;
+
+public class Reactor extends AbstractActor {
+
+}
+                        </code>
+                    </solution>
+                </lecturer>
+
+            </task>
+
+
+            <task>
+                <problem>
+                    Do triedy <class>Reactor</class> pridajte členské premenné, ktoré budú reprezentovať stav reaktora: <emph>aktuálnu teplotu</emph>, <emph>poškodenie</emph> a <emph>animáciu reprezentujúcu reaktor</emph>.
+                </problem>
+
+                <description>
+                    Jedná sa o nasledovné členské premenné:
+                    <ul>
+                        <li>
+                            <field>temperature</field> - aktuálna teplota reaktora bude reprezentovaná celým číslom, pričom minimálna hodnota je <value>0</value> stupňov
+                        </li>
+                        <li>
+                            <field>damage</field> - poškodenie reaktora budeme rozlišovať hodnotou v percentách (celé číslo v rozsahu od <value>0</value> (nepoškodený) do <value>100</value> (zničený))
+                        </li>
+                        <li>
+                            <field>normalAnimation</field> - objekt animácie, ktorý reprezentuje bezporuchový stav reaktora (pre objekty animácií budeme používať špeciálny typ <type>Animation</type> z balíčka <package>sk.tuke.oop.framework.Animation</package>)
+                        </li>
+                    </ul>
+
+                    <comment>
+                        V počítačovej grafike (hlavne v súvislosti s 2D hrami) je možné sa veľmi často stretnúť s termínom <emph>sprite</emph>. <link href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)"><emph>Sprite</emph></link> je malý dvojrozmerný obrázok (alebo animácia), ktorý je integrovaný do väčšej scény. Postupným zobrazením niekoľkých sprite-ov na rovnakej pozícii vzniká animácia.
+
+                        <figure>
+                            <image>jsw-right.gif</image>
+                            <caption>
+                                Sprite-y hlavnej postavy hry <emph>Jet Set Willy</emph> idúcej vpravo
+                            </caption>
+                        </figure>
+
+                        <figure>
+                            <image>jsw-animation.gif</image>
+                            <caption>
+                                Výsledná animácia postupným prehratím jednotlivých sprite-ov
+                            </caption>
+                        </figure>
+
+
+                        V hernom rámci, ktorý používame, budeme pracovať s objektami typu <type>Animation</type>, ale termíny animácia a sprite budeme považovať za synonymá.
+                    </comment>
+
+                    <p>
+                        Pri tvorbe členských premenných nezabúdajte na to, že nechceme, aby boli voľne viditeľné mimo triedu!
+                    </p>
+
+                    <lecturer>
+                        <solution>
+                            <code lang="java">
+private int temperature;
+private int damage;
+private Animation normalAnimation;
+                            </code>
+                        </solution>
+                    </lecturer>
+
+                </description>
+            </task>
+
+
+            <task>
+                <problem>
+                    Vytvorte bezparametrický konštruktor triedy, v ktorom novovytváraný objekt reaktora inicializujete.
+                </problem>
+
+                <description>
+                    V rámci inicializácie objektu nastavte:
+                    <ol>
+                        <li>
+                            animáciu, ktorá bude znázorňovať reaktor, na nasledujúci obrázok
+
+                            <figure>
+                                <sprite>reactor_on.png</sprite>
+                                <caption>
+                                    Animácia <file>reactor_on.png</file> (rozmery obrázka: <value>80x80</value>, dĺžka prehrávania: <value>100</value>)
+                                </caption>
+                            </figure>
+                        </li>
+                        <li>
+                            počiatočnú teplotu jadra reaktora na hodnotu <value>0</value>, a
+                        </li>
+                        <li>
+                            počiatočnú percentuálnu hodnotu poškodenia na hodnotu <value>0</value>.
+                        </li>
+                    </ol>
+
+                    <p>
+                        Animácie sa nachádzajú v projekte v priečinku <path>resources/images/</path>. Pri nastavovaní cesty k animácii používajte relatívnu cestu, pričom za koreňový priečinok je považovaný <path>resources/</path>.
+                    </p>
+
+                    <p>
+                        Pre nastavenie animácie využite nasledovný fragment kódu:
+                        <code lang="java">
+// create animation object
+normalAnimation = new Animation("images/reactor_on.png", 80, 80, 100);
+// play animation repeatedly
+normalAnimation.setPingPong(true);
+// set actor's animation to just created Animation object
+setAnimation(normalAnimation);
+                        </code>
+                    </p>
+
+                    <comment>
+                        Dokumentáciu ku jednotlivým metódam a triedam softvérového rámca <emph>AlienLib</emph> nájdete na <link href="resources/javadoc/training.project/index.html">tejto stránke</link>.
+                    </comment>
+
+                <lecturer>
+                    <solution>
+                        <code lang="java">
+public Reactor() {
+    temperature = 0;
+    damage = 0;
+
+    normalAnimation = new Animation("images/reactor_on.png", 80, 80, 100);
+    normalAnimation.setPingPong(true);
+    setAnimation(normalAnimation);
+}
+                        </code>
+                    </solution>
+                </lecturer>
+
+                </description>
+            </task>
+
+
+            <task>
+                <problem>
+                    Overte správnosť svojej implementácie vytvorením inštancie reaktora a jeho vložením do mapy.
+                </problem>
+
+                <description>
+                    Pokiaľ ste postupovali správne, budete vedieť vytvoriť inštanciu reaktora a umiestniť ju do mapy.
+
+                    <figure>
+                        <image>alienbreed.02-02.png</image>
+                        <caption>Plnefunkčný reaktor</caption>
+                    </figure>
+                </description>
+            </task>
+
+
+            <task>
+                <problem>
+                    Vytvorte metódy <method>getTemperature()</method> a <method>getDamage()</method>, pomocou ktorej budete vedieť získať hodnotu aktuálnej teploty jadra a jeho poškodenia.
+                </problem>
+
+                    <lecturer>
+                        <solution>
+                            <code lang="java">
+public int getTemperature() {
+    return temperature;
+}
+
+public int getDamage() {
+    return damage;
+}
+                            </code>
+                        </solution>
+                    </lecturer>
+
+            </task>
+
+
+            <task>
+                <problem>
+                    Vytvorte metódu <method>increaseTemperature()</method>, pomocou ktorej bude možné zvýšiť aktuálnu teplotu jadra reaktora.
+                </problem>
+
+                <description>
+                    Táto metóda nebude vracať žiadnu hodnotu a bude mať jeden celočíselný parameter (pomenovaný napr. <emph>increment</emph>), ktorý bude reprezentovať hodnotu, o ktorú sa má aktuálna teplota jadra zvýšiť.
+
+                    Pri implementovaní metódy však zohľadnite nasledovné skutočnosti:
+
+                    <ul>
+                        <li>
+                            S nárastom teploty lineárne zvyšujte poškodenie reaktora. Reaktor sa začne kaziť <emph>po prekročení</emph> teploty <value>2000</value> stupňov a prestane byť funkčný <emph>po dosiahnutí</emph> <value>6000</value> stupňov. Následné ochladenie reaktora ale nezníži úroveň poškodenia, ktoré už vysoká teplota spôsobila (to znamená, že po volaní tejto metódy nemôže byť hodnota poškodenia reaktora nižšia ako pred jej volaním). Pri výpočte úrovne poškodenia ignorujte desatinnú časť výsledku (zaokrúhľujte nadol).
+                            <figure>
+                                <image>alienbreed.02-03.svg</image>
+                                <caption>Závislosť zvyšovania poškodenia reaktora pri raste jeho teploty</caption>
+                            </figure>
+                            <comment>
+                              Znižovanie poškodenia reaktora bude možné jedine jeho opravou, ktorú budete riešiť nabudúce.
+                            </comment>
+                        </li>
+                        <li>
+                            Ak teplota po zvýšení prekročí hodnotu <value>4000</value> stupňov, vzhľad reaktora bude od tohto momentu reprezentovaný nasledujúcou animáciou:
+
+                            <figure>
+                                <sprite>reactor_hot.png</sprite>
+                                <caption>
+                                    Animácia <file>reactor_hot.png</file> (rozmery obrázka: <value>80x80</value>, dĺžka prehrávania: <value>50</value>)
+                                </caption>
+                            </figure>
+
+                            Aby bol efekt zaujímavejší, skráťte dĺžku prehrávania animácie (parameter <parameter>duration</parameter>) na polovicu z dĺžky prehrávania animácie nepoškodeného reaktora.
+
+                        </li>
+                        <li>
+                            Ak je poškodenie reaktora v intervale &lt;<value>33%</value>, <value>66%</value>&gt;, teplota rastie 1.5-násobne; ak prekročí hodnotu <value>66%</value>, teplota porastie dvojnásobne. V oboch prípadoch je zmena uvedená oproti pôvodnej hodnote parametra <emph>increment</emph>. Po výpočte novej hodnoty teploty výsledok zaokrúhlite vždy nahor na najbližšie celé číslo.
+                        </li>
+                        <li>
+                            Ak teplota po zvýšení dosiahne (alebo prekročí) hodnotu <value>6000</value> stupňov, dôjde ku zničeniu reaktora (poškodenie reaktora dosiahne hodnotu <value>100%</value>). Zničený reaktor bude reprezentovaný nasledujúcou animáciou:
+                            <figure>
+                                <sprite>reactor_broken.png</sprite>
+                                <caption>
+                                    Animácia <file>reactor_broken.png</file> (rozmery obrázka: <value>80x80</value>, dĺžka prehrávania: <value>100</value>)
+                                </caption>
+                            </figure>
+                        </li>
+                        <li>
+                            Ak poškodenie reaktora dosiahlo hodnotu <value>100%</value>, akékoľvek ďalšie zvyšovanie teploty už nemá žiadny efekt.
+                        </li>
+                    </ul>
+
+                    <comment>
+                        Je výhodné vytvoriť objekty animácií už pri inicializovaní objektu a ich hodnoty uložiť do ďalších členských premenných. Keďže reaktor sa môže nachádzať v niekoľkých stavoch (v našom prípade v troch - stav ok, prehriaty a zničený reaktor), animácie reprezentujúce tento stav sa budú meniť. Ak sa v priebehu hry zmení stav reaktora napr. 50x, znamená to, že pri každej zmene potrebujete načítavať inú animáciu zvlášť - spolu teda 50 načítaní súborov animácií. Ak si však všetky animácie načítate pri inicializácii objektu, načítate spolu iba 3 súbory animácií, ktoré sa už budú používať podľa potreby.
+                    </comment>
+                </description>
+
+                    <lecturer>
+                        <solution>
+                            <code lang="java">
+// new fields
+private Animation hotAnimation;
+private Animation brokenAnimation;
+
+public Reactor() {
+    temperature = 0;
+    damage = 0;
+
+    normalAnimation = new Animation("images/reactor_on.png", 80, 80, 100);
+    normalAnimation.setPingPong(true);
+    hotAnimation = new Animation("images/reactor_hot.png", 80, 80, 100);
+    hotAnimation.setPingPong(true);
+    brokenAnimation = new Animation("images/reactor_broken.png", 80, 80, 100);
+    brokenAnimation.setPingPong(true);
+
+    setAnimation(normalAnimation);
+}
+
+public void increaseTemperature(int increment) {
+    if (damage == 100) {
+        return;
+    }
+
+    double coef = 1;
+
+    if (damage > 66) {
+        coef = 2;
+    } else if (damage >= 33) {
+        coef = 1.5;
+    }
+
+    temperature += temperature + (int)Math.ceil(increment*coef);
+
+    if (temperature >= 6000) {
+        setAnimation(brokenAnimation);
+    } else if (temperature > 4000) {
+        setAnimation(hotAnimation);
+    }
+
+    // linear dependence of damage and temperature
+    int tempDamage = (temperature - 2000)/40;
+
+    // clip damage to 0 - 100 range
+    tempDamage = Math.max(Math.min(100, tempDamage), 0);
+
+    // do not decrease damage when temperature drops
+    if (damage &lt; tempDamage) {
+        damage = tempDamage;
+    }
+}
+                            </code>
+                        </solution>
+                    </lecturer>
+            </task>
+
+
+            <task>
+                <problem>
+                    Vytvorte metódu <method>decreaseTemperature()</method>, pomocou ktorej bude možné znížiť aktuálnu teplotu jadra reaktora.
+                </problem>
+
+                <description>
+                    Táto metóda nebude vracať žiadnu hodnotu a bude mať jeden celočíselný parameter (pomenovaný napr <emph>decrement</emph>), ktorý bude reprezentovať hodnotu, o ktorú sa má aktuálna teplota jadra znížiť. Pozor, zníženie teploty neznižuje poškodenie, ktoré vysoká teplota už spôsobila!
+
+                    Pri implementovaní metódy zohľadnite nasledovné skutočnosti:
+
+                    <ul>
+                        <li>
+                            Ak je poškodenie jadra aspoň <value>50%</value>, reálne znižovanie teploty bude len polovičné oproti hodnote parametra <emph>decrement</emph>.
+                        </li>
+                        <li>
+                            Ak je poškodenie jadra na úrovni <value>100%</value>, znižovanie teploty už nemá žiaden efekt.
+                        </li>
+                        <li>
+                            Ak teplota jadra pri ochladzovani klesne pod <value>4000</value> stupňov, zmeňte animáciu reprezentujúcu stav reaktora na <sprite-link>reactor_on.png</sprite-link>.
+                        </li>
+                    </ul>
+                </description>
+
+                <lecturer>
+                    <solution>
+                        <code lang="java">
+public void decreaseTemperature(int decrement) {
+    if (damage == 100) {
+        return;
+    }
+
+    if (damage >= 50) {
+        temperature -= decrement / 2;
+    } else {
+        temperature -= decrement;
+    }
+
+    if (temperature &lt; 4000) {
+        setAnimation(normalAnimation);
+    }
+}
+                        </code>
+                    </solution>
+                </lecturer>
+            </task>
+
+            <task>
+                <problem>
+                    Vytvorte súkromnú metódu <method>updateAnimation()</method>, ktorá na základe aktuálnej teploty nastaví animáciu reaktora.
+                </problem>
+                <lecturer>
+                    <solution>
+                        <code lang="java">
+private void updateAnimation() {
+    if (temperature >= 6000) {
+        setAnimation(brokenAnimation);
+    } else if (temperature > 4000) {
+        setAnimation(hotAnimation);
+    } else {
+        setAnimation(normalAnimation);
+    }
+}
+                        </code>
+                    </solution>
+                </lecturer>
+            </task>
+
+            <task>
+                <problem>
+                    Upravte implementáciu metód <method>increaseTemperature()</method> a <method>decreaseTemperature()</method> tak, aby pre zmenu aktuálnej animácie využili práve vytvorenú metódu <method>updateAnimation()</method>
+                </problem>
+            </task>
+
+            <task>
+                <problem>
+                    Pomocou <emph>Inšpektora</emph> umiestnite objekt reaktora do mapy a otestujte správnosť svojej implementácie.
+                </problem>
+
+                <description>
+                    <figure>
+                        <image>alienbreed.02-04.png</image>
+                        <caption>Pokazený (prehriaty) reaktor</caption>
+                    </figure>
+
+                </description>
+            </task>
+
+        </step>
+
+
+
+
+    </content>
+
+    <!-- additional tasks ================================================== -->
+    <additional-tasks>
+
+        <additional-task>
+            Pridajte do reaktora nasledovný atribút a metódu:
+            <ul>
+                <li><field>manufacturer</field> - názov výrobcu reaktora,</li>
+                <li><method>isServiceNeeded()</method> - bezparametrická metóda vracajúca hodnotu
+                    <ul>
+                        <li><value>true</value>, ak teplota reaktora presiahne teplotu <value>3000</value> stupňov a poškodenie bude viac ako <value>50</value> percent,</li>
+                        <li><value>false</value> v opačnom prípade.</li>
+                    </ul>
+                </li>
+                Atribút zapúzdrite a inicializujte v parametrickom konštruktore.
+            </ul>
+        </additional-task>
+
+        <additional-task>
+            Ošetrite prípad, kedy sa pri volaní metód <method>increaseTemperature()</method> a <method>decreaseTemperature()</method> použije záporný parameter. Ak k takémuto volaniu dôjde, nevykonajte žiadnu zmenu teploty.
+        </additional-task>
+
+        <additional-task>
+            Upravte reaktor tak, aby rýchlosť pulzovania jeho animácie závisela od úrovne poškodenia.
+        </additional-task>
+
+        <additional-task>
+            V balíčku <package>sk.tuke.oop.aliens</package> vytvorte triedu <class>Computer</class> ako potomka triedy <class>AbstractActor</class>. Tento počítač bude podporovať vykonávanie základných aritmetických operácií <method>add()</method> (sčítanie) a <method>sub()</method> (odčítanie) pre číselné údaje typu <type>int</type> a <type>double</type> (vhodne preťažte tieto metódy). Funkcie budete môcť použiť za pomoci <emph>Inšpektora</emph>.
+        </additional-task>
+
+    </additional-tasks>
+
+    <!-- additional links ================================================== -->
+    <additional-links>
+
+        <additional-link>
+            <resource href="javadoc/training.project/index.html">Dokumentácia k softvérovému rámcu GameLib</resource>
+        </additional-link>
+
+        <additional-link>
+
+            Metóda <resource href="javadoc/training.project/sk/tuke/oop/framework/Actor.html#setAnimation(sk.tuke.oop.framework.Animation)"><method>setAnimation()</method></resource> rozhrania <link href="resources/javadoc/training.project/sk/tuke/oop/framework/Actor.html">Actor</link>:
+            <emph>Sets the actor's current animation</emph>.
+        </additional-link>
+
+        <additional-link>
+            Trieda <resource href="javadoc/training.project/sk/tuke/oop/framework/Animation.html"><class>Animation()</class></resource>:
+            <emph>Animation is made of the picture (sprite) given the width and height of the picture. Animation could be started by calling start and stop methods.</emph>.
+        </additional-link>
+
+        <additional-link>
+            Java Tutoriál: <link href="http://download.oracle.com/javase/tutorial/java/concepts/object.html">What Is an Object?</link>
+        </additional-link>
+
+        <additional-link>
+            Java Tutoriál: <link href="http://download.oracle.com/javase/tutorial/java/concepts/class.html">What Is a Class?</link>
+        </additional-link>
+
+        <additional-link>
+            Java Tutoriál: <link href="http://docs.oracle.com/javase/tutorial/java/concepts/inheritance.html">What Is Inheritance?</link>
+        </additional-link>
+
+    </additional-links>
+
+</module>
