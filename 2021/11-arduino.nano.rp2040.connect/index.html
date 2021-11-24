@@ -1,0 +1,516 @@
+---
+title: MicroPython pre Arduino Nano RP2040 Connect
+description: |
+    Arduino Nano RP2040 Connect.
+#permalink: /2021/micropython-for-arduino-nano-rp2040-connect/
+duration: 60
+layout: slide
+theme: night
+date: 2021-11-24
+# bitly: https://bit.ly/3oemezv
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk/
+categories: talk
+authors:
+    - name: Mirek Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# published: false
+---
+
+<style>
+
+#cp-networking  pre {
+    font-size: .45em;
+}
+
+#cp-pdm-microphone pre {
+    font-size: .31em;
+}
+
+#snek h2 > a {
+    /* color: #AAE0E5; */
+}
+</style>
+
+<!--<base href="{{ page.permalink }}">-->
+
+{% include first.slide.html %}
+
+
+<section data-markdown id="arduino-with-python" data-background="#AAE0E5">
+[![Arduino with Python](images/arduino.with.python.webp)](https://realpython.com/arduino-python/)
+
+notes:
+* problem ako dostat python do arduina trapi uz cele generacie
+* problemom je mala SRAM aj FLASH
+* firmata
+</section>
+
+
+<section data-markdown id="snek" data-background="white">
+![Snek](images/snek.svg)
+
+## [sneklang](https://sneklang.org/)
+
+A Python-inspired Language for Embedded Devices
+
+notes:
+* projekt https://github.com/keith-packard/snek
+* `./snek-uno-install -port /dev/ttyACM1 -hex snek-uno-1.7.hex`
+</section>
+
+
+<section data-markdown id="arduino-nano-rp2040-connect" data-background="white">
+![Arduino Nano RP2040 Connect](images/arduino.nano.rp2040.connect.jpg)
+</section>
+
+
+<section data-markdown id="features" data-background="white">
+![Features of Arduino Nano RP2040 Connect](images/arduino.features.jpg)
+
+notes:
+* https://www.conrad.sk/p/arduino-doska-nano-rp2040-connect-nano-2371847
+</section>
+
+
+<section data-markdown id="pins-overview" data-background="white">
+![Overview of Pins of Arduino Nano RP2040 Connect](images/arduino.pins.jpg)
+
+notes:
+* https://www.conrad.sk/p/arduino-doska-nano-rp2040-connect-nano-2371847
+* tieto info nájdete aj na krabičke
+</section>
+
+
+<section data-markdown id="pins" data-background="white">
+![Pins of Arduino Nano RP2040 Connect](images/arduino.nano.rp2040.connect-pins.png)
+
+notes:
+* všetky piny môžu byť aj PWM
+* GPIO0 a 1 (D0 a D1) sú vyhradené pre UART
+* analógové piny A6 a A7 nie sú pripojené priamo k RP2040 a nedajú sa použiť
+	* sú pripojené k WiFi modulu
+	* možno sa dajú použiť v Arduino SDK
+* A4 a A5 sú pre I2C komunikáciu 
+	* akcelerometer a gyroskop
+</section>
+
+
+
+<section data-markdown id="pinout" data-background="white">
+![Arduino Nano RP2040 Connect Pinout](images/arduino.nano.rp2040.connect.pinout.png)
+
+notes:
+* https://circuitstate.com/news/arduino-nano-rp2040-connect-is-in-the-stores/
+</section>
+
+
+<section data-markdown id="pins-details">
+## Piny
+
+* 8 analógových pinov
+	* `A4` a `A5` sú určené pre I2C
+	* piny `A6` a `A7` nie sú prepojené cez RP2040 a nedajú sa použiť
+* 22 digitálnych GPIO pinov
+	* `D2` - `D12`
+    * `A4` - `A5`
+* 20 PWM pinov
+
+notes:
+* https://docs.arduino.cc/tutorials/nano-rp2040-connect/rp2040-01-technical-reference
+</section>
+
+
+<section data-markdown id="arduino-block-diagram" data-background="white">
+![Arduino Nano RP2040 Connect Block Diagram](images/arduino.nano.rp2040.connect-block.diagram.png)
+
+notes:
+* https://circuitstate.com/news/arduino-nano-rp2040-connect-is-in-the-stores/
+</section>
+
+
+<section data-markdown id="interfaces" data-background="white">
+![Interfaces of Arduino Nano RP2040 Connect](images/arduino.interfaces.jpg)
+
+notes:
+* https://www.conrad.sk/p/arduino-doska-nano-rp2040-connect-nano-2371847
+* u-blox NINA-W102 radio modul
+	* WiFi 802.11b/g/n
+	* Bluetooth® 
+	* BLE v4.2
+</section>
+
+
+<section data-markdown id="extended-features" data-background="white">
+![Extended Features of Arduino Nano RP2040 Connect](images/arduino.extended.features.jpg)
+
+notes:
+* https://www.conrad.sk/p/arduino-doska-nano-rp2040-connect-nano-2371847
+</section>
+
+
+<section data-markdown id="python-support">
+## Arduino a Python
+
+* [MicroPython](https://micropython.org/download/ARDUINO_NANO_RP2040_CONNECT/) - od nočných zostavení v1.17 (17.nov.2021)
+* [Circuit Python](https://circuitpython.org/board/arduino_nano_rp2040_connect/) - od v6.3
+* [OpenMV MicroPython](https://docs.arduino.cc/tutorials/nano-rp2040-connect/rp2040-openmv-setup)
+</section>
+
+
+<section id="micropython-vs-circuitpython" data-background="images/micropython.vs.circuitpython.jpg">
+</section>
+
+
+<section data-markdown id="python-for-microcontrollers">
+* [CircuitPython](https://circuitpython.org/) je fork [MicroPython](http://micropython.org/)-u
+* sú určené na programovanie mikrokontrolérov
+    * odľahčená verzia Python 3
+    * optimalizovaný na beh na mikrokontroléroch (min 16k RAM a 256k FLASH)
+* za CircuitPython-om stojí [Adafruit](https://www.adafruit.com/)
+* MicroPython vďaka RP2040 získal podporu od [Raspberry Pi Foundation](https://www.raspberrypi.org/)
+</section>
+
+
+
+<section data-markdown id="thonny" data-background="#ABE0E6">
+[![Thonny](images/thonny.jpg)](https://realpython.com/python-thonny/)
+
+notes:
+* nebudem vas trapit nastrojmi z prikazoveho riadku ;)
+    * ziadny rshell, mpremote ani vim
+* budem pouzivat thonny, pretoze:
+    * ma lepsie vyriesenu podporu prace s mikrokontrolermi
+    * ma zvyraznovanie syntaxe v rezime repl
+</section>
+
+
+<section data-markdown>
+## Nahratie *Python-u
+
+1. odpojiť zariadenie
+2. aktivovať Bootloader režim prepojením pinov `GND` a `REC`
+3. znovu pripojiť zariadenie k počítaču
+4. nahrať firmvér na zariadenie `RPI-RP2`
+5. po nahratí sa zariadenie samo reštartuje
+</section>
+
+
+<section data-markdown data-background="images/short.rec.nanorp2040connect.png">
+notes:
+* https://docs.arduino.cc/tutorials/nano-rp2040-connect/rp2040-openmv-setup
+</section>
+
+
+<section data-markdown id="micropython" data-background="white">
+[![MicroPython](images/micropython.png)](http://micropython.org/)
+</section>
+
+
+<section data-markdown id="mp-blink">
+## Blink 
+
+* zabudovaná LED je na digitálnom pin-e `13`
+	* v MicroPython-e je dostupná cez `GPIO6`
+
+```python
+from machine import Pin
+from time import sleep
+
+led = Pin(6, Pin.OUT)
+
+while True:
+    led.on()
+    sleep(1)
+    led.off()
+    sleep(0.5)
+```
+</section>
+
+
+<section data-markdown id="mp-networking">
+## Networking
+
+```python
+>>> import network
+>>> wlan = network.WLAN(network.STA_IF)
+>>> wlan.active(True)
+>>> wlan.scan()
+[(b'IoTLab', b'\xe8e\xd4\xca\xcea', 10, -64, 4, 1)]
+>>> wlan.connect('IoTLab', 'password')
+>>> wlan.isconnected()
+True
+>>> wlan.ifconfig()
+('192.168.0.150', '255.255.255.0', '192.168.0.1', '192.168.0.1')
+```
+</section>
+
+
+<section data-markdown id="lsm6dsox">
+## Pohybový senzor LSM6DSOX
+
+* typ senzoru označovaný aj ako IMU (Inertial Measurement Unit)
+* [LSM6DSOX obsahuje](https://docs.arduino.cc/tutorials/nano-rp2040-connect/rp2040-imu-basics)
+	* akcelerometer
+	* gyroskop
+</section>
+
+
+<section data-markdown id="imu-accelerometer" data-background="white">
+![IMU Accelerometer](images/imu.accelerometer.png)
+
+notes:
+* https://docs.arduino.cc/tutorials/nano-rp2040-connect/rp2040-imu-basics
+</section>
+
+
+<section data-markdown id="mp-accelerometer">
+### Čítanie dát z akcelerometra
+
+```python
+from machine import I2C, Pin
+from lsm6dsox import LSM6DSOX
+import time
+
+i2c = I2C(0, scl=Pin(13), sda=Pin(12))
+lsm = LSM6DSOX(i2c)
+
+while True:
+    ax, ay, az = lsm.read_accel()
+    print(f"x:{ax:>8.3f} y:{ay:>8.3f} z:{az:>8.3f}")
+    time.sleep_ms(100)
+```
+</section>
+
+
+<section data-markdown id="accelerometer">
+## Gyroskop
+</section>
+
+
+
+<section data-markdown id="imu-gyroscope" data-background="white">
+![IMU Accelerometer](images/imu.gyroscope.png)
+
+notes:
+* https://docs.arduino.cc/tutorials/nano-rp2040-connect/rp2040-imu-basics
+</section>
+
+
+<section data-markdown id="gyroscope">
+### Čítanie dát z gyroskopu 
+
+```python
+from machine import I2C, Pin
+from lsm6dsox import LSM6DSOX
+import time
+
+i2c = I2C(0, scl=Pin(13), sda=Pin(12))
+lsm = LSM6DSOX(i2c)
+
+while True:
+    gx, gy, gz = lsm.read_gyro()
+    print(f"x:{gx:>8.3f} y:{gy:>8.3f} z:{gz:>8.3f}")
+    time.sleep_ms(100)
+```
+</section>
+
+
+<section data-markdown id="rgb-led">
+## RGB LED
+
+* pripojená cez modul U-blox® Nina W102
+</section>
+
+
+<section data-markdown id="pdm-microphone">
+## PDM Mikrofón
+
+* PDM mikrofón MP34DT05
+</section>
+
+
+
+<section data-markdown id="bluetooth">
+## Bluetooth
+
+* vo firmvéri sú dve knižnice:
+	* [`ubluetooth`](http://docs.micropython.org/en/latest/library/bluetooth.html)
+	* [`aioble`](https://github.com/detectlabs/aioble)
+</section>
+
+
+<section data-markdown id="circuitpython" data-background="#2D2D2D">
+[![CircuitPython](images/circuitpython.png)](https://circuitpython.org/)
+</section>
+
+
+<section data-markdown id="running-bootloader-from-mp">
+## Zapnutie bootloader režimu v MP
+
+`machine.bootloader()`
+</section>
+
+
+<section data-markdown id="cp-blink">
+## Blink 
+
+* zabudovaná LED je dostupná cez `board.LED` alebo cez `board.D13`
+
+```python
+import time
+import board
+from digitalio import DigitalInOut, Direction
+
+# LED setup for onboard LED
+led = DigitalInOut(board.LED)
+led.direction = Direction.OUTPUT
+
+while True:
+    led.value = True
+    time.sleep(1)
+    led.value = False
+    time.sleep(0.5)
+```
+</section>
+
+
+<section data-markdown id="cp-networking">
+## Networking
+([treba stiahnuť moduly](https://learn.adafruit.com/circuitpython-on-the-arduino-nano-rp2040-connect/wifi))
+
+```python
+import board
+import busio
+from digitalio import DigitalInOut
+import adafruit_esp32spi.adafruit_esp32spi_socket as socket
+from adafruit_esp32spi import adafruit_esp32spi
+
+#  ESP32 pins
+esp32_cs = DigitalInOut(board.CS1)
+esp32_ready = DigitalInOut(board.ESP_BUSY)
+esp32_reset = DigitalInOut(board.ESP_RESET)
+
+#  uses the secondary SPI connected through the ESP32
+spi = busio.SPI(board.SCK1, board.MOSI1, board.MISO1)
+esp = adafruit_esp32spi.ESP_SPIcontrol(spi, esp32_cs, esp32_ready, esp32_reset)
+
+print(esp.scan_networks())
+esp.connect_AP('IoTLab', 'password')
+print(esp.pretty_ip(esp.ip_address))
+```
+</section>
+
+
+<section data-markdown id="cp-accelerometer">
+### Čítanie dát z akcelerometra
+([treba stiahnuť moduly](https://learn.adafruit.com/circuitpython-on-the-arduino-nano-rp2040-connect/accelerometer-gyroscope))
+
+```python
+import board
+from adafruit_lsm6ds.lsm6dsox import LSM6DSOX
+import time
+
+i2c = board.I2C()
+lsm = LSM6DSOX(i2c)
+
+while True:
+    ax, ay, az = lsm.acceleration
+    print(f"x:{ax:>8.3f} y:{ay:>8.3f} z:{az:>8.3f}")
+    time.sleep(0.1)
+```
+</section>
+
+
+<section data-markdown id="cp-gyroscope">
+### Čítanie dát z gyroskopu
+([treba stiahnuť moduly](https://learn.adafruit.com/circuitpython-on-the-arduino-nano-rp2040-connect/accelerometer-gyroscope))
+
+```python
+import board
+from adafruit_lsm6ds.lsm6dsox import LSM6DSOX
+import time
+
+i2c = board.I2C()
+lsm = LSM6DSOX(i2c)
+
+while True:
+    gx, gy, gz = lsm.gyro
+    print(f"x:{gx:>8.3f} y:{gy:>8.3f} z:{gz:>8.3f}")
+    time.sleep(0.1)
+```
+</section>
+
+
+<section data-markdown id="cp-pdm-microphone">
+## PDM Mikrofón
+
+```python
+import time
+import array
+import math
+import board
+import audiobusio
+
+def mean(values):
+    return sum(values) / len(values)
+
+def normalized_rms(values):
+    minbuf = int(mean(values))
+    samples_sum = sum(
+        float(sample - minbuf) * (sample - minbuf)
+        for sample in values
+    )
+    return math.sqrt(samples_sum / len(values))
+
+mic = audiobusio.PDMIn(board.MICROPHONE_CLOCK,
+                       board.MICROPHONE_DATA, sample_rate=16000, bit_depth=16)
+samples = array.array('H', [0] * 160)
+
+while True:
+    mic.record(samples, len(samples))
+    magnitude = normalized_rms(samples)
+    print(magnitude)
+    time.sleep(0.1)
+```
+</section>
+
+
+
+<section data-markdown id="cp-bluetooth">
+## Bluetooth
+
+* vo firmvéri je modul [`_bleio`](https://circuitpython.readthedocs.io/en/latest/shared-bindings/_bleio/index.html)
+	* prefix `_` znamená, že modul je pre interné použitie a nie pre koncového používateľa
+	* odporúčanie je použiť [`adafruit_ble`](https://circuitpython.readthedocs.io/projects/ble/en/latest/), ktorý je postavený na `_bleio`
+</section>
+
+
+<section id="conclusion" data-markdown>
+## Nedostatky
+
+* klient pre MQTT 
+	* v MicroPythone ešte nie je (ale očakávam, že bude)
+	* v CircuitPythone je externá knižnica [Adafruit MiniMQTT](https://github.com/adafruit/Adafruit_CircuitPython_MiniMQTT)
+* Bluetooth?
+* RGB LED
+</section>
+
+<section data-markdown>
+## Otázky?
+</section>
+
+
+<section data-markdown id="">
+## Ďalšie zdroje
+
+* [Datasheet](https://content.arduino.cc/assets/ABX00053-datasheet.pdf)
+* Arduino Nano RP2040 Connect na
+	* [rpishop.cz](https://rpishop.cz/arduino/3807-arduino-nano-rp2040-connect.html?ssa_query=arduino%20nano%20rp2040)
+	* [rlx.sk](https://rlx.sk/sk/original-arduino-boards/8202-abx00052-arduino-nano-rp2040-connect.html)
+</section>
+
+{% include qr.html %}
+
