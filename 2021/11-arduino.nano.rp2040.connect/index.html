@@ -1,13 +1,12 @@
 ---
 title: MicroPython pre Arduino Nano RP2040 Connect
 description: |
-    Arduino Nano RP2040 Connect.
-#permalink: /2021/micropython-for-arduino-nano-rp2040-connect/
+    Arduino v máji 2021 vydalo dosku Arduino Nano RP2040 Connect, ktorá bola osadená mikrokontrolérom RP2040. Arduino sľúbilo, že na ňu vypublikuje aj MicroPython. Prvý dátum bol v júli 2021, následne sa termín posunul na september 2021. Dnes v novembri 2021 sa pozrieme na to, aký Python je možné na túto dosku dostať a čo všetko ponúka.
 duration: 60
 layout: slide
 theme: night
 date: 2021-11-24
-# bitly: https://bit.ly/3oemezv
+bitly: https://bit.ly/3DOHvq2
 event:
     title: Namakaný webinár
     url: http://www.namakanyden.sk/
@@ -16,11 +15,9 @@ authors:
     - name: Mirek Biňas
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
-# published: false
 ---
 
 <style>
-
 #cp-networking  pre {
     font-size: .45em;
 }
@@ -58,12 +55,19 @@ A Python-inspired Language for Embedded Devices
 
 notes:
 * projekt https://github.com/keith-packard/snek
+* `cd ~/bin/Snek`
 * `./snek-uno-install -port /dev/ttyACM1 -hex snek-uno-1.7.hex`
 </section>
 
 
 <section data-markdown id="arduino-nano-rp2040-connect" data-background="white">
 ![Arduino Nano RP2040 Connect](images/arduino.nano.rp2040.connect.jpg)
+
+notes:
+* doska vydaná v máji 2021
+* prísľub v júli 2021
+* v júli došlo k posunu na september 2021
+* dnes v novembri 2021 sa pozrieme na Python-y pre túto dosku 
 </section>
 
 
@@ -72,6 +76,43 @@ notes:
 
 notes:
 * https://www.conrad.sk/p/arduino-doska-nano-rp2040-connect-nano-2371847
+* je vo veľkosti Arduino Nano
+    * preto sa aj doska volá nano
+* pracovné napätie je 3.3V
+* srdcom je mikrokontrolér RP2040
+    * frekvencia 133MHz
+    * dve jadrá
+* SRAM 264k
+* FLASH 16M
+</section>
+
+
+<section data-markdown id="interfaces" data-background="white">
+![Interfaces of Arduino Nano RP2040 Connect](images/arduino.interfaces.jpg)
+
+notes:
+* https://www.conrad.sk/p/arduino-doska-nano-rp2040-connect-nano-2371847
+* u-blox NINA-W102 radio modul
+	* WiFi 802.11b/g/n
+	* Bluetooth® 
+	* BLE v4.2
+</section>
+
+
+<section data-markdown id="extended-features" data-background="white">
+![Extended Features of Arduino Nano RP2040 Connect](images/arduino.extended.features.jpg)
+
+notes:
+* https://www.conrad.sk/p/arduino-doska-nano-rp2040-connect-nano-2371847
+* ma 6 osi IMU
+    * Inertial measurement unit - inerciální měřící jednotka
+        * LSM6DSOX
+        * akcelerometer
+        * gyroskop
+        * nema magnetometer
+* PDM mikrofon
+    * PDM - Pulse Density Modulation - pulzne sirkova modulacia
+    * PDM mikrofón MP34DT05
 </section>
 
 
@@ -131,23 +172,13 @@ notes:
 </section>
 
 
-<section data-markdown id="interfaces" data-background="white">
-![Interfaces of Arduino Nano RP2040 Connect](images/arduino.interfaces.jpg)
+<section data-markdown id="rgb-led">
+## RGB LED
+
+* pripojená cez modul U-blox® Nina W102
 
 notes:
-* https://www.conrad.sk/p/arduino-doska-nano-rp2040-connect-nano-2371847
-* u-blox NINA-W102 radio modul
-	* WiFi 802.11b/g/n
-	* Bluetooth® 
-	* BLE v4.2
-</section>
-
-
-<section data-markdown id="extended-features" data-background="white">
-![Extended Features of Arduino Nano RP2040 Connect](images/arduino.extended.features.jpg)
-
-notes:
-* https://www.conrad.sk/p/arduino-doska-nano-rp2040-connect-nano-2371847
+* je pripojena cez wifi modul, takze k nej nemame priamy pristup :-(
 </section>
 
 
@@ -157,6 +188,18 @@ notes:
 * [MicroPython](https://micropython.org/download/ARDUINO_NANO_RP2040_CONNECT/) - od nočných zostavení v1.17 (17.nov.2021)
 * [Circuit Python](https://circuitpython.org/board/arduino_nano_rp2040_connect/) - od v6.3
 * [OpenMV MicroPython](https://docs.arduino.cc/tutorials/nano-rp2040-connect/rp2040-openmv-setup)
+</section>
+
+
+<section data-markdown id="repl">
+## REPL
+
+(Read, Evaluate, Print, Loop)
+
+notes:
+* toto je vlastnost, ktoru budete prave pri programovani mikrokontrolerov milovat
+    * zive hranie sa s mikrokontrolerom bez nutnosti neustaleho vypekania noveho kodu
+* ved uvidite ;)
 </section>
 
 
@@ -172,7 +215,6 @@ notes:
 * za CircuitPython-om stojí [Adafruit](https://www.adafruit.com/)
 * MicroPython vďaka RP2040 získal podporu od [Raspberry Pi Foundation](https://www.raspberrypi.org/)
 </section>
-
 
 
 <section data-markdown id="thonny" data-background="#ABE0E6">
@@ -201,6 +243,21 @@ notes:
 <section data-markdown data-background="images/short.rec.nanorp2040connect.png">
 notes:
 * https://docs.arduino.cc/tutorials/nano-rp2040-connect/rp2040-openmv-setup
+</section>
+
+
+<section data-markdown id="uf2-format">
+## [.uf2](https://github.com/microsoft/uf2)
+
+(USB Flashing Format)
+
+* formát vytvorený Microsoft-om pre [MakeCode](https://makecode.com/)
+* vhodný pre nahrávanie firmvérov/programov cez flash disk
+* Arduino Nano RP2040 má USB disk
+    * ale môže tiež fungovať ako zariadenie komunikujúce cez USB (klávesnica, myš, ...)
+
+notes:
+* takze uz ziadny `esptool` ako v pripade ESP32
 </section>
 
 
@@ -318,19 +375,14 @@ while True:
 </section>
 
 
-<section data-markdown id="rgb-led">
-## RGB LED
-
-* pripojená cez modul U-blox® Nina W102
-</section>
-
-
 <section data-markdown id="pdm-microphone">
 ## PDM Mikrofón
 
-* PDM mikrofón MP34DT05
-</section>
+* aktuálne nie je podpora (?!)
 
+notes:
+* nie som si isty, lebo nieco som kedysi zachytil vo fore na temu audio a pdm
+</section>
 
 
 <section data-markdown id="bluetooth">
@@ -498,14 +550,17 @@ while True:
 * RGB LED
 </section>
 
-<section data-markdown>
+
+<section data-markdown id="questions">
 ## Otázky?
 </section>
 
 
-<section data-markdown id="">
+<section data-markdown id="resources">
 ## Ďalšie zdroje
 
+* [Arduino Nano RP2040 Connect rozcestník](https://docs.arduino.cc/hardware/nano-rp2040-connect)
+* [Nano RP2040 Connect Cheat Sheet](https://docs.arduino.cc/tutorials/nano-rp2040-connect/rp2040-01-technical-reference)
 * [Datasheet](https://content.arduino.cc/assets/ABX00053-datasheet.pdf)
 * Arduino Nano RP2040 Connect na
 	* [rpishop.cz](https://rpishop.cz/arduino/3807-arduino-nano-rp2040-connect.html?ssa_query=arduino%20nano%20rp2040)
