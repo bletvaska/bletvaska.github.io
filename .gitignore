@@ -5,3 +5,5 @@ vendor/
 Gemfile.lock
 _config_local.yml
 *.backup
+.bundle/
+.jekyll-cache/
