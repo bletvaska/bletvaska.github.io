@@ -123,6 +123,18 @@ Po opätovnom spustení systému bude jeho prostredie lokalizované.
 * **Nefungujúce WiFi** - Jedná sa o odľahčený systém, kde nie sú predinštalované všetky moduly pre jadro. Tento problém sa dá jednoducho obísť pripojením vášho telefónu k počítaču cez USB kábel a zapnutím voľby *USB Tethering*. Tým bude váš mobilný telefón fungovať ako modem, resp. sieťová karta a pre pripojenie k sieti bude používať pripojenie, ktoré máte zapnuté na telefóne (WiFi alebo mobilné dáta).
 
 
+### Aktualizácia z príkazového riadku
+
+Celý systém viete aktualizovať tak, že si spustíte príkazový riadok a z neho zadáte tieto príkazy:
+
+```bash
+$ sudo apt update -y
+$ sudo apt upgrade -y
+```
+
+Proces aktualizácie môže trvať jednotky až desiatky minút v závislosti od množstva nových balíkov. Priebeh aktualizácie uvidíte na obrazovke.
+
+
 ## Vlastná elektronika
 
 V rámci školenia sa hráme aj s elektronikou a programujeme aj mikrokontroléry. Tým, že teraz nebudeme spolu v labáku, neviem vám poskytnúť vlastné pomôcky. Pre absolvovanie kurzu ich však nebudete potrebovať, pretože sa bez nich nakoniec zaobídeme. 
