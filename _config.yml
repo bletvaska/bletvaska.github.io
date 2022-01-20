@@ -24,6 +24,7 @@ port: 5000
 github_username:  bletvaska
 google_analytics: "G-VNM4YHG6XD"
 remote_theme: fongandrew/hydeout
+timezone: Europe/Bratislava
 
 # Build settings
 markdown: kramdown

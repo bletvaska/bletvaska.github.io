@@ -83,6 +83,8 @@ Je na vás, pre aký spôsob používania sa rozhodnete. Zo skúseností však v
 
 2. Pri štartovaní vyberte ako bootovacie zariadenie váš USB kľúč.  
    Tento proces vyzerá na každom počítači trochu ináč. Obyčajne sa vám na niekoľko sekúnd zobrazí správa o klávesovej skratke, ktorú máte stlačiť, aby sa vám zobrazilo menu pre výber iného zavádzacieho zariadenia (u mňa je to napr. kláves `F12`).
+
+   **Poznámka:** Ak sa vám nezobrazí možnosť zaviesť systém z USB zariadenia, pozrite sa do vášho *BIOS Setup*-u, či v ňom nemáte možnosť zaviesť systém z USB zariadenia vypnutú.
    
 3. Po úspešnom navolení sa vám zobrazí ponuka zavádzača.  
 
@@ -106,6 +108,8 @@ Pomocou srievodcu si postupne vyberte/nastavte:
 * krajinu, jazyk a časovú zónu (odporúčam nastaviť slovenské prostredie, ale používať americkú klávesnicu (zaškrtnite voľbu `Use US keyboard`))
 
 * heslo predvoleného používateľa `pi`
+
+* pripojenie do WiFi siete
 
 * preskočte aktualizáciu softvéru, a
 
