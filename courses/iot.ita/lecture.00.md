@@ -163,5 +163,8 @@ Kupovať to však po kusoch dá zabrať a ak to myslíte vážne, skôr vám odp
 Kúpiť si ju môžete napríklad na týchto stránkach:
 
 * [Techfun.sk](https://techfun.sk/produkt/arduino-uno-basic-kit/)
+
 * [RLX](https://rlx.sk/sk/arduino-kit/3453-leaper-upgraded-rfid-stepper-driver-learning-kit-for-arduino-er-ak55865rf.html)
+
 * [Aliexpress](https://www.aliexpress.com/item/1005001653349193.html?spm=a2g0o.productlist.0.0.3c173b34qWpB0V&algo_pvid=5988b2cb-d077-4c69-9a19-064f575c1ea8&algo_expid=5988b2cb-d077-4c69-9a19-064f575c1ea8-7&btsid=2100bdf016118557452563960e7943&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_)
+
