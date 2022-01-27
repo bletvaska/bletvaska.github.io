@@ -28,7 +28,9 @@ timezone: Europe/Bratislava
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-hydeout
+
+theme: minima
+#theme: jekyll-theme-hydeout
 #theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
