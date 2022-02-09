@@ -1,0 +1,315 @@
+---
+title: Sense HAT prakticky
+subtitle: najpopulárnejšie rozšírenie pre Raspberry Pi
+description: |
+    asdf
+duration: 120
+date: 2022-02-09
+layout: slide
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk
+categories: talk
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+#bitly: https://bit.ly/3uBhK7w
+#video: https://youtu.be/coqzmKypHyE
+---
+<style>
+#trinket > p > img,
+#sense-hat-assembly > p > img
+{
+    width: 50%
+}
+
+#astropi-projectxxx
+{
+    background-blend-mode: darken;
+    background-color: rgba(0,43,63,0.65);
+}
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="what-is-sensehat" data-markdown>
+![Sense HAT](images/sense.hat.png)
+
+## Čo je to Sense HAT?
+</section>
+
+
+<section id="hat" data-markdown>
+## HAT 
+
+(Hardware Attached on Top)
+</section>
+
+
+<section id="sense-hat-assembly" data-markdown data-background="white">
+![Sense HAT Assembly](https://projects-static.raspberrypi.org/projects/rpi-sensehat-attach/a180c64ad52670ac0df6a15e334499b683e65708/en/images/animated_sense_hat.gif)  
+
+Notes:
+* https://radu-matei.com/blog/rpi-sensehat-telemetry/
+* https://projects.raspberrypi.org/en/projects/getting-started-with-the-sense-hat/2
+</section>
+
+
+<section id="astropi-project" data-markdown data-background="images/background-astropi.jpg" style="background-blend-mode: darken; background-color: rgba(0,43,63,0.65);">
+Sense HAT je rozširujúca doska pre Raspberry Pi vytvorená špeciálne pre súťaž [Astro Pi](https://astro-pi.org).
+</section>
+
+
+<section id="sense-hat-equipment" data-markdown>
+## Komponenty Sense HAT-u
+
+* senzory: teplotný, vlhkosti, tlakový
+* IMU (Inertial Measurement Unit)
+    * gyroskop
+    * akcelerometer
+    * magnetometer
+* joystick
+* 8x8 RGB LED matrix
+
+notes:
+* A gyroscope (for detecting which way up the board is)
+* An accelerometer (for detecting movement)
+* A magnetometer (for detecting magnetic fields)
+</section>
+
+
+<section id="sense-hat-cost" data-markdown>
+## Koľko Sense HAT stojí?
+
+* [RPishop.cz](https://rpishop.cz/hat/126-raspberry-pi-sense-hat.html?SubmitCurrency=1&id_currency=2) - 37,89 €
+* [RLX.sk](https://rlx.sk/sk/raspberry-pi/4546-raspberrypi-sensehat-2483095-orientation-pressure-humidity-temperature-sensors-.html) - 35,28 €
+</section>
+
+
+<section id="i-dont-have-sensehat" data-markdown>
+## (Ani) Sense HAT nemám :-(
+
+* Desktop Sense HAT emulátor
+* Online Sense HAT emulátor
+</section>
+
+
+<section id="sense-hat-emu" data-markdown>
+## [Sense HAT Emulator](https://sense-emu.readthedocs.io/)
+
+![Dekstop Sense HAT Emu](images/sense.emu.png)
+
+* dá sa nainštalovať aj na ["bežný" OS](https://sense-emu.readthedocs.io/en/v1.1/install.html)
+</section>
+
+
+<section id="trinket" data-markdown data-background="white">
+![Trinket Logo](images/logo-trinket.png)
+</section>
+
+
+<section id="sensehat-on-trinket" data-markdown>
+## [Code the Sense HAT in Your Browser!](https://trinket.io/sense-hat)
+New from Trinket and the Raspberry Pi Foundation: Explore Your World with Sensors and Python
+</section>
+
+
+<section id="sensehat-emulator-embeded" data-background="white">
+<iframe src="https://trinket.io/embed/python/705716580a?start=result" width="100%" height="500px" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+</section>
+
+
+<section id="sense-hat-in-practice" data-markdown>
+## Sense HAT prakticky
+
+* Hello world!
+* senzory teploty, vlhkosti a tlaku
+* kompas
+</section>
+
+
+<section id="hello-world" data-markdown>
+## Hello world!
+
+```python
+from sense_hat import SenseHat
+# from sense_emu import SenseHat
+
+sense = SenseHat()
+sense.show_message('Hello world!')
+```
+</section>
+
+
+<section id="setting-single-pixels" data-markdown>
+## Nastavenie jedného pixla
+
+```python
+from sense_hat import SenseHat
+
+sense = SenseHat()
+
+sense.set_pixel(2, 2, (0, 0, 255))
+sense.set_pixel(4, 2, (0, 0, 255))
+sense.set_pixel(3, 4, (100, 0, 0))
+sense.set_pixel(1, 5, (255, 0, 0))
+sense.set_pixel(2, 6, (255, 0, 0))
+sense.set_pixel(3, 6, (255, 0, 0))
+sense.set_pixel(4, 6, (255, 0, 0))
+sense.set_pixel(5, 5, (255, 0, 0))
+```
+</section>
+
+
+<section id="sensing-the-environment" data-markdown>
+## Snímanie prostredia
+
+```python
+from time import sleep
+from sense_emu import SenseHat
+
+sense = SenseHat()
+sense.clear()
+
+while True:
+    pressure = sense.get_pressure()
+    temp = sense.get_temperature()
+    humidity = sense.get_humidity()
+
+    print(f"{temp:.2f}°C {humidity:.2f}% {pressure:.2f}hPa")
+    sleep(1)
+```
+</section>
+
+
+<section id="" data-markdown data-background="white">
+![](images/orientation.png)
+</section>
+
+
+<section id="" data-markdown>
+## Pitch, Roll and Yaw
+
+```python
+from sense_emu import SenseHat
+
+sense = SenseHat()
+sense.clear()
+
+o = sense.get_orientation()
+pitch = o["pitch"]
+roll = o["roll"]
+yaw = o["yaw"]
+print(f"pitch {pitch} roll {roll} yaw {yaw}")
+```
+
+notes:
+* azimut? elevace? náklon? 
+</section>
+
+
+<section id="acceleration" data-markdown>
+## Zrýchlenie
+
+```python
+from sense_hat import SenseHat
+
+sense = SenseHat()
+
+red = (255, 0, 0)
+
+while True:
+    acceleration = sense.get_accelerometer_raw()
+    x = acceleration['x']
+	y = acceleration['y']
+	z = acceleration['z']
+
+    x = abs(x)
+    y = abs(y)
+    z = abs(z)
+
+    if x &gt; 1 or y &gt; 1 or z &gt; 1:
+        sense.show_letter("!", red)
+    else:
+        sense.clear()
+```
+</section>
+
+
+<section id="joystick" data-markdown>
+## Použitie veselej paličky
+
+```python
+from sense_hat import SenseHat
+
+def pushed_up(event):
+    print(event)
+
+sense = SenseHat()
+sense.stick.direction_up = pushed_up
+
+while True:
+    for event in sense.stick.get_events():
+        print(event.direction, event.action)
+```
+</section>
+
+
+<section id="sense-hat-as-compass" data-markdown>
+## Sense HAT ako kompas
+
+```python
+from sense_hat import SenseHat
+
+sense = SenseHat()
+
+while True:
+    heading = sense.get_compass()
+
+    if heading &lt; 45 or heading &gt; 315:
+        sense.show_letter('N')
+    elif heading &lt; 135:
+        sense.show_letter('N')
+    elif heading &lt; 225:
+        sense.show_letter('S')
+    else:
+        sense.show_letter('W')
+```
+</section>
+
+
+<section id="sense-hat-and-iot" data-markdown>
+## Sense HAT a IoT?
+</section>
+
+
+<section id="sense-hat-in-node-red" data-markdown data-background="#8f1200">
+## Sense HAT a Node-RED
+
+* [node-red-node-pi-sense-hat](https://flows.nodered.org/node/node-red-node-pi-sense-hat)
+* [node-red-node-pi-sense-hat-simulator](https://flows.nodered.org/node/node-red-node-pi-sense-hat-simulator)
+* [node-red-contrib-sense-hat-scroll-message](https://flows.nodered.org/node/node-red-contrib-sense-hat-scroll-message)
+</section>
+
+
+<section id="questions" data-markdown data-background="#8F1200">
+## Otázky?
+</section>
+
+
+<section id="resources" data-markdown data-background="#8f1200">
+## Zdroje
+
+* [Sense HAT](https://pythonhosted.org/sense-hat/) - modul pre jazyk Python na ovládanie Sense HAT-u
+* [Sense HAT Emulator](https://sense-emu.readthedocs.io/) - softvérový emulátor pre Sense HAT
+* [Code the Sense HAT in Your Browser!](https://trinket.io/sense-hat)
+* [Raspberry Pi Projekty](https://projects.raspberrypi.org/en/projects?hardware%5B%5D=sense-hat) - projekty pre Sense HAT
+* [Getting started with the Sense HAT](https://projects.raspberrypi.org/en/projects/getting-started-with-the-sense-hat)
+</section>
+
+
+{% include qr.html %}
+
