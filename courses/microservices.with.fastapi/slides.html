@@ -1,0 +1,228 @@
+---
+title: Microservices with FastAPI
+description: etc
+# permalink: /2021/lean-publishing
+# duration: 60
+layout: slide
+theme: night
+# date: 2021-11-09
+# bitly: https://bit.ly/3oemezv
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk/
+categories: talk
+authors:
+    - name: Mirek Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+courseid: fastapi
+---
+
+<style>
+#what-is-microservice-by-fowler > blockquote {
+    width: 90%;
+}
+</style>
+
+{% include first.slide.html %}
+
+<section data-markdown id="the-tradition-monolith-approach">
+## The Traditional Monolith Approach
+</section>
+
+
+<section data-markdown id="the-microservices">
+## Microservices
+</section>
+
+
+<section data-markdown id="what-is-microservice-short">
+> ...a collection of **loosely coupled specialized services** that **work in unison** to provide a comprehensive service.
+> -- [J. Buelta: Hands-On Docker for Microservices with Python (2019)](https://www.amazon.com/Hands-Docker-Microservices-Python-microservices/dp/1838823816)
+</section>
+
+
+<section data-markdown id="what-is-microservice-by-fowler">
+> ...is an approach to developing a single application as a **suite of small services**, each **running in its own process** and communicating with lightweight mechanisms, often an HTTP resource API. These services are **built around business capabilities** and **independently deployable** by fully automated deployment machinery. There is a **bare minimum of centralized management** of these services, which may be written in different programming languages and use different data storage technologies.
+> -- [J. Lewis and M. Fowler (2014)](https://martinfowler.com/articles/microservices.html)
+</section>
+
+
+<section data-markdown id="what-is-rest">
+## REST API
+
+A REST API (also known as RESTful API) is an application programming interface (API or web API) that conforms to the constraints of REST architectural style and allows for interaction with RESTful web services.
+
+notes:
+* https://www.redhat.com/en/topics/api/what-is-a-rest-api
+* REST stands for representational state transfer and was created by computer scientist Roy Fielding.
+</section>
+
+
+<section data-markdown id="poetry" data-background="white">
+[![Poetry](images/logo-poetry.jpg)](https://python-poetry.org/)
+</section>
+
+
+<section data-markdown id="http-status-codes">
+## [HTTP Status Codes](https://httpstatuses.com/)
+</section>
+
+
+<section data-markdown data-background="white" id="fastapi">
+[![FastAPI](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png)](https://fastapi.tiangolo.com/)
+
+FastAPI framework, high performance, easy to learn, fast to code, ready for production
+</section>
+
+
+<section data-markdown id="features">
+## Features
+
+[Fast](https://www.techempower.com/benchmarks/#section=data-r20&hw=ph&test=query&l=v2qiv3-db&a=2),
+Fast to code, Fewer bugs, Intuitive, Easy, Short, Robust, Standards-based
+</section>
+
+
+<section data-markdown id="sebastian-ramirez">
+![Sebastian Ramirez](images/sebastian.ramirez.jpg)
+## [Sebastian Ramirez](https://github.com/tiangolo)
+</section>
+
+
+<section id="talk-python-to-me" data-background="#F5F5F5">
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/904573510&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/talkpython" title="Talk Python To Me Podcast" target="_blank" style="color: #cccccc; text-decoration: none;">Talk Python To Me Podcast</a> · <a href="https://soundcloud.com/talkpython/modern-and-fast-apis-with-fastapi" title="Modern and fast APIs with FastAPI" target="_blank" style="color: #cccccc; text-decoration: none;">Modern and fast APIs with FastAPI</a></div>
+</section>
+
+
+<section id="fastapi-vs-flask">
+    <h2><a href="https://fastapi.tiangolo.com#create-it">FastAPI</a> vs <a href="https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application">Flask</a></h2>
+
+<div style="display: flex;">
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-python hljs">
+from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/")
+def hello():
+    return {"Hello": "World"}
+      </code>
+      </pre>
+  </div>
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-python hljs">
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return 'Hello, World!'
+      </code>
+      </pre>
+  </div>
+</div>
+</section>
+
+
+<section data-markdown data-background="white" id="url-format-explained">
+![URL Format Explained](images/url.format.explained.png)
+</section>
+
+
+<section data-markdown id="http-get">
+### HTTP GET
+
+```http
+$ http GET http://app.com/files/qtOw3Uc
+
+HTTP/1.1 200 OK
+content-length: 179
+content-type: application/json
+date: Tue, 16 Nov 2021 21:52:14 GMT
+server: uvicorn
+
+{
+    "created": "2021-11-16T19:47:39.701326",
+    "downloads": 0,
+    "filename": "high.tiff",
+    "id": 1577,
+    "key": "qtOw3Uc",
+    "mimetype": "image/svg+xml",
+    "size": 58401
+}
+```
+</section>
+
+
+<section data-markdown id="http-delete">
+## HTTP DELETE
+
+```http
+$ http DELETE http://app.com/files/WjaGsbI
+
+HTTP/1.1 204 No Content
+date: Tue, 16 Nov 2021 23:07:18 GMT
+server: uvicorn
+```
+</section>
+
+
+<section data-markdown id="pagination-django">
+```json
+{
+    "count": 4321,
+    "next": "http://app.com/users/?page=2",
+    "previous": null,
+    "results": [
+		...
+    ]
+}
+```
+</section>
+
+
+<section data-markdown id="pagination-fastapi">
+```json
+$ http GET "app.com/files/?size=10&page=3"
+
+{
+	"items": [
+		...
+	],
+    "page": 3,
+    "size": 10,
+    "total": 289
+}
+```
+</section>
+
+
+<section data-markdown id="pagination-django">
+```
+http://app.com/users/?page=3&amp;page_size=20
+```
+</section>
+
+
+<section data-markdown id="sqlmodel" data-background="white">
+[![SQLModel](https://sqlmodel.tiangolo.com/img/logo-margin/logo-margin-vector.svg)](https://sqlmodel.tiangolo.com/)
+</section>
+
+
+<section data-markdown id="idempotent-operation">
+## Idempotent operation
+
+(Idempotent operation is any operation that produces same result regardless of it is called one time or hundred times)
+</section>
+
+
+<section data-markdown id="pydantic" data-background="#FF43A1">
+[![Pydantic](images/logo-pydantic.png)](https://pydantic-docs.helpmanual.io/)
+</section>
+
+
+{% include qr.html %}
+

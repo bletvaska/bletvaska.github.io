@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1920"
+   height="1080"
+   viewBox="0 0 1920 1080"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="url.format.explained.svg"
+   inkscape:export-filename="/home/mirek/Projects/github.io/courses/microservices.with.fastapi/resources/url.format.explained.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="1.0756752"
+     inkscape:cx="959.86227"
+     inkscape:cy="540.12589"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g71425" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g71425"
+       transform="translate(-54.067871,5.3043823)"
+       inkscape:export-filename="/home/mirek/Projects/github.io/courses/microservices.with.fastapi/images/url.format.explained.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px"
+         x="495.69873"
+         y="547.60022"
+         id="text4646"><tspan
+           sodipodi:role="line"
+           id="tspan4644"
+           x="495.69873"
+           y="547.60022"><tspan
+   style="fill:#800080"
+   id="tspan8760">http</tspan>://<tspan
+   style="fill:#800000"
+   id="tspan25576">api.site.com</tspan>:<tspan
+   style="fill:#0000ff"
+   id="tspan13162">1234</tspan><tspan
+   style="fill:#ff0000"
+   id="tspan21822">/v1/users</tspan>?<tspan
+   style="fill:#008000"
+   id="tspan23756">offset=50</tspan></tspan><tspan
+           sodipodi:role="line"
+           x="495.69873"
+           y="597.60022"
+           id="tspan4648" /></text>
+      <g
+         id="g12032"
+         style="stroke:#666666">
+        <path
+           style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 500.7307,506.45147 v -25.61233 h 85.31908 v 25.44479"
+           id="path11065" />
+        <path
+           style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 543.39024,455.22681 v 25.61233"
+           id="path11071" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800080;fill-opacity:0.854902;stroke-width:0.48382"
+         x="498.44492"
+         y="450.57123"
+         id="text28270"><tspan
+           sodipodi:role="line"
+           id="tspan28268"
+           x="498.44492"
+           y="450.57123"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800080;fill-opacity:0.854902;stroke-width:0.48382">PROTOCOL</tspan></text>
+      <path
+         style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 983.32811,506.45147 v -25.61233 h 85.31909 v 25.44479"
+         id="path36377" />
+      <path
+         style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 1025.9877,455.22681 v 25.61233"
+         id="path36379" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke-width:0.48382"
+         x="1004.1947"
+         y="450.57123"
+         id="text36385"><tspan
+           sodipodi:role="line"
+           id="tspan36383"
+           x="1004.1947"
+           y="450.57123"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#0000ff;fill-opacity:1;stroke-width:0.48382">PORT</tspan></text>
+      <g
+         id="g39372">
+        <path
+           style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 1317.9016,506.45147 v -25.61233 h 205.781 v 25.44479"
+           id="path39356" />
+        <path
+           style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 1420.7921,455.22681 v 25.61233"
+           id="path39358" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:0.92549;stroke-width:0.48382"
+         x="1393.1866"
+         y="450.57123"
+         id="text39364"><tspan
+           sodipodi:role="line"
+           id="tspan39362"
+           x="1393.1866"
+           y="450.57123"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008000;fill-opacity:0.92549;stroke-width:0.48382">QUERY</tspan></text>
+      <g
+         id="g61347">
+        <path
+           style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 948.43538,562.46303 v 25.61233 H 667.89139 v -25.44479"
+           id="path61333" />
+        <path
+           style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 808.16339,613.68769 V 588.07536"
+           id="path61335" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;fill-opacity:1;stroke-width:0.48382"
+         x="785.07745"
+         y="630.46844"
+         id="text61341"><tspan
+           sodipodi:role="line"
+           id="tspan61339"
+           x="785.07745"
+           y="630.46844"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;fill-opacity:1;stroke-width:0.48382">HOST</tspan></text>
+      <g
+         id="g66171">
+        <path
+           style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 1291.0308,562.46303 v 25.61233 h -219.3833 v -25.44479"
+           id="path66157" />
+        <path
+           style="fill:none;stroke:#666666;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="M 1181.3391,613.68769 V 588.07536"
+           id="path66159" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke-width:0.48382"
+         x="1161.2727"
+         y="630.46844"
+         id="text66165"><tspan
+           sodipodi:role="line"
+           id="tspan66163"
+           x="1161.2727"
+           y="630.46844"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff0000;fill-opacity:1;stroke-width:0.48382">PATH</tspan></text>
+    </g>
+  </g>
+</svg>
