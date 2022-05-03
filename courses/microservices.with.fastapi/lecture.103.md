@@ -2,7 +2,7 @@
 title: FastAPI
 description: rámec FastAPI, vlastnosti, inštalácia, prvé použitie
 courseid: fastapi
-order: 03
+order: 103
 layout: lecture
 ---
 
@@ -25,18 +25,18 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return "Hello, World!"
 ```
 
 
 spustit:
 
+
 ```bash
 $ uvicorn fishare.main:app --reload
 ```
 
-
-alebo 
+alebo
 
 ```python
 uvicorn.run('main:app', port=8000, host='127.0.0.1', reload=True)
@@ -46,3 +46,29 @@ uvicorn.run('main:app', port=8000, host='127.0.0.1', reload=True)
 
 http://127.0.0.1:8000/docs
 
+
+## Refaktoring
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+def read_root():
+    return "Hello, World!"
+
+
+def main():
+    uvicorn.run('fishare.main:app', port=8000, host='127.0.0.1', reload=True)
+
+if __name__ == '__main__':
+    main()
+```
+
+spustit z korenoveho priecinku projektu (nad balikom `fishare`):
+
+```bash
+$ python -m fishare.main
+```

@@ -1,7 +1,7 @@
 ---
 title: File Update
 courseid: fastapi
-order: 20
+order: 307
 layout: lecture
 description: |
     aktualzácia existujúcich záznamov, plná aktualizácia pomocou metódy `PUT`, čiastočná aktualizácia pomocou metódy `PATCH`
@@ -26,47 +26,55 @@ description: |
 ### Ukazka implementacie
 
 ```python
-@router.put('/files/{slug}')
-def full_update_file(slug: str,
-                     payload: UploadFile = fastapi.File(...),
-                     filename: str = Form(...),
-                     max_downloads: int = Form(...)):
+@router.put('/files/{slug}', response_model=FileOut,
+            summary='Updates the file identified by {slug}. Any parameters not provided are reset to defaults.')
+def full_file_update(slug: str,
+                     payload: UploadFile,  # UploadFile = fastapi.File(...)
+                     filename: str = Form(None),
+                     max_downloads: int = Form(...),
+                     session: Session = Depends(get_session)
+                     ):
     try:
-        # get existing file from db
-        with Session(engine) as session:
-            statement = select(File).where(File.slug == slug)
-            file = session.exec(statement).one()
+        # get the file with given slug
+        statement = select(File).where(File.slug == slug)
+        file = session.exec(statement).one()
 
-            # upload new file and update/overwrite existing file/attributes
-            path = settings.storage / slug
-            with open(path, 'wb') as dest:
-                shutil.copyfileobj(payload.file, dest)
+        # save uploaded file
+        path = settings.storage / file.slug
+        with open(path, 'wb') as dest:
+            shutil.copyfileobj(payload.file, dest)
 
-            # update the file object
-            file.size = path.stat().st_size
+        # update filename if given
+        if filename is not None:
             file.filename = filename
-            file.max_downloads = max_downloads
-            file.content_type = payload.content_type
-            file.updated_at = datetime.now()
+        else:
+            file.filename = payload.filename
 
-            session.add(file)
-            session.commit()
-            session.refresh(file)
+        # update other file fields
+        file.size = path.stat().st_size
+        file.max_downloads = max_downloads
+        file.updated_at = datetime.now()
+        file.mime_type = payload.content_type
 
-            return file
+        # update db
+        session.add(file)
+        session.commit()
+        session.refresh(file)
 
-    except NoResultFound:
+        return file
+
+    except NoResultFound as ex:
+        # when not found, then 404
         content = ProblemDetails(
-            title='File not found.',
-            detail=f"No file with slug '{slug}'",
+            type='/errors/files/put',
+            title="File not found.",
             status=404,
-            instance=f'/files/{slug}'
+            detail=f"File with slug '{slug}' was not found.",
+            instance=f"/files/{slug}"
         )
 
-        return ProblemJSONResponse(
-            status_code=404,
-            content=content.dict(exclude_unset=True)
-        )
+    return JSONResponse(status_code=content.status,
+                        content=content.dict())
 ```
 
 

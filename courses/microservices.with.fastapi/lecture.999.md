@@ -1,7 +1,7 @@
 ---
 title: Redirect
 courseid: fastapi
-order: 20
+order: 999
 layout: lecture
 ---
 

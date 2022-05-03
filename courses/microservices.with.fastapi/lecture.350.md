@@ -1,7 +1,7 @@
 ---
 title: OpenAPI
 courseid: fastapi
-order: 25
+order: 350
 layout: lecture
 description: |
     ako sa da upravit dokumentacia API pomocou OpenAPI

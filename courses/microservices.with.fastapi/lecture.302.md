@@ -1,7 +1,7 @@
 ---
 title: HTTP DELETE
 courseid: fastapi
-order: 10
+order: 302
 layout: lecture
 description: |
     odstránenie existujúcej položky

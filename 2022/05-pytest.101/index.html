@@ -1,0 +1,552 @@
+---
+title: Pytest 101
+subtitle: |
+    Základy testovania v jazyku Python s rámcom pytest (nie len) pre učiteľov
+description: |
+    Síce sa to nezdá, ale testujeme denne. Keď si pripravíte kávu alebo dostanete pred seba horúcu polievku, tak opatrne testujete, či už má tú správnu teplotu, aby ste sa mohli napiť alebo začať jesť. Keď si kupujete topánky, tak tiež nedáte na prvý pohľad, ale vyskúšate si, aké sú pohodlné, či vás netlačia a hlavne, či v nich dobre vyzeráte. Rovnako tak, keď si kupujete nohavice, tak vás síce zaujíma cena, ale najmä to, ako v nich vyzerá vaša ritka.
+
+    Sme testeri a testovanie je neoddeliteľnou súčasťou nášho života. Testovanie je dnes taktiež neoddeliteľnou súčasťou (nie len) veľkých softvérových projektov. A samozrejme - pred uvedením akéhokoľvek výrobku na trh je tento dôkladne testovaný rozličnými typmi testov.
+
+    Na tomto webinári sa naučíme základy softvérového testovania v jazyku Python pomocou rámca pytest. Pokúsim sa vám predstaviť základné pravidlá pre písanie testov, ale hlavne učiteľom ukážem, čo im môže testovanie priniesť pri hodnotení študentských zadaní. A vychádzať budem z takmer 10 ročných skúseností, ktoré máme s nasadením prístupu vývoja riadeného testami priamo do výučby.
+duration: 120
+date: 2022-05-04
+layout: slide
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk
+categories: talk
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/3gxVern
+#video: https://youtu.be/coqzmKypHyE
+---
+<style>
+.question
+{
+    position: absolute;
+    font-size: 2em;
+    width: 100%;
+}
+
+.answer
+{
+    /* position: absolute; */
+    font-size: 7em;
+    z-index: 9;
+    font-weight: bold;
+}
+
+.true{
+    color: green;
+}
+
+.false {
+    color: red;
+}
+
+.question-container {
+    position: relative;
+}
+
+.center {
+    text-align: center;
+}
+
+#assert-1,
+#assert-2,
+#assert-3 {
+    font-size: 2.5em;
+}
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="what-is-test" data-markdown>
+## Čo je to test?
+</section>
+
+
+<section id="what-is-test-answer" data-markdown>
+## Test je kód, ktorý sa spúšťa na overenie správnosti iného kódu.
+
+Notes:
+* a test is code that runs to check the validity of other code (https://www.youtube.com/watch?v=etosV2IWBF0)
+</section>
+
+
+<section id="why-to-test" data-markdown>
+## Prečo by som mal testovať?
+
+Notes:
+* dokázať, že kód pracuje podľa požiadaviek
+* ukázať iným, ako sa váš kód dá používať
+* vložiť do kódu bezpečnostnú poistku pre zmeny v budúcnosti
+</section>
+
+
+<section id="quiz" data-markdown>
+## Kvíz
+
+áno/nie pravda/lož
+</section>
+
+
+<section id="round-1" data-markdown>
+## 1. kolo
+
+všeobecné znalosti
+</section>
+
+
+<section id="question-1-1">
+    <div class="question-container">
+        <div class="question">
+            <blockquote>Hlavné mesto Slovenska je <b>Bratislava</b>.</blockquote>
+        </div>
+
+        <div class="answer true fragment">Pravda</div>
+    </div>
+</section>
+
+
+<section id="question-1-2">
+    <div class="question-container">
+        <div class="question">
+            <blockquote>
+                <b>Nulou</b> sa nedá deliť.
+            </blockquote>
+        </div>
+
+        <div class="answer true fragment">Pravda</div>
+    </div>
+</section>
+
+
+<section id="question-1-3">
+    <div class="question-container">
+        <div class="question">
+            <blockquote>
+                Písmeno "<b>N</b>" je samohláska.
+            </blockquote>
+        </div>
+
+        <div class="answer false fragment">Lož</div>
+    </div>
+</section>
+
+
+<section id="question-1-4">
+    <div class="question-container">
+        <div class="question">
+            <blockquote>
+                $$ 1 + 2 \times 3^2 = 18 $$
+            </blockquote>
+        </div>
+
+        <div class="answer false fragment">Lož</div>
+    </div>
+</section>
+
+
+<section id="round-1" data-markdown>
+## 2. kolo
+
+výrazy v jazyku Python
+</section>
+
+
+<section id="question-2-1">
+    <div class="question-container">
+        <div class="question">
+            <pre>
+                <code class="lang-python hljs center">
+42 == 42
+                </code>
+            </pre>
+        </div>
+
+        <div class="answer true fragment">True</div>
+    </div>
+</section>
+
+
+<section id="question-2-2">
+    <div class="question-container">
+        <div class="question">
+            <pre>
+                <code class="lang-python hljs center">
+4 != 4.0
+                </code>
+            </pre>
+        </div>
+
+        <div class="answer false fragment">False</div>
+    </div>
+</section>
+
+
+
+<section id="question-2-3">
+    <div class="question-container">
+        <div class="question">
+            <pre>
+                <code class="lang-python hljs center">
+2022 > 21
+                </code>
+            </pre>
+        </div>
+
+        <div class="answer true fragment">True</div>
+    </div>
+</section>
+
+
+<section id="question-2-4">
+    <div class="question-container">
+        <div class="question">
+            <pre>
+                <code class="lang-python hljs center">
+10 >= 10
+                </code>
+            </pre>
+        </div>
+
+        <div class="answer true fragment">True</div>
+    </div>
+</section>
+
+
+<section id="question-2-5">
+    <div class="question-container">
+        <div class="question">
+            <pre>
+                <code class="lang-python hljs center">
+'Python' in 'Welcome to Python'
+                </code>
+            </pre>
+        </div>
+
+        <div class="answer true fragment">True</div>
+    </div>
+</section>
+
+
+
+<section id="question-2-6">
+    <div class="question-container">
+        <div class="question">
+            <pre>
+                <code class="lang-python hljs center">
+'Security' in 'IoT'
+                </code>
+            </pre>
+        </div>
+
+        <div class="answer false fragment">False</div>
+    </div>
+</section>
+
+
+<section id="the-quiz" data-transition="none" data-markdown>
+## Kvíz
+
+```python
+42 == 42
+4 != 4.0
+2022 > 21
+10 >= 10
+'Python' in 'Welcome to Python'
+'Security' in 'IoT'
+```
+</section>
+
+
+<section id="pytest-api" data-transition="none" data-markdown>
+## pytest API
+
+```python
+assert 42 == 42
+assert 4 != 4.0
+assert 2022 > 21
+assert 10 >= 10
+assert 'Python' in 'Welcome to Python'
+assert 'Security' in 'IoT'
+```
+</section>
+
+
+<section id="assert-1" data-markdown data-transition="none">
+```python
+assert
+```
+
+notes:
+* klucove slovo jazyka
+* netreba nic importovat
+</section>
+
+
+<section id="assert-2" data-markdown data-transition="none">
+```python
+assert výraz
+```
+
+notes:
+* logický výraz alebo tvrdenie
+    * výsledná hodnota môže byť `True` alebo `False`
+    * ak je výraz `True`, nič sa nestane
+    * ak je výraz `False`, dôjde k vyvolaniu výnimky `AssertionError`
+</section>
+
+
+<section id="assert-3" data-markdown data-transition="none">
+```python
+assert výraz [, správa]
+```
+
+notes:
+* voliteľný parameter je správa
+    * zobrazí sa pri vzniku výnimky `AssertionError`
+</section>
+
+
+<section id="no-boilerplate" data-markdown>
+## No boilerplate,
+## no required API.
+
+notes:
+* http://pythontesting.net/framework/pytest/pytest-introduction/
+</section>
+
+
+<section id="sense-hat-emu" data-markdown>
+> "Everybody is using pytest anyway..."
+> -- [Guido van Rosum](https://bugs.python.org/issue17908)
+</section>
+
+
+<section id="pytest" data-markdown data-background="#EBEBEB">
+[![Pytest logo](images/logo-pytest.png)](https://docs.pytest.org)
+</section>
+
+
+<section id="pytest-installation" data-markdown>
+## Inštalácia `pytest`
+
+```bash
+$ pip install pytest
+```
+</section>
+
+
+<section id="my-first-test" data-markdown>
+## Môj prvý test ;)
+
+notes:
+```python
+def hello():
+    pass
+```
+</section>
+
+
+<section id="how-to-write-good-tests" data-markdown>
+## Ako písať dobré testy
+
+1. Test má byť **atomický**.
+2. Jeden test vždy testuje **jednu vec**.
+3. V jednom teste vždy len **jeden `assert`**.
+</section>
+
+
+<section id="naming-conventions" data-markdown>
+## when/if - then/expect
+
+notes:
+* KED zadas vek nizsi ako 18 rokov, TAK ta nepustim dalej
+* KED delitel bude 0, OCAKAVAJ vynimku ZeroDivisionError
+* KED bude vstupny parameter None, OCAKAVAJ vynimku TypeError
+* KED sa prvok nenachadza v zozname, TAK vrat False
+</section>
+
+
+<section id="arrange-act-assert" data-markdown>
+## Arrange - Act -Assert
+
+(AAA pattern)
+
+notes:
+* Arrange-Act-Assert je vyborny sposob, ako strukturovat testy
+* predpisuje poradie operacii
+* BDD pouziva Given-When-Then
+</section>
+
+
+<section id="arrange" data-markdown>
+Časť **Arrange** nastaví testovacie objekty a pripraví podmienky pre test.
+
+notes:
+* Arrange steps should set up the test case.
+* Does the test require any objects or special settings? Does it need to prep a database? Does it need to log into a web app? Handle all of these operations at the start of the test.
+</section>
+
+
+<section id="act" data-markdown>
+Časť **Act** vykoná hlavné kroky pre otestovanie cieľa.
+
+notes:
+* Act on the target behavior. Act steps should cover the main thing to be tested.
+* This could be calling a function or method, calling a REST API, or interacting with a web page. Keep actions focused on the target behavior.
+</section>
+
+
+<section id="assert" data-markdown>
+Časť **Assert** overí výsledok.
+
+notes:
+* Assert expected outcomes. Act steps should elicit some sort of response. Assert steps verify the goodness or badness of that response. Sometimes, assertions are as simple as checking numeric or string values. Other times, they may require checking multiple facets of a system. Assertions will ultimately determine if the test passes or fails.
+</section>
+
+
+<section id="arrange-act-assert-example" data-markdown>
+## Príklad použitia AAA
+(na organizáciu testu)
+
+```python
+def test_when_negative_nr_is_given_then_return_abs_value():
+  # Arrange
+  negative = -5
+
+  # Act
+  answer = abs(negative)
+
+  # Assert
+  assert answer == 5
+```
+</section>
+
+
+<section id="red-green-refactor" data-markdown data-background="#FFFFFF">
+![Red-Green-Refactor](images/red.green.refactor.png)
+</section>
+
+
+<section id="test-fixtures" data-markdown>
+## Test Fixtures
+
+* funkcie, ktoré sa spúšťajú pred/po teste
+* použitie:
+  * príprava/vyčistenie prostredia (db, fs, ...)
+* sú vytvorené ako **generátory**
+* jeden test môže používať viacero fixtures
+* možné špecifikovať rozsah na *funkciu*, *triedu*, *modul* alebo *sedenie*
+</section>
+
+
+<section id="fixture-example" data-markdown>
+## Príklad `fixture`
+```python
+@fixture
+def webdriver():
+   # setup part
+   driver = webdriver.Chrome()
+
+   yield driver
+
+   # teardown part
+   driver.close()
+```
+</section>
+
+
+<section id="fixture-usage" data-markdown>
+## Použitie `fixture`
+
+```python
+def test_when_web_opens_then_dennik_in_title(webdriver):
+    # arrange
+    url = 'http://www.sme.sk'
+
+    # act
+    webdriver.get(url)
+
+    # assert
+    assert 'dennik' in webdriver.title
+```
+</section>
+
+
+<section id="handling-exceptions" data-markdown>
+## Testovanie výnimiek
+
+* pomocou *context provider*-a:
+
+```python
+def test_when_zero_is_given_then_raise_zerodivisionerror():
+    # arrange
+    value = 0
+
+    # act
+    with pytest.raises(ZeroDivisionError):
+        10 / value
+```
+</section>
+
+
+<section id="parametrized-tests" data-markdown>
+## Parametrické testy
+
+* test je napísaný len jeden, ale vo výsledku sa spustí toľkokrát, koľko hodnôt parametrov má
+
+```python
+@pytest.mark.parametrize("word",
+    ['hello', 'World', '123', ''])
+def test_when_not_uppercase_word_is_given_then_false(word):
+    assert word.isupper() == False
+```
+</section>
+
+
+<section id="marking-tests" data-markdown>
+## Značkovanie testov
+
+* výhodné pri selektívnom spúšťaní testov
+* príklad:
+
+    ```python
+    @pytest.mark.wip
+    def test_when_digits_are_given_then_return_true():
+        assert '123'.isdigit() == True
+    ```
+
+* následne je možné spustiť test so značkou `wip`:
+
+    ```bash
+    $ pytest -m wip
+    ```
+
+* pozor na upozornenie kvôli neznámej značke
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="resources" data-markdown>
+## Zdroje
+
+* [pytest](https://docs.pytest.org/en/7.1.x/) - domovská stránka projektu
+* RealPython: [Effective Python Testing With Pytest](https://realpython.com/pytest-python-testing/)
+* YouTube: [Python Testing 101 with pytest](https://www.youtube.com/watch?v=etosV2IWBF0)
+* DZone: [7 Popular Unit Test Naming Conventions](https://dzone.com/articles/7-popular-unit-test-naming)
+</section>
+
+
+{% include qr.html %}
+

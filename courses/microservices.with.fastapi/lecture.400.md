@@ -1,7 +1,7 @@
 ---
 title: Health Check API
 courseid: fastapi
-order: 30
+order: 400
 layout: lecture
 description: |
     kontrola stavu mikrosluzby

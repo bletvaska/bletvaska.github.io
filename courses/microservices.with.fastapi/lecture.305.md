@@ -1,7 +1,7 @@
 ---
 title: Post New File
 courseid: fastapi
-order: 15
+order: 305
 layout: lecture
 description: |
     ako vytvoriť novú položku pomocou metódy POST, voliteľné parametre
@@ -36,27 +36,21 @@ description: |
 ## Implementacia
 
 ```python
-@router.post('/files/', response_model=File)
-def create_file(request: Request,
-                payload: UploadFile = fastapi.File(...),
-                filename: Optional[str] = Form(None),
-                max_downloads: Optional[int] = Form(None)):
-    # prepare the file entry
+@router.post('/files/', response_model=FileOut, status_code=201,
+             summary='Uploads file and creates file details.')
+def create_file(payload: UploadFile = fastapi.File(...),
+                max_downloads: Optional[str] = Form(None),
+                session: Session = Depends(get_session)):
+    # create file skeleton
     file = File(
-        filename=payload.filename if filename is None else filename,
-        content_type=payload.content_type,
+        filename=payload.filename,
+        size=-1,
+        mime_type=payload.content_type,
+        max_downloads=1 if max_downloads is None else max_downloads
     )
-
-    # set max downloads, if provided
-    if max_downloads is not None:
-        file.max_downloads = max_downloads
 
     # get ready
     path = settings.storage / file.slug
-
-    # check if storage directory exists
-    if not settings.storage.is_dir():
-        settings.storage.mkdir(parents=True, exist_ok=True)
 
     # save uploaded file
     with open(path, 'wb') as dest:
@@ -65,20 +59,12 @@ def create_file(request: Request,
     # get file size
     file.size = path.stat().st_size
 
-    # insert file in to db
-    with Session(engine) as session:
-        session.add(file)
-        session.commit()
-        session.refresh(file)
+    # save to db
+    session.add(file)
+    session.commit()
+    session.refresh(file)
 
-    # return RedirectResponse(f'/uploaded/?slug={file.slug}', 
-    #                         status_code=302)
-
-    # return newly created file
-    return JSONResponse(
-        status_code=201,
-        content=jsonable_encoder(file)
-    )
+    return file
 ```
 
 

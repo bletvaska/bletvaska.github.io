@@ -1,7 +1,7 @@
 ---
 title: Introduction to Microservices
 courseid: fastapi
-order: 01
+order: 101
 layout: lecture
 ---
 
@@ -76,7 +76,7 @@ este predtym, ako sa dostaneme k tej "najzavaznejsej" chybe, vam poviem jeden pr
 Existuje mnoho definicii toho, co je to mikrosluzba (microservice), ale zrejme stale nie je taka, ktora je naozaj uznavana. pozrime sa na dve z nich - jednu kratku a druhu dlhsiu:
 
 > "...a collection of loosely coupled specialized services that work in unison to provide a comprehensive service."
-> 
+>
 > -- Jaime Buelta: Hands-On Docker for Microservices with Python (2019)
 
 tuto kratsiu verziu vieme nájsť v rozličných prevedeniach na viacerých miestach.

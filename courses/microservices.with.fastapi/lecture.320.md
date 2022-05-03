@@ -1,7 +1,7 @@
 ---
 title: REST API Error Handling
 courseid: fastapi
-order: 20
+order: 320
 layout: lecture
 ---
 
@@ -89,6 +89,25 @@ response:
     "instance": "/login/log/abc123"
   }
   ```
+
+
+## Vlastny Model
+
+Vytvorime si vlastny model:
+
+```python
+class ProblemDetails(BaseModel):
+    type = "about:blank"
+    title: str
+    status: Optional[int]
+    detail: Optional[str]
+    instance: Optional[str]
+```
+
+## Content-type odpovede
+
+podla RFC 7807 ma byt content type odpovede ``. mozeme si teda urobit vlastny navratovy typ.
+
 
 ### Podpora vo FastAPI
 

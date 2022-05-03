@@ -2,7 +2,7 @@
 title: Installation
 description: inštalácia, nástroj Poetry, vytvorenie projektu
 courseid: fastapi
-order: 02
+order: 102
 layout: lecture
 ---
 
@@ -44,6 +44,9 @@ a potom pofici aj `pip3`
 
 
 ## Vytvorenie projektu
+
+Projekt sa da uz rovno vytvorit aj len pomocou *PyCharm*-u. Akurat neurobi celu strukturu projektu s balikom, co nie je zasa na skodu veci ;) Takze staci len otvorit novy projekt a z moznosti si vybrat *Poetry* a cestu k nemu.
+
 
 First, let’s create our new project, let’s call it `fishare`:
 

@@ -1,7 +1,7 @@
 ---
 title: Logging
 courseid: fastapi
-order: 35
+order: 500
 layout: lecture
 description: |
     čo je to logovanie
