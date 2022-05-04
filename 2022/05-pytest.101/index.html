@@ -71,7 +71,8 @@ authors:
 
 
 <section id="what-is-test-answer" data-markdown>
-## Test je kód, ktorý sa spúšťa na overenie správnosti iného kódu.
+### Test je kód,
+### ktorý sa spúšťa na overenie správnosti iného kódu.
 
 Notes:
 * a test is code that runs to check the validity of other code (https://www.youtube.com/watch?v=etosV2IWBF0)
@@ -436,7 +437,7 @@ def test_when_negative_nr_is_given_then_return_abs_value():
 
 
 <section id="test-fixtures" data-markdown>
-## Test Fixtures
+## Fixtures
 
 * funkcie, ktoré sa spúšťajú pred/po teste
 * použitie:
@@ -448,7 +449,7 @@ def test_when_negative_nr_is_given_then_return_abs_value():
 
 
 <section id="fixture-example" data-markdown>
-## Príklad `fixture`
+## Príklad fixture
 ```python
 @fixture
 def webdriver():
@@ -464,7 +465,7 @@ def webdriver():
 
 
 <section id="fixture-usage" data-markdown>
-## Použitie `fixture`
+## Použitie fixture
 
 ```python
 def test_when_web_opens_then_dennik_in_title(webdriver):
@@ -533,6 +534,21 @@ def test_when_not_uppercase_word_is_given_then_false(word):
 </section>
 
 
+<section id="benefits-for-teachers" data-markdown>
+## Výhody pre učiteľa
+
+* rovnaké podmienky pre testovaní pre všetkých
+* dôsledné otestovanie všetkých možných (aj nemožných) prípadov
+* napísaním testov sa zlepší aj znenie zadania úlohy
+* jednoduchšie a jasnejšie zdôvodnenie výsledného hodnotenia pre študentov
+* úspora času
+    * keď odmyslíme prípravu testov
+
+notes:
+* pri písaní testov si uvedomíte, na čo všetko ste zabudli
+</section>
+
+
 <section id="questions" data-markdown>
 ## Otázky?
 </section>
@@ -549,4 +565,3 @@ def test_when_not_uppercase_word_is_given_then_false(word):
 
 
 {% include qr.html %}
-
