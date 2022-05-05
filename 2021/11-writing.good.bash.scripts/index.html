@@ -219,7 +219,7 @@ note:
 * detect, if the script is being run directly, or if it is just being sourced
 
   ```bash
-  # call the funct only if the script is executed directly
+  # call the func only if the script is executed directly
   if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     main
   fi
