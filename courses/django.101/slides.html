@@ -1,0 +1,104 @@
+---
+title: Django 101
+description: etc
+# permalink: /2021/lean-publishing
+# duration: 60
+layout: slide
+theme: night
+# date: 2021-11-09
+# bitly: https://bit.ly/3oemezv
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk/
+categories: talk
+authors:
+    - name: Mirek Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+courseid: django101
+---
+
+<style>
+#what-is-microservice-by-fowler > blockquote {
+    width: 90%;
+}
+
+#two-scoops-of-django img {
+    width: 40%;
+}
+</style>
+
+{% include first.slide.html %}
+
+
+<section data-markdown id="django" data-background="#103E2E">
+[![Django](images/logo-django.png)](https://www.djangoproject.com/)
+</section>
+
+
+
+<section data-markdown id="django-the-movie" data-background="white">
+![Django](images/django-the.movie.jpg)
+</section>
+
+
+<section data-markdown id="django-reinhardt" data-background="white">
+[![Django Reinhardt](images/django.reinhardt.jpg)](https://en.wikipedia.org/wiki/Django_Reinhardt)
+</section>
+
+
+<section data-markdown >
+> "**Django** is a high-level **Python Web framework** that encourages **rapid development** and **clean**, **pragmatic design**."
+> ([www.djangoproject.com](https://www.djangoproject.com))
+</section>
+
+
+<section data-markdown id="django-history">
+## History of Django
+
+* internal project of newspaper [Lawrence Journal-World](http://www2.ljworld.com/) (Kansas) in 2003
+* lead developer was former journalist
+* released as open source in 2005 (BSD licence)
+* in 2008 version 1.0 released
+* from version 1.5 in 2013 Django supports Python3
+</section>
+
+
+<section data-markdown id="django-principles">
+## Django Principles
+
+* DRY
+* write less code:
+    > "Django is web framework for perfectionists with deadlines."
+* make CRUD easy
+* DB neutral
+* deployment neutral (WSGI/ASGI/CGI/...)
+
+</section>
+
+
+<section data-markdown id="two-scoops-of-django">
+[![Two Scoops of Django - cover](images/cover-two.scoops.of.django.jpg)](https://www.feldroy.com/books/two-scoops-of-django-3-x)
+</section>
+
+
+<section data-markdown id="project-structure">
+## Recommended Project Structure
+
+```
+repository_root/
+├── configuration_root/
+└─── django_project_root/
+```
+</section>
+
+
+<section data-markdown>
+## The Golden Rule of Django App Design
+
+> The art of creating and maintaining a good Django app is that it should follow the truncated Unix philosophy according to Douglas McIlroy: **"Write programs that do one thing and do it well."** (James Bennett, a Django core developer)
+</section>
+
+
+{% include qr.html %}
+
