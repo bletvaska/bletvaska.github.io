@@ -106,7 +106,7 @@ $ mv fishare/ config/
 mozeme tu spravit niekolko kostier suborov a priecinkov:
 
 ```bash
-$ touch readme.md .gitignore 
+$ touch readme.md .gitignore
 $ mkdir docs/ static/ templates/
 ```
 

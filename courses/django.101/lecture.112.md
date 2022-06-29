@@ -9,10 +9,11 @@ layout: lecture
 
 Urobime len taku jednoduchu aplikaciu, aby sme videli, ze to naozaj funguje.
 
-Zacneme teda jej vytvorenim:
+Zacneme teda jej vytvorenim. presunieme sa do priecinku `fishare/` a spustime:
 
 ```bash
-$ ./manage.py startapp hello
+$ cd fishare/
+$ python3 ../manage.py startapp hello
 ```
 
 

@@ -100,5 +100,52 @@ repository_root/
 </section>
 
 
+<section data-markdown id="cbv-vs-fbv" data-background="#5D17EB">
+![](https://i.ytimg.com/vi/KskV5dWq7Tk/maxresdefault.jpg)
+</section>
+
+
+<section data-markdown>
+## FBV vs CBV
+</section>
+
+
+<section data-markdown id="guidelines-for-writing-fbv">
+## Guidelines for Writing FBV
+
+* Less view code is better.
+* Never repeat code in views.
+* Views should handle presentation logic. Try to keep business logic in models when possible, or in forms if you must.
+* Keep your views simple.
+* Use them to write custom 403, 404, and 500 error handlers.
+* Complex nested-if blocks are to be avoided.
+
+notes:
+* two scoops of django, 9th chapter
+</section>
+
+
+<section data-markdown id="templates">
+## Template Components
+
+* **variables** - hold data
+  ```
+  {\{ person.name }}
+  ```
+* **tags** - perform logic
+  ```
+  {\% include "detail.html" %}
+  ```
+* **filters** - operate on data
+  ```
+  {\{ person.name | upper }}
+  ```
+</section>
+
+
+<section data-markdown id="template-example">
+![Example](https://files.speakerdeck.com/presentations/5431f020a5cf0130d06036e1e4c67336/slide_15.jpg)
+</section>
+
 {% include qr.html %}
 

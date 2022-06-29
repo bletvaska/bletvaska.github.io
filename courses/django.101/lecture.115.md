@@ -13,10 +13,11 @@ Inspiracia zo sluzby [file.io](https://www.file.io/) na nahravanie suborov.
 
 ## Creation
 
-vytvorime appku:
+vytvorime novu appku v priečinku `fishare/`:
 
 ```bash
-$ ./manage.py startapp files
+$ cd fishare/
+$ python3 ../manage.py startapp files
 ```
 
 a pridame ju do zoznamu aplikacii projektu v subore `config/settings.py`:

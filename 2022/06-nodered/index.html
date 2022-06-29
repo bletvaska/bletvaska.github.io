@@ -1,0 +1,395 @@
+---
+title: Úvod do internetu vecí s nástrojom Node-RED
+subtitle: nástroje, ukážky a nápady
+description: |
+    Legendy hovoria, že Internet vecí sa na stredných školách týka len programovania Arduín a BBC micro:bit-ov. Tam to však len začína a my na tomto webinári budeme rozhodne pokračovať. Síce bez mikrokontrolérov, ale to nás nezastaví v tom, aby sme urobili jednoduchú meteo službu. Dáta ukradneme (tí kreatívnejší alebo lenivejší si ich vymyslia), zobrazíme ich na mape Slovenska a hneď uvidíme, aké meteorologické podmienky majú jednotliví účastníci webinára doma. A to všetko len s prehliadačom, nadšením, chuťou experimentovať, vymýšľať... Proste si ukážeme silu integrácie existujúcich nástrojov a služieb bez toho, aby sme napísali čo i len riadok kódu. No skús neprísť ;-)
+duration: 30
+date: 2022-06-29
+layout: slide
+event:
+    title: IOSCS
+#    url: https://mpc-edu.sk/sk
+categories: talk
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+#bitly: https://bit.ly/3uBhK7w
+openweathermap_apikey: 08f5d8fd385c443eeff6608c643e0bc5
+#video: https://youtu.be/coqzmKypHyE
+---
+
+<style>
+#handlebars-template > pre{
+    font-size: 0.4em;
+}
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="about-mirek" data-markdown>
+[![mirek](images/mirek.na.hackathone.jpg)](https://bletvaska.github.io)
+</section>
+
+
+<section id="what-is-iot" data-markdown>
+> **Internet vecí** predstavuje sieť prepojených objektov (vecí), ktoré sú jednoznačne adresovateľné s tým, že táto sieť je založená na štandardizovaných komunikačných protokoloch umožňujúcich výmenu a zdieľanie údajov a informácií, ktorých analýzou bude možné docieliť vyššiu pridanú hodnotu. -- ([Pavel Pohanka](https://pavelpohanka.cz/internet-of-things/))
+
+notes:
+* 
+</section>
+
+
+<section id="the-basis-of-iot-is-data" data-markdown>
+## Základom IoT sú **údaje**.
+
+notes:
+* architektura IoT riesenia musi zabezpecit zber, ulozenie aj analyzu.
+</section>
+
+
+<section id="node-red" data-markdown data-background="#8f1200">
+[![Node-RED Logo](images/logo-node.red.png)](https://nodered.org)
+</section>
+
+
+<section id="what-is-node-red" data-markdown data-background="#8F1200">
+## Čo je Node-RED?
+
+> [Node-RED](https://nodered.org) is a **programming tool** for **wiring** together hardware devices, APIs and online services in new and interesting ways. ([homepage](https://nodered.org))
+
+* grafický programovací nástroj
+* **Flow-based programming** for the Internet of Things. (2017)
+</section>
+
+
+<section id="nodered-features" data-markdown data-background="#8F1200">
+## A okrem toho...
+
+* open source (zadarmo)
+* platformovo nezávislý ([nodejs](https://nodejs.org/))
+    * aplikácia v prehliadači
+</section>
+
+
+<section id="iot-development" data-markdown>
+## "Tradičné" požiadavky na vývoj IoT riešení
+
+* programovanie v nízkoúrovňových jazykoch
+* zručnosti na úrovni návrhu hardvéru
+* rozumieť elektronike
+* znalosti komplexných API pre integrovanie externých služieb
+* znalosti TSDB systémov pre prácu s dátami
+* znalosti z oblastí ako DA alebo ML pre aplikovanie poznatkov z uložených dát
+</section>
+
+
+<section id="nodered-help" data-markdown data-background="#8F1200">
+Node-RED sa postará o technické aspekty vášho riešenia a pomôže vám sústrediť sa na váš **workflow**.
+</section>
+
+
+<section id="the-usecase" data-markdown data-background="#8F1200">
+## Prípadová štúdia
+
+notes:
+* vecami môže byť čokoľvek čo vieme identifikovať. v našom prípade to budú lietadlá.
+* stiahneme informácie o letoch nad slovenskom pomocou komunikačného protokolu HTTP
+* spracujeme ich a zobrazíme ich na vlastnej mape
+* zautomatizujeme proces sťahovania a aktualizácie údajov na mape
+* získané údaje prepošleme ďalej pomocou komunikačného protokolu MQTT
+* údaje začneme lokálne ukladať
+* poskytneme ich ďalej pomocou REST API
+* urobíme jednoduchú webovú stránku
+</section>
+
+
+<section id="getting-the-data" data-markdown data-background="#8F1200">
+## 1. Zber údajov z vecí
+
+notes:
+* running
+  ```bash
+  $ docker container run --publish 1880:1880 --name nodered --volume $(pwd)/data:/data --rm nodered/node-red
+  ```
+</section>
+
+
+<section id="open-sky-network" data-markdown data-background="#8F1200">
+[![The OpenSky Network](images/logo-opensky.png)](https://openskynetwork.github.io/opensky-api/index.html)
+
+https://opensky-network.org/api/states/all?lamin=47.4912&lomin=16.4517&lamax=49.8981&lomax=25.9378
+</section>
+
+
+<section id="getting-the-data-flow" data-markdown data-background="#fff">
+![Zber údajov](images/01.retrieve.data.png)
+</section>
+
+
+<section id="what-is-flow-based-programming" data-markdown data-background="#8f1200">
+## Čo je to FBP?
+
+> **Flow-Based Programming** is a programming paradigm that defines applications as **networks** of "black box" processes, which exchange data across predefined **connections** by **message passing**, where the connections are specified **externally** to the processes. ([Wikipedia](https://en.wikipedia.org/wiki/Flow-based_programming))
+</section>
+
+
+<section id="message" data-markdown data-background="#8f1200">
+## Prenášaná správa
+
+```json
+{
+    "_msgid": "89cbb063.7f7a7",
+    "payload": "Hello world!",
+    "topic": "Greetings!"
+}
+```
+</section>
+
+
+<section id="presenting-the-data" data-markdown data-background="#8F1200">
+## 2. Zobrazenie údajov
+</section>
+
+
+<section id="worldmap-node" data-markdown data-background="#8f1200">
+[![node-red-contrib-web-worldmap](images/worldmap.node.gif)](https://flows.nodered.org/node/node-red-contrib-web-worldmap)
+[node-red-contrib-web-worldmap](https://flows.nodered.org/node/node-red-contrib-web-worldmap)
+
+notes:
+* nainstalujeme plugin worldmap
+* nastavit zemepisnu vysku a sirku, zoom level na hodnotu 8
+* nainstalujeme plugin pre handlebars
+</section>
+
+
+<section id="handlebars-template" data-markdown data-background="#8f1200">
+## Šablóna pre spracovanie údajov 
+
+```json
+{% raw %}[
+    {{#each states}}
+    {
+        "name": "{{0}}",
+        "icao24": "{{0}}",
+        "callsign": "{{1}}",
+        "origin_country": "{{2}}",
+        "lon": {{5}},
+        "lat": {{6}},
+        "icon": "plane",
+        "speed": {{9}},
+        "last_contact": {{4}},
+        "heading": {{10}},
+        "ttl": 60
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+]
+{% endraw %}
+```
+</section>
+
+
+<section id="presenting-the-data-flow" data-markdown data-background="#fff">
+![Zber údajov](images/02.presenting.data.png)
+</section>
+
+
+<section id="updating-of-data" data-markdown data-background="#8F1200">
+## 3. Aktualizácia údajov
+
+notes:
+* nechame udaje stahovat napr. kazdych 10s
+* cron job / systemd timers
+* udaje budeme aktualizovat kazdych 5s, ale netreba zabudnut na cakanie 6s na zaciatku kvoli inicializacii mapy
+</section>
+
+
+<section id="updating-data-flow" data-markdown data-background="#fff">
+![Aktualizácia údajov](images/03.updating.data.png)
+</section>
+
+
+<section id="publishing-data-with-mqtt" data-markdown data-background="#8F1200">
+## 4. Publikovanie údajov cez MQTT
+
+notes:
+* MQTT je jeden zo zakladnych komunikacnych protokolov v IoT rieseniach
+* pouzijeme `broker.hivemq.com:1883` a topic `ossconf/flights`
+</section>
+
+
+<section id="publishing-data-flow" data-markdown data-background="#fff">
+![Publikovanie údajov](images/04.publishing.data.with.mqtt.png)
+</section>
+
+
+<section id="creating-rest-api" data-markdown data-background="#8F1200">
+## 5. REST API
+
+* HTTP protokol
+* endpoint: `/api/flights/:cislo_letu`
+
+notes:
+</section>
+
+
+<section id="local-db" data-markdown data-background="#8F1200">
+## Lokálna databáza
+
+* REST API musí údaje vrátiť okamžite po prijatí požiadavky
+* databáza ako globálna premenná
+* jednoduchý slovník (`key-value` store)
+</section>
+
+<section id="local-db-template" data-markdown data-background="#8F1200">
+```json
+{% raw %}{
+{{#each this}}
+    "{{ icao24 }}": {
+        "icao24": "{{icao24}}",
+        "callsign": "{{callsign}}",
+        "origin_country": "{{origin_country}}",
+        "lon": {{lon}},
+        "lat": {{lat}},
+        "speed": {{speed}},
+        "last_contact": {{last_contact}},
+        "heading": {{heading}}
+    }{{#unless @last}},{{/unless}}
+{{/each}}
+}
+{% endraw %}
+```
+
+notes:
+* vysledok vlozime pomocou uzla `CHANGE` do premennej `global.flights = msg.payload`
+</section>
+
+
+<section id="storing-data-flow" data-markdown data-background="#fff">
+![Uloženie údajov](images/05.storing.data.png)
+</section>
+
+
+<section id="rest-api-flow" data-markdown data-background="#fff">
+![REST API](images/06.rest.api.png)
+
+notes:
+* `CHANGE` uzol urobi `msg.payload = global.flights[msg.req.params.flight]`
+</section>
+
+
+<section id="testing-the-rest-api" data-markdown data-background="#8f1200">
+## Testovanie REST API
+
+http://localhost:1880/api/flights/cislo_letu
+</section>
+
+
+<section id="web-page" data-markdown data-background="#8F1200">
+## 6. Webová stránka
+
+* podobné ako v prípade REST API
+
+notes:
+</section>
+
+
+<section id="webpage-template" data-markdown data-background="#8F1200">
+```html
+{% raw %}&lt;h1>Flight nr {{payload.callsign}}&lt;/h1>
+
+&lt;ul>
+    &lt;li>
+        &lt;b>ICAO24&lt;/b>: {{ payload.icao24 }}
+    &lt;/li>
+    &lt;li>
+        &lt;b>Callsign&lt;/b>: {{ payload.callsign}}
+    &lt;/li>
+    &lt;li>
+        &lt;b>Country of Origin&lt;/b>: {{ payload.origin_country }}
+    &lt;/li>
+    &lt;li>
+        &lt;b>Longitude&lt;/b>: {{ payload.lon }}
+    &lt;/li>
+    &lt;li>
+        &lt;b>Latitude&lt;/b>: {{ payload.lat }}
+    &lt;/li>
+    &lt;li>
+        &lt;b>Speed&lt;/b>: {{ payload.speed }}
+    &lt;/li>
+    &lt;li>
+        &lt;b>Heading&lt;/b>: {{ payload.heading }}
+    &lt;/li>
+    &lt;li>
+        &lt;b>Last Contact&lt;/b>: {{ payload.last_contact }}
+    &lt;/li>
+&lt;/ul>
+{% endraw %}
+```
+
+notes:
+* vysledok vlozime pomocou uzla `CHANGE` do premennej `global.flights = msg.payload`
+</section>
+
+
+<section id="web-page-flow" data-markdown data-background="#fff">
+![Web Page](images/07.web.page.png)
+
+notes:
+* `SWITCH`:
+    * `property = global.flights`
+    * `has key = msg.req.params.flight`
+    * `otherwise`
+* `CHANGE`
+  * `msg.payload = global.flights[msg.req.params.flight]`
+</section>
+
+
+<section id="what-can-nodered-do" data-markdown data-background="#8F1200">
+## Čo ešte Node-RED dokáže?
+
+* websocket-y
+* pripojiť k nemu hardvér
+* vlastné dashboard-y
+* integrácia s DB systémami
+* integrácia s ďalšími službami
+* programovať uzly (JavaScript, Python)
+* a iné
+</section>
+
+
+<section id="experiences" data-markdown data-background="#8F1200">
+## Aké sú skúsenosti?
+
+* [Namakané webináre](http://namakanyden.sk/webinare/) (Covid edition)
+* [IoT kurz na TUKE](https://kurzy.kpi.fei.tuke.sk/iot1/) (2 roky)
+* IoT kurz v rámci IT Akadémie (2 behy)
+</section>
+
+
+<section id="questions" data-markdown data-background="#8F1200">
+## Otázky?
+</section>
+
+
+<section id="resources" data-markdown data-background="#8f1200">
+## Zdroje
+
+* [domovská stránka nástroja Node-RED](https://nodered.org)
+* [FRED: Front End For Node-RED](https://fred.sensetecnic.com)
+* [flow s výslednou službou](resources/flow-flights.json)
+* [Node-RED kanál na YouTube](https://www.youtube.com/channel/UCQaB8NXBEPod7Ab8PPCLLAA)
+* [videozáznam z webinára]({{ page.video }})
+</section>
+
+
+<section id="namakany-den" data-markdown>
+[![Follow Us on Facebook](images/follow.us.on.facebook.png)](https://www.facebook.com/namakanyden)
+[www.facebook.com/namakanyden](https://www.facebook.com/namakanyden)
+</section>
+
+
+{% include qr.html %}
+

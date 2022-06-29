@@ -36,7 +36,7 @@ Try and keep your apps small. Remember, it’s better to have many small apps th
 a few giant apps.
 
 
-## Additional Resources 
+## Additional Resources
 
 * [Two Scoops of Django](https://www.feldroy.com/books/two-scoops-of-django-3-x) - kapitola c. 4
 

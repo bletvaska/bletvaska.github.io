@@ -13,3 +13,15 @@ nainstalujeme django
 $ pip install django
 ```
 
+otestujeme prikazom
+
+```bash
+$ pip list
+```
+
+do systemu sa nainstaloval prikaz `django-admin` na spravu django projektov. vieme si overit napriklad verziu nainstalovaneho djanga:
+
+```bash
+$ django-admin --version
+4.0.5
+```

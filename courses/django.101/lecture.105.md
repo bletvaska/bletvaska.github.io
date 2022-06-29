@@ -10,7 +10,7 @@ layout: lecture
 Ak sme vsetko urobili dobre, tak mozeme napisat:
 
 ```bash
-./manage.py runserver
+$ python3 manage.py runserver
 ```
 
 V konzole sa nam zobrazi text:
@@ -34,3 +34,26 @@ Quit the server with CONTROL-C.
 
 a mozeme otvorit webovy prehliadac na adrese http://127.0.0.1:8000, kde sa nam zobrazi stranka Django aplikacie.
 
+
+## Running on Different port
+
+ak je napr. port _8000_ obsadeny, mozeme django spustit na inom porte zadanim portu ako dalsieho parametra:
+
+```bash
+$ python3 manage.py runserver 9000
+```
+
+
+## Running in Virtual Server
+
+ak sa Django spusta vo virtualnom pocitaci a klient pristupuje z hostovskeho pocitaca, je potrebne pridat do `ALLOWED_HOSTS` znak `'*'` v subore `config/settings.py`:
+
+```python
+ALLOWED_HOSTS = ['*']
+```
+
+a spustit cez
+
+```bash
+$ python3 manage.py runserver 0.0.0.0:8000
+```
