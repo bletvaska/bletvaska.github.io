@@ -1,22 +1,20 @@
 ---
-title: Úvod do internetu vecí s nástrojom Node-RED
-subtitle: alebo tvorba IoT riešení bez programovania
-description: |
-    Legendy hovoria, že Internet vecí sa na stredných školách týka len programovania Arduín a BBC micro:bit-ov. Tam to však len začína a my na tomto webinári budeme rozhodne pokračovať. Síce bez mikrokontrolérov, ale to nás nezastaví v tom, aby sme urobili jednoduchú meteo službu. Dáta ukradneme (tí kreatívnejší alebo lenivejší si ich vymyslia), zobrazíme ich na mape Slovenska a hneď uvidíme, aké meteorologické podmienky majú jednotliví účastníci webinára doma. A to všetko len s prehliadačom, nadšením, chuťou experimentovať, vymýšľať... Proste si ukážeme silu integrácie existujúcich nástrojov a služieb bez toho, aby sme napísali čo i len riadok kódu. No skús neprísť ;-)
+title: Node-RED 101
+subtitle: How to create a solution for hackathons without writing a single line of code
+description:
 duration: 30
-date: 2022-06-29
+date: 2022-07-01
 layout: slide
 event:
-    title: IOSCS
-#    url: https://mpc-edu.sk/sk
+    title: Citython 2022
+    url: https://www.citython.sk/
 categories: talk
 theme: night
 authors:
     - name: Miroslav "mirek" Biňas
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
-bitly: https://bit.ly/3bzZfw2
-openweathermap_apikey: 08f5d8fd385c443eeff6608c643e0bc5
+#bitly: https://bit.ly/3bzZfw2
 #video: https://youtu.be/coqzmKypHyE
 ---
 
@@ -28,82 +26,11 @@ openweathermap_apikey: 08f5d8fd385c443eeff6608c643e0bc5
 
 {% include first.slide.html %}
 
-
-<section id="about-mirek" data-markdown>
-[![mirek](images/mirek.na.hackathone.jpg)](https://bletvaska.github.io)
-</section>
-
-
-<section id="what-is-iot" data-markdown>
-## Čo je to IoT?
-</section>
-
-
-<section id="what-is-iot-definition" data-markdown>
-> **Internet vecí** predstavuje sieť prepojených objektov (vecí), ktoré sú jednoznačne adresovateľné s tým, že táto sieť je založená na štandardizovaných komunikačných protokoloch umožňujúcich výmenu a zdieľanie údajov a informácií, ktorých analýzou bude možné docieliť vyššiu pridanú hodnotu. -- ([Pavel Pohanka](https://pavelpohanka.cz/internet-of-things/))
-
-notes:
-* IoT nie je len o hardveri
-    * ani o softveri
-    * ani len o datach
-    * o vsetkom, ale hladajme pridanu hodnotu
-</section>
-
-
-<section id="the-basis-of-iot-is-data" data-markdown>
-## Základom IoT sú **údaje**.
-
-notes:
-* architektura IoT riesenia musi zabezpecit zber, ulozenie aj analyzu.
-</section>
-
-
-<section id="node-red" data-markdown data-background="#8f1200">
-[![Node-RED Logo](images/logo-node.red.png)](https://nodered.org)
-</section>
-
-
-<section id="what-is-node-red" data-markdown data-background="#8F1200">
-## Čo je Node-RED?
-
-> [Node-RED](https://nodered.org) is a **programming tool** for **wiring** together hardware devices, APIs and online services in new and interesting ways. ([homepage](https://nodered.org))
-
-* grafický programovací nástroj
-* **Flow-based programming** for the Internet of Things. (2017)
-</section>
-
-
-<section id="nodered-features" data-markdown data-background="#8F1200">
-## A okrem toho...
-
-* open source (zadarmo)
-* platformovo nezávislý ([nodejs](https://nodejs.org/))
-    * aplikácia v prehliadači
-</section>
-
-
-<section id="iot-development" data-markdown>
-## "Tradičné" požiadavky na vývoj IoT riešení
-
-* programovanie v nízkoúrovňových jazykoch
-* zručnosti na úrovni návrhu hardvéru
-* rozumieť elektronike
-* znalosti komplexných API pre integrovanie externých služieb
-* znalosti TSDB systémov pre prácu s dátami
-* znalosti z oblastí ako DA alebo ML pre aplikovanie poznatkov z uložených dát
-</section>
-
-
-<section id="nodered-help" data-markdown data-background="#8F1200">
-Node-RED sa postará o technické aspekty vášho riešenia a pomôže vám sústrediť sa na váš **workflow**.
-</section>
-
-
 <section id="the-usecase" data-markdown data-background="#8F1200">
-## Prípadová štúdia
+## Traditional Hackathon Use Case
 
 notes:
-* vecami môže byť čokoľvek čo vieme identifikovať. v našom prípade to budú lietadlá.
+* ukradnut data, spracovat ich, poskytnut pouzivatelom
 * stiahneme informácie o letoch nad slovenskom pomocou komunikačného protokolu HTTP
 * spracujeme ich a zobrazíme ich na vlastnej mape
 * zautomatizujeme proces sťahovania a aktualizácie údajov na mape
@@ -112,12 +39,16 @@ notes:
 * poskytneme ich ďalej pomocou REST API
 * urobíme jednoduchú webovú stránku
 * budem robit nazivo a samozrejme budem podvadzat
-    * som ucitel, takze mozem
+</section>
+
+
+<section id="node-red" data-markdown data-background="#8f1200">
+[![Node-RED Logo](images/logo-node.red.png)](https://nodered.org)
 </section>
 
 
 <section id="getting-the-data" data-markdown data-background="#8F1200">
-## 1. Zber údajov z vecí
+## 1. Collecting Data
 
 notes:
 * running
@@ -139,15 +70,8 @@ https://opensky-network.org/api/states/all?lamin=47.4912&lomin=16.4517&lamax=49.
 </section>
 
 
-<section id="what-is-flow-based-programming" data-markdown data-background="#8f1200">
-## Čo je to FBP?
-
-> **Flow-Based Programming** is a programming paradigm that defines applications as **networks** of "black box" processes, which exchange data across predefined **connections** by **message passing**, where the connections are specified **externally** to the processes. ([Wikipedia](https://en.wikipedia.org/wiki/Flow-based_programming))
-</section>
-
-
 <section id="message" data-markdown data-background="#8f1200">
-## Prenášaná správa
+## The Message
 
 ```json
 {
@@ -160,7 +84,7 @@ https://opensky-network.org/api/states/all?lamin=47.4912&lomin=16.4517&lamax=49.
 
 
 <section id="presenting-the-data" data-markdown data-background="#8F1200">
-## 2. Zobrazenie údajov
+## 2. Presenting the Data
 </section>
 
 
@@ -176,7 +100,7 @@ notes:
 
 
 <section id="handlebars-template" data-markdown data-background="#8f1200">
-## Šablóna pre spracovanie údajov 
+## Template for Data Processing
 
 ```json
 {% raw %}[
@@ -202,12 +126,12 @@ notes:
 
 
 <section id="presenting-the-data-flow" data-markdown data-background="#fff">
-![Zber údajov](images/02.presenting.data.png)
+![Data presentation](images/02.presenting.data.png)
 </section>
 
 
 <section id="updating-of-data" data-markdown data-background="#8F1200">
-## 3. Aktualizácia údajov
+## 3. Updating Data
 
 notes:
 * nechame udaje stahovat napr. kazdych 10s
@@ -217,12 +141,12 @@ notes:
 
 
 <section id="updating-data-flow" data-markdown data-background="#fff">
-![Aktualizácia údajov](images/03.updating.data.png)
+![Updating Data](images/03.updating.data.png)
 </section>
 
 
 <section id="publishing-data-with-mqtt" data-markdown data-background="#8F1200">
-## 4. Publikovanie údajov cez MQTT
+## 4. Publishing Data with MQTT
 
 notes:
 * MQTT je jeden zo zakladnych komunikacnych protokolov v IoT rieseniach
@@ -231,7 +155,7 @@ notes:
 
 
 <section id="publishing-data-flow" data-markdown data-background="#fff">
-![Publikovanie údajov](images/04.publishing.data.with.mqtt.png)
+![Publishing Data](images/04.publishing.data.with.mqtt.png)
 </section>
 
 
@@ -246,7 +170,7 @@ notes:
 
 
 <section id="local-db" data-markdown data-background="#8F1200">
-## Lokálna databáza
+## Local Database
 
 * REST API musí údaje vrátiť okamžite po prijatí požiadavky
 * databáza ako globálna premenná
@@ -278,7 +202,7 @@ notes:
 
 
 <section id="storing-data-flow" data-markdown data-background="#fff">
-![Uloženie údajov](images/05.storing.data.png)
+![Storing the Data](images/05.storing.data.png)
 </section>
 
 
@@ -291,16 +215,16 @@ notes:
 
 
 <section id="testing-the-rest-api" data-markdown data-background="#8f1200">
-## Testovanie REST API
+## Testing the REST API
 
 http://localhost:1880/api/flights/cislo_letu
 </section>
 
 
 <section id="web-page" data-markdown data-background="#8F1200">
-## 6. Webová stránka
+## 6. Web Page
 
-* podobné ako v prípade REST API
+(similar to REST API)
 
 notes:
 </section>
@@ -358,46 +282,30 @@ notes:
 
 
 <section id="what-can-nodered-do" data-markdown data-background="#8F1200">
-## Čo ešte Node-RED dokáže?
+## What else Node-RED do?
 
-* websocket-y
-* pripojiť k nemu hardvér
-* vlastné dashboard-y
-* integrácia s DB systémami
-* integrácia s ďalšími službami
-* programovať uzly (JavaScript, Python)
-* a iné
-</section>
-
-
-<section id="experiences" data-markdown data-background="#8F1200">
-## Aké sú skúsenosti?
-
-* [Namakané webináre](http://namakanyden.sk/webinare/) (Covid edition)
-* [IoT kurz na TUKE](https://kurzy.kpi.fei.tuke.sk/iot1/) (2 roky)
-* IoT kurz v rámci IT Akadémie (2 behy)
+* websockets
+* connected hw
+* dashboards
+* integration with DBS
+* integration with external services
+* own functions as nodes (JavaScript, Python)
+* ...
 </section>
 
 
 <section id="questions" data-markdown data-background="#8F1200">
-## Otázky?
+## Questions?
 </section>
 
 
 <section id="resources" data-markdown data-background="#8f1200">
-## Zdroje
+## Resources
 
-* [domovská stránka nástroja Node-RED](https://nodered.org)
+* [Node-RED Homepage](https://nodered.org)
 * [FRED: Front End For Node-RED](https://fred.sensetecnic.com)
-* [flow s výslednou službou](resources/flow-flights.json)
-* [Node-RED kanál na YouTube](https://www.youtube.com/channel/UCQaB8NXBEPod7Ab8PPCLLAA)
-* [videozáznam z webinára]({{ page.video }})
-</section>
-
-
-<section id="namakany-den" data-markdown>
-[![Follow Us on Facebook](images/follow.us.on.facebook.png)](https://www.facebook.com/namakanyden)
-[www.facebook.com/namakanyden](https://www.facebook.com/namakanyden)
+* [The Result Flow](resources/flow-flights.json)
+* [Node-RED YouTube Channel](https://www.youtube.com/channel/UCQaB8NXBEPod7Ab8PPCLLAA)
 </section>
 
 
