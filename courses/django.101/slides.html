@@ -130,21 +130,41 @@ notes:
 
 * **variables** - hold data
   ```
-  {\{ person.name }}
+  {% raw %}{{ person.name }}{% endraw %}
   ```
 * **tags** - perform logic
   ```
-  {\% include "detail.html" %}
+  {% raw %}{% include "detail.html" %}{% endraw %}
   ```
 * **filters** - operate on data
   ```
-  {\{ person.name | upper }}
+  {% raw %}{{ person.name | upper }}{% endraw %}
   ```
 </section>
 
 
 <section data-markdown id="template-example">
 ![Example](https://files.speakerdeck.com/presentations/5431f020a5cf0130d06036e1e4c67336/slide_15.jpg)
+</section>
+
+
+<section data-markdown id="drf" data-background="#fff">
+[![Django REST Framework](https://www.django-rest-framework.org/img/logo.png)](https://www.django-rest-framework.org/)
+</section>
+
+
+<section data-markdown id="pytest" data-background="#ECECEC">
+[![Pytest](images/logo-pytest.webp)](https://pytest.org)
+</section>
+
+
+<section data-markdown id="how-to-write-unit-tests">
+## How to Write Unit Tests
+</section>
+
+
+<section data-markdown id="each-test-method-tests-one-thing">
+## Each Test Method Tests One Thing 
 </section>
 
 {% include qr.html %}
