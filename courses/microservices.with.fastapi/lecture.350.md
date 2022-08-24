@@ -21,3 +21,4 @@ description: |
 
     * `summary` - kratky opis, ktory sa zobrazi na hlevnej stranke hned vedla endpoint-u
     * `description` - dlhy opis, ktory sa zobrazi po rozkliknuti
+
