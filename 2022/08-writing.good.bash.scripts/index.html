@@ -21,6 +21,16 @@ authors:
       url: https://bletvaska.github.io
 ---
 
+<style>
+section#bash-script-template pre {
+    font-size: 0.35em;
+}
+
+section#bats-test-example pre {
+    font-size: 0.5em;
+}
+</style>
+
 {% include first.slide.html %}
 
 
@@ -36,22 +46,70 @@ authors:
 </section>
 
 
+<section data-markdown id="follow-clean-code-aproach">
+## #0 The principles of [Clean Code](https://www.pearson.com/us/higher-education/program/Martin-Clean-Code-A-Handbook-of-Agile-Software-Craftsmanship/PGM63937.html) apply to Bash as well!
+
+note:
+* https://bertvv.github.io/cheat-sheets/Bash.html
+</section>
+
+
+<section data-markdown id="readibility-counts">
+## #1 Readibility Counts!
+
+more than wherever
+</section>
+
+
 <section data-markdown>
-## #1 Don't forget about portability!
+* use **readable** and **meaningful** names
+
+* `snake_style_for_long_names`
+
+* **always** use **long parameter notation** when available
+
+    * increases readibility especially for lesser known/used commands that you don’t remember all the options for
+
+* capitalization of var names:
+
+    * `${ALL_CAPS}` for env (exported) vars
+    * `${lower_case}` for local vars
+
+note:
+* https://bertvv.github.io/cheat-sheets/Bash.html
+</section>
+
+
+<section data-markdown id="echo-vs-printf">
+## #2 `printf` is Preferable to `echo`
+</section>
+
+
+<section data-markdown>
+* [various reasons](https://unix.stackexchange.com/a/65819) why `printf` is preferable to `echo` such as:
+    * more control over the output
+    * more portable and reliable
+    * behaviour is defined better
+* follows MTV/MVC pattern
+</section>
+
+
+<section data-markdown>
+## #3 Don't Forget About Portability!
 </section>
 
 
 <section data-markdown>
 <script type="text/template">
-    ### `Hello world!`
+### `Hello world!`
 
-    ```bash
-    #!/bin/bash
+```bash
+#!/bin/bash
 
-    echo "Hello world!"
-    ```
+printf "Hello world!\n"
+```
 
-    ## wrong Wrong WRONG! <!-- .element: class="fragment" data-fragment-index="1" -->
+## wrong Wrong WRONG! <!-- .element: class="fragment" data-fragment-index="1" -->
 </script>
 </section>
 
@@ -62,28 +120,60 @@ authors:
 ```bash
 #!/usr/bin/env bash
 
-echo "Hello world!"
+printf "Hello world!\n"
 ```
 
-* `env` - run a program in a modified environment
+* from `env` manpage - `env` runs a program in a modified environment
     * looks for interpreter in `$PATH`
 </section>
 
 
 <section data-markdown>
-## #2 Stop on Error!
+## #4 Stop on Error Immediately!
 </section>
 
 
-<section data-markdown>
-### Wrong Script
+<section data-markdown data-transition="none">
+### Erroneous Script
+(Don't Try at Home!)
 
 ```bash
 #!/usr/bin/env bash
 
-echo "start here"
-VAR = "syntax error on this line"
-echo "this line will be executed too"
+printf "Get ready for some magic!\n"
+folder = "tmp/cache"
+rm --recursive --force "${HOME}/${folder}"
+printf "Enjoy ;)\n"
+```
+</section>
+
+
+<section data-markdown data-transition="none">
+### Erroneous Script
+(Don't Try at Home!)
+
+```bash
+#!/usr/bin/env bash
+
+printf "Get ready for some magic!\n"
+folder = "tmp/cache"                        # syntax error
+rm --recursive --force "${HOME}/${folder}"
+printf "Enjoy ;)\n"
+```
+</section>
+
+
+<section data-markdown data-transition="none">
+### Erroneous Script
+(Don't Try at Home!)
+
+```bash
+#!/usr/bin/env bash
+
+printf "Get ready for some magic!\n"
+folder = "tmp/cache"                        # syntax error
+rm --recursive --force "${HOME}/${folder}"  # still reachable
+printf "Enjoy ;)\n"                         # still reachable
 ```
 </section>
 
@@ -94,22 +184,24 @@ echo "this line will be executed too"
 ```bash
 #!/usr/bin/env bash
 
-set -o errexit  # stop when error occurs
-set -o pipefail # if not, expressions like `error here | true`
-                # will always succeed
-set -o nounset  # detects uninitialised variables
-set -o xtrace   # prints every expression
-                # before executing it (debugging)
+set -o errexit   # stop when error occurs
+set -o pipefail  # if not, expressions like `error here | true`
+                 # will always succeed
+set -o nounset   # detects uninitialised variables
+set -o xtrace    # prints every expression
+                 # before executing it (debugging)
 
-echo "start here"
-VAR = "syntax error on this line"
-echo "this line is now not reachable"
+
+printf "Get ready for some magic!\n"
+folder = "tmp/cache"                        # syntax error
+rm --recursive --force "${HOME}/${folder}"  # no more reachable
+printf "Enjoy ;)\n"                         # no more reachable
 ```
 </section>
 
 
 <section data-markdown>
-## #3 Enclose Vars as `"${variable}"`
+## #5 Enclose Vars as `"${variable}"`!
 </section>
 
 
@@ -137,7 +229,7 @@ echo "this line is now not reachable"
       ```bash
       "${variable:-something_else}"
       ```
-    * string replacement: 
+    * string replacement (all occurrencies): 
       ```bash
       "${variable//from/to}"
       ```
@@ -145,7 +237,7 @@ echo "this line is now not reachable"
 
 
 <section data-markdown>
-## #4 Use `[[ expr ]]` instead of `[ expr ]`
+## #6 Use `[[ expr ]]` Instead of `[ expr ]`!
 
 note:
 * `[[` - extension of bash
@@ -166,7 +258,7 @@ note:
 * support for operators `"&&"` and `"||"`  
 
   ```bash
-  [[ ${USERNAME} == "root" && $(id -g) == 1 ]]
+  [[ "${USERNAME}" == "root" && $(id --group) == 1 ]]
   ```
 
 * string comparision with `"<"` and `">"`
@@ -187,18 +279,117 @@ note:
 * operator `"=~"` for regex comparisions
 
   ```bash
-  [[ ${answer} =~ ^y(es)?$ ]]
+  [[ "${answer}" =~ ^y(es)?$ ]]
   ```
-* supports _globbing_
+* support for _globbing_
 
   ```bash
-  [[ ${answer} = y* ]]
+  [[ "${answer}" = y* ]]
   ```
 </section>
 
 
 <section data-markdown>
-## #5 Use Modular Approach
+## #7 Don't Use External Tools whose Functions `bash` Handles!
+</section>
+
+
+<section data-markdown>
+* one of the most common (unconscious) mistakes
+
+* most common `grep`, `awk`, `sed`, `bc`, `expr`, e.g.:
+  ```bash
+  size=$(du -hs images/ | awk '{print $1}')
+  ```
+  can be solved with bash as
+  ```bash
+  array=($(du -hs images/))
+  size=${array[0]}
+  ```
+* instead of `seq 1 10` use `{1..10}`
+</section>
+
+
+<section data-markdown id="variable-anotations">
+## #8 Use Variable Annotations!
+</section>
+
+
+<section data-markdown id="readonly-anotation">
+### Anotation `readonly`
+
+* for **readonly variables** such as constants 
+
+* if you need globals, mark them as `readonly`!
+
+* example:
+
+  ```bash
+  readonly pi=3.14159265359
+  ```
+</section>
+
+
+<section data-markdown id="local-anotation">
+### Anotation `local`
+
+* for local variables inside of functions
+
+* **prefer local variables** within functions over global variables
+
+* **always** declare variables with a meaningful names for positional parameters of functions!
+
+* example:
+
+  ```bash
+  function greetings(){
+      local name="${1}"
+
+      printf "Hello %s!\n" "${name}"
+  }
+  ```
+</section>
+
+
+<section data-markdown id="about-functions">
+## #9 Write Safe and Readable Functions, which apply SRP!
+</section>
+
+
+<section data-markdown id="single-responsibility-principle">
+### Single Responsibility Principle
+
+> A function does one thing.
+>
+> -- [Wikipedia](https://en.wikipedia.org/wiki/Single_responsibility_principle)
+</section>
+
+
+<section data-markdown>
+* describe the usage of each function: 
+    * number of arguments
+    * return value
+    * output
+
+* declare `local` variables with a meaningful name for positional parameters of functions
+
+* check positional parameters
+
+  ```bash
+  function greeting(){
+    local name="${1:?Error: Parameter name was not set.}"
+
+    printf "Hello %s!\n" "${name}"
+  }
+  ```
+
+notes:
+* https://betterprogramming.pub/5-bash-scripting-power-tips-bfd919b619c1
+</section>
+
+
+<section data-markdown>
+## #10 Use Modular Approach!
 </section>
 
 
@@ -215,6 +406,7 @@ note:
   # ...
   ```
 </section>
+
 
 <section data-markdown>
 ## Detect Sourcing
@@ -236,110 +428,53 @@ note:
 
 
 <section data-markdown>
-## #6 Don't Use Tools whose Functions `bash` Handles
+## #11 Write Scripts so That They can be Tested!
 </section>
 
 
 <section data-markdown>
-* one of the most common (unconscious) mistakes
-
-* most common `grep`, `awk`, `sed`, `bc`, `expr`, e.g.:
-  ```bash
-  size=$(du -hs images/ | awk '{print $1}')
-  ```
-  can be solved with bash as
-  ```bash
-  array=($(du -hs images/))
-  size=${array[0]}
-  ```
-* instead of `seq 1 10` use `{1..10}`
-
-* use `$(cmd)` instead of ` `cmd` `
-</section>
-
-
-<section data-markdown>
-## #7 Write Scripts so That They can be Tested
-</section>
-
-
-<section data-markdown>
-* close everything to the function (approach)
+* approach: close everything to the function, so it can be tested
   ```bash
   #!/usr/bin/env bash
 
-  main(){
-      echo "Hello world!"
+  function main(){
+      printf "Hello world!\n"
   }
 
   if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     main "$@"
   fi
   ```
+</section>
 
-* many tools for testing in bash are available (e.g. [bats](https://github.com/sstephenson/bats))
+
+<section data-markdown id="bats-test-example">
+* many tools are available for testing in bash (e.g. [bats](https://github.com/sstephenson/bats))
   ```bash
   #!/usr/bin/env bats
 
-  @test "when new folder is created, then exit status is 0" {
-    run mkdir "${dir}"
-    assert [[ ${status} == 0 ]]
+  load "libs/bats-support/load.bash"
+  load "libs/bats-assert/load.bash"
+
+  source "script.bash"
+
+  @test 'if main is invoked, then "Hello world!" is printed out' {
+    run main
+    assert [[ "${output}" == "Hello world!" ]]
   }
   ```
 </section>
 
 
 <section data-markdown>
-## #8 Use Linter
+## #12 Avoid Usage of Temporary Files!
 </section>
 
 
 <section data-markdown>
-> **Lint** or a **linter**, is a static code analysis tool used to flag programming errors, bugs, stylistic errors and suspicious constructs. It helps to increase the quality of code.
->
-> -- [Wikipedia](https://en.wikipedia.org/wiki/Linter_%28software%29)
-</section>
+* problem - concurent execution of script
+    * overwriting temp files with same path leads to wrong behavior/result
 
-
-<section data-markdown>
-### [ShellCheck](https://www.shellcheck.net/)
-
-* Shell script analysis tool
-* contains [Gallery of bad code](https://github.com/koalaman/shellcheck/blob/master/README.md#user-content-gallery-of-bad-code)
-    * shows, what kind of things does ShellCheck look for
-* in your Linux distro
-</section>
-
-
-<section data-markdown>
-## #9 Use Variable Annotations
-</section>
-
-<section data-markdown>
-
-* `readonly` - for readonly (constant) variables
-
-  ```bash
-  readonly pi=3.14159265359
-  ```
-
-* `local` - for local variables inside of functions
-
-  ```bash
-  _greetings(){
-      local name="$1"
-      printf "Hello %s!\n" "${name}"
-  }
-  ```
-</section>
-
-
-<section data-markdown>
-## #10 Avoid Temporary Files
-</section>
-
-
-<section data-markdown>
 * some commands expect filenames as params
     * pipelining does not work
 
@@ -348,8 +483,11 @@ note:
   ```bash
   jq -r .client_ip &lt;(http http://worldtimeapi.org/api/ip)
   ```
+</section>
 
-* _here documents_
+
+<section data-markdown id="here-documents-and-strings">
+* _Here Documents_
 
   ```bash
   cat &lt;&lt;EOF
@@ -358,11 +496,135 @@ note:
      Document.
   EOF
   ```
+
+* _Here String_ is variant of _Here Document_
+
+  ```bash
+  ```
+</section>
+
+
+<section data-markdown id="configuration">
+## #13 Store Config in the Environment!
 </section>
 
 
 <section data-markdown>
-## Other Tips
+> An app’s config is **everything that is likely to vary between deploys** (staging, production, developer environments, etc).
+>
+> -- [The Twelve-Factor App](https://12factor.net/config)
+
+note:
+* https://12factor.net/config
+</section>
+
+
+<section data-markdown>
+* **strict separation of config from code** is required!
+* don't use constant vars for config in app code!
+* possibly use defaults
+    * `"${BASE_URL:-localhost}"`
+    * possible issue - if forgot to set env var, unexpected behaviour can occure
+</section>
+
+
+<section data-markdown>
+* config should be stored in **env variables**
+* env vars are easy to change between deploys without changing any code
+* the preffered way, how to communicate with apps from outside of apps
+* approach is used also in apps running in containers
+</section>
+
+
+<section data-markdown>
+* source and export your env vars **before** running the app
+
+    ```bash
+    $ set -o allexport \     # export all created vars (-a)
+      && source local.env \  # source the env variables
+      && set +o allexport \  # dissable auto export (+a)
+      && script.bash         # run the script
+    ```
+</section>
+
+
+<section data-markdown id="always-use-linter">
+## #14 Always Use Linter!
+</section>
+
+
+<section data-markdown id="what-is-linter">
+> **Lint** or a **linter**, is a static code analysis tool used to flag programming errors, bugs, stylistic errors and suspicious constructs. It helps to increase the quality of code.
+>
+> -- [Wikipedia](https://en.wikipedia.org/wiki/Linter_%28software%29)
+</section>
+
+
+<section data-markdown id="shellcheck">
+### [ShellCheck](https://www.shellcheck.net/)
+
+* Shell script analysis tool
+* contains [Gallery of bad code](https://github.com/koalaman/shellcheck/blob/master/README.md#user-content-gallery-of-bad-code)
+    * shows, what kind of things does ShellCheck look for
+* available in your Linux distro
+</section>
+
+
+<section data-markdown id="use-linter-asap">
+### Use Linter ASAP!
+
+* helps you to **avoid same issues** in future
+* helps you to **eliminate bad habits**
+* helps you **become better scripter**
+</section>
+
+
+
+
+<section data-markdown id="tips-and-tricks-and-snippets">
+## [[ Tips && Tricks && Snippets ]]
+</section>
+
+
+<section data-markdown>
+* for [various reasons](https://stackoverflow.com/questions/9449778/what-is-the-benefit-of-using-instead-of-backticks-in-shell-scripts) use `$(cmd)` instead of ` `cmd` `
+
+* `$()` stands visually better (readibility counts)
+
+* major reason is ability of nesting
+
+  ```bash
+  local parent=$(basename $(dirname $PWD))
+  ```
+
+  looks better than
+
+  ```bash
+  local parent=`basename \`dirname $PWD\``
+  ```
+
+</section>
+
+
+<section data-markdown id="error-messages">
+* **always** print error messages on standard error output with log-like function
+
+  ```bash
+  function error(){
+    local message="${*}"
+
+    printf "ERROR: %s\n" "${message}" 1>&2;
+  }
+  ```
+
+  or make output of block to print on error output
+
+  ```bash
+  {
+    printf "This is\n"
+    printf "critical error.\n"
+  } 1>&2
+  ```
 </section>
 
 
@@ -371,7 +633,7 @@ note:
 
   ```bash
   ls /root || {
-    echo "Error" >&2 
+    printf "Error\n" >&2 
     exit 1
   }
   ```
@@ -380,8 +642,86 @@ note:
 * https://linuxhint.com/bash_error_handling/
 </section>
 
+
+<section data-markdown>
+* or make a function with uniform behaviour (similar to [`or die()`](https://www.php.net/manual/en/function.die.php) in [PHP](https://www.php.net/))
+
+  ```bash
+  function or_exit(){
+    local exit_status="${?}"
+    local message="${1}"
+
+    [[ "${exit_status}" == 0 ]] || {
+        printf "CRITICAL: %s\n" "${message}" 1>&2
+        exit "${exit_status}"
+    }
+  }
+
+  ls /root
+    or_exit "Can't list directory /root"
+  ```
+
+note:
+* https://stackoverflow.com/a/64331640/1671256
+</section>
+
+
+<section data-markdown>
+* enter the folder && do the job && return to origin folder
+
+    ```bash
+    (
+        cd folder/
+        # do the job
+    )
+    ```
+
+note:
+* https://bertvv.github.io/cheat-sheets/Bash.html
+</section>
+
+
+<section data-markdown id="bash-script-template">
+## Bash Script Template
+
+```bash
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+[[ "${ENVIRONMENT:-devel}" == "devel" ]] && set -o xtrace
+
+# load modules
+source "lib/helper.sh"
+
+
+# the main function
+function main(){
+    local target="${1:-world}"
+
+    printf "Hello %s!\n" "${target}"
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi
+```
+</section>
+
+
 <section data-markdown>
 ## Questions?
+</section>
+
+
+<section data-markdown id="resources">
+## Resources
+
+* `man bash`
+* [Bash best practices](https://bertvv.github.io/cheat-sheets/Bash.html)
+* [The Twelve-Factor App](https://12factor.net/config)
+* [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
 </section>
 
 {% include qr.html %}
