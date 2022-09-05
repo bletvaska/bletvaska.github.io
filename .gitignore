@@ -7,3 +7,5 @@ _config_local.yml
 *.backup
 .bundle/
 .jekyll-cache/
+.ipynb_checkpoints/
+.obsidian
