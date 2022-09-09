@@ -15,11 +15,36 @@ theme: night
 authors:
     - name: Miroslav Biňas
       email: miroslav.binas@tuke.sk
-      url: http://kpi.fei.tuke.sk
+      url: https://bletvaska.github.io
 bitly: https://bit.ly/3x0kHCq
 ---
 
+<style>
+#sense-hat-assembly > p > img {
+    width: 50%;
+}
+
+#about-mirek > p > img {
+    width: 85%;
+}
+</style>
+
+
+
+
 {% include first.slide.html %}
+
+
+<section id="about-mirek" data-markdown>
+![mirek](images/mirek.na.hackathone.jpg)
+[https://bletvaska.github.io](https://bletvaska.github.io)
+</section>
+
+
+<section id="follow-namakanyden" data-markdown>
+[![Follow us on Facebook](images/follow.us.on.facebook.png)](https://www.facebook.com/namakanyden)
+[www.facebook.com/namakanyden](https://www.facebook.com/namakanyden)
+</section>
 
 
 <section id="why-python" data-markdown>
@@ -43,7 +68,7 @@ Notes:
 ## Univerzálny programovací jazyk
 
 notes:
-* skriptovanie, serverove programovanie, testovanie aplikacii, desktopove aplikacie, ...
+* skriptovanie, serverove programovanie, testovanie aplikacii, desktopove aplikacie, webové aplikácie, mikrokontroléry, hry, ...
 </section>
 
 
@@ -59,9 +84,18 @@ notes:
 ## 1. Menej je niekedy viac
 
 notes:
+* chceme ich naucit viac!
 * vedia kadečo, ale nič poriadne
 * slovami mojho sefa: nie je dolezite, co vsetko by mali studenti vediet, ale co nakoniec naozaj vedia
+* ak vedia jazyk, mame viac casu sustredit sa na dalsie temy/technologie/pristupy
 * problem - opakujeme sa
+</section>
+
+
+<section id="focus-on-syntax" data-markdown>
+    > štandardné kurzy miesto výučby programovania učia svojich čitateľov a frekventantov len syntax preberaného jazyka.
+    >
+    > -- [Rudolf Pecinovský](https://pdfs.semanticscholar.org/d50c/fa981ded2bf03fc6e3db8e7a85e82ce75180.pdf)
 </section>
 
 
@@ -78,6 +112,11 @@ notes:
 * opakujeme sa
 * kazdy rok venujeme zhruba 1/3 kurzu opakovaniu
 * to znamena, ze ak prvy rocnik ich nieco naucime a nasledujuce tri to budeme opakovat, tak jeden cely rok sme stravili len s opakovanim
+</section>
+
+
+<section id="repetition-consequence" data-markdown>
+    $$ \frac{1}{3} + \frac{1}{3} + \frac{1}{3} = 1 $$
 </section>
 
 
@@ -100,6 +139,11 @@ notes:
 
 <section id="bus-factor" data-markdown>
 ## 3. Bus Factor > 1
+
+notes:
+* vypadok ucitela moze viest k znefunkcneniu predmetu
+* zastupitelnost ucitelov
+* problem hlavne na gymnaziach
 </section>
 
 
@@ -138,20 +182,19 @@ notes:
 ## Úvodné kurzy programovania
 
 * motivačný faktor - hry
-    * Oliver a Minecraft
 * v hrách sa riešia zaujímavé problémy
     * častokrát sú herní developeri lepší programátori ako programátori IS
-* podpora kreativity - projekty na GTA
+* podpora kreativity - projekty na GTA, OOP na TUKE
 * nápady sa dajú rozvíjať
 * [Reeborg](http://reeborg.ca/index_en.html), 
   [Pygame Zero](https://pygame-zero.readthedocs.io/en/stable/), 
   [Minecraft](https://github.com/martinohanlon/mcpi), ...
 
 notes:
-* hovoril som vlani
 * Pygame Zero
 * Minecraft MCPI
 * vysledok
+    * 200 studentov na KPI = 200 jedinecnych projektov
     * GTA a zaverecne projekty
     * vzdy sa najde skupinka ludi, ktori to robia
 </section>
@@ -160,11 +203,35 @@ notes:
 <section id="oop" data-markdown>
 ## Objektovo orientované programovanie
 
-* [Greenfoot](https://www.greenfoot.org/door)
+* [Greenfoot](https://www.greenfoot.org/door) a [BlueJ](https://www.bluej.org/)
     * Objects first approach
 * Python je objektovo orientovaný
     * obecne sa objektom nevyhnete
-* OOP nie je ani tak o programovaní (často UI), ako skôr o návrhu/architektúre
+* OOP nie je ani tak o programovaní, ako skôr o návrhu/architektúre
+</section>
+
+
+<section id="oop-is-not-gui-programming" data-markdown>
+## OOP ≠ GUI Prog.
+
+notes:
+* mytus: programovat objektovo neznamena vytvarat GUI
+* aj moja predstava mladosti a rovnako tak predstava mnohych nasich studentov
+* dizajner GUI urobi robotu za vas a vy osetrujete len udalosti
+    * udalost - kliknutie na tlacidlo
+    * pravdepodobne kopec globalnych premennych
+* pre navrh GUI pouzivajte graficky dizajner
+</section>
+
+
+<section id="oop-is-gui-myth" data-markdown>
+* mýtus: programovať objektovo znamená vytvárať GUI
+     * predstava mnohých našich študentov
+     * (aj moja už od strednej školy)
+* dizajnér GUI urobí robotu za vás a vy (ako programátor) už len ošetrujete udalosti
+    * udalosť - kliknutie na tlačidlo
+    * pravdepodobnosť používania globálnych premenných je veľmi vysoká
+* pre návrh GUI používajte grafický dizajnér
 </section>
 
 
@@ -172,10 +239,19 @@ notes:
 ## Webové stránky
 
 * najhorší možný výber - PHP
-    * jazyk, ktorý je určený len na tvorbu dynamických webov
+    * určený **len** na tvorbu dynamických webov
     * ([vraj skritpy a UI](https://www.php.net/manual/en/intro-whatcando.php))
-    * štýl programovania ako pred 20 rokmi (žiadne MVC/MTV)
-* Python má dva typy webových rámcov
+* v školách je štýl programovania v PHP ako pred 20 rokmi
+    * žiadne MVC/MTV
+    * žiadne rámce
+    * Jiří Kosek: [PHP - Tvorba interaktivních internetových aplikací](https://www.martinus.sk/?uItem=1) (1999)
+</section>
+
+
+<section id="python-and-web-pages" data-markdown>
+## Python a dynamické webové stránky
+
+* dva typy webových rámcov
     * micro webové rámce
     * plnohodnotné webové rámce
 </section>
@@ -187,15 +263,118 @@ notes:
 [Flask](https://palletsprojects.com/p/flask/) vs [Django](https://www.djangoproject.com)
 </section>
 
+
+<section id="fastapi" data-markdown data-background="white">
+[![FastAPI](images/logo-fastapi.png)](https://fastapi.tiangolo.com/)
+</section>
+
+
+<section id="fastapi-vs-flask">
+    <h2><a href="https://fastapi.tiangolo.com#create-it">FastAPI</a> vs <a href="https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application">Flask</a></h2>
+
+<div style="display: flex;">
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-python hljs">
+from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/")
+def hello():
+    return 'Hello, World!'
+      </code>
+      </pre>
+  </div>
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-python hljs">
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return 'Hello, World!'
+      </code>
+      </pre>
+  </div>
+</div>
+</section>
+
+
+<section id="fastapi-workshop" data-markdown>
+[![Pokedex Workshop](https://cdn.vox-cdn.com/uploads/chorus_image/image/53254027/who_pokemon.0.jpg))](https://github.com/namakanyden/pokedex)
+[https://github.com/namakanyden/pokedex](https://github.com/namakanyden/pokedex)
+</section>
+
+
 <section id="iot-and-ucontrollers" data-markdown>
 ## IoT a Mikrokontroléry
 
+![](https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2022/08/arduino_ide_and_parts.jpg)
+
+notes:
 * Arduino a jazyk C
     * dlho topka
+    * od roku 2005
+</section>
+
+
+<section id="microcontrollers-and-python" data-markdown>
+## Mikrokontroléry a Python
+
 * špeciálne verzie Python-u
-    * [MicroPython](http://micropython.org) - ESP32, micro:bit
-    * [CircuitPython](https://circuitpython.org)
+    * [MicroPython](http://micropython.org) - ESP32, micro:bit, RP2040, ...
+    * [CircuitPython](https://circuitpython.org) - ESP32, RP2040, ...
     * [GPIO Zero](https://gpiozero.readthedocs.io/en/stable/) - RPi
+    * [Snek](https://github.com/keith-packard/snek) - Arduino ;)
+</section>
+
+
+<section id="esp32-demo" data-markdown>
+## Demo
+</section>
+
+
+<section id="esp32-workshop" data-markdown>
+[![ESP32 and MicroPython](https://www.usinainfo.com.br/blog/wp-content/uploads/2019/06/IMG_2897-ok-1920x1080.jpg)](https://github.com/namakanyden/esp32-workshop)
+[https://github.com/namakanyden/esp32-workshop](https://github.com/namakanyden/esp32-workshop)
+</section>
+
+
+<section id="sense-hat-assembly" data-markdown data-background="white">
+![Sense HAT Assembly](https://projects-static.raspberrypi.org/projects/rpi-sensehat-attach/a180c64ad52670ac0df6a15e334499b683e65708/en/images/animated_sense_hat.gif)
+</section>
+
+
+<section id="astropi-project" data-markdown data-background="images/background-astropi.jpg" style="background-blend-mode: darken; background-color: rgba(0,43,63,0.65);">
+Sense HAT je rozširujúca doska pre Raspberry Pi vytvorená špeciálne pre súťaž [Astro Pi](https://astro-pi.org).
+</section>
+
+
+<section id="sense-hat-usages" data-markdown>
+# Použitie
+
+* ako HAT na RPi (cena okolo 40 Eur)
+* ako [online Sense Hat emulátor](https://trinket.io/sense-hat)
+* ako [desktop Sense Hat emulátor](https://sense-emu.readthedocs.io/en/v1.1/install.html)
+</section>
+
+
+<section id="desktop-sensehat-emulator"  data-markdown>
+![Desktop SenseHat Emulator](images/sensehat.emulator.png)
+</section>
+
+
+<section id="sense-hat-demo" data-markdown>
+## Hello world!
+
+```python
+from sense_emu import SenseHat
+# from sense_hat import SenseHat
+
+sense = SenseHat()
+sense.show_message('Hello world!')
+```
 </section>
 
 
@@ -204,20 +383,22 @@ notes:
 
 * hra s herným ovládačom, diaľkový ovládač, ovládanie hw cez webovú stránku, ...
 * diaľkový detonátor v _Minecraft_-e
+* alebo...
+</section>
+
+
+<section id="data-workflow" data-markdown>
+![Excel Shit](https://embed-ssl.wistia.com/deliveries/4a67919e0368e6d5ef4b3b7570baba221fcd8114.jpg)
+</section>
+
+
+<section id="pandas" data-markdown data-background="white">
+[![Pandas](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/2560px-Pandas_logo.svg.png)](https://pandas.pydata.org/)
 </section>
 
 
 <section id="conclusion" data-markdown>
-## Záver
-
-* detiská to žerú
-* učitelia to žerú tiež
-</section>
-
-
-
-<section id="namakany.den.2019" data-markdown data-background="white">
-    [![Namakany den 2020](images/namakany.den.2020.png)](http://www.namakanyden.sk)
+## Python Rocks!
 </section>
 
 
@@ -226,8 +407,12 @@ notes:
 </section>
 
 
-<section data-markdown id="qr-code">
-    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.short_url }}&size=300x300)
-
-    (**{{ page.short_url }}**)
+<section id="links" data-markdown>
+## Odkazy
+* [zborník](http://www.didinfo.net/images/DidInfo/files/Didinfo_2020.pdf) z konferencie [Didinfo 2020](http://www.didinfo.net/sk/)
+* [Namakaný deň](http://namakanyden.sk/)
 </section>
+
+
+{% include qr.html %}
+
