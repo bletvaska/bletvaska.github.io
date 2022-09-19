@@ -28,7 +28,7 @@ Project Github: [https://github.com/bletvaska/fishare](https://github.com/bletva
 {% endfor %}
 
 
-## Additional 
+## Additional
 
 ### REST Best Practices
 

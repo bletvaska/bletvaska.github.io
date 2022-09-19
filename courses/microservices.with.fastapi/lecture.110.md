@@ -31,7 +31,8 @@ def list_of_files():
 @router.get('/files/{slug}', summary="Get file identified by the {slug}.")
 def get_file(slug: str):
     return {
-        'filename': filename
+        'filename': 'file4',
+        'slug': slug
     }
 
 
@@ -65,12 +66,6 @@ def create_file():
     return "file was created"
 ```
 
-## Nastavenie spustania v Pycharm-e
 
-niekolko sposobov:
-
-1. staci pravym tlacidlom mysi kliknut na subor `main.py` a spustit ho. tym sa vytvori spustac sam
-
-2. vytvorit Python spustac a miesto
 
 ## Organizacia projektu

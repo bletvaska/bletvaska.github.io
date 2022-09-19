@@ -23,14 +23,14 @@ nase REST API bude pouzivat prefix `/api/v1/`
 
 ### Resource Files
 
-| path            | method   | meaning |
-| `/{slug}`       | `GET`    | download file with given `slug` |
-| `/files/{slug}` | `GET`    | get file info as JSON document |
-| `/files/{slug}` | `DELETE` | delete file with given `slug` |
-| `/files/{slug}` | `PUT`    | full update of file with `slug` |
-| `/files/{slug}` | `PATCH`  | partial update of file with `slug` |
-| `/files/`       | `POST`   | create/upload new file |
-| `/files/`       | `GET`    | return list of files |
+| path            | method   | meaning                              | status    |
+| `/{slug}`       | `GET`    | download file with given `slug`      | `200`     |
+| `/files/{slug}` | `GET`    | get file info as JSON document       | `200`     |
+| `/files/{slug}` | `DELETE` | delete file with given `slug`        | `200`, `204`  |
+| `/files/{slug}` | `PUT`    | full update of file with `slug`      | `200`     |
+| `/files/{slug}` | `PATCH`  | partial update of file with `slug`   | `200`     |
+| `/files/`       | `POST`   | create/upload new file               | `201`     |
+| `/files/`       | `GET`    | return list of files                 | `200`     |
 
 
 ### Resource Users
