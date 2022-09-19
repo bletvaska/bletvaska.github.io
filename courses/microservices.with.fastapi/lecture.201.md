@@ -12,10 +12,13 @@ description: |
 
 ## Pydantic
 
-* treba nainstalovat plugin pre pycharm, aby isiel pydantic pekne
+* treba nainstalovat plugin pre pycharm, aby isiel pydantic pekne cez `File` > `Settings` > `Plugins`
 
 
 ## Model pre subor
+
+Modely budeme ukladat do balika s nazvom `models`, ktory vytvorime v korenovom priecinku projektu. nasledne model pre subor vytvorime v module `file.py`. jeho kod bude vyzerat nasledovne:
+
 
 ```python
 from datetime import datetime
@@ -44,7 +47,8 @@ from fishare.models.file import File
 file = File(filename='fishare.exe', size=1024, mime_type='text/plain')
 ```
 
-## Validator 
+
+## Validator
 
 * `always` - validator sa bude volat aj vtedy, ak nie je poskytnuta hodnota pri vytvarani objektu (`value`)
 * `pre` - validator sa bude volat pred inymi validatormi
@@ -67,7 +71,7 @@ File(slug=None, filename='fishare.exe', size=1024, mime_type='text/plain', creat
 ```
 
 
-## Vytvorit jednoduchu implementaciu pre /files/
+## Vytvorit jednoduchu implementaciu pre `/files/`
 
 
 najprv si pripravime zoznam niekolkych suborov:

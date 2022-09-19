@@ -5,6 +5,11 @@ order: 110
 layout: lecture
 description: |
     čo je to REST API, paralela s jazykom SQL, vytvorenie prvého REST API
+todo:
+* mozno by to chcelo zacat robit po jednom a nie cely template nahodit naraz
+* alebo pracovat so statickym zoznamom suborov a naprogramovat jednotlive veci manualne
+    * strata casu?
+    * ukazat na tom funkcionalne programovanie
 ---
 
 ## Čo je to REST API?
