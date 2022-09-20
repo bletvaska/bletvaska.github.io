@@ -71,6 +71,7 @@ mame v podstate dva sposoby:
 
     * module name - `fishare.main`
     * interpereter - poetry set
+    * nastavit workdir na korenovy priecinok projektu
 
 
 ## Refactoring with module `__main__.py`

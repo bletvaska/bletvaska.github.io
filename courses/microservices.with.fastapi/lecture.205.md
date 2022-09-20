@@ -1,115 +1,156 @@
 ---
-title: SQLModel
+title: Model
 courseid: fastapi
 order: 205
 layout: lecture
 description: |
-    praca s databazou, SQLModel, SQL Alchemy
+    co je to model, pydantic, response model
 ---
 
-## Installation
+## Co je to model?
+
+
+## Balik Pydantic
+
+balik `pydantic` najprv nainstalujeme:
 
 ```bash
-$ poetry add sqlmodel
+$ poetry add pydantic
+```
+
+a pre lepsiu pracu si nainstalujeme aj plugin pre pycharm, aby isiel pydantic. otvorime nastavenia cez `File` > `Settings` > `Plugins` a nechame vyhladat a nainstalovat plugin s nazvom `Pydantic`
+
+
+## Model pre subor
+
+pre inspiraciu toho, ako bude vyzerat model pre subor, sa mozeme pozriet na sluzbu [file.io](https://www.file.io/developers).
+
+Modely budeme ukladat do balika s nazvom `models`, ktory vytvorime v korenovom priecinku projektu. nasledne model pre subor vytvorime v module `file_details.py`. jeho kod bude vyzerat nasledovne:
+
+
+```python
+from datetime import datetime
+
+from pydantic import BaseModel
+
+
+class FileDetails(BaseModel):
+    # id: int
+    slug: str = None
+    filename: str
+    downloads = 0
+    max_downloads = 1
+    size: int
+    mime_type: str
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+    # expires: datetime # od uploadu +24 hodin
 ```
 
 
-## Model Refaktoring
+## Otestovanie vytvoreneho modelu
 
-upravime signaturu triedy a pridame primarny kluc:
+skusit vytvorit subor
 
 ```python
-from sqlmodel import SQLModel, Field
+from fishare.models.file_details import FileDetails
 
-class File(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-
-    ...
+file = FileDetails(filename='fishare.exe', size=1024, mime_type='text/plain')
 ```
 
 
-## Settings Refaktoring
+## Validator
 
-pridame polozku do nastaveni pre pripojenie k databaze:
+### Validatacia clenskej premennej `mime_type`
+
+mozeme overit, ci mime type obsahuje znak `'/'`:
 
 ```python
-class Settings(BaseSettings):
-    db_uri: str = 'sqlite:///database.db'
-
-    ...
+@validator('mime_type')
+def mime_type_must_contain_slash(cls, v):
+    if '/' not in v:
+        raise ValueError('must contain "/"')
+    else:
+        return v.lower()
 ```
 
-tym mozeme pridat lubovolnu databazu a nakonfigurovat jej pripojenie len pomocou tohto retazca
-
-
-## Table Initialization
-
-za zaciatok funkcie `main()` pridame:
-
-* vytvorenie db enginu
-* vytvorenie tabuliek podla modelov
+vyskusat:
 
 ```python
-def main():
-    # init db
-    engine = create_engine(settings.db_uri)
-    SQLModel.metadata.create_all(engine)
+>>> from fishare.models.file import File
 
-    ...
+>>> file = File(filename='fishare.exe', size=1024, mime_type='textPLAIN')
 ```
 
 
-## Aktualizacia funkcie `populate_data()`
+### Validatacia clenskej premennej `created_at`
 
-upravime funkciu pre generovanie nahodnych dat, aby ich ukladala rovno do databazy:
+validatory ale vieme pouzit aj na post inicializaciu clenskych premennych. v nasom pripade je to clenska premenna `created_at`, ktoru chceme nastavit v dobe vytvorenia na datum a cas vytvorenia objektu. takze vytvorime nasledovny validator:
 
 ```python
-def populate_data(count: int = 10):
-    engine = create_engine(settings.db_uri)
+@validator('created_at')
+def set_created_now(cls, v):
+    print('>> validating created_at')
+    return datetime.now()
+```
 
-    faker = Faker()
-    categories = ('audio', 'video', 'image', 'text')
+ked sa ale pokusime vytvorit subor, clenska premenna `created_at` bude mat stale hodnotu `None` a nevypise sa ani pomocna hlaska. to znamena, ze tento validator nebol vobec zavolany.
 
-    with Session(engine) as session:
-        for _ in range(count):
-            category = random.choice(categories)
-            file = File(
-                id=_,
-                filename=faker.file_name(category=category),
-                mime_type=faker.mime_type(category=category),
-                size=random.randint(100, 100000000)
-            )
-            session.add(file)
+to je sposobene tym, ze validator sa vola len vtedy, ak je potrebne overit zadanu hodnotu - nesmie byt prazdny (`None`). aby sme zabezpecili toto spravanie a teda spustanie validatora vzdy aj v pripade, ze je hodnota premennej prazdna, pridame validatoru parameter `always`. ten zabezpeci, ze sa bude validator spustat aj vtedy, ak nie je poskytnuta hodnota pri vytvarani objektu.
 
-        session.commit()
+upravime teda kod validatora takto:
+
+```python
+@validator('created_at', always=True)
+def set_created_now(cls, v):
+    print('>> validating created_at')
+    return datetime.now()
+```
+
+vyskusat:
+
+```python
+>>> from fishare.models.file import File
+
+>>> file = File(filename='fishare.exe', size=1024, mime_type='text/plain')
+
+>>> file
+File(slug=None, filename='fishare.exe', size=1024, mime_type='text/plain',
+    created_at=datetime.datetime(2022, 4, 6, 10, 19, 56, 644201),
+    updated_at=None, downloads=0, max_downloads=1)
+```
+
+Okrem volby `always` je mozne pouzit aj dalsie volby, napr.:
+
+* `pre` - validator sa bude volat pred inymi validatormi
+
+
+## Validator pre `slug`
+
+```python
+@validator('slug', always=True)
+def set_secret_slug(cls, v):
+    return secrets.token_urlsafe(5)
 ```
 
 
-## Refaktoring `GET /files/{slug}`
+## Vytvorit jednoduchu implementaciu pre `/files/`
+
+najprv si pripravime zoznam niekolkych suborov:
 
 ```python
-@router.head('/files/{slug}')
-@router.get('/files/{slug}', response_model=FileOut,
-            summary="Get file identified by the {slug}.")
-def get_file(slug: str):
-    try:
-        engine = create_engine(settings.db_uri)
+files = [
+    File(filename='jano.jpg', size=1234, mime_type='image/jpeg'),
+    File(filename='juro.jpg', size=21234, mime_type='image/jpeg'),
+    File(filename='main.py', size=234, mime_type='plain/text'),
+    File(filename='pesnicka.mp3', size=12000000, mime_type='audio/mp3'),
+]
+```
 
-        with Session(engine) as session:
-            statement = select(File).where(File.slug == slug)
-            return session.exec(statement).one()
+vratit ho cely nie je problem:
 
-    except NoResultFound as ex:
-        content = ProblemDetails(
-            type='/errors/files',
-            title="File not found.",
-            status=404,
-            detail=f"File with slug '{slug} was not found.'",
-            instance=f"/files/{slug}"
-        )
-
-        return JSONResponse(
-            status_code=404,
-            content=content.dict(exclude_unset=True)
-        )
+```python
+@router.get("/files/")
+def get_list_of_files():
+    return files
 ```

@@ -95,8 +95,6 @@ $ poetry add --dev ipython
 ```
 
 
-
-
 ## Installation
 
 ak nemate systemovy balickovaci system, tak balik nainstalujete prikazom `pip`:
