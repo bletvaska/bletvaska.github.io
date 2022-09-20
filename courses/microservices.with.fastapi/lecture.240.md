@@ -41,6 +41,21 @@ def populate_data(count: int = 100):
 
         session.commit()
 
+
+if __name__ == '__main__':
+    populate_data()
+```
+
+modul sme pripravili s moznostou jeho spustenia, takze ho vieme spustit nasledovne:
+
+```bash
+$ python -m fishare.helpers
+```
+
+tym sa v tabulke `filedetails` vytvori _100_ nahodnych zaznamov so subormi. to vieme otestovat priamo z databazy prikazom:
+
+```sql
+SELECT * FROM filedetails;
 ```
 
 
