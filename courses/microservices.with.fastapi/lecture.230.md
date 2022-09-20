@@ -59,57 +59,31 @@ def main():
 ```
 
 
-## Aktualizacia funkcie `populate_data()`
+## Klient litecli
 
-upravime funkciu pre generovanie nahodnych dat, aby ich ukladala rovno do databazy:
+ak pouzivate Linux, mate k dispozicii priamo z prikazoveho riadku nastroj `sqlite3`, ktory reprezentuje SQLite klienta. ak ale Linux nemate, mate smolu.
 
-```python
-def populate_data(count: int = 10):
-    engine = create_engine(settings.db_uri)
+ako SQLite klienta ale mozeme pouzit nastroj `litecli`, ktory je napisany v jazyku Python, takze ho vieme nainstalovat priamo z Pypi:
 
-    faker = Faker()
-    categories = ('audio', 'video', 'image', 'text')
+```bash
+$ poetry add litecli
+```
 
-    with Session(engine) as session:
-        for _ in range(count):
-            category = random.choice(categories)
-            file = File(
-                id=_,
-                filename=faker.file_name(category=category),
-                mime_type=faker.mime_type(category=category),
-                size=random.randint(100, 100000000)
-            )
-            session.add(file)
+v korenovom priecinku, kde vznikol subor `database.db` ho mozeme spustit prikazom:
 
-        session.commit()
+```bash
+$ litecli database.db
+```
+
+zoznam tabuliek si vypiseme:
+
+```
+.tables
 ```
 
 
-## Refaktoring `GET /files/{slug}`
+schemu tabulky `filedetails` si vypiseme:
 
-```python
-@router.head('/files/{slug}')
-@router.get('/files/{slug}', response_model=FileOut,
-            summary="Get file identified by the {slug}.")
-def get_file(slug: str):
-    try:
-        engine = create_engine(settings.db_uri)
-
-        with Session(engine) as session:
-            statement = select(File).where(File.slug == slug)
-            return session.exec(statement).one()
-
-    except NoResultFound as ex:
-        content = ProblemDetails(
-            type='/errors/files',
-            title="File not found.",
-            status=404,
-            detail=f"File with slug '{slug} was not found.'",
-            instance=f"/files/{slug}"
-        )
-
-        return JSONResponse(
-            status_code=404,
-            content=content.dict(exclude_unset=True)
-        )
+```
+.schema filedetails
 ```
