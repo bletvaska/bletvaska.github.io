@@ -1,7 +1,7 @@
 ---
 title: File Update
 courseid: fastapi
-order: 307
+order: 340
 layout: lecture
 description: |
     aktualzácia existujúcich záznamov, plná aktualizácia pomocou metódy `PUT`, čiastočná aktualizácia pomocou metódy `PATCH`

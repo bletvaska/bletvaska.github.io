@@ -4,8 +4,16 @@ courseid: fastapi
 order: 230
 layout: lecture
 description: |
-    praca s databazou, SQLModel, SQL Alchemy
+    praca s databazou, ORM, SQLModel, SQL Alchemy
 ---
+
+## Introduction
+
+* co je to ORM
+* balik SQL Alchemy - najznamejsi ORM balik pre pracu s SQL databazami v jazyku Python
+* problem - FastAPI pouziva na reprezentaciu modelov Pydantic, SQL Alchemy ma vlastnu definiciu modelov, takze je potrebne spravit prepojenie medzi nimi
+* riesenie - SQL Model - jeho modely su sucasne modelmi Pydanticu aj SQL Alchemy
+
 
 ## Installation
 
@@ -22,7 +30,7 @@ upravime signaturu triedy a pridame primarny kluc:
 from sqlmodel import SQLModel, Field
 
 class File(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: int | None = Field(default=None, primary_key=True)
 
     ...
 ```
