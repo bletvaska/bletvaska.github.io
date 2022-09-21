@@ -70,6 +70,7 @@ Teraz sa budú nastavenia inicializovať len raz.
 
 ## Links
 
+* FastAPI: [Settings and Environment Variables](https://fastapi.tiangolo.com/advanced/settings/)
 * [Build a URL Shortener With FastAPI and Python](https://realpython.com/build-a-python-url-shortener-with-fastapi/)
 * [Caching in Python Using the LRU Cache Strategy](https://realpython.com/lru-cache-python/)
 
