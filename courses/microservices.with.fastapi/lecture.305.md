@@ -63,8 +63,8 @@ v nasom pripade (a keby len v nasom) mozeme na DI vyuzit pripojenie k databaze. 
 
 metoda `get_session()` bude vlastne generatorom vo vnutri kontext manazera:
 
-    * kontext manazer zabezpeci vytvorenie a uzatvorenie spojenia s databazou
-    * generator zabezpeci, ze nebudeme musiet zakazdym vytvarat objekt `engine`
+  * kontext manazer zabezpeci vytvorenie a uzatvorenie spojenia s databazou
+  * generator zabezpeci, ze nebudeme musiet zakazdym vytvarat objekt `engine`
 
 ```python
 def get_session():
@@ -78,10 +78,14 @@ def get_session():
 
 ## DI in path operation function
 
+pouzitie DI v _path operation function_ bude vyzerat nasledovne:
+
 ```python
 def get_list_of_files(session: Session = Depends(get_session)):
     # ...
 ```
+
+rovnako tak mozeme v pripade potreby pouzivat aj nastavenia.
 
 
 
