@@ -33,6 +33,14 @@ description: |
 	> Warning: You can declare multiple File and Form parameters in a path operation, but you can't also declare Body fields that you expect to receive as JSON, as the request will have the body encoded using multipart/form-data instead of application/json. This is not a limitation of FastAPI, it's part of the HTTP protocol. ([FastAPI](https://fastapi.tiangolo.com/tutorial/request-files/#what-is-form-data))
 
 
+
+## Instalacia
+
+```bash
+$ poetry add python-multipart
+```
+
+
 ## Implementacia
 
 ```python
@@ -73,7 +81,7 @@ def create_file(payload: UploadFile = fastapi.File(...),
 ```bash
 $ http -f post http://localhost:8080/api/v1/files/ \
     payload@slides.html \
-    filename=prezentacia.html
+    max_downloads=10
 ```
 
 ```http

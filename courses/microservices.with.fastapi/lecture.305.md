@@ -27,6 +27,8 @@ description: |
     * globalne premenne
     * jedinacik
     * staticke metody
+    * subor
+    * priamo od pouzivatela
 
 * problem pri navrhovani a pisani kodu - vsetko, co funkcia potrebuje pre svoj beh, jej dodajte v podobe parametrov!
 
@@ -72,7 +74,6 @@ def get_session():
 
     with Session(engine) as session:
         yield session
-
 ```
 
 
