@@ -16,6 +16,23 @@ Zadanim prikazu `poetry build` dojde k vytvoreniu priecinku `dist/`, do ktoreho 
 $ poetry build
 ```
 
+## Nainstalovanie balicka z prikazoveho riadku
+
+```bash
+$ mkvirtualenv fishare
+$ pip install ./fishare-0.2.0-py3-none-any.whl
+```
+
+
+## Spustenie naninstalovanej aplikacie
+
+musime ju spustit tak, ako v IDE:
+
+
+```bash
+$ python -m fishare.main
+```
+
 
 ## Vytvorenie suboru `requirements.txt`
 
@@ -43,6 +60,7 @@ mame ale moznost vytvorit spustitelny skript, ktory to urobi za nas. upravime ko
 ```toml
 [tool.poetry.scripts]
 fishare = "fishare.main:main"
+fishare_init = "fishare.helpers:populate_data"
 ```
 
 a ked ho teraz nainstalujeme, budeme ho mat k dispozicii.

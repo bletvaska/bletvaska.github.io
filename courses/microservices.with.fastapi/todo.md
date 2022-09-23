@@ -8,17 +8,14 @@
     * `DEVEL` - spusti sa s `reload=true` vlastnostou
     * `PRODUCTION` - spusti sa bez
 
-* spomenut pri konfiguracii [12 factor app methodology](https://12factor.net/)
+* pridat parametre prikazoveho riadku
+    * nastavit port
+    * nastavit reload
 
-* rozclenit tie lectures podla dni:
-  * 1xx - prvy den
+* spomenut pri konfiguracii [12 factor app methodology](https://12factor.net/)
 
 * http streaming pre `/cron`
     * https://amittallapragada.github.io/docker/fastapi/python/2020/12/23/server-side-events.html
-
-* dependency injection
-    * `Depends()` v opise funkcie pre route
-    * odovzdavat tak databazu/session
 
 * logging
 

@@ -28,7 +28,7 @@ COPY dist/fishare-0.1.0-py3-none-any.whl /wheels/
 
 RUN pip install wheel \
     && pip wheel --wheel-dir=/wheels/ \
-       /wheels/fishare-0.1.0-py3-none-any.whl 
+       /wheels/fishare-0.1.0-py3-none-any.whl
 
 
 FROM alpine AS base
@@ -71,8 +71,8 @@ RUN cd /tmp/ \
     && chown -R appuser.appuser /app/storage
 
 
-HEALTHCHECK --interval=10s --timeout=3s \
-    CMD curl -f http://localhost:8000/health || exit 1
+HEALTHCHECK --interval=10s --timeout=3s --retries=3 \
+    CMD curl --fail http://localhost:8000/health || exit 1
 
 EXPOSE 8000
 VOLUME /app/storage
