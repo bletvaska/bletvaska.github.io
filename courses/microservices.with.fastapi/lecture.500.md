@@ -25,7 +25,7 @@ description: |
 
 * v prostredí kontajnerov sa však logy zapisujú na štandardný výstup (`stdout`). počas ladenia a vývoja aplikácie tak programátor vždy vidí, čo sa deje.
 
-* v produkcii sú logy z aplikácie presmerované do jedného alebo viacerých cieľových destinácií určených pre zobrazenie alebo archiváciu logov. tieto destinácie nie sú pre aplikáciu viditeľné ani konfigurovateľné. 
+* v produkcii sú logy z aplikácie presmerované do jedného alebo viacerých cieľových destinácií určených pre zobrazenie alebo archiváciu logov. tieto destinácie nie sú pre aplikáciu viditeľné ani konfigurovateľné.
 
 
 

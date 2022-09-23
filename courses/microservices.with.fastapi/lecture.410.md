@@ -19,25 +19,27 @@ my si urobime endpoint
 ## Endpoint `/cron`
 
 ```python
-@router.get("/", summary="Run background jobs.")
-def run_cron_job(session: Session = Depends(get_session)):
+@router.get('/', summary="Run background jobs.")
+def cleanup(session: Session = Depends(get_session),
+            settings: Settings = Depends(get_settings)):
     start = datetime.now()
 
-    # query
-    statement = select(File).where(or_(datetime.now() > File.expires, File.downloads >= File.max_downloads))
+    # SELECT * FROM filedetails WHERE downloads >= max_downloads OR now() > expires;
+    statement = select(FileDetails).where(or_(
+        FileDetails.downloads >= FileDetails.max_downloads,
+        datetime.now() > FileDetails.expires
+    ))
     files = session.exec(statement).all()
 
     # delete files
     for file in files:
-        # prepare path
+        # delete file from storage
         path = settings.storage / file.slug
+        path.unlink(missing_ok=True)
 
-        # delete file
+        # delete file from database
         session.delete(file)
         session.commit()
-
-        # delete file from storage
-        path.unlink(missing_ok=True)
 
     # count duration
     end = datetime.now()
@@ -46,7 +48,7 @@ def run_cron_job(session: Session = Depends(get_session)):
     return {
         'startedAt': start,
         'finishedAt': end,
-        'removedFiles': len(files),
-        'duration': duration.total_seconds()
+        'duration': duration.total_seconds(),
+        'removedFiles': len(files)
     }
 ```

@@ -20,9 +20,9 @@ description: |
 
 * ak sa niektorá jeho súčať pokazí, systém ju musí:
 
-    * detegovať, napr. vytvorením alertu, 
-    * obísť ju, napr. load balancer nebude posielať požiadavky na nefungujúcu službu, a 
-    * opraviť ju, resp. zotaviť sa z nej. 
+    * detegovať, napr. vytvorením alertu,
+    * obísť ju, napr. load balancer nebude posielať požiadavky na nefungujúcu službu, a
+    * opraviť ju, resp. zotaviť sa z nej.
 
 * a to všetko sa musí udiať automagicky.
 
@@ -39,7 +39,7 @@ description: |
 
   ```json
   {
-      "status" : "UP" 
+      "status" : "UP"
   }
   ```
 
