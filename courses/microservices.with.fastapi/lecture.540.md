@@ -55,30 +55,29 @@ CMD [ "fishare" ]
 ## Finalny obraz zalozeny na Python obraze
 
 ```dockerfile
-FROM python:3.10-slim-bullseye
+FROM python:3.10-slim
 LABEL maintainer="mirek <mirek@cnl.sk>"
 
 RUN adduser --no-create-home --disabled-password --gecos "" appuser
 
-COPY dist/fishare-0.1.0-py3-none-any.whl /tmp/
+COPY dist/fishare-0.9.0-py3-none-any.whl /tmp/
 
-RUN cd /tmp/ \
-    && apt update && apt install -y curl \
-    && pip install ./fishare*whl \
+RUN pip install /tmp/fishare-0.9.0-py3-none-any.whl httpie \
     && pip cache purge \
-    && rm -rf *whl \
+    && rm /tmp/*whl \
     && mkdir -p /app/storage \
-    && chown -R appuser.appuser /app/storage
-
+    && chown -R appuser.appuser /app \
+    && apt update && apt install -y curl \
+    && rm -rf /var/lib/apt/lists/*
 
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 \
-    CMD curl --fail http://localhost:8000/health || exit 1
+    CMD http get http://localhost:8000/health/ --check-status || exit 1
+
+USER appuser
+WORKDIR /app
 
 EXPOSE 8000
-VOLUME /app/storage
-
-WORKDIR /app
-USER appuser
+VOLUME /app/storage/
 
 CMD [ "fishare" ]
 ```
