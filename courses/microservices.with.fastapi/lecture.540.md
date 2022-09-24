@@ -81,3 +81,4 @@ VOLUME /app/storage/
 
 CMD [ "fishare" ]
 ```
+

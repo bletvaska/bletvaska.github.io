@@ -17,6 +17,8 @@ courseid: fastapi
 
 Project Github: [https://github.com/bletvaska/fishare](https://github.com/bletvaska/fishare)
 
+klavesove skratky pre PyCharm!
+
 ## TOC
 
 {% for lecture in lectures %}
