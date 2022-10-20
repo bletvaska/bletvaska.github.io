@@ -1,0 +1,261 @@
+---
+title: Programovanie počítačovýh hier
+subtitle: alebo nie príliš stručný úvod do programovania v jazyku Python
+description:
+    Ako sa stať herným vývojárom rýchlo a ľahko s Pythonom a knižnicou Pygame Zero. A to všetko za 90 minút. Maňana.
+duration: 90
+date: 2022-10-19
+# bitly: http://bit.ly/2LYZgKM
+event:
+    title: Hands Off 2022
+    url: http://kpi.pages.kpi.fei.tuke.sk/hands-off/
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+---
+<style>
+body, html{
+  background-color: #222;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  position :absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast
+}
+</style>
+
+
+{% include first.slide.html %}
+
+
+<section id="hrate-sa" data-markdown>
+## Hráte sa počítačové hry?
+</section>
+
+
+<section id="assassins-creed" data-markdown>
+![Assassin's Creed](images/assassins.creed.jpg)
+</section>
+
+
+<section id="tis-100" data-markdown>
+![TIS 100](images/tis.100.jpg)
+</section>
+
+
+<section id="naprogramovali-ste-hru" data-markdown>
+## Naprogramovali ste si vlastnú počítačovú hru?
+</section>
+
+
+<section id="arkanoid-logo" data-markdown data-background="black">
+![Arkanoid Logo](images/arkanoid.logo.jpg)
+
+Note:
+* https://i.ytimg.com/vi/2bdFsD_0HXI/maxresdefault.jpg
+</section>
+
+
+<section id="arkanoid-arcade" data-background="black">
+    <iframe width="896" height="504" src="https://www.youtube.com/embed/Th-Z6QQ5AOQ?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen data-autoplay></iframe>
+</section>
+
+
+<section id="collisions" data-markdown data-background="#2ECC71">
+[![Kenney.nl](images/kenney-promo.png)](https://kenney.nl/)
+</section>
+
+
+<section id="pygame-zero" data-background="white">
+<a href="https://pygame-zero.readthedocs.io/">
+    <img src="images/logo-pygamezero.svg" width="600">
+</a>
+</section>
+
+
+<section id="pygame" data-markdown data-background="white">
+[![Pygame logo](images/logo-pygame.png)](https://www.pygame.org/news)
+</section>
+
+
+<section id="sdl" data-markdown data-background="white">
+[![SDL logo](images/logo-sdl.png)](https://www.libsdl.org/)
+
+Since 1998
+</section>
+
+
+<section id="steam" data-markdown data-background="black">
+![Steam logo](images/logo-steam.jpg)
+</section>
+
+
+<section id="pygame-zero-about" data-markdown>
+### Pygame Zero is for creating games without boilerplate.
+</section>
+
+
+<section id="pygame-zero-magpi" data-markdown data-background="images/magpi-35-pygamezero.jpg">
+Note:
+* https://www.raspberrypi.org/magpi/wp-content/uploads/2015/06/35_PygameZero.jpg
+</section>
+
+
+<section id="installation" data-markdown>
+## Installation
+
+* Raspberry Pi - builtin
+* `sudo dnf install pgzero mu`
+* `pip install pgzero mu-editor`
+</section>
+
+
+<section id="warning" data-markdown>
+## Warning!
+(no best practices provided)
+</section>
+
+
+<section id="game-loop" data-markdown data-background="#FEFCF6">
+![Game Loop](images/game-loop-simple.png)
+
+Note:
+* http://gameprogrammingpatterns.com/images/game-loop-simple.png
+</section>
+
+
+<section id="project-structure" data-markdown>
+## Project Structure
+
+```
+.
+├── game.py
+├── sounds/
+│   ├── hit.01.wav
+│   └── hit.02.wav
+└── images/
+    ├── background.png
+    ├── ball.png
+    ├── brick.purple.png
+    └── paddle.png
+```
+</section>
+
+
+<section id="2d-coordinate-system" data-markdown>
+## 2D Coordinate System
+
+![2D Coordinate System](images/2d.coordinate.system.png)
+</section>
+
+
+<section id="actor" data-markdown>
+![Actor](images/invader.png)
+</section>
+
+
+<section id="actor-fields-and-methods" data-markdown>
+## Actor Fields and Methods
+
+* `actor.x`, `actor.y`, `actor.pos`
+* `actor.image`
+* `actor.width`, `actor.height`
+* `actor.draw()`
+</section>
+
+
+<section id="pygame-handles" data-markdown>
+## Pygame Handles 
+
+![Pygame Handles](images/handles.png)
+</section>
+
+
+<section id="collision-detections" data-markdown>
+    ## Collisioin Detection
+</section>
+
+
+<section id="collisions" data-markdown data-background="#fff">
+    ![Collisions](images/collisions.png)
+
+    Note:
+    * https://treadgaming.blogspot.com/2016/06/video-game-physics-tutorial-part-ii.html
+</section>
+
+
+<section id="questions" data-markdown>
+## Questions?
+</section>
+
+
+<section id="where-to-go-next" data-markdown>
+## What's Next?
+</section>
+
+
+<section id="links" data-markdown>
+## Links
+
+* [projekt](arkanoid.zip) - výsledný projekt
+* [assets](https://kenney.nl/assets/puzzle-pack) - stolen from [Kenney.nl](https://kenney.nl)
+* [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
+* [Wireframe](https://wireframe.raspberrypi.org/) and [MagPi](https://www.raspberrypi.org/magpi/) Magazines
+* [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
+* [PyWeek](https://pyweek.org/) - Python Game Programming Challenge
+</section>
+
+
+<section id="tasks-1" data-markdown>
+## Tasks #01: The Bricks
+
+* Every brick has different color.
+* Different color has different points.
+* Different color has different power.
+</section>
+
+
+<section id="tasks-2" data-markdown>
+## Tasks #02: The Levels
+
+* Different shape of bricks (triangles, smile, letter, ...)
+* Different shape for different levels.
+* Levels in file.
+</section>
+
+
+<section id="tasks-3" data-markdown>
+## Tasks #03: Effects
+
+* [Parallax background](https://images.squarespace-cdn.com/content/v1/551a19f8e4b0e8322a93850a/1574024073167-PRLTM8P9IEOI4Q6EZQYO/Desert.gif)
+* bouncing the ball
+</section>
+
+
+<section id="tasks-4" data-markdown>
+## Tasks #04: Misc
+
+* Game Over and Well Done as images
+* bonus objects falling from bricks
+</section>
+
+
+{% include qr.html %}
+
