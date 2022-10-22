@@ -1,0 +1,247 @@
+---
+title: Naprogramuj si hru za 60 minút
+description: |
+    Ako malý jogurt som chcel byť programátorom počítačových hier. Rozrobil som teda veľa herných titulov v tom čase hlavne pre mikropočítač Didaktik M (domáci klon ZX Spectra). Do úspešného konca som ich ale dotiahol... málo... teda žiadnu, ktorá by sa dala nazvať Á-čkovým titulom. Alebo B-éčkovým. Ehm... Aj C-éčkový by stačil, ale ani na ten nevydalo. Medzičasom sa však zo mňa stal lektor a učiteľ a tvorba počítačových hier sa pre mňa stala motivačným prvkom mnohých mojich školení. Aj v tomto príspevku vám ukážem, ako za pomerne krátky čas budeme vedieť naprogramovať hernú mechaniku hry Flappy Bird. A to konkrétne v jazyku Python a knižnici Pygame Zero. Ak teda špekulujete, že by ste chceli programovanie počítačových hier skúsiť alebo ako učiteľ rozmýšľate, ako spestriť nudné hodiny informatiky, príďte sa pozrieť. A keďže to zvládajú aj decká na základných školách, tak ty to zvládneš určite tiež.
+duration: 60
+date: 2022-10-22
+layout: slide
+event:
+    title: GameFair 2022
+    url: http://www.21games.sk/gamefair.html
+categories: talk
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/3p4GXpF
+# video: https://youtu.be/-Nue8zK_JVc
+---
+
+<style>
+/* Check out my article on how to create this: https://roboleary.net/css/2020/11/17/parallax-animation.html 
+
+Source code: https://github.com/robole/artifice
+*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(197, 217, 255);
+  overflow-x: auto;
+}
+
+#parallax-scrolling-example {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  /* margin: 60px auto;  */
+}
+
+#scene {
+  position: absolute;
+  height: inherit;
+}
+
+#background {
+  animation: background-shift 8s linear infinite forwards;
+}
+
+#train {
+  animation: train-shift 4s linear infinite forwards;
+}
+
+#foreground {
+  animation: foreground-shift 2s linear infinite forwards;
+}
+
+@keyframes background-shift {
+  to {
+    transform: translateX(-800px);
+  }
+}
+
+@keyframes train-shift {
+  to {
+    transform: translateX(820px);
+  }
+}
+
+@keyframes foreground-shift {
+  to {
+    transform: translateX(-800px);
+  }
+}
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.jpg)
+</section>
+
+
+<section id="hrate-sa" data-markdown>
+## Hráte sa počítačové hry?
+</section>
+
+
+<section id="assassins-creed" data-markdown>
+![Assassins Creed Black Flag](images/assassins.creed.jpg)
+</section>
+
+
+<section id="tis-100" data-markdown data-background="#ebebeb">
+![TIS-100](images/tis.100.jpg)
+</section>
+
+
+<section id="naprogramovali-ste-hru" data-markdown>
+## Naprogramovali ste si vlastnú počítačovú hru?
+</section>
+
+
+<section id="pygame-zero" data-background="white">
+    <a href="https://pygame-zero.readthedocs.io/">
+        <img src="images/logo-pygamezero.svg" width="600">
+    </a>
+</section>
+
+
+<section id="pygame" data-markdown data-background="white">
+[![Pygame logo](images/logo-pygame.png)](https://www.pygame.org/news)
+</section>
+
+
+<section id="sdl" data-markdown data-background="white">
+[![SDL logo](images/logo-sdl.png)](https://www.libsdl.org/)
+
+Since 1998
+</section>
+
+
+<section id="steam" data-markdown data-background="black">
+![Steam logo](images/logo-steam.jpg)
+</section>
+
+
+<section id="pygame-zero-about" data-markdown>
+### Pygame Zero is for creating games without boilerplate.
+</section>
+
+
+<section id="flappybird-gameplay" data-markdown>
+![Flappy Bird](images/flappy.gif)
+</section>
+
+
+<section id="analysis" data-markdown data-background="#52C2CA">
+![Game Analysis](images/analysis.png)
+
+Note:
+* https://www.researchgate.net/publication/324066514_Playing_Flappy_Bird_with_Deep_Reinforcement_Learning
+</section>
+
+
+<section id="project-structure" data-markdown>
+## [Štruktúra projektu](resources/project.zip)
+
+```
+.
+├── game.py
+├── images/
+│   ├── background.png
+│   ├── flappy.png
+│   ├── ground.png
+│   ├── pipe.lower.png
+│   └── pipe.upper.png
+└── sounds/
+    ├── ding.wav
+    ├── fall.wav
+    ├── hit.wav
+    └── jump.wav
+```
+
+notes:
+* otvorit rovno game.py a ukazat
+    * obrazky z mu
+    * zvuky z mu
+* spustit rovno program
+    * pytat sa na vlastnosti okna a ukazat, ako ich zapisat v kniznici
+</section>
+
+
+<section id="game-loop" data-markdown data-background="#FEFCF6">
+![Herná slučka](images/game-loop-simple.png)
+
+Notes:
+* http://gameprogrammingpatterns.com/images/game-loop-simple.png
+* vytvorit kostru funkcii:
+    * `draw()`
+    * `update()`
+</section>
+
+
+<section id="2d-coordinate-system" data-markdown>
+## 2D Súradnicový sys.
+
+![2D Coordinate System](images/2d.coordinate.system.png)
+</section>
+
+
+<section id="pygame-handles" data-markdown>
+## Pygame Handles 
+
+![Pygame Handles](images/handles.png)
+</section>
+
+
+<section id="collision-detections" data-markdown>
+## Detekcia kolízií
+</section>
+
+
+<section id="collision-detections-illustration" data-markdown data-background="white">
+![Ilustrácia detekcie kolízií](images/collisions.png)
+</section>
+
+
+<section id="good-job" data-markdown>
+## Hotovo (!?)
+</section>
+
+
+<section id="adding-sounds" data-markdown>
+## Pridáme zvuky
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="resources" data-markdown>
+## Na stiahnutie
+
+* kostra projektu: [project.zip](resources/project.zip)
+* to, čo sme stihli na webinári: [game.py](resources/flappy/game.py)
+* to, čo som plánoval spraviť: [demo.py](resources/flappy/game.py)
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
+* [Wireframe](https://wireframe.raspberrypi.org/) Magazine, [MagPi](https://www.raspberrypi.org/magpi/) Magazine
+* [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
+* [Tvorba počítačových hier s Pygame Zero](https://legacy.gitbook.com/book/bletvaska/tvorba-pocitacovych-hier-s-pygame-zero/details) - poznámky ku tvorivej dielni
+* [Code the Classics – Volume 1](https://wireframe.raspberrypi.org/books/code-the-classics1)
+* [Pygame Zero: snadno použitelný nástroj určený pro výuku programování](https://www.root.cz/clanky/pygame-zero-snadno-pouzitelny-nastroj-urceny-pro-vyuku-programovani/) - časť seriálu [Jazyky pro výuku programování](https://www.root.cz/serialy/jazyky-pro-vyuku-programovani/) na portáli [root.cz](https://www.root.cz)
+</section>
+
+
+{% include qr.html %}
