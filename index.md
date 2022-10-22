@@ -12,6 +12,6 @@ Yes, that's me. Welcome to my homepage.
 {% assign slides = site.pages | where: "layout", "slide" | where: "categories", "talk" | sort: "date" | reverse | slice: 0, 3 %}
 
 {% for item in slides %}
-* {{ item.title }}
+* [{{ item.title }}]({{ item.url }})
 {% endfor %}
 
