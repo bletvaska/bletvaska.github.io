@@ -690,7 +690,7 @@ note:
 set -o errexit
 set -o pipefail
 set -o nounset
-[[ "${ENVIRONMENT:-devel}" == "devel" ]] && set -o xtrace
+[[ "${ENVIRONMENT:-prod}" == "devel" ]] && set -o xtrace
 
 # load modules
 source "lib/helper.sh"
