@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+
+  supa:
+    build: .
+    ports:
+    - 8000:8000
+    volumes:
+    - ./project/supa:/app

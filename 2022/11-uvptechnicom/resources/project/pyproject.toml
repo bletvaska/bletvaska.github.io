@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "supa"
+version = "0.1.0"
+description = "mega supa app for talk at uvp technicom"
+authors = ["Miroslav Biňas <miroslav.binas@tuke.sk>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.87.0"
+uvicorn = "^0.19.0"
+jinja2 = "^3.1.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+supa = "supa.main:main"
