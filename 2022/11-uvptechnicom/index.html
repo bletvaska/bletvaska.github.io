@@ -17,7 +17,7 @@ authors:
       email: miroslav.binas@tuke.sk
       url: https://bletvaska.github.io
 
-#bitly: https://bit.ly/3ETfDVb
+bitly: https://bit.ly/3tAcH9a
 ---
 
 {% include first.slide.html %}
@@ -112,6 +112,12 @@ notes:
 </section>
 
 
+<section id="scaling" data-markdown data-background="white">
+<!-- ![](https://iximiuz.com/multiple-containers-same-port-reverse-proxy/multiple-containers-same-port-2000-opt.png) -->
+![](https://docs.docker.com/engine/swarm/images/services-diagram.png)
+</section>
+
+
 <section id="where-are-my-clients-comming-from" data-markdown>
 ### Problém: Odkiaľ sú moji zákazníci?
 (a kedy ku mne chodia?)
@@ -120,6 +126,67 @@ notes:
 
 <section id="logging" data-markdown>
 ## Logovanie
+
+> Logging - one of the secrets to building extremely stable, robust web applications.
+</section>
+
+
+<section id="about-logging" data-markdown>
+## Kde logovať?
+
+* do lokálneho súboru
+    * náročná analýza - viacero súborov, rozličné formáty
+* do vzdialenej db
+    * aplikácia musí obsahovať konfiguráciu pre pripojenie
+    * špeciálne systémy ako [Logstash](https://www.elastic.co/logstash/), [Loki](https://grafana.com/oss/loki/), štandardné SQL databázy
+</section>
+
+
+<section id="logging-in-containers" data-markdown>
+### Aplikácia spustená v kontajneri loguje do štandardného výstupu!
+</section>
+
+
+<section id="logging-in-python" data-markdown>
+### Logovanie v jazyku Python
+
+```python
+import logging
+
+# basic config
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(name)-12s %(levelname)-8s: %(message)s'
+)
+
+# creating logger
+logger = logging.getLogger('supa')
+
+# logging
+logger.info('Starting Application')
+```
+</section>
+
+
+<section id="log-aggregation" data-markdown>
+## Agregácia logov
+
+App > [Docker](https://www.docker.com/) > [Fluentd](https://www.fluentd.org/) (plugin) > [[Logstash](https://www.elastic.co/logstash/) | [Loki](https://grafana.com/oss/loki/)]
+</section>
+
+
+<section id="bsod" data-markdown data-background="#0000AA">
+![BSOD](images/bsod.png)
+</section>
+
+
+<section id="deadlock" data-markdown>
+## Deadlock
+
+```python
+while True:
+    pass
+```
 </section>
 
 
@@ -128,7 +195,22 @@ notes:
 </section>
 
 
+<section id="healthcheck-endpoint" data-markdown>
+## Jednoduchá kontrola
+
+```python
+@app.get('/api/healthz')
+def check_health():
+    return {
+        'status': 'up'
+    }
+```
+</section>
+
+
 <section id="healthcheck-in-dockerfile" data-markdown>
+## Healthcheck a Docker
+
 ```dockerfile
 HEALTHCHECK \
   --interval=5m \
@@ -140,6 +222,36 @@ HEALTHCHECK \
 </section>
 
 
+<section id="metrics" data-markdown>
+## Metriky
+
+> Metriky poskytujú **pohľad** na **aktuálny stav** vašej aplikácie. Prípadne vieme pomocou metrík zistiť **stav v čase**.
+</section>
+
+
+<section id="the-four-golden-signals" data-markdown data-background="white">
+![](images/four.golden.signals.png)
+</section>
+
+
+<section id="latency" data-markdown>
+> **Latency** is the **time** it takes to service a request.
+</section>
+
+
+<section id="traffic" data-markdown>
+> **Traffic** is a measure of **how much** demand is being placed on your system, measured in a high-level system-specific metric.
+</section>
+
+
+<section id="errors" data-markdown>
+> **Errors** is the **rate of requests that fail**, either explicitly (e.g., HTTP 500s), implicitly (for example, an HTTP 200 success response, but coupled with the wrong content), or by policy (for example, "If you committed to one-second response times, any request over one second is an error").
+</section>
+
+
+<section id="saturation" data-markdown>
+> **Saturation** describes, **how "full" your service is**.
+</section>
 
 
 <section id="questions" data-markdown>
@@ -150,7 +262,8 @@ HEALTHCHECK \
 <section id="links" data-markdown>
 ## Links
 
-* used pictures are from the [Short Circuit](https://www.imdb.com/title/tt0091949/?ref_=fn_al_tt_1) (1986) movie, [LEBO Boost](https://www.lego.com/sk-sk/product/boost-creative-toolbox-17101)
+* [The four Golden Signals of Kubernetes monitoring](https://sysdig.com/blog/golden-signals-kubernetes/)
+
 </section>
 
 

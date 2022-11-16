@@ -5,6 +5,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 
+import logging
+logging.basicConfig(level=logging.INFO)
 
 # fastapi app init
 app = FastAPI()
@@ -20,7 +22,8 @@ def homepage(request: Request):
 
 # main entrypoint
 def main():
-    uvicorn.run('supa.main:app', reload=True, host='0.0.0.0')
+    logging.info('Starting Application')
+    uvicorn.run('supa.main:app', reload=True, host='0.0.0.0', log_level="critical")
 
 
 if __name__ == '__main__':
