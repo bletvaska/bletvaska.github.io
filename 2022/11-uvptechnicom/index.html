@@ -23,6 +23,9 @@ bitly: https://bit.ly/3tAcH9a
 {% include first.slide.html %}
 
 
+{% include about.mirek.html %}
+
+
 <section id="hard-work" data-markdown>
 ![Hard Work](images/hard.work.gif)
 
@@ -239,8 +242,31 @@ HEALTHCHECK \
 </section>
 
 
+<section id="middleware" data-markdown>
+### Meranie latencie s middleware
+
+```python
+import time
+from fastapi import FastAPI, Request
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
+```
+</section>
+
+
 <section id="traffic" data-markdown>
 > **Traffic** is a measure of **how much** demand is being placed on your system, measured in a high-level system-specific metric.
+</section>
+
+
+<section id="prometheus" data-markdown data-background="#F2F2F2">
+![](https://static.wixstatic.com/media/cf93e2_c52dcfd44ea84f01b64cef91b4e54b98~mv2.png/v1/fill/w_640,h_480,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/cf93e2_c52dcfd44ea84f01b64cef91b4e54b98~mv2.png)
 </section>
 
 
@@ -254,6 +280,11 @@ HEALTHCHECK \
 </section>
 
 
+<section id="grafana" data-markdown data-background="white">
+![](https://www.vectorlogo.zone/logos/grafana/grafana-ar21.png)
+</section>
+
+
 <section id="questions" data-markdown>
 ## Questions?
 </section>
@@ -263,7 +294,7 @@ HEALTHCHECK \
 ## Links
 
 * [The four Golden Signals of Kubernetes monitoring](https://sysdig.com/blog/golden-signals-kubernetes/)
-
+* [Microservice Architecture](https://microservices.io/index.html)
 </section>
 
 

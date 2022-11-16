@@ -10,3 +10,78 @@ services:
     - ./project:/app
     working_dir: /app
     command: python3 -m supa.main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#   prometheus:
+#     image: bitnami/prometheus
+#     ports:
+#     - 9090:9090
+#     volumes:
+#     - prometheus:/opt/bitnami/prometheus/data
+#     - ./prometheus/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml:ro
+
+
+#   node_exporter:
+#     image: quay.io/prometheus/node-exporter
+#     command:
+#     - '--path.rootfs=/host'
+#     pid: host
+#     restart: unless-stopped
+#     ports:
+#     - 9100:9100
+#     volumes:
+#     - '/:/host:ro,rslave'
+
+
+#   grafana:
+#     image: grafana/grafana
+#     ports:
+#     - 3000:3000
+#     volumes:
+#     - grafana:/var/lib/grafana
+
+# volumes:
+#   grafana:
+#   prometheus:

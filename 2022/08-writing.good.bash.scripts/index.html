@@ -19,6 +19,8 @@ authors:
     - name: Mirek Biňas
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
+todo:
+- getopts
 ---
 
 <style>
@@ -491,9 +493,8 @@ note:
 
   ```bash
   cat &lt;&lt;EOF
-     This is
-     Here
-     Document.
+    Usage: cat [OPTION] [FILE]...
+    Concatenate FILE(s) to standard output.
   EOF
   ```
 
@@ -545,6 +546,13 @@ note:
       && set +o allexport \  # dissable auto export (+a)
       && script.bash         # run the script
     ```
+
+* source and export your env vars **only for running the app**
+
+    ```bash
+    $ env $(cat local.env) script.bash
+    ```
+</applet>
 </section>
 
 
