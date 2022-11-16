@@ -1,0 +1,157 @@
+---
+title: Čo s aplikáciou po nasadení?
+description: |
+    Naprogramovali ste aplikáciu, ktorá bude odpoveďou na otázky života, vesmíru a vôbec? Super – gratulujem! Ale čo ďalej? Ako ju správne nasadiť? Ako ju monitorovať? A čo? Ako zabezpečiť jej prevádzku 24/7? Čo ak sa „zrúbe“, keď budem spať? Čo ak prestane stíhať cez Vianoce? Čo ak…
+
+    Počas tohto príspevku si prakticky ukážeme, čo ďalej s vytvorenou aplikáciou a prečo sa oplatí rozmýšľať o jej nasadení v kontajneroch.
+duration: 90
+date: 2022-11-16
+event:
+    title: UVP Technicom
+    url: https://uvptechnicom.sk/event/co-s-aplikaciou-po-nasadeni/
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+
+#bitly: https://bit.ly/3ETfDVb
+---
+
+{% include first.slide.html %}
+
+
+<section id="hard-work" data-markdown>
+![Hard Work](images/hard.work.gif)
+
+notes:
+* mozno takto nejako vyzeral pracovny zapal aj vo vasom time este pomerne nedavno (dnes rano?)
+* po tyzdnoch tvrdej (timovej) prace ste to nakoniec dali
+</section>
+
+
+<section id="live-demo" data-markdown>
+## Live demo!
+
+notes:
+* tadaaaa
+</section>
+
+<section id="congratulations" data-markdown>
+## Gratulujem!
+
+notes:
+* ale nakoniec ste to dali, takze gratulujem
+</section>
+
+
+<section id="what-next" data-markdown>
+## Čo ďalej?
+
+aplikácia beží, ale **len** na vašom počítači
+</section>
+
+
+<section id="problems" data-markdown>
+## ...a ešte k tomu
+
+* kde a ako hostovať?
+* kde a ako ukladať údaje?
+* ako to budem aktualizovať? (nbusr style?)
+* koľko ma to bude stáť? (denne/ročne)
+</section>
+
+
+<section id="docker" data-markdown data-background="white">
+[![Docker](images/logo-docker.png)](https://www.docker.com/)
+
+notes:
+* trendom je dnes robit aplikacie v kontajneroch
+* rovno od zaciatku uvazujte presne takto
+</section>
+
+
+<section id="docker-stackoverflow-survey" data-markdown data-background="#003F8C">
+![The most-loved Tool in Stack Overflow’s 2022 Developer Survey.](images/docker.stackoverflow.survey.png)
+
+notes:
+* docker je dnes jednym z najpopularnejsich nastrojov developerov. o tom hovori aj posledny prieskum StackOverflow survery 2022
+</section>
+
+
+<section id="what-is-container" data-markdown>
+## Čo je to kontajner?
+
+> Kontajner je **izolované prostredie** na **spustenie procesu**.
+
+notes:
+* laicky - zip balik s aplikaciou a potrebnymi kniznicami pre spustenie aplikacie
+* proces sa spusta pod linuxovym jadrom
+</section>
+
+
+<section id="benefits-of-containers" data-markdown>
+## Prečo kontajnery?
+
+* jednotné prostredie pre rozličné prostredia
+* rovnaké prostredie pre vývoj aj nasadenie
+* podpora naprieč IDE
+* škálovanie...
+</section>
+
+
+<section id="getting-on-bus" data-markdown>
+![Getting on Bus](images/getting.on.bus.png)
+</section>
+
+
+<section id="scaling-busses" data-markdown data-background="#273137">
+![Scaling the Busses](images/horizontal.and.vertical.scaling.of.busses.png)
+</section>
+
+
+<section id="where-are-my-clients-comming-from" data-markdown>
+### Problém: Odkiaľ sú moji zákazníci?
+(a kedy ku mne chodia?)
+</section>
+
+
+<section id="logging" data-markdown>
+## Logovanie
+</section>
+
+
+<section id="healthcheck" data-markdown>
+## Healthcheck
+</section>
+
+
+<section id="healthcheck-in-dockerfile" data-markdown>
+```dockerfile
+HEALTHCHECK \
+  --interval=5m \
+  --timeout=3s \
+  --retries=3 \
+  --start-period=5s \
+  CMD curl -f http://localhost/ || exit 1
+```
+</section>
+
+
+
+
+<section id="questions" data-markdown>
+## Questions?
+</section>
+
+
+<section id="links" data-markdown>
+## Links
+
+* used pictures are from the [Short Circuit](https://www.imdb.com/title/tt0091949/?ref_=fn_al_tt_1) (1986) movie, [LEBO Boost](https://www.lego.com/sk-sk/product/boost-creative-toolbox-17101)
+</section>
+
+
+{% include qr.html %}

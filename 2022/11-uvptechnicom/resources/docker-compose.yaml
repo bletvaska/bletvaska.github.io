@@ -7,4 +7,6 @@ services:
     ports:
     - 8000:8000
     volumes:
-    - ./project/supa:/app
+    - ./project:/app
+    working_dir: /app
+    command: python3 -m supa.main

@@ -1,4 +1,5 @@
 FROM python:3.10-slim
+# FROM bletvaska/python
 
 LABEL author="mirek <mirek@cnl.sk>"
 
