@@ -346,7 +346,6 @@ note:
   ```bash
   function greetings(){
       local name="${1}"
-
       printf "Hello %s!\n" "${name}"
   }
   ```
@@ -380,7 +379,6 @@ note:
   ```bash
   function greeting(){
     local name="${1:?Error: Parameter name was not set.}"
-
     printf "Hello %s!\n" "${name}"
   }
   ```
@@ -489,7 +487,7 @@ note:
 
 
 <section data-markdown id="here-documents-and-strings">
-* _Here Documents_
+* **Here Documents** are useful for long strings
 
   ```bash
   cat &lt;&lt;EOF
@@ -498,9 +496,10 @@ note:
   EOF
   ```
 
-* _Here String_ is variant of _Here Document_
+* **Here String** is variant of _Here Document_, useful instead of piping
 
   ```bash
+  jq -r '."Content-Type"' <<< "${response}"
   ```
 </section>
 
@@ -587,8 +586,6 @@ note:
 </section>
 
 
-
-
 <section data-markdown id="tips-and-tricks-and-snippets">
 ## [[ Tips && Tricks && Snippets ]]
 </section>
@@ -610,7 +607,6 @@ note:
   ```bash
   local parent=`basename \`dirname $PWD\``
   ```
-
 </section>
 
 
@@ -620,7 +616,6 @@ note:
   ```bash
   function error(){
     local message="${*}"
-
     printf "ERROR: %s\n" "${message}" 1>&2;
   }
   ```
@@ -703,12 +698,14 @@ set -o nounset
 # load modules
 source "lib/helper.sh"
 
+# global variables
+readonly greeting="Hello"
 
 # the main function
 function main(){
     local target="${1:-world}"
 
-    printf "Hello %s!\n" "${target}"
+    printf "${greeting} %s!\n" "${target}"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
