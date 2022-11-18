@@ -1,0 +1,826 @@
+[
+    {
+        "id": "40572ddb4e92dd0b",
+        "type": "tab",
+        "label": "stealing antik data",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "69e3f67a60eb7e7e",
+        "type": "tab",
+        "label": "visualize",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "61daf75291b21ad0",
+        "type": "tab",
+        "label": "rest api",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ae84735d68d4b058",
+        "type": "tab",
+        "label": "store to db",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "73addc4f59bb0808",
+        "type": "tab",
+        "label": "OpenSky Network",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "616755c775dbc7fe",
+        "type": "tab",
+        "label": "www",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5e887e3f8962d00b",
+        "type": "tab",
+        "label": "dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "47144a23a6fdcc87",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "9564848d0fc2221e",
+        "type": "json-db-collection",
+        "name": "",
+        "collection": "bikes",
+        "save": true
+    },
+    {
+        "id": "b274fec5f009f158",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "7b1b9b742361c42e",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "c9dd22024bcd9b95",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "b274fec5f009f158",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3e0fd5bfd61a0a13",
+        "type": "inject",
+        "z": "40572ddb4e92dd0b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "6",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "0f997f8ce053b984"
+            ]
+        ]
+    },
+    {
+        "id": "0f997f8ce053b984",
+        "type": "http request",
+        "z": "40572ddb4e92dd0b",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://gbfs.sharing.antik.sk/v2/antiksharing_ke/en/free_bike_status.json",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "1b7d75fc2e7b25eb"
+            ]
+        ]
+    },
+    {
+        "id": "1b7d75fc2e7b25eb",
+        "type": "handlebars",
+        "z": "40572ddb4e92dd0b",
+        "name": "",
+        "sourceProperty": "payload",
+        "targetProperty": "payload",
+        "query": "[    \n    {{#each data.bikes }}\n    {\n        \"lon\": {{ lon }},\n        \"lat\": {{ lat }},\n        \"name\": \"{{ bike_id }}\",\n        \"is_reserved\": \"{{ is_reserved }}\",\n        \"is_disabled\": \"{{ is_disabled }}\",\n        \"icon\": \"fa-bicycle\",\n        \"ttl\": 60,\n        \"layer\": \"bikes\"\n    }\n    {{#unless @last}},{{/unless}}\n    {{/each}}\n]",
+        "x": 590,
+        "y": 180,
+        "wires": [
+            [
+                "53ec59844aacde44"
+            ]
+        ]
+    },
+    {
+        "id": "53ec59844aacde44",
+        "type": "json",
+        "z": "40572ddb4e92dd0b",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 790,
+        "y": 180,
+        "wires": [
+            [
+                "d25ea0f8bb7d5073"
+            ]
+        ]
+    },
+    {
+        "id": "d25ea0f8bb7d5073",
+        "type": "mqtt out",
+        "z": "40572ddb4e92dd0b",
+        "name": "",
+        "topic": "citython/bikes",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "47144a23a6fdcc87",
+        "x": 1020,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "d7862f67e5c52cc2",
+        "type": "worldmap",
+        "z": "69e3f67a60eb7e7e",
+        "name": "",
+        "lat": "48.716693",
+        "lon": "21.250365",
+        "zoom": "15",
+        "layer": "EsriC",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 840,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "e098f0c4a541e4ca",
+        "type": "mqtt in",
+        "z": "69e3f67a60eb7e7e",
+        "name": "",
+        "topic": "citython/bikes",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "47144a23a6fdcc87",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 510,
+        "y": 240,
+        "wires": [
+            [
+                "d7862f67e5c52cc2"
+            ]
+        ]
+    },
+    {
+        "id": "ea94bac55490f2dc",
+        "type": "http in",
+        "z": "61daf75291b21ad0",
+        "name": "",
+        "url": "/api/bikes/:bikeid",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "37a34d576b9d28ee"
+            ]
+        ]
+    },
+    {
+        "id": "aa32b1c538632f91",
+        "type": "http response",
+        "z": "61daf75291b21ad0",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 910,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "37a34d576b9d28ee",
+        "type": "change",
+        "z": "61daf75291b21ad0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "bikes[msg.req.params.bikeid]",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 120,
+        "wires": [
+            [
+                "aa32b1c538632f91"
+            ]
+        ]
+    },
+    {
+        "id": "53994c464a97de41",
+        "type": "mqtt in",
+        "z": "ae84735d68d4b058",
+        "name": "",
+        "topic": "citython/bikes",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "47144a23a6fdcc87",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "2272849489bc190c"
+            ]
+        ]
+    },
+    {
+        "id": "2272849489bc190c",
+        "type": "handlebars",
+        "z": "ae84735d68d4b058",
+        "name": "",
+        "sourceProperty": "payload",
+        "targetProperty": "payload",
+        "query": "{\n{{#each this}}\n    \"{{ name }}\": {\n        \"lon\": {{ lon }},\n        \"lat\": {{ lat }},\n        \"bike_id\": \"{{ name }}\",\n        \"is_reserved\": \"{{ is_reserved }}\",\n        \"is_disabled\": \"{{ is_disabled }}\"\n    }\n    {{#unless @last}},{{/unless}}\n{{/each}}\n}",
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "e4c5fe113aa3459b"
+            ]
+        ]
+    },
+    {
+        "id": "e4c5fe113aa3459b",
+        "type": "json",
+        "z": "ae84735d68d4b058",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "e1407fbbc8383a49"
+            ]
+        ]
+    },
+    {
+        "id": "e1407fbbc8383a49",
+        "type": "change",
+        "z": "ae84735d68d4b058",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "bikes",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "de7922993b2a87b5",
+        "type": "inject",
+        "z": "73addc4f59bb0808",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "6",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "1a493b1272fd87ce"
+            ]
+        ]
+    },
+    {
+        "id": "1a493b1272fd87ce",
+        "type": "http request",
+        "z": "73addc4f59bb0808",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://opensky-network.org/api/states/all?lamin=47.4912&lomin=16.4517&lamax=49.8981&lomax=25.9378",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "0657d3654317b726"
+            ]
+        ]
+    },
+    {
+        "id": "0657d3654317b726",
+        "type": "handlebars",
+        "z": "73addc4f59bb0808",
+        "name": "",
+        "sourceProperty": "payload",
+        "targetProperty": "payload",
+        "query": "[\n    {{#each states}}\n    {\n        \"name\": \"{{0}}\",\n        \"icao24\": \"{{0}}\",\n        \"callsign\": \"{{1}}\",\n        \"origin_country\": \"{{2}}\",\n        \"lon\": {{5}},\n        \"lat\": {{6}},\n        \"icon\": \"plane\",\n        \"speed\": {{9}},\n        \"last_contact\": {{4}},\n        \"heading\": {{10}},\n        \"ttl\": 60,\n        \"layer\": \"flights\"\n    }\n    {{#unless @last}},{{/unless}}\n    {{/each}}\n]",
+        "x": 610,
+        "y": 200,
+        "wires": [
+            [
+                "2794e34b760784c4"
+            ]
+        ]
+    },
+    {
+        "id": "2794e34b760784c4",
+        "type": "json",
+        "z": "73addc4f59bb0808",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 810,
+        "y": 200,
+        "wires": [
+            [
+                "c8f5b6c8129cf3cb"
+            ]
+        ]
+    },
+    {
+        "id": "c8f5b6c8129cf3cb",
+        "type": "worldmap",
+        "z": "73addc4f59bb0808",
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "false",
+        "showgrid": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 1000,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "903d6f7f34dcfd96",
+        "type": "http in",
+        "z": "616755c775dbc7fe",
+        "name": "",
+        "url": "/www/:bikeid",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 220,
+        "wires": [
+            [
+                "7377e2976f445033"
+            ]
+        ]
+    },
+    {
+        "id": "d8818a83a77f59c4",
+        "type": "http response",
+        "z": "616755c775dbc7fe",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 930,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "06e65b194dfebc31",
+        "type": "change",
+        "z": "616755c775dbc7fe",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "bikes[msg.req.params.bikeid]",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 160,
+        "wires": [
+            [
+                "1682a35e7d6c9ee4"
+            ]
+        ]
+    },
+    {
+        "id": "1682a35e7d6c9ee4",
+        "type": "template",
+        "z": "616755c775dbc7fe",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<h1>Bike {{payload.bike_id}}</h1>\n\n<ul>\n    <li>\n        <b>Longitude</b>: {{ payload.lon }}\n    </li>\n    <li>\n        <b>Latitude</b>: {{ payload.lat }}\n    </li>\n\n    <li>\n        <b>Is Reserver</b>: {{ payload.is_reserved }}\n    </li>\n    <li>\n        <b>Is Disabled</b>: {{ payload.is_disabled }}\n    </li>\n</ul>\n",
+        "output": "str",
+        "x": 760,
+        "y": 160,
+        "wires": [
+            [
+                "d8818a83a77f59c4"
+            ]
+        ]
+    },
+    {
+        "id": "7377e2976f445033",
+        "type": "switch",
+        "z": "616755c775dbc7fe",
+        "name": "",
+        "property": "bikes",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "req.params.bikeid",
+                "vt": "msg"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "06e65b194dfebc31"
+            ],
+            [
+                "abca71fa45ad3f99"
+            ]
+        ]
+    },
+    {
+        "id": "abca71fa45ad3f99",
+        "type": "template",
+        "z": "616755c775dbc7fe",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<h1>Bike {{ req.params.bikeid }} not found.</h1>",
+        "output": "str",
+        "x": 540,
+        "y": 280,
+        "wires": [
+            [
+                "a4b1792f0e2ac018"
+            ]
+        ]
+    },
+    {
+        "id": "a4b1792f0e2ac018",
+        "type": "http response",
+        "z": "616755c775dbc7fe",
+        "name": "",
+        "statusCode": "404",
+        "headers": {},
+        "x": 920,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f0c5633ec5705f51",
+        "type": "mqtt in",
+        "z": "5e887e3f8962d00b",
+        "name": "",
+        "topic": "citython/bikes",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "47144a23a6fdcc87",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 470,
+        "y": 340,
+        "wires": [
+            [
+                "2f7f5b5932a168cc"
+            ]
+        ]
+    },
+    {
+        "id": "bb973e7a53e4ecb6",
+        "type": "ui_text",
+        "z": "5e887e3f8962d00b",
+        "group": "c9dd22024bcd9b95",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "bikes total",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 880,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2f7f5b5932a168cc",
+        "type": "template",
+        "z": "5e887e3f8962d00b",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{ payload.length }}",
+        "output": "json",
+        "x": 680,
+        "y": 340,
+        "wires": [
+            [
+                "bb973e7a53e4ecb6",
+                "6c20322b5d8264c4"
+            ]
+        ]
+    },
+    {
+        "id": "6c20322b5d8264c4",
+        "type": "ui_gauge",
+        "z": "5e887e3f8962d00b",
+        "name": "",
+        "group": "c9dd22024bcd9b95",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Total bikes",
+        "label": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 890,
+        "y": 400,
+        "wires": []
+    }
+]
