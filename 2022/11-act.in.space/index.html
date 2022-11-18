@@ -135,35 +135,6 @@ notes:
 
 ```json
 {% raw %}[
-    {{#each data.bikes }}
-    {
-        "lon": {{ lon }},
-        "lat": {{ lat }},
-        "name": "{{ bike_id }}",
-        "is_reserved": "{{ is_reserved }}",
-        "is_disabled": "{{ is_disabled }}",
-        "icon": "fa-bicycle",
-        "ttl": 60,
-        "layer": "bikes"
-    }
-    {{#unless @last}},{{/unless}}
-    {{/each}}
-]
-{% endraw %}
-```
-</section>
-
-
-<section id="presenting-the-data-flow" data-markdown data-background="#fff">
-![Data presentation](images/02.presenting.data.png)
-</section>
-
-
-<section id="handlebars-template-for-opensky" data-markdown data-background="#8f1200">
-## Template
-
-```json
-{% raw %}[
     {{#each states}}
     {
         "name": "{{0}}",
@@ -184,6 +155,11 @@ notes:
 ]
 {% endraw %}
 ```
+</section>
+
+
+<section id="presenting-the-data-flow" data-markdown data-background="#fff">
+![Data presentation](images/02.presenting.data.png)
 </section>
 
 
