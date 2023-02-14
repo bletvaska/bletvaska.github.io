@@ -7,7 +7,7 @@ authors = ["Miroslav Biňas <miroslav.binas@tuke.sk>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 mcpi = "^1.2.0"
-ipython = "^7.23.1"
+ipython = "^8.10"
 jupyterlab = "^3.0.16"
 
 [tool.poetry.dev-dependencies]
