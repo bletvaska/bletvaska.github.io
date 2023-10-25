@@ -17,7 +17,7 @@ authors:
       email: miroslav.binas@tuke.sk
       url: https://bletvaska.github.io
 
-# video: https://youtu.be/-_wCzGxfRK0 
+# video: https://youtu.be/-_wCzGxfRK0
 ---
 <style>
 body, html{
@@ -63,7 +63,7 @@ canvas {
 
 
 <section id="arkanoid-logo" data-markdown data-background="black">
-![Arkanoid Logo](images/arkanoid.logo.jpg)
+![Arkanoid Logo](images/logo-arkanoid.jpg)
 
 Note:
 * https://i.ytimg.com/vi/2bdFsD_0HXI/maxresdefault.jpg
@@ -75,52 +75,34 @@ Note:
 </section>
 
 
-<section id="collisions" data-markdown data-background="#2ECC71">
-[![Kenney.nl](images/kenney-promo.png)](https://kenney.nl/)
+<section id="kenney" data-markdown data-background="#2ECC71">
+[![Kenney.nl](images/logo-kenney.png)](https://kenney.nl/)
 </section>
 
 
-<section id="pygame-zero" data-background="white">
-<a href="https://pygame-zero.readthedocs.io/">
-    <img src="images/logo-pygamezero.svg" width="600">
-</a>
+<section id="arcade" data-markdown data-background="white">
+[![Arcade Logo](images/logo-arcade.png)](https://arcade.academy/)
 </section>
 
 
-<section id="pygame" data-markdown data-background="white">
-[![Pygame logo](images/logo-pygame.png)](https://www.pygame.org/news)
+<section id="pyglet" data-markdown data-background="white">
+[![Pyglet Logo](images/logo-pyglet.png)](https://pyglet.org/)
+
+[https://pyglet.org/](https://pyglet.org/)
 </section>
 
 
-<section id="sdl" data-markdown data-background="white">
-[![SDL logo](images/logo-sdl.png)](https://www.libsdl.org/)
-
-Since 1998
-</section>
-
-
-<section id="steam" data-markdown data-background="black">
-![Steam logo](images/logo-steam.jpg)
-</section>
-
-
-<section id="pygame-zero-about" data-markdown>
-### Pygame Zero is for creating games without boilerplate.
-</section>
-
-
-<section id="pygame-zero-magpi" data-markdown data-background="images/magpi-35-pygamezero.jpg">
-Note:
-* https://www.raspberrypi.org/magpi/wp-content/uploads/2015/06/35_PygameZero.jpg
+<section id="arcade-about" data-markdown>
+### Easy to use Python library for creating 2D arcade games.
 </section>
 
 
 <section id="installation" data-markdown>
 ## Installation
 
-* Raspberry Pi - builtin
-* `sudo dnf install pgzero mu`
-* `pip install pgzero mu-editor`
+```
+$ pip install arcade
+```
 </section>
 
 
@@ -163,38 +145,38 @@ Note:
 </section>
 
 
-<section id="actor" data-markdown>
+<section id="sprite" data-markdown>
 ![Actor](images/invader.png)
 </section>
 
 
-<section id="actor-fields-and-methods" data-markdown>
-## Actor Fields and Methods
+<section id="sprite-fields-and-methods" data-markdown>
+## Sprite Fields and Methods
 
-* `actor.x`, `actor.y`, `actor.pos`
-* `actor.image`
-* `actor.width`, `actor.height`
-* `actor.draw()`
+* `sprite.center_x`, `sprite.center_y`
+* `sprite.position`
+* `sprite.width`, `sprite.height`
+* `sprite.draw()`
 </section>
 
 
-<section id="pygame-handles" data-markdown>
-## Pygame Handles 
+<section id="sprite-handles" data-markdown>
+## Sprite Handles
 
 ![Pygame Handles](images/handles.png)
 </section>
 
 
 <section id="collision-detections" data-markdown>
-    ## Collisioin Detection
+## Collisioin Detection
 </section>
 
 
 <section id="collisions" data-markdown data-background="#fff">
-    ![Collisions](images/collisions.png)
+![Collisions](images/collisions.png)
 
-    Note:
-    * https://treadgaming.blogspot.com/2016/06/video-game-physics-tutorial-part-ii.html
+Note:
+* https://treadgaming.blogspot.com/2016/06/video-game-physics-tutorial-part-ii.html
 </section>
 
 
@@ -213,10 +195,10 @@ Note:
 
 * [projekt](arkanoid.zip) - výsledný projekt
 * [assets](https://kenney.nl/assets/puzzle-pack) - stolen from [Kenney.nl](https://kenney.nl)
-* [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
-* [Wireframe](https://wireframe.raspberrypi.org/) and [MagPi](https://www.raspberrypi.org/magpi/) Magazines
-* [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
+* [Arcade Homepage](https://arcade.academy/)
+* [Pyglet Homepage](https://pyglet.org/)
 * [PyWeek](https://pyweek.org/) - Python Game Programming Challenge
+* [Multimediální knihovna Pyglet](https://mojefedora.cz/multimedialni-knihovna-pyglet/)
 </section>
 
 
@@ -270,4 +252,3 @@ Note:
 
 
 {% include qr.html %}
-
