@@ -9,6 +9,7 @@ _config_local.yml
 .jekyll-cache/
 .ipynb_checkpoints/
 .obsidian
+.idea-
 
 __pycache__/
 poetry.lock
