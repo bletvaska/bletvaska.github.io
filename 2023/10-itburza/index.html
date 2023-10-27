@@ -4,7 +4,7 @@ description:
   Učiť sa programovať je ťažké. Učiť programovať niekoho iného je však ešte ťažšie. Čo tak však zvýšiť motiváciu študentov tým, že ich budeme učiť programovať spôsobom, kedy budú vytvárať vlastné počítačové hry? V tomto príspevku vám predstavím knižnicu pre jazyk Python s názvom Wasabi2D, ktorá vychádza z najlepších skúseností s knižnicou Pygame Zero. Predstavím vám teda nástroj, pomocou ktorého viete podporiť kreativitu (nie len) u študentov. Počas príspevku naprogramujeme od nuly jednoduchú počítačovú hru a nevyhneme sa ani porovnaniu so spomínanou knižnicou Pygame Zero.
 duration: 90
 date: 2023-10-27
-bitly: https://bit.ly/3M3KUaL
+bitly: https://bit.ly/46MaJ7g
 event:
     title: IT Burza 2023
     url: https://itburza.gvpt.sk/
@@ -61,21 +61,16 @@ canvas {
 </section>
 
 
-<section id="arkanoid-logo" data-markdown data-background="black">
-![Arkanoid Logo](images/logo-arkanoid.jpg)
+<section id="flappybird-gameplay" data-markdown>
+![Flappy Bird](images/flappy.gif)
+</section>
+
+
+<section id="analysis" data-markdown data-background="#52C2CA">
+![Game Analysis](images/analysis.png)
 
 Note:
-* https://i.ytimg.com/vi/2bdFsD_0HXI/maxresdefault.jpg
-</section>
-
-
-<section id="arkanoid-arcade" data-background="black">
-    <iframe width="896" height="504" src="https://www.youtube.com/embed/Th-Z6QQ5AOQ?controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen data-autoplay></iframe>
-</section>
-
-
-<section id="kenney" data-markdown data-background="#2ECC71">
-[![Kenney.nl](images/logo-kenney.png)](https://kenney.nl/)
+* https://www.researchgate.net/publication/324066514_Playing_Flappy_Bird_with_Deep_Reinforcement_Learning
 </section>
 
 
@@ -92,12 +87,12 @@ Note:
 
 
 <section id="arcade-about" data-markdown>
-### Easy to use Python library for creating 2D arcade games.
+### _Easy to use Python library for creating 2D arcade games._
 </section>
 
 
 <section id="installation" data-markdown>
-## Installation
+## Inštalácia
 
 ```
 $ pip install arcade
@@ -105,8 +100,45 @@ $ pip install arcade
 </section>
 
 
+<section id="window" data-markdown>
+## Robíme okno
+
+```python
+import arcade
+
+class Flappy(arcade.Window):
+    def __init__(self):
+        super().__init__()
+
+game = Flappy()
+arcade.run()
+```
+</section>
+
+
+<section id="project-structure" data-markdown>
+## [Štruktúra projektu](resources/flappy-skelet.zip)
+
+```
+.
+├── assets
+│   ├── images
+│   │   ├── background.png
+│   │   ├── flappy.png
+│   │   └── pipe.png
+│   └── sounds
+│       ├── die.wav
+│       ├── hit.wav
+│       ├── point.wav
+│       └── wing.wav
+└── game.py
+```
+</section>
+
+
 <section id="warning" data-markdown>
-## Warning!
+## Upozornenie!
+
 (no best practices provided)
 </section>
 
@@ -119,26 +151,8 @@ Note:
 </section>
 
 
-<section id="project-structure" data-markdown>
-## Project Structure
-
-```
-.
-├── game.py
-├── sounds/
-│   ├── hit.01.wav
-│   └── hit.02.wav
-└── images/
-    ├── background.png
-    ├── ball.png
-    ├── brick.purple.png
-    └── paddle.png
-```
-</section>
-
-
 <section id="2d-coordinate-system" data-markdown>
-## 2D Coordinate System
+## 2D Súradnicový sys.
 
 ![2D Coordinate System](images/2d.coordinate.system.png)
 </section>
@@ -179,11 +193,6 @@ Note:
 </section>
 
 
-<section id="hands-off" data-markdown>
-## Hands Off!
-</section>
-
-
 <section id="where-to-go-next" data-markdown>
 ## What's Next?
 </section>
@@ -192,61 +201,13 @@ Note:
 <section id="links" data-markdown>
 ## Links
 
-* [projekt](arkanoid.zip) - výsledný projekt
-* [assets](https://kenney.nl/assets/puzzle-pack) - stolen from [Kenney.nl](https://kenney.nl)
+* [projekt](flappy.zip) - výsledný projekt
 * [Arcade Homepage](https://arcade.academy/)
 * [Pyglet Homepage](https://pyglet.org/)
-* [PyWeek](https://pyweek.org/) - Python Game Programming Challenge
 * [Multimediální knihovna Pyglet](https://mojefedora.cz/multimedialni-knihovna-pyglet/)
-</section>
-
-
-<section id="tasks-1" data-markdown>
-## Tasks #01: The Bricks
-
-* Every brick has different color.
-* Different color has different points.
-* Different color has different power.
-</section>
-
-
-<section id="tasks-2" data-markdown>
-## Tasks #02: Powerups
-
-* powerup is falling from brick
-* sticky paddle
-* bigger/shorter size of paddle
-* speed up/down
-* multi balls
-* no walls on left and right
-</section>
-
-
-<section id="tasks-3" data-markdown>
-## Tasks #03: The Levels
-
-* Different shape of bricks (triangles, smile, letter, ...)
-* Different shape for different levels.
-* Levels in file.
-</section>
-
-
-<section id="tasks-4" data-markdown>
-## Tasks #04: Effects
-
-* [Parallax background](https://images.squarespace-cdn.com/content/v1/551a19f8e4b0e8322a93850a/1574024073167-PRLTM8P9IEOI4Q6EZQYO/Desert.gif)
-* bouncing the ball
-* breaking the brick
-    * brick has power
-    * hit/break effect
-</section>
-
-
-<section id="tasks-5" data-markdown>
-## Tasks #05: Misc
-
-* Game Over and Well Done as images
-* bonus objects falling from bricks
+* [Arcade: A Primer on the Python Game Framework](https://realpython.com/arcade-python-game-framework/)
+* Assets stolen from Github: [FlapPy-Bird](https://github.com/iJohnMaged/FlapPy-Bird)
+* [PyWeek](https://pyweek.org/) - Python Game Programming Challenge
 </section>
 
 

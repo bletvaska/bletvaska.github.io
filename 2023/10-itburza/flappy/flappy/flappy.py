@@ -2,21 +2,17 @@ import arcade
 
 from .config import *
 
-GRAVITY = -0.3
-KICK = 6.5
-
 
 class Flappy(arcade.Sprite):
-    def __init__(self):
-        super().__init__(ASSETS / 'yellowbird-midflap.png')
+    def __init__(self, pipes):
+        super().__init__(ASSETS / 'images/yellowbird-midflap.png')
 
+        self.pipes = pipes
         self.center_x = WIDTH / 2
         self.center_y = HEIGHT / 2
         self.vy = 0
-        print(self.texture)
-        print(self.textures)
 
-    def on_update(self, dt):
+    def on_update(self, delta_time: float = 1 / 60):
         self.vy += GRAVITY
         self.center_y += self.vy
 
@@ -25,6 +21,10 @@ class Flappy(arcade.Sprite):
             print('>> game over')
             quit()
 
+        # check collisions with pipes
+        if self.collides_with_list(self.pipes):
+            print('>> you have died')
+            quit()
+
     def flap(self):
         self.vy = KICK
-
