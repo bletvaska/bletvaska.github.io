@@ -10,6 +10,7 @@ _config_local.yml
 .ipynb_checkpoints/
 .obsidian
 .idea-
+.idea/
 
 __pycache__/
 poetry.lock
