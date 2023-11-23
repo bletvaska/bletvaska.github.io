@@ -791,7 +791,7 @@ set -o nounset
 [[ "${ENVIRONMENT:-prod}" == "devel" ]] && set -o xtrace
 
 # load modules
-source "helper.bash"
+source "libs/helper.bash"
 
 # global variables
 readonly GREETING="Hello"
@@ -810,7 +810,7 @@ fi
 
 
 <section data-markdown id="bash-module-template">
-### Bash Module Tplemplate
+### Bash Module Template
 
 ```bash
 # Example module with helper function.
@@ -829,9 +829,20 @@ fi
 function greetings(){
   local target="${1:?Target not set.}"
 
-  printf "%s %s!" "${GREETING}" "${target}"
+  printf "%s %s!\n" "${GREETING}" "${target}"
 }
 ```
+</section>
+
+
+<section data-markdown id="vscode-extensions">
+## VS Code Extensions
+
+* [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck) - linter
+* [shell-format](https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format) - formatter
+* [Bats](https://marketplace.visualstudio.com/items?itemName=jetmartin.bats) - testing
+* [Bash Debug](https://marketplace.visualstudio.com/items?itemName=rogalmic.bash-debug) - debugging
+* generic ones: [indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow), [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 </section>
 
 
