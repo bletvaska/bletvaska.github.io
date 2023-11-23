@@ -8,8 +8,8 @@ description: |
 duration: 120
 layout: slide
 theme: night
-date: 2023-11-22
-#bitly: https://bit.ly/3QVWwiG
+date: 2023-11-23
+bitly: https://bit.ly/47OXq6p
 event:
     title: Inovatívne trendy vo VŠ vzdelávaní
     url: http://educationmatters.ekf.tuke.sk
@@ -22,16 +22,9 @@ authors:
 todo:
 ---
 
-
 <style>
-section#bash-script-template pre,
-section#bash-module-template pre
-{
-    font-size: 0.35em;
-}
-
-section#bats-test-example pre {
-    font-size: 0.5em;
+#vidiq-achievement > p > a > img {
+  width: 60%;
 }
 </style>
 
@@ -40,6 +33,15 @@ section#bats-test-example pre {
 
 <section data-markdown id="this-is-mirek">
 ![mirek](../../images/mirek.na.hackathone.jpg)
+</section>
+
+
+<section data-markdown id="preco-youtube">
+## Kde bolo tam bolo
+</section>
+
+
+<section data-markdown data-background="images/chalupka.jpg" id="chalupka">
 </section>
 
 
@@ -69,22 +71,136 @@ section#bats-test-example pre {
 * vytvorenie scén pre vysielanie
   * iba plochy
   * iba prednášajúceho (cez kameru)
-  * aj plochy aj prednášajúceho
+  * aj plochy aj prednášajúceho (overlay)
+
+notes:
+* `Nastavenia` > `Video`
+</section>
+
+
+<section data-markdown id="overlay-example">
+[![Overlay](images/overlay.jpg)](https://www.youtube.com/watch?v=hiVcgUdjy0A)
 </section>
 
 
 <section data-markdown id="local-recording">
 ## #2 Lokálny záznam
+
+notes:
+* `Nastavenia` > `Video` - rozlíšenie (aj výstupnej) obrazovky a nastavenie FPS
+* `Nastavenia` > `Výstup` > `Nahrávanie`
+  * Nahrávacia cesta
+  * kvalita
+  * formát
+</section>
+
+
+<section data-markdown id="local-post-processing">
+## #2.5 (Lokálny) Post Processing
+
+notes:
+* video editor
+  * kdenlive
+  * davinci resolve
+</section>
+
+
+<section data-markdown id="post-processing">
+* vystrihnúť
+  * začiatok a koniec
+  * tiché chvíľky, dramatické pauzy
+  * ak sa niečo pototo
+  * hmm... žeeeee...
+</section>
+
+
+<section data-markdown data-background-color="white" id="kdenlive">
+[![kdenlive](images/logo-kdenlive.png)](https://kdenlive.org/)
 </section>
 
 
 <section data-markdown id="streaming">
 ## #3 Živé vysielanie
+
+notes:
+* je potrebné získať streamovací kľúč
+  * `Nastavenia` > `Stream` > `Dostať streamovací kľúč`
+</section>
+
+
+<section data-markdown id="post-processing">
+## #4 Post Processing
 </section>
 
 
 <section data-markdown id="youtube-studio" data-background="white">
 [![YouTube Studio](images/youtube.studio.png)](https://studio.youtube.com)
+</section>
+
+
+<section id="raw-video">
+  <h2>Nezostrihané video</h2>
+
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/efpp4Wf1JO8?si=4RoexG_LcmPxRa4p&amp;start=348" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</section>
+
+
+<section data-markdown id="metadata">
+## #5 Metadáta
+</section>
+
+
+<section data-markdown id="metadata-example">
+```
+Opis videa
+
+Linky:
+* https://bletvaska.github.io - domovská stránka
+
+Kapitoly
+00:00:00 Privítanie
+00:01:23 Prezentovaný medžik
+00:04:56 Diskusia
+
+#HashTag #DalsiHashTag
+```
+</section>
+
+
+<section data-markdown id="analytika-videa">
+## #6 Analytika
+</section>
+
+
+<section data-markdown data-background-color="#139DFF" id="vidiq">
+[![](images/logo-vidiq.jpg)](https://vidiq.com)
+</section>
+
+
+<section data-markdown data-background-color="white" id="vidiq-achievement">
+[![](images/vidiq.achievement.png)](https://vidiq.com/certificates/IAa7Kvzm2C/?utm_content=10000_views)
+</section>
+
+
+<section data-markdown id="best-practices">
+## Niekoľko odporúčaní
+
+* **pozor na veľkosť textov!**
+* **pozor na licencie!**
+* online prednáška bude trvať 90 minút, ale príprava prednášky offline bude trvať hodiny/dni/týždne
+* je to ako natáčanie filmu ;)
+  * chce to scenár
+  * vstupy "naživo" budete robiť na viackrát
+* viac kratších vs jedno dlhšie video
+</section>
+
+
+<section id="ako-si-vyrobit-citacie-zariadenie">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ExW3eOf6kpw?si=QyqLNHnFN3JbLixn&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+  <p>
+    Ľ. Lacko: <a href="https://www.youtube.com/watch?v=ExW3eOf6kpw">Ako si jednoducho vyrobiť čítacie zariadenie pre kameru</a>
+  </p>
 </section>
 
 
@@ -99,6 +215,7 @@ section#bats-test-example pre {
 * [OBS Studio](https://obsproject.com) - domovská stránka
 * [vidIQ](https://vidiq.com) - domovská stránka
 * [studio YouTube](https://studio.youtube.com) - domovská stránka
+* [kdenlive](https://kdenlive.org/) - video editor
 </section>
 
 {% include qr.html %}
