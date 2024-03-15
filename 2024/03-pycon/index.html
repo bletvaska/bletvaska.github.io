@@ -1,0 +1,206 @@
+---
+title: Python pre DevOps
+subtitle: alebo nie príliš stručný úvod do [Apache Airflow](https://airflow.apache.org/)
+description:
+  Hovorí sa, že tým najlepším lepidlom na lepenie Dev a Ops je bash. Používame ho na drobné skripty, na tvorbu vlastných nástrojov z príkazového riadku, na ľahkú automatizáciu pomocou cron-u alebo na písanie úloh pre CI/CD. Aj keď má bash v tejto oblasti svoje nezastupiteľné miesto, môžeme ho dnes na mnohých miestach nahradiť jazykom Python a ako bonus dostaneme celý jeho ekosystém. A v tomto príspevku si ukážeme, ako je možné jazyk Python použiť (nie len) pre DevOps pomocou nástroja Apache Airflow.
+duration: 30
+date: 2024-03-16
+# bitly: https://bit.ly/3TkY86Y
+event:
+    title: PyCon SK 2024
+    url: https://2024.pycon.sk/sk/speakers/Mirek%20Bi%C5%88as.html
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+
+# video: https://youtu.be/-_wCzGxfRK0
+---
+
+<style>
+code {
+    font-size: 0.7em;
+    line-height: 1.5em;
+};
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.na.hackathone.jpg)
+</section>
+
+
+<section id="incomming-mail" data-markdown data-background="white">
+> ... Chcel by som sa opytat, ci by bolo mozne zmenit sylaby zaveru tohto kurzu, aby tam boli temy, ktore suvisia blizsie s **SD Networkingom**? Osobne nemam vedomosti, co presne by malo byt naplnou kurzu, resp. ake temy v ramci Pythonu by sa mal clovek naucit, aby mal dobre zaklady pre **SD Networking**? ...
+</section>
+
+
+<section id="schema" data-markdown data-background="white">
+![Schema](images/schema.png)
+</section>
+
+
+
+<section id="etl" data-markdown data-background="white">
+![ETL](images/etl.png)
+</section>
+
+
+<section id="dag" data-markdown data-background="white">
+![What is DAG?](images/what.is.dag.png)
+</section>
+
+
+<section id="scrape-data" data-markdown>
+## Scrape Data
+
+```python
+def scrape_data(query: str, units: str, appid: str) -> dict:
+  print('>> Scrape data')
+
+  url = 'http://api.openweathermap.org/data/2.5/weather'
+  params = {
+      'q': query,
+      'units': units,
+      'appid': appid
+  }
+  response = httpx.get(url, params=params)
+  return response.json()
+```
+</section>
+
+
+<section id="process-data" data-markdown>
+## Process Data
+
+```python
+def process_data(data: dict) -> str:
+  print('>> Process data')
+
+  entries = [
+      data['dt'],
+      data['name'],
+      data['sys']['country'],
+      data['main']['temp'],
+      data['main']['humidity'],
+      data['main']['pressure'],
+  ]
+  return ','.join(entries)
+```
+</section>
+
+
+<section id="publish-data" data-markdown>
+## Publish Data
+
+```python
+def publish_data(line: str):
+  print('>> Publishing data')
+
+  with open('dataset.csv', 'a') as dataset:
+      print(line, file=dataset)
+```
+</section>
+
+
+<section id="all-together" data-markdown>
+## CLI Tool
+
+```python
+#!/usr/bin/env python
+
+import click
+import httpx
+
+@click.command(help='Download current weather condition in CSV format.')
+@click.argument('query')
+@click.option('--units', type=click.Choice(['metric', 'standard', 'imperial']),
+              default='metric', help='Unit of measurement')
+@click.option('--appid', default=None, help='API key for openweathermap.org service.',
+              envvar='APPID')
+def main(query: str, units: str, appid: str):
+    data = scrape_data(query, units, appid)
+    processed_data = process_data(data)
+    publish_data(processed_data)
+
+main()
+```
+</section>
+
+
+<section id="running-from-cli" data-markdown>
+## Running from CLI
+
+```bash
+$ ./workflow.py --appid 98113cc2ea891cc2246900c7dc6a8038 kosice
+```
+</section>
+
+
+
+<section id="issues" data-markdown>
+## Problems?!
+
+* periodic execution
+    * `cron`, `systemd` Timers
+* what if something goes wrong?
+    * email from cron?
+    * SMS/IM/notification?
+    * desktop/phone?
+</section>
+
+
+
+<section id="apache-airflow" data-markdown data-background="white">
+[![](images/logo-airflow.png)](https://airflow.apache.org/)
+</section>
+
+
+<section id="demo-time" data-markdown>
+## Demo Time!
+</section>
+
+
+
+
+<section id="where-to-go-next" data-markdown>
+## What's Next?
+</section>
+
+
+<section id="try-me" data-markdown>
+## Try Me!
+
+https://bit.ly/3TkxkCq
+
+(admin:admin)
+</section>
+
+
+<section id="links" data-markdown>
+## Links
+
+* [Apache Airflow](https://airflow.apache.org/) - homepage
+</section>
+
+
+<section id="thanks-zdenko" data-markdown>
+[![Zdenko Vrábel](images/zdenko.vrabel.jpg)](https://www.linkedin.com/in/zdenkovrabel/)
+
+Zdenko Vrábel ([linked in](https://www.linkedin.com/in/zdenkovrabel/))
+</section>
+
+
+<section id="talk-python-to-me" data-markdown>
+[![Talk Python to Me](images/talk.python.to.me.jpg)](https://www.linkedin.com/in/zdenkovrabel/)
+
+#330: [Apache Airflow Open-Source Workflow with Python](https://talkpython.fm/episodes/show/330/apache-airflow-open-source-workflow-with-python)
+</section>
+
+
+{% include qr.html %}
