@@ -5,7 +5,7 @@ description:
   Hovorí sa, že tým najlepším lepidlom na lepenie Dev a Ops je bash. Používame ho na drobné skripty, na tvorbu vlastných nástrojov z príkazového riadku, na ľahkú automatizáciu pomocou cron-u alebo na písanie úloh pre CI/CD. Aj keď má bash v tejto oblasti svoje nezastupiteľné miesto, môžeme ho dnes na mnohých miestach nahradiť jazykom Python a ako bonus dostaneme celý jeho ekosystém. A v tomto príspevku si ukážeme, ako je možné jazyk Python použiť (nie len) pre DevOps pomocou nástroja Apache Airflow.
 duration: 30
 date: 2024-03-16
-# bitly: https://bit.ly/3TkY86Y
+bitly: https://bit.ly/3TeXd6R
 event:
     title: PyCon SK 2024
     url: https://2024.pycon.sk/sk/speakers/Mirek%20Bi%C5%88as.html
@@ -51,8 +51,23 @@ code {
 </section>
 
 
-<section id="dag" data-markdown data-background="white">
-![What is DAG?](images/what.is.dag.png)
+<section id="etl-in-bash" data-markdown>
+## ETL in Bash
+
+`$ scrape_data | process_data | publish_data`
+</section>
+
+
+<section id="etl-in-python" data-markdown>
+## ETL in Python
+
+```
++--------------------------+       +----------------+       +----------------+
+|        Scrape Data       |       |  Process Data  |       |  Publish Data  |
+|       -------------      | ----> | -------------- | ----> | -------------- |
+| (GET openweathermap.org) |       | (extract data) |       | (save to file) |
++--------------------------+       +----------------+       +----------------+
+```
 </section>
 
 
@@ -61,16 +76,16 @@ code {
 
 ```python
 def scrape_data(query: str, units: str, appid: str) -> dict:
-  print('>> Scrape data')
+    print('>> Scrape data')
 
-  url = 'http://api.openweathermap.org/data/2.5/weather'
-  params = {
-      'q': query,
-      'units': units,
-      'appid': appid
-  }
-  response = httpx.get(url, params=params)
-  return response.json()
+    url = 'http://api.openweathermap.org/data/2.5/weather'
+    params = {
+        'q': query,
+        'units': units,
+        'appid': appid
+    }
+    response = httpx.get(url, params=params)
+    return response.json()
 ```
 </section>
 
@@ -80,17 +95,16 @@ def scrape_data(query: str, units: str, appid: str) -> dict:
 
 ```python
 def process_data(data: dict) -> str:
-  print('>> Process data')
+    print('>> Process data')
 
-  entries = [
-      data['dt'],
-      data['name'],
-      data['sys']['country'],
-      data['main']['temp'],
-      data['main']['humidity'],
-      data['main']['pressure'],
-  ]
-  return ','.join(entries)
+    return  '{},{},{},{},{},{}'.format(
+        data['dt'],
+        data['name'],
+        data['sys']['country'],
+        data['main']['temp'],
+        data['main']['humidity'],
+        data['main']['pressure'],
+    )
 ```
 </section>
 
@@ -100,10 +114,10 @@ def process_data(data: dict) -> str:
 
 ```python
 def publish_data(line: str):
-  print('>> Publishing data')
+    print('>> Publishing data')
 
-  with open('dataset.csv', 'a') as dataset:
-      print(line, file=dataset)
+    with open('dataset.csv', 'a') as dataset:
+        print(line, file=dataset)
 ```
 </section>
 
@@ -137,10 +151,10 @@ main()
 ## Running from CLI
 
 ```bash
+# token will be available during pycon ;)
 $ ./workflow.py --appid 98113cc2ea891cc2246900c7dc6a8038 kosice
 ```
 </section>
-
 
 
 <section id="issues" data-markdown>
@@ -148,6 +162,7 @@ $ ./workflow.py --appid 98113cc2ea891cc2246900c7dc6a8038 kosice
 
 * periodic execution
     * `cron`, `systemd` Timers
+* monitoring?
 * what if something goes wrong?
     * email from cron?
     * SMS/IM/notification?
@@ -155,9 +170,38 @@ $ ./workflow.py --appid 98113cc2ea891cc2246900c7dc6a8038 kosice
 </section>
 
 
-
 <section id="apache-airflow" data-markdown data-background="white">
 [![](images/logo-airflow.png)](https://airflow.apache.org/)
+
+An open-source platform for developing, scheduling and monitoring workflows.
+</section>
+
+
+<section id="apache-airflow-installation" data-markdown>
+## Installation / Running
+
+* as standard [Python package](https://pypi.org/project/apache-airflow/):
+    ```bash
+    $ pip install apache-airflow
+    ```
+
+* in [Docker Composition](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html)
+    ```bash
+    $ curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.8.3/docker-compose.yaml'
+    $ docker compose up
+    ```
+</section>
+
+
+<section id="dag" data-markdown data-background="white">
+![What is DAG?](images/what.is.dag.png)
+</section>
+
+
+<section id="cicd" data-markdown data-background="white">
+## CI/CD Pipeline
+
+![CI/CD](images/cicd.png)
 </section>
 
 
@@ -166,10 +210,138 @@ $ ./workflow.py --appid 98113cc2ea891cc2246900c7dc6a8038 kosice
 </section>
 
 
+<section id="example-dag" data-markdown>
+## DAG Skeleton
+
+```python
+from airflow.decorators import dag
+from pendulum import datetime
+
+@dag(
+    "pycon_scraper",
+    description="Scrapes weather from openweathermap.org",
+    schedule="*/20 * * * *",
+    start_date=datetime(2024, 3, 15, tz="UTC"),
+    catchup=False,
+)
+def main():
+    pass
+
+main()
+```
+</section>
+
+
+<section id="adding-tasks" data-markdown>
+## Adding Tasks to DAG
+
+* task is the basic unit of execution
+* a function decorated with `@task` decorator
+* relationship is
+</section>
+
+
+<section id="xcom" data-markdown>
+## XComs
+
+> **XComs** (short for “cross-communications”) are a **mechanism** that **let Tasks talk to each other**.
+>
+> -- [Airflow Docs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html)
+</section>
+
+
+<section id="params" data-markdown>
+## Params
+
+> **Params** enable you to **provide runtime configuration to tasks**.
+>
+> -- [Airflow Docs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/params.html)
+</section>
+
+<section id="params-example" data-markdown>
+## Query as Param
+
+```python
+@dag(
+    "pycon_scraper",
+    description="Scrapes weather from openweathermap.org",
+    schedule="*/2 * * * *",
+    start_date=datetime(2024, 3, 14, tz="UTC"),
+    catchup=False,
+)
+def main(query: str = 'kosice'):
+    payload = scrape_data(query, 'metric', APPID)
+    csv_line = process_data(payload)
+    publish_data(csv_line)
+
+main()
+```
+</section>
+
+
+<section id="connections-and-hooks" data-markdown>
+## Connections & Hooks
+
+* Airflow is often used to pull and push data into other systems.
+* A **Connection** - **set of parameters** that Airflow connects to.
+* A **Hook** - a high-level **access interface** (not only) to connections.
+</section>
+
+
+<section id="hook-example" data-markdown>
+## Hook Usage Example
+
+```python
+from airflow.hooks.base import BaseHook
+
+def scrape_data(query: str, units: str) -> dict:
+    print('>> Scrape data')
+
+    conn = BaseHook.get_connection("pycon")
+
+    params = {
+        'q': query,
+        'units': units,
+        'appid': conn.password
+    }
+    response = httpx.get(f'https://{conn.host}/data/2.5/weather', params=params)
+    return response.json()
+```
+</section>
+
+
+<section id="task-failure" data-markdown>
+## Task Failure ?!
+</section>
 
 
 <section id="where-to-go-next" data-markdown>
 ## What's Next?
+</section>
+
+
+<section id="other-concepts" data-markdown>
+## Other Features
+
+* datasets
+* sensors
+* parallelism
+* dynamic DAG generation
+* alerting
+* ...
+</section>
+
+
+<section id="use-cases" data-markdown>
+## [Common Use Cases](https://www.devopsschool.com/blog/what-is-apache-airflow-and-use-cases-of-apache-airflow/#Top_10_use_cases_of_Apache_Airflow)
+
+* data ETL/processing/migration
+* reporting and analytics
+* workflow automation
+* infrastructure management
+* DevOps automation
+* IoT data processing
+* workflow monitoring
 </section>
 
 
@@ -185,7 +357,9 @@ https://bit.ly/3TkxkCq
 <section id="links" data-markdown>
 ## Links
 
-* [Apache Airflow](https://airflow.apache.org/) - homepage
+* [Apache Airflow](https://airflow.apache.org/) - project homepage
+* [Awesome Apache Airflow](https://github.com/jghoman/awesome-apache-airflow) - Curated list of resources about Apache Airflow
+* [Ecosystem](https://airflow.apache.org/ecosystem/) - other resources (listed at homepage)
 </section>
 
 
@@ -197,7 +371,7 @@ Zdenko Vrábel ([linked in](https://www.linkedin.com/in/zdenkovrabel/))
 
 
 <section id="talk-python-to-me" data-markdown>
-[![Talk Python to Me](images/talk.python.to.me.jpg)](https://www.linkedin.com/in/zdenkovrabel/)
+[![Talk Python to Me](images/talk.python.to.me.jpg)](https://talkpython.fm/)
 
 #330: [Apache Airflow Open-Source Workflow with Python](https://talkpython.fm/episodes/show/330/apache-airflow-open-source-workflow-with-python)
 </section>
