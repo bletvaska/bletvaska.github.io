@@ -22,7 +22,12 @@ token: 98113cc2ea891cc2246900c7dc6a8038
 ---
 
 <style>
-code {
+
+#etl-in-bash code,
+#etl-in-python code,
+#cli-tool code,
+#apache-airflow-installation code
+{
     font-size: 0.7em;
     line-height: 1.5em;
 };
@@ -124,7 +129,7 @@ def publish_data(line: str):
 </section>
 
 
-<section id="all-together" data-markdown>
+<section id="cli-tool" data-markdown>
 ## CLI Tool
 
 ```python
@@ -183,20 +188,23 @@ An open-source platform for developing, scheduling and monitoring workflows.
 ## Installation / Running
 
 * as standard [Python package](https://pypi.org/project/apache-airflow/):
-    ```bash
-    $ pip install apache-airflow
-    ```
+
+  ```bash
+  $ pip install apache-airflow
+  ```
 
 * as [Docker Container](https://hub.docker.com/r/bitnami/airflow)
-    ```bash
-    $ docker container run --name airflow bitnami/airflow:latest
-    ```
+
+  ```bash
+  $ docker container run --name airflow bitnami/airflow:latest
+  ```
 
 * in [Docker Composition](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html)
-    ```bash
-    $ curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.8.3/docker-compose.yaml'
-    $ docker compose up
-    ```
+
+  ```bash
+  $ curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.8.3/docker-compose.yaml'
+  $ docker compose up
+  ```
 </section>
 
 
@@ -313,7 +321,8 @@ def scrape_data(query: str, units: str) -> dict:
         'units': units,
         'appid': conn.password
     }
-    response = httpx.get(f'https://{conn.host}/data/2.5/weather', params=params)
+    response = httpx.get(f'https://{conn.host}/data/2.5/weather',
+                         params=params)
     return response.json()
 ```
 </section>
