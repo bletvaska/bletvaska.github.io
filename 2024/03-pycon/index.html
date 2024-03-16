@@ -163,10 +163,12 @@ $ ./workflow.py --appid {{ page.token }} kosice
 ```
 </section>
 
+<section id="houston-we-still-have-a-problem" data-markdown data-background="#080102">
+![](images/houston.png)
+</section>
 
-<section id="issues" data-markdown>
-## Problems?!
 
+<section id="those-problems" data-markdown>
 * periodic execution
     * `cron`, `systemd` Timers
 * monitoring?
@@ -253,7 +255,7 @@ main()
 
 * task is the basic unit of execution
 * a function decorated with `@task` decorator
-* relationship is
+* key part of using tasks is defining how they relate to each other
 </section>
 
 
@@ -315,14 +317,14 @@ def scrape_data(query: str, units: str) -> dict:
     print('>> Scrape data')
 
     conn = BaseHook.get_connection("pycon")
-
+    url = f'https://{conn.host}/data/2.5/weather'
     params = {
         'q': query,
         'units': units,
         'appid': conn.password
     }
-    response = httpx.get(f'https://{conn.host}/data/2.5/weather',
-                         params=params)
+    response = httpx.get(url, params=params)
+
     return response.json()
 ```
 </section>
@@ -342,14 +344,14 @@ simple healthcheck example
 
 ```python
 from sh import ping
-from airflow.exceptions import AirflowFailException
+# from airflow.exceptions import AirflowFailException
 
 @task
 def service_healthcheck():
-    conn: BaseHook = BaseHook.get_connection("pycon")
+    conn = BaseHook.get_connection("pycon")
     ping('-c', '1', conn.host, _timeout=1)
 
-    # raise AirflowFailException('samsing hepens')
+    # raise AirflowFailException('we have a problem')
 ```
 </section>
 
