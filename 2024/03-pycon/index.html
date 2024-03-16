@@ -18,6 +18,7 @@ authors:
       url: https://bletvaska.github.io
 
 # video: https://youtu.be/-_wCzGxfRK0
+token: 98113cc2ea891cc2246900c7dc6a8038
 ---
 
 <style>
@@ -36,7 +37,7 @@ code {
 
 
 <section id="incomming-mail" data-markdown data-background="white">
-> ... Chcel by som sa opytat, ci by bolo mozne zmenit sylaby zaveru tohto kurzu, aby tam boli temy, ktore suvisia blizsie s **SD Networkingom**? Osobne nemam vedomosti, co presne by malo byt naplnou kurzu, resp. ake temy v ramci Pythonu by sa mal clovek naucit, aby mal dobre zaklady pre **SD Networking**? ...
+> ... Chcel by som sa opytat, ci by bolo mozne zmenit sylaby zaveru tohto kurzu, aby tam boli temy, ktore suvisia blizsie s **SD Networkingom**? Osobne nemam vedomosti, co presne by malo byt naplnou kurzu, resp. ake temy v ramci **Pythonu** by sa mal clovek naucit, aby mal dobre zaklady pre **SD Networking**? ...
 </section>
 
 
@@ -59,14 +60,15 @@ code {
 
 
 <section id="etl-in-python" data-markdown>
-## ETL in Python
+## ETL Python Example
 
+Let's scrape'n'store selected data from [openweathermap.org](http://api.openweathermap.org/data/2.5/weather?units=metric&q=bratislava&appid={{ page.token }})
 ```
-+--------------------------+       +----------------+       +----------------+
-|        Scrape Data       |       |  Process Data  |       |  Publish Data  |
-|       -------------      | ----> | -------------- | ----> | -------------- |
-| (GET openweathermap.org) |       | (extract data) |       | (save to file) |
-+--------------------------+       +----------------+       +----------------+
+      +--------------------------+       +----------------+       +----------------+
+      |        Scrape Data       |       |  Process Data  |       |  Publish Data  |
+      |       -------------      | ----> | -------------- | ----> | -------------- |
+      | (GET openweathermap.org) |       | (extract data) |       | (save to file) |
+      +--------------------------+       +----------------+       +----------------+
 ```
 </section>
 
@@ -97,7 +99,7 @@ def scrape_data(query: str, units: str, appid: str) -> dict:
 def process_data(data: dict) -> str:
     print('>> Process data')
 
-    return  '{},{},{},{},{},{}'.format(
+    return '{},{},{},{},{},{}'.format(
         data['dt'],
         data['name'],
         data['sys']['country'],
@@ -152,7 +154,7 @@ main()
 
 ```bash
 # token will be available during pycon ;)
-$ ./workflow.py --appid 98113cc2ea891cc2246900c7dc6a8038 kosice
+$ ./workflow.py --appid {{ page.token }} kosice
 ```
 </section>
 
@@ -183,6 +185,11 @@ An open-source platform for developing, scheduling and monitoring workflows.
 * as standard [Python package](https://pypi.org/project/apache-airflow/):
     ```bash
     $ pip install apache-airflow
+    ```
+
+* as [Docker Container](https://hub.docker.com/r/bitnami/airflow)
+    ```bash
+    $ docker container run --name airflow bitnami/airflow:latest
     ```
 
 * in [Docker Composition](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html)
@@ -222,6 +229,7 @@ from pendulum import datetime
     description="Scrapes weather from openweathermap.org",
     schedule="*/20 * * * *",
     start_date=datetime(2024, 3, 15, tz="UTC"),
+    tags=['pycon', 'weather', 'devops'],
     catchup=False,
 )
 def main():
@@ -267,6 +275,7 @@ main()
     description="Scrapes weather from openweathermap.org",
     schedule="*/2 * * * *",
     start_date=datetime(2024, 3, 14, tz="UTC"),
+    tags=['pycon', 'weather', 'devops'],
     catchup=False,
 )
 def main(query: str = 'kosice'):
@@ -312,6 +321,48 @@ def scrape_data(query: str, units: str) -> dict:
 
 <section id="task-failure" data-markdown>
 ## Task Failure ?!
+
+Don't Forget: **Tasks can (and will) fail!**
+</section>
+
+
+<section id="task-failure-example" data-markdown>
+## Task Failure Example
+
+simple healthcheck example
+
+```python
+from sh import ping
+from airflow.exceptions import AirflowFailException
+
+@task
+def service_healthcheck():
+    conn: BaseHook = BaseHook.get_connection("pycon")
+    ping('-c', '1', conn.host, _timeout=1)
+
+    # raise AirflowFailException('samsing hepens')
+```
+</section>
+
+
+<section id="connecting-funcs-returning-none" data-markdown>
+## Connecting Funcs Returning `None`
+
+```python
+payload = service_healthcheck() >> scrape_data(query, 'metric')
+```
+</section>
+
+
+<section id="parallelism" data-markdown>
+## Parallelism
+
+```python
+payload = [
+  service_healthcheck(),
+  dummy_healthcheck()
+] >> scrape_data(query, 'metric')
+```
 </section>
 
 
@@ -327,7 +378,9 @@ def scrape_data(query: str, units: str) -> dict:
 * sensors
 * parallelism
 * dynamic DAG generation
-* alerting
+* notifier on success/failure
+* runs in Kubernetes
+* extendable
 * ...
 </section>
 
@@ -350,7 +403,9 @@ def scrape_data(query: str, units: str) -> dict:
 
 https://bit.ly/3TkxkCq
 
-(admin:admin)
+(user: `admin` pass: `admin`)
+
+**Please DON'T CHANGE credentials!**
 </section>
 
 
