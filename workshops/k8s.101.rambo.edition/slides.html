@@ -1,0 +1,120 @@
+---
+title: "Kubernetes 101: RAMBO Edition"
+subtitle: (workshop)
+description: |
+  Ak ste s Kubernetesom nikdy nerobili a chceli by ste ho zažiť na vlastnej koži pod dohľadom (ne)skúseného inštruktora, tak tento survival workshop je určený práve pre vás. Začneme zľahka a pozrieme sa na to, ako Rambo zvládne stiesnené podmienky, keď ho zavrieme do Pod-u. Následne ho nasadíme do akcie a zistíme, že mať viac Rambov je lepšie ako mať len jedného. A nakoniec Ramba po úspešnom nasadení povoláme do služby v internetoch. No a pred odchodom z workshopu sa pozrieme na to, ako aktualizovať Rambovu výbavu priamo v akcii.
+
+  Tento survival workshop je zameraný na zlepšenie vašich Kubernetes schopností z príkazového riadku pomocou nástroja kubectl. Pred príchodom si teda skontrolujte, či máte vo svojej výbave Open SSH klienta a webový prehliadač.
+
+duration: 120
+date: 2024-06-06
+<!-- bitly: https://bit.ly/3TeXd6R -->
+event:
+    title: KCD Czech Slovak 2024
+    url: https://community.cncf.io/events/details/cncf-kcd-czech-slovak-presents-kcd-czech-slovak-2024/
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+
+# video: https://youtu.be/-_wCzGxfRK0
+machines_url: https://bit.ly/4aUVQRG
+ssh_user: ubuntu
+ssh_password: Kubernetes101
+---
+
+<style>
+
+/* #etl-in-bash code,
+#etl-in-python code,
+#cli-tool code,
+#apache-airflow-installation code
+{
+    font-size: 0.7em;
+    line-height: 1.5em;
+} */
+
+section#rambo
+{
+  margin-top: 15%;
+  background-color: #2b3f679c;
+}
+</style>
+
+
+<section id="machines" data-markdown>
+## Get Ready for K8s!
+
+1. Go to [`{{ page.machines_url }}`]({{ page.machines_url }})
+2. Take available IP address of remote host and sign yourself
+3. Connect to remote host with SSH client:
+  ```
+  # ssh user: "{{ page.ssh_user }}"
+  # ssh password: "{{ page.ssh_password }}"
+  $ ssh {{ page.ssh_user }}@remote_host
+  ```
+4. Make yourself comfy and enjoy ;)
+</section>
+
+
+<section id="rambo" data-markdown data-background="images/rambo.jpg">
+## Kubernetes 101
+### (RAMBO Edition)
+[{{ page.authors[0].name }}]({{ page.authors[0].email }}) / [{{ page.event.title }}]({{ page.event.url }})
+</section>
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.na.hackathone.jpg)
+</section>
+
+
+<section id="kubectl" data-markdown data-background="#1852A4">
+[![kubectl](images/kubectl.png)](https://kubernetes.io/docs/reference/kubectl/)
+</section>
+
+
+<section id="k8s-architecture" data-markdown data-background="#E2EBF4">
+[![K8s Architecture](images/k8s.architecture.png)](https://thenewstack.io/kubernetes-an-overview/)
+</section>
+
+
+<section id="what-is-pod" data-markdown>
+## What is Pod?
+
+> The smallest deployable unit of computing that can be created and managed.
+</section>
+
+
+<section id="pod-is-not-container" data-markdown>
+## Pod ≠ Container
+</section>
+
+
+<section id="pod-vs-container" data-markdown>
+![Pod vs Container](images/pod.vs.containers.jpg)
+</section>
+
+
+
+
+
+<section id="where-to-go-next" data-markdown>
+## What's Next?
+</section>
+
+
+<section id="links" data-markdown>
+### Links
+
+* Single-Node K8s Clusters
+  * [minikube](https://minikube.sigs.k8s.io/docs/)
+  * [MicroK8s](https://microk8s.io/)
+  * [K3s](https://k3s.io/)
+</section>
+
+
+{% include qr.html %}

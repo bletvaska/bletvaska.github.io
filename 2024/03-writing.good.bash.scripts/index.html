@@ -354,10 +354,13 @@ note:
 
   ```bash
   function greetings(){
-      local name="${1}"
+      local name="${1:?Error: Parameter name was not set.}"
       printf "Hello %s!\n" "${name}"
   }
   ```
+
+notes:
+* https://betterprogramming.pub/5-bash-scripting-power-tips-bfd919b619c1
 </section>
 
 
@@ -372,28 +375,6 @@ note:
 > A function does one thing.
 >
 > -- [Wikipedia](https://en.wikipedia.org/wiki/Single_responsibility_principle)
-</section>
-
-
-<section data-markdown>
-* describe the usage of each function:
-    * number of arguments
-    * return value
-    * output
-
-* declare `local` variables with a meaningful name for positional parameters of functions
-
-* check positional parameters
-
-  ```bash
-  function greeting(){
-    local name="${1:?Error: Parameter name was not set.}"
-    printf "Hello %s!\n" "${name}"
-  }
-  ```
-
-notes:
-* https://betterprogramming.pub/5-bash-scripting-power-tips-bfd919b619c1
 </section>
 
 
@@ -499,7 +480,8 @@ notes:
 #   1 - otherwise
 # Outputs:
 #   STDERR - details, on failure
-function del_thing() {
+function delete_entry() {
+    # implementation goes here
 }
 ```
 </section>
