@@ -8,7 +8,7 @@ description: |
 
 duration: 120
 date: 2024-06-06
-<!-- bitly: https://bit.ly/3TeXd6R -->
+bitly: https://bit.ly/3x3Rnhu
 event:
     title: KCD Czech Slovak 2024
     url: https://community.cncf.io/events/details/cncf-kcd-czech-slovak-presents-kcd-czech-slovak-2024/
@@ -22,6 +22,7 @@ authors:
 
 # video: https://youtu.be/-_wCzGxfRK0
 machines_url: https://bit.ly/4aUVQRG
+notes_url: https://bit.ly/3RcHLHW
 ssh_user: ubuntu
 ssh_password: Kubernetes101
 ---
@@ -45,7 +46,7 @@ section#rambo
 </style>
 
 
-<section id="machines" data-markdown>
+<section id="bootstrap" data-markdown>
 ## Get Ready for K8s!
 
 1. Go to [`{{ page.machines_url }}`]({{ page.machines_url }})
@@ -60,6 +61,11 @@ section#rambo
 </section>
 
 
+<section id="mirek" data-markdown>
+![thats me](images/mirek.na.hackathone.jpg)
+</section>
+
+
 <section id="rambo" data-markdown data-background="images/rambo.jpg">
 ## Kubernetes 101
 ### (RAMBO Edition)
@@ -67,8 +73,8 @@ section#rambo
 </section>
 
 
-<section id="mirek" data-markdown>
-![thats me](images/mirek.na.hackathone.jpg)
+<section id="kubernetes-is-huge" data-markdown>
+## Kubernetes is ~~not~~ HUGE!
 </section>
 
 
@@ -83,7 +89,7 @@ section#rambo
 
 
 <section id="what-is-pod" data-markdown>
-## What is Pod?
+## Pod
 
 > The smallest deployable unit of computing that can be created and managed.
 </section>
@@ -99,6 +105,39 @@ section#rambo
 </section>
 
 
+<section id="what-is-deployment" data-markdown>
+## Deployment
+
+> Provides **declarative updates** for `Pods` and `ReplicaSets`.
+</section>
+
+
+<section id="control-loop" data-markdown data-background="white">
+![Control Loop](images/control.loop.webp)
+</section>
+
+
+
+<section id="dont-deploy-on-fridays" data-markdown>
+### Don't deploy on a friday!
+</section>
+
+
+<section id="what-is-service" data-markdown>
+## Service
+
+> **A method** for **exposing a network application** that is running as one or more `Pods` in your cluster.
+</section>
+
+
+<section id="service-types" data-markdown data-background="white">
+![Service Types](images/service.types.png)
+</section>
+
+
+<section id="about-ports" data-markdown data-background="white">
+![About Ports](images/nodeport.port.targetport.png)
+</section>
 
 
 
@@ -114,6 +153,7 @@ section#rambo
   * [minikube](https://minikube.sigs.k8s.io/docs/)
   * [MicroK8s](https://microk8s.io/)
   * [K3s](https://k3s.io/)
+* [ Workshop Notes ]( {{ page.notes_url }} )
 </section>
 
 
