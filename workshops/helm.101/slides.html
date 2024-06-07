@@ -1,0 +1,144 @@
+---
+title: "Helm 101: RAMBO Free Edition"
+subtitle: (workshop)
+description: |
+  Ak ste zvládli základy Kubernetes-u a chcete sa posunúť ďalej, tak prirodzeným krokom je siahnuť po balíčkoch, ktoré vám nasadzovanie a celkový manažment vašich aplikácií a infraštruktúr výrazne zjednodušia. Počas tohto workshopu si ukážeme základy práce s nástrojom Helm, ktorý slúži práve na tento účel. A možno sa stretneme aj s Rambom...
+
+  Pred príchodom na workshop si skontrolujte, či máte vo svojej výbave Open SSH klienta a webový prehliadač.
+
+duration: 120
+date: 2024-06-07
+#bitly: https://bit.ly/3x3Rnhu
+event:
+    title: KCD Czech Slovak 2024
+    url: https://community.cncf.io/events/details/cncf-kcd-czech-slovak-presents-kcd-czech-slovak-2024/
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+
+# video: https://youtu.be/-_wCzGxfRK0
+machines_url: https://bit.ly/4aUVQRG
+notes_url: https://bit.ly/3RcHLHW
+ssh_user: ubuntu
+ssh_password: Kubernetes101
+---
+
+
+<section id="bootstrap" data-markdown>
+## Get Ready for K8s!
+
+1. Go to [`{{ page.machines_url }}`]({{ page.machines_url }})
+2. Take available IP address of remote host and sign yourself
+3. Connect to remote host with SSH client:
+  ```
+  # ssh user: "{{ page.ssh_user }}"
+  # ssh password: "{{ page.ssh_password }}"
+  $ ssh {{ page.ssh_user }}@remote_host
+  ```
+4. Make yourself comfy and enjoy ;)
+</section>
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.na.hackathone.jpg)
+</section>
+
+
+{% include first.slide.html %}
+
+
+<section id="what-is-helm" data-markdown>
+## What is Helm?
+</section>
+
+
+<section id="helm-is-package-manager" data-markdown data-background="white">
+![helm is](images/what.is.helm.png)
+</section>
+
+
+<section id="k8s-architecture" data-markdown data-background="#E2EBF4">
+[![K8s Architecture](images/k8s.architecture.png)](https://thenewstack.io/kubernetes-an-overview/)
+</section>
+
+
+<section id="helm-architecture" data-markdown data-background="white">
+![Helm Architecture](images/helm.architecture.png)
+</section>
+
+
+<section id="helm-concepts" data-markdown>
+## Helm Concepts
+</section>
+
+
+<section id="chart" data-markdown>
+## Chart
+
+* collection of YAML files
+* bundle of the K8s resources needed to build a K8s app
+</section>
+
+
+<section id="config" data-markdown>
+## Config
+
+* configuration in the `values.yaml` file
+* contains config explicit to a realease of K8s app
+</section>
+
+
+<section id="release" data-markdown>
+## Release
+
+* a chat instance loaded into K8s
+* installed chart
+</section>
+
+
+<section id="repository" data-markdown>
+## Repository
+
+* repository of published charts
+</section>
+
+
+<section id="hub" data-markdown>
+## Hub
+
+* helps to find charts hosted in many distributed repositories hosted by numerous people and organizations
+</section>
+
+
+<section id="artifact-hub" data-markdown data-background="#417598">
+[![Artifact Hub](images/artifact.hub.png)](https://artifacthub.io/)
+</section>
+
+
+<section id="tldr" data-markdown data-background="white">
+![tldr](images/tldr.png)
+</section>
+
+
+<section id="where-to-go-next" data-markdown>
+## What's Next?
+</section>
+
+
+<section id="links" data-markdown>
+### Links
+
+* Single-Node K8s Clusters
+  * [minikube](https://minikube.sigs.k8s.io/docs/)
+  * [MicroK8s](https://microk8s.io/)
+  * [K3s](https://k3s.io/)
+* [ Workshop Notes ]( {{ page.notes_url }} )
+</section>
+
+
+{% include qr.html %}
+
