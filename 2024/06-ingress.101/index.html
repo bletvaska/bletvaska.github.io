@@ -6,7 +6,7 @@ description: |
 
 duration: 30
 date: 2024-06-27
-#bitly: https://bit.ly/3x3Rnhu
+bitly: https://bit.ly/3zoixAv
 event:
     title: Cloud Native Košice
     url: https://www.linkedin.com/events/cloudnativeko-icemeetup-47209200561047355392/comments/
@@ -44,21 +44,6 @@ section#k8s-rambo
   background-color: #2b3f679c;
 }
 </style>
-
-
-<section id="bootstrap" data-markdown>
-## Get Ready for K8s!
-
-1. Go to [`{{ page.machines_url }}`]({{ page.machines_url }})
-2. Take available IP address of remote host and sign yourself
-3. Connect to remote host with SSH client:
-  ```
-  # ssh user: "{{ page.ssh_user }}"
-  # ssh password: "{{ page.ssh_password }}"
-  $ ssh {{ page.ssh_user }}@remote_host
-  ```
-4. Make yourself comfy and enjoy ;)
-</section>
 
 
 <section id="mirek" data-markdown>
@@ -201,18 +186,8 @@ section#k8s-rambo
 </section>
 
 
-
 <section id="demo-1" data-markdown>
-## Demo #1
-</section>
-
-
-<section id="ingress-path-based-rule" data-markdown>
-```bash
-kubectl create ingress weather \
-  --rule /=weather:8000 \
-  --namespace weather
-```
+## Demo Time
 </section>
 
 
