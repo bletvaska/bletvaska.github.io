@@ -1,0 +1,243 @@
+---
+title: "Ingress 101: RAMBO Edition"
+subtitle: (workshop)
+description: |
+  Čo to je Ingress a ako funguje.
+
+duration: 30
+date: 2024-06-27
+#bitly: https://bit.ly/3x3Rnhu
+event:
+    title: Cloud Native Košice
+    url: https://www.linkedin.com/events/cloudnativeko-icemeetup-47209200561047355392/comments/
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+
+# video: https://youtu.be/-_wCzGxfRK0
+machines_url: https://bit.ly/4aUVQRG
+notes_url: https://bit.ly/3RcHLHW
+ssh_user: ubuntu
+ssh_password: Kubernetes101
+hostip: 52.58.85.13
+---
+
+<style>
+
+/* #etl-in-bash code,
+#etl-in-python code,
+#cli-tool code,
+#apache-airflow-installation code
+{
+    font-size: 0.7em;
+    line-height: 1.5em;
+} */
+
+section#intro,
+section#k8s-rambo
+{
+  margin-top: 15%;
+  background-color: #2b3f679c;
+}
+</style>
+
+
+<section id="bootstrap" data-markdown>
+## Get Ready for K8s!
+
+1. Go to [`{{ page.machines_url }}`]({{ page.machines_url }})
+2. Take available IP address of remote host and sign yourself
+3. Connect to remote host with SSH client:
+  ```
+  # ssh user: "{{ page.ssh_user }}"
+  # ssh password: "{{ page.ssh_password }}"
+  $ ssh {{ page.ssh_user }}@remote_host
+  ```
+4. Make yourself comfy and enjoy ;)
+</section>
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.na.hackathone.jpg)
+</section>
+
+
+<section id="intro" data-markdown data-background="images/rambo.jpg">
+## Ingress 101
+### (RAMBO Edition)
+[{{ page.authors[0].name }}]({{ page.authors[0].email }}) / [{{ page.event.title }}]({{ page.event.url }})
+</section>
+
+
+<section id="previously" data-markdown>
+## Previously
+### on Cloud Native Košice
+</section>
+
+<section id="kubernetes-is-huge" data-markdown>
+## Kubernetes is ~~not~~ HUGE!
+</section>
+
+
+<section id="k8s-rambo" data-markdown data-background="images/rambo.jpg">
+  ## Kubernetes 101
+  ### (RAMBO Edition)
+  [{{ page.authors[0].name }}]({{ page.authors[0].email }}) / [{{ page.event.title }}]({{ page.event.url }})
+  </section>
+
+
+<section id="kubectl" data-markdown data-background="#1852A4">
+[![kubectl](images/kubectl.png)](https://kubernetes.io/docs/reference/kubectl/)
+</section>
+
+
+<section id="k8s-architecture" data-markdown data-background="#E2EBF4">
+[![K8s Architecture](images/k8s.architecture.png)](https://thenewstack.io/kubernetes-an-overview/)
+</section>
+
+
+<section id="what-is-pod" data-markdown>
+## Pod
+
+> The smallest deployable unit of computing that can be created and managed.
+</section>
+
+
+<section id="pod-is-not-container" data-markdown>
+## Pod ≠ Container
+</section>
+
+
+<section id="pod-vs-container" data-markdown>
+![Pod vs Container](images/pod.vs.containers.jpg)
+</section>
+
+
+<section id="what-is-deployment" data-markdown>
+## Deployment
+
+> Provides **declarative updates** for `Pods` and `ReplicaSets`.
+</section>
+
+
+<section id="control-loop" data-markdown data-background="white">
+![Control Loop](images/control.loop.webp)
+</section>
+
+
+<section id="dont-deploy-on-fridays" data-markdown>
+### Don't deploy on a friday!
+</section>
+
+
+<section id="what-is-service" data-markdown>
+## Service
+
+> **A method** for **exposing a network application** that is running as one or more `Pods` in your cluster.
+</section>
+
+
+<section id="service-types" data-markdown data-background="white">
+![Service Types](images/service.types.png)
+</section>
+
+
+<section id="about-ports" data-markdown data-background="white">
+![About Ports](images/nodeport.port.targetport.png)
+</section>
+
+
+<section id="first-blood" data-markdown>
+## [First Blood](http://{{ page.hostip }}:8000/)
+</section>
+
+
+<section id="today" data-markdown>
+## Present
+</section>
+
+
+<section id="houston-we-have-a-problem" data-markdown>
+## Houston, we have a problem.
+</section>
+
+
+<section id="ingress" data-background="images/ingress.jpg">
+</section>
+
+
+<section id="what-is-ingress" data-markdown>
+## Ingress
+
+> Ingress **exposes HTTP and HTTPS routes from outside the cluster to services within the cluster**. Traffic routing is controlled by rules defined on the Ingress resource.
+</section>
+
+
+<section id="ingress-architecture" data-markdown data-background="white">
+[![](images/ingress-architecture.png)](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+</section>
+
+
+<section id="ingress-controller" data-markdown>
+## [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+</section>
+
+
+<section id="ingress-rules" data-markdown>
+## Components of Ingress Rule
+
+`HOST1/PATH1=SERVICE1.NAME:SERVICE1.PORT`
+</section>
+
+
+<section id="url-format" data-markdown data-background="white">
+### URL Format Explained
+
+![](images/url.format.png)
+</section>
+
+
+
+<section id="demo-1" data-markdown>
+## Demo #1
+</section>
+
+
+<section id="ingress-path-based-rule" data-markdown>
+```bash
+kubectl create ingress weather \
+  --rule /=weather:8000 \
+  --namespace weather
+```
+</section>
+
+
+<section id="where-to-go-next" data-markdown>
+## What's Next?
+</section>
+
+<section id="kubernets-the-documentary" data-background="images/kubernetes-the.documentary.png">
+</section>
+
+
+<section id="state-of-ingress" data-markdown data-background="white">
+[![](images/ingress-state.png)](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+</section>
+
+
+<section id="links" data-markdown>
+### Links
+
+* Single-Node K8s Clusters
+  * [minikube](https://minikube.sigs.k8s.io/docs/)
+  * [MicroK8s](https://microk8s.io/)
+  * [K3s](https://k3s.io/)
+* Kubernetes: The Documentary - [part 1](https://www.youtube.com/watch?v=BE77h7dmoQU), [part 2](https://www.youtube.com/watch?v=318elIq37PE)
+</section>
+
+
+{% include qr.html %}
