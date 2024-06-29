@@ -1,0 +1,240 @@
+---
+title: Písanie záverečných prác v $\LaTeX$-u
+subtitle: ako som napísal bakalársku prácu po 10 rokoch
+description: |
+  Čo to je Ingress a ako funguje.
+
+duration: 30
+date: 2024-07-02
+#bitly: https://bit.ly/3zoixAv
+event:
+    title: OSSConf 2024
+    url: https://ossconf.soit.sk/
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+
+---
+
+<style>
+
+/* #etl-in-bash code,
+#etl-in-python code,
+#cli-tool code,
+#apache-airflow-installation code
+{
+    font-size: 0.7em;
+    line-height: 1.5em;
+} */
+
+section#intro,
+section#k8s-rambo
+{
+  margin-top: 15%;
+  background-color: #2b3f679c;
+}
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="previously" data-markdown>
+## Zostavovanie $\LaTeX$ dokumentov ináč a využitie dedičnosti pri tvorbe šablón
+
+[Miroslav Biňas](http://bletvaska.github.io) / **[OSSConf 2018]({{ page.event.url }})**
+</section>
+
+
+
+<section data-markdown id="my-myself-and-latex">
+## Ja, moje druhé ja a $\LaTeX$
+
+* nie som pravidelný používateľ $\LaTeX$-u ;)
+* šablóna pre záverečné práce na KPI v 2016
+* niekoľko učebníc v 2021
+  * zdrojom bol ale _Markdown_
+  * vytvoril som pre ne samostatné šablóny
+* aktualizácia šablóny záverečných prác v 2024
+</section>
+
+
+<section id="usage-of-thesis" data-markdown>
+## Aktuálny stav
+
+* záverečné práce na KPI sa píšu len v $\LaTeX$-u od roku ~2018
+  * CI/CD pipeline (automatické zostavenie výsledku v [GitLab](https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex)-e)
+  * niekoľko míľnikov
+* prvá veľká aktualizácia od 2018
+* šablóna je distribuovaná so štruktúrou: analytická časť, syntetická časť, vyhodnotenie, záver
+  * je to humus
+</section>
+
+<section id="yearly" data-markdown>
+## vyše [400]() prác ročne
+</section>
+
+<section id="since" data-markdown>
+## vyše [2500]() prác od 2018
+</section>
+
+
+<section id="we-have-a-problem" data-markdown data-background="#081E30">
+![](images/we.have.a.problem.png)
+</section>
+
+
+<section data-markdown id="overleaf">
+## [Overleaf](https://www.overleaf.com/)
+</section>
+
+
+<section id="overleafx" data-markdown data-background="white">
+![](https://upload.wikimedia.org/wikipedia/commons/d/d6/Screenshot_of_Overleaf.png)
+</section>
+
+
+<section id="docker" data-markdown>
+## Docker obraz
+
+* založený na obraze `fedora:40`
+* veľkosť < 1G
+* [`docker.io/bletvaska/thesis`](https://hub.docker.com/r/bletvaska/thesis)
+</section>
+
+
+<section id="thesis-maker" data-markdown>
+## Thesis Maker
+
+* súbor `Makefile`
+* cieľ `dist` - zostaví všetko potrebné pre odovzdanie práce
+  * verzia pre tlač
+  * elektronická verzia
+* súčasťou prekladu je `vlna` ([xevlna](https://ctan.org/pkg/xevlna)?, [luavlna](https://ctan.org/pkg/luavlna)?)
+* štatistika (počet znakov a slov)
+* linter (wip)
+</section>
+
+
+<section id="" data-markdown>
+## Podmienený preklad
+
+* problém - ovládať podobu výstupu pri preklade
+  * nastavenie premennej prostredia?
+  * použitie prepínačov pri preklade?
+* riešenie:
+  ```bash
+  $ pdflatex '\def\printable{true}\input{thesis}'
+  ```
+* problém - nefunguje dobre s `mklatex`
+</section>
+
+
+<section id="thesis-maker-provisioning" data-markdown>
+```bash
+# vytvorenie aliasu pre jednoduchšie používanie
+$ alias mkthesis='docker container run --rm -it \
+  --volume .:/thesis \
+  --user $(id --user):$(id --group) \
+  --name thesis \
+  bletvaska/thesis \
+  make'
+
+# následné použitie: pri písaní
+$ mkthesis clean watch
+
+# pri zostavovaní výsledku
+$ mkthesis dist
+```
+</section>
+
+
+<section id="thesis-structure" data-markdown>
+## Štruktúra práce
+
+* analytická časť, syntetická časť, vyhodnotenie, záver
+  * je to humus
+* šablóna je aktuálne distribuovaná s ukážkovým textom práce
+  * _Robot Karel sa učí jazyk C_
+  * jednou z príloh je dokumentácia ku štruktúre práce
+  * WIP
+</section>
+
+
+
+<section id="refactoring" data-markdown>
+## Refaktoring šablóny
+</section>
+
+
+<section id="thesis-structure" data-markdown>
+## Štruktúra šablóny
+
+```
+thesis/
+├── acronyms.tex
+├── appendixes/
+├── bibliography.bib
+├── build/
+├── dist/
+├── figures/
+├── glossary.tex
+├── chapters/
+├── listings/
+├── metadata.tex
+├── packages
+├── thesis.tex
+├── tukethesis.cls
+└── tukethesis.sty
+```
+</section>
+
+
+<section id="refactoring" data-markdown>
+## Drobný refaktoring
+
+* vďaka úpravám je hlavný súbor `thesis.tex` takmer prázdny
+* zmizol analytický list
+* pridali sme citáciu práce (na čierno)
+* `\nameref`
+* normalizovaný preklad (ako tabuľka, výpis, obrázok, ...)
+* vypisovanie zoznamov obrázkov/výpisov len vtedy, keď nejaké sú
+</section>
+
+
+<section id="future-work" data-markdown>
+## Ďalšia práca
+
+* prvý semester s novou verziou
+  * testing na deťoch ;)
+  * očakávaná spätná väzba
+  * aktualizácia CI/CD s novým Docker obrazom
+* linter pre naše pravidlá písania
+* distribuovať šablónu ako samostatný balík?
+* pridať podporu pre [Overleaf](https://www.overleaf.com/)
+</section>
+
+
+<section id="looks-good" data-markdown>
+> Aj keď je tá práca na h\*\*\*\*, tak aspoň dobre vyzerá.
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+### Odkazy
+
+* [Thesis in LaTeX](https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex) - verejne dostupná šablóna
+* [`bletvaska/thesis`](https://hub.docker.com/r/bletvaska/thesis) - Docker obraz
+* [Awesome $\LaTeX$](https://github.com/egeerardyn/awesome-LaTeX) - Curated list of $\LaTeX$ awesomeness
+</section>
+
+
+{% include qr.html %}
