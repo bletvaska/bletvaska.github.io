@@ -119,20 +119,6 @@ section#k8s-rambo
 </section>
 
 
-<section id="" data-markdown>
-## Podmienený preklad
-
-* problém - ovládať podobu výstupu pri preklade
-  * nastavenie premennej prostredia?
-  * použitie prepínačov pri preklade?
-* riešenie:
-  ```bash
-  $ pdflatex '\def\printable{true}\input{thesis}'
-  ```
-* problém - nefunguje dobre s `mklatex`
-</section>
-
-
 <section id="thesis-maker-provisioning" data-markdown>
 ```bash
 # vytvorenie aliasu pre jednoduchšie používanie
@@ -149,6 +135,20 @@ $ mkthesis clean watch
 # pri zostavovaní výsledku
 $ mkthesis dist
 ```
+</section>
+
+
+<section id="" data-markdown>
+## Podmienený preklad
+
+* problém - ovládať podobu výstupu pri preklade
+  * nastavenie premennej prostredia?
+  * použitie prepínačov pri preklade?
+* riešenie:
+  ```bash
+  $ pdflatex '\def\printable{true}\input{thesis}'
+  ```
+* problém - nefunguje dobre s `mklatex`
 </section>
 
 
@@ -212,7 +212,7 @@ thesis/
   * testing na deťoch ;)
   * očakávaná spätná väzba
   * aktualizácia CI/CD s novým Docker obrazom
-* linter pre naše pravidlá písania
+* linter pre naše pravidlá písania (podobne ako [ShellCheck](https://www.shellcheck.net/wiki/))
 * distribuovať šablónu ako samostatný balík?
 * pridať podporu pre [Overleaf](https://www.overleaf.com/)
 </section>
@@ -231,10 +231,10 @@ thesis/
 <section id="links" data-markdown>
 ### Odkazy
 
-* [Thesis in LaTeX](https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex) - verejne dostupná šablóna
+* [Thesis in $\LaTeX$](https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex) - verejne dostupná šablóna
 * [`bletvaska/thesis`](https://hub.docker.com/r/bletvaska/thesis) - Docker obraz
 * [Awesome $\LaTeX$](https://github.com/egeerardyn/awesome-LaTeX) - Curated list of $\LaTeX$ awesomeness
-* [Zostavovanie $\LaTeX$ dokumentov ináč a využitie dedičnosti pri tvorbe šablón](https://bletvaska.github.io/2018/ossconf-tipy.pre.pracu.s.latexom.html)
+* [Zostavovanie $\LaTeX$ dokumentov ináč a využitie dedičnosti pri tvorbe šablón](https://bletvaska.github.io/2018/ossconf-tipy.pre.pracu.s.latexom.html) - prezentácia z OSSConf 2018
 </section>
 
 
