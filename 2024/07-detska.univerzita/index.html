@@ -1,0 +1,211 @@
+---
+title: Programujeme počítačové hry
+description: |
+    Ak si niekedy rozmýšľal nad tým, ako vyzerá programovanie počítačovej hry, tak máš jedinečnú príležitosť si to vyskúšať. Že nevieš programovať? To vôbec nevadí - pre vytvorenie počítačovej hry totiž nepotrebujeme len programátorov, ale aj grafikov, dizajnérov, hudobníkov a... aj teba! Staň sa teda súčasťou herného vývojárskeho tímu, ktorého úlohou je za necelých 60 minút naprogramovať remake počítačovej hry Flappy Bird
+
+duration: 50
+date: 2024-07-16
+layout: slide
+event:
+    title: Detská univerzita 2024
+    url: https://detskauniverzita.tuke.sk/
+categories: talk
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/3D9JRRD
+# video: https://youtu.be/-Nue8zK_JVc
+---
+
+<style>
+/* Check out my article on how to create this: https://roboleary.net/css/2020/11/17/parallax-animation.html
+
+Source code: https://github.com/robole/artifice
+*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(197, 217, 255);
+  overflow-x: auto;
+}
+
+#parallax-scrolling-example {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  /* margin: 60px auto;  */
+}
+
+#scene {
+  position: absolute;
+  height: inherit;
+}
+
+#background {
+  animation: background-shift 8s linear infinite forwards;
+}
+
+#train {
+  animation: train-shift 4s linear infinite forwards;
+}
+
+#foreground {
+  animation: foreground-shift 2s linear infinite forwards;
+}
+
+@keyframes background-shift {
+  to {
+    transform: translateX(-800px);
+  }
+}
+
+@keyframes train-shift {
+  to {
+    transform: translateX(820px);
+  }
+}
+
+@keyframes foreground-shift {
+  to {
+    transform: translateX(-800px);
+  }
+}
+</style>
+
+
+{% include first.slide.html %}
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.jpg)
+</section>
+
+
+<section id="hrate-sa" data-markdown>
+## Hráte sa počítačové hry?
+</section>
+
+
+<section id="far.cry.3" data-markdown>
+![Far Cry 3](images/farcry.3.jpg)
+</section>
+
+
+<section id="pygame-zero" data-background="white">
+    <a href="https://pygame-zero.readthedocs.io/">
+        <img src="images/logo-pygamezero.svg" width="600">
+    </a>
+</section>
+
+
+<section id="flappybird-gameplay" data-markdown>
+![Flappy Bird](images/flappy.gif)
+</section>
+
+
+<section id="analysis" data-markdown data-background="#52C2CA">
+![Game Analysis](images/analysis.png)
+
+Note:
+* https://www.researchgate.net/publication/324066514_Playing_Flappy_Bird_with_Deep_Reinforcement_Learning
+</section>
+
+
+<section id="2d-coordinate-system" data-markdown>
+## 2D Súradnicový sys.
+
+![2D Coordinate System](images/2d.coordinate.system.png)
+</section>
+
+
+<section id="game-loop" data-markdown data-background="#FEFCF6">
+![Herná slučka](images/game-loop-simple.png)
+
+Notes:
+* http://gameprogrammingpatterns.com/images/game-loop-simple.png
+* vytvorit kostru funkcii:
+    * `draw()`
+    * `update()`
+</section>
+
+
+<section id="super.mario" data-markdown>
+![](images/super.mario.gif)
+</section>
+
+
+<section id="mega.man-sprite.sheet" data-markdown data-background="white">
+![Mega Man Spritesheet](images/mega.man-sprite.sheet.jpg)
+
+notes:
+* https://remarkablecoder.com/sprites-in-games/
+</section>
+
+
+<section id="mega.man-animation" data-markdown>
+![Mega Man Animation](images/mega.man-animation.gif)
+
+notes:
+* https://remarkablecoder.com/sprites-in-games/
+</section>
+
+
+<section id="pygame-handles" data-markdown>
+## Pygame Handles
+
+![Pygame Handles](images/handles.png)
+</section>
+
+
+<section id="collision-detections" data-markdown>
+## Detekcia kolízií
+</section>
+
+
+<section id="collision-detections-illustration" data-markdown data-background="white">
+![Ilustrácia detekcie kolízií](images/collisions.png)
+</section>
+
+
+<section id="good-job" data-markdown>
+## Hotovo (!?)
+</section>
+
+
+<section id="adding-sounds" data-markdown>
+## Pridáme zvuky
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="resources" data-markdown>
+## Na stiahnutie
+
+* kostra projektu: [project.zip](resources/project.zip)
+* výsledok prvej skupiny: [group-1.py](resources/flappy/group-1.py)
+* výsledok druhej skupiny: [group-2.py](resources/flappy/group-2.py)
+* výsledok tretej skupiny: [group-3.py](resources/flappy/group-3.py)
+* to, čo som plánoval spraviť: [demo.py](resources/flappy/game.py)
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
+* [Wireframe](https://wireframe.raspberrypi.org/) Magazine, [MagPi](https://www.raspberrypi.org/magpi/) Magazine
+* [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
+* [Code the Classics – Volume 1](https://wireframe.raspberrypi.org/books/code-the-classics1)
+* [Pygame Zero: snadno použitelný nástroj určený pro výuku programování](https://www.root.cz/clanky/pygame-zero-snadno-pouzitelny-nastroj-urceny-pro-vyuku-programovani/) - časť seriálu [Jazyky pro výuku programování](https://www.root.cz/serialy/jazyky-pro-vyuku-programovani/) na portáli [root.cz](https://www.root.cz)
+</section>
+
+
+{% include qr.html %}
