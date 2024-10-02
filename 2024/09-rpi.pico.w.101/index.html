@@ -1,0 +1,446 @@
+---
+title: Raspberry Pi Pico W 101
+description: |
+  Doska Raspberry Pi Pico spolu s mikrokontrolérom RP2040 je vďaka svojej cene a schopnostiam fantastickým komponentom pre prototypovanie vecí pre IoT projekty, ako aj skvelou pomôckou pre výučbu problematiky IoT. V tomto príspevku si ukážeme základy práce s touto doskou v jazyku MicroPython. Začneme nahratím firmvéru, nainštalovaním potrebných knižníc z prostredia editora Thonny, a pre ilustráciu činnosti si vytvoríme jednoduchý projekt, ktorý bude pomocou HTTP protokolu zbierať informácie o počasí vo vybratej lokalite a bude ich pomocou protokolu MQTT publikovať do prostredia platformy AdafruitIO.
+duration: 90
+date: 2024-10-02
+layout: slide
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk
+categories: talk
+theme: night
+authors:
+    - name: mirek
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: http://bit.ly/3dIRnrh
+# video: https://youtu.be/s1RbHF_HCXo
+---
+
+<style>
+#to-adafruit-with-mqtt > pre {
+  font-size: 0.39em;
+}
+
+#post-to-feed > pre {
+  font-size: 0.5em;
+}
+
+#transform-data > pre {
+  font-size: 0.44em;
+}
+
+#micropython-and-thonny > p > a > img {
+  height: 180px;
+  padding: 25px;
+}
+
+#to-adafruit-with-http > pre {
+  font-size: 0.4em;
+}
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="začíname-s-rpi-pico">
+  <iframe
+    width="800" height="488"
+    src="https://www.youtube.com/embed/s1RbHF_HCXo?si=wmHji2r9kMMAeSlu"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+  </iframe>
+</section>
+
+
+<section id="raspberry-pi-pico-w" data-markdown data-background="images/introducing.rpi.pico.w.png">
+notes:
+* https://projects.raspberrypi.org/en/projects/get-started-pico-w/0
+</section>
+
+
+
+<section id="rp2040-features-i" data-markdown>
+## Vlastnosti RP2040
+
+* mikrokontrolér RP2040
+* Dual-Core Arm Cortex-M0+ @ 133MHz
+* 264kB pamäť SRAM, 2MB flash pamäť
+</section>
+
+
+<section id="infineon" data-markdown data-background="#fff">
+![Infineon Logo](images/logo-infineon.png)
+[CYW43439](https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/wi-fi-4-802.11n/cyw43439/)
+
+(jednopásmové **WiFi** 4 (802.11n) + **Bluetooth®** 5.2)
+</section>
+
+
+<section id="citron-base-board" data-markdown>
+[![](images/citron.base.board.jpg)](https://rpishop.cz/pico-karty/3854-cytron-maker-pi-pico-base-deska-pro-pi-pico-pro-zacatecniky.html)
+</section>
+
+
+<section id="etl" data-markdown data-background="white">
+![](images/etl.png)
+
+note:
+* https://www.fivetran.com/learn/data-pipeline-vs-etl
+</section>
+
+
+<section id="pipeline" data-markdown>
+```
+[ extract_data ] --> [ transform_data ] --> [ load_data ]
+```
+</section>
+
+<section id="live-demo" data-markdown>
+## Pico Projekt
+
+0. príprava prostredia
+1. pripojenie k WiFi
+2. stiahnutie aktuálneho počasia zo služby [openweathermap.org](https://openweathermap.org/) cez HTTP
+3. odoslanie údajov do [Adafruit IO](https://io.adafruit.com/) cez HTTP
+4. odoslanie údajov do [Adafruit IO](https://io.adafruit.com/) cez MQTT
+  * stiahnutie knižnice
+5. pravidelné spúšťanie
+  * cez nekonečnú slučku
+  * uspatím
+</section>
+
+
+<section id="step-0" data-markdown>
+## 1. Príprava prostredia
+</section>
+
+<section id="micropython-and-thonny" data-markdown data-background="#fff">
+[![McroPython](images/logo-micropython.png)](https://micropython.org/)
+[![Thonny](images/logo-thonny.png)](https://thonny.org/)
+
+notes:
+* inštalácia prostredia Thonny
+* inštalácia MicroPython-u
+  * stlačenie `Bootsel` tlačidla na doske
+  * inštalácia cez tlačidlo vpravo dole
+  * nebáť sa nainštalovať nočné zostavenie
+* Hello, world!
+</section>
+
+
+<section id="step-1" data-markdown>
+## 2. Pripojenie k WiFi
+</section>
+
+
+<section id="networking-code" data-markdown>
+```python
+def do_connect(ssid, password):
+    import network
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    if not wlan.isconnected():
+        print(f'>> Connecting to network "{ssid}"...')
+        wlan.connect(ssid, password)
+        while not wlan.isconnected():
+            pass
+    print('>> Network config:', wlan.ifconfig())
+```
+zdroj: [docs.micropython.org](https://docs.micropython.org/en/latest/esp32/quickref.html#wlan)
+</section>
+
+
+<section id="step-2" data-markdown>
+## 3. Stiahnutie aktuálneho počasia
+</section>
+
+
+<section id="get-current-weather" data-markdown>
+```python
+import requests
+
+
+def extract_data(query: str, units: str, appid: str) -> dict:
+    url = (
+        'https://api.openweathermap.org/data/2.5/weather?'
+        f'q={query}&units={units}&appid={appid}'
+    )
+
+    response = requests.get(url)
+    data = response.json()
+    response.close()
+
+    return data
+```
+</section>
+
+
+<section id="adafruitio" data-markdown>
+[![Adafruit IO](images/logo-adafruitio.png)](https://io.adafruit.com/)
+
+Cloudová služba pre projekty Internetu vecí
+
+notes:
+* https://io.adafruit.com/api/docs/#adafruit-io-http-api
+* ukážka rozhrania
+  * predstaviť koncept `Feeds` a `Groups`
+  * vytvoriť skupinu `weather` a feed-y pre teplotu, vlhkosť a tlak
+  * ukázať _Feed Info_ s tým, že nás bude zaujímať linka na API:
+    `https://io.adafruit.com/api/v2/bletvaska/feeds/weather.humidity`
+</section>
+
+
+<section id="step-3" data-markdown>
+## 4. Odoslanie údajov do [Adafruit IO](https://io.adafruit.com/) cez protokol HTTP
+</section>
+
+
+<section id="post-to-feed-over-http" data-markdown>
+### Odoslanie metriky cez protokol HTTP
+
+```bash
+$ http post \
+  https://io.adafruit.com/api/v2/{user}/feeds/{group}.{feed}/data \
+  X-AIO-Key:{aio_key} \
+  datum:='{
+    "lat": 48.6667,
+    "lon": 21.3333,
+    "value": 6.86,
+    "created_at": "2024-10-1T20:36:22Z"
+  }'
+```
+</section>
+
+
+<section id="transform-data" data-markdown>
+### Spracovanie údajov
+
+```python
+def to_iso8601(ts: int) -> str:
+    dt = time.gmtime(ts)
+    return f'{dt[0]:04}-{dt[1]:02}-{dt[2]:02}T{dt[3]:02}:{dt[4]:02}:{dt[5]:02}Z'
+```
+
+```python
+def transform_data(data: dict) -> dict:
+    return {
+        'dt'       : to_iso8601(data['dt']),
+        'lat'      : data['coord']['lat'],
+        'lon'      : data['coord']['lon'],
+        'metrics'  : {
+            'temp'     : data['main']['temp'],
+            'humidity' : data['main']['humidity'],
+            'pressure' : data['main']['pressure']
+        }
+    }
+```
+</section>
+
+
+<section id="to-adafruit-with-http" data-markdown>
+### Odoslanie údajov cez HTTP
+
+```python
+def load_data(aio_username: str, aio_key: str, group: str, data: dict):
+    headers = {'X-AIO-Key': aio_key}
+
+    for feed in data['metrics']:
+        url = f'https://io.adafruit.com/api/v2/{aio_username}/feeds/{group}.{feed}/data'
+
+        payload = {
+            'value': data['metrics'][feed],
+            'lat': data['lat'],
+            'lon': data['lon'],
+            'created_at': data['dt']
+        }
+
+        response = requests.post(url, headers=headers, json=payload)
+        response.close()
+```
+</section>
+
+
+<section id="step-3" data-markdown>
+## 5. Odoslanie údajov do [Adafruit IO](https://io.adafruit.com/) cez protokol MQTT
+</section>
+
+
+<section id="pipkin" data-markdown>
+## [`pipkin`](https://github.com/aivarannamaa/pipkin)
+
+nástroj na inštaláciu balíkov pre [MicroPython](https://micropython.org/) a [CircuitPython](https://circuitpython.org/)
+
+(podpora v editore [Thonny](https://thonny.org/))
+
+notes:
+* instalovat modul `umqtt.simple`
+* ak nepojde, tak rucne:
+  ```python
+  import mip
+  mip.install('umqtt.simple')
+  ```
+</section>
+
+
+<section id="load-data-over-mqtt" data-markdown>
+### Odoslanie metriky cez protokol MQTT
+
+```bash
+$ mosquitto_pub -h io.adafruit.com -u {user} -P {key} \
+  -t {user}/feeds/{group}.{feed} \
+  -m '{
+    "lat": 48.6667,
+    "lon": 21.3333,
+    "value": 6.86,
+    "created_at": "2024-10-1T20:36:22Z"
+  }'
+```
+</section>
+
+
+<section id="load-group-over-mqtt" data-markdown>
+### Odoslanie skupiny metrík cez protokol MQTT
+
+```bash
+$ mosquitto_pub -h io.adafruit.com -u {user} -P {key} \
+  -t {user}/groups/{group} \
+  -m '{
+    "feeds": {
+      "pressure": 1016,
+      "humidity": 94,
+      "temp": 7.54
+    },
+    "location": {
+      "lat": 48.6667,
+      "lon": 21.3333
+    }
+  }'
+```
+</section>
+
+
+<section id="to-adafruit-with-mqtt" data-markdown>
+### Odoslanie údajov cez [MQTT](https://github.com/micropython/micropython-lib/tree/master/micropython/umqtt.simple)
+
+```python
+from umqtt.simple import MQTTClient
+
+def load_data_mqtt(aio_username: str, aio_key: str, group: str, data: dict):
+    topic = f'{aio_username}/groups/{group}'
+
+    payload = {
+        "feeds": {
+            "temp": data['metrics']['temp'],
+            "humidity": data['metrics']['humidity'],
+            "pressure": data['metrics']['pressure'],
+        },
+        "location": {
+            'lat': data['lat'],
+            'lon': data['lon'],
+        }
+    }
+
+    client = MQTTClient(unique_id(), 'io.adafruit.com', 1883, aio_username, aio_key)
+    client.connect()
+    client.publish(topic, json.dumps(payload))
+    client.disconnect()
+```
+</section>
+
+
+<section id="continuous-execution" data-markdown>
+## 6. Pravidelné spúšťanie
+</section>
+
+
+<section id="with-infinite-loop" data-markdown>
+### ...v nekonečnej slučke
+
+```python
+def main():
+    while True:
+        do_connect(WIFI_SSID, WIFI_PASSWORD)
+        measurement = extract_data(...)
+        data = transform_data(measurement)
+        load_data_http(...)
+
+        print(f'>> going to sleep for {INTERVAL} minuts')
+        time.sleep(INTERVAL * 60)
+```
+</section>
+
+
+<section id="with-deepsleep" data-markdown>
+### ...hlbokým uspaním
+
+```python
+def main():
+    do_connect(WIFI_SSID, WIFI_PASSWORD)
+    measurement = extract_data(...)
+    data = transform_data(measurement)
+    load_data_http(...)
+
+    print(f'>> going to sleep for {INTERVAL} minutes')
+    machine.deepsleep(INTERVAL * 60 * 1000)
+```
+</section>
+
+
+<section id="bonus" data-markdown>
+### Bonus: Dekorátor osvietenia
+</section>
+
+
+<section id='decorator-code' data-markdown>
+```python
+from machine import Pin
+
+def enlight(func):
+    def wrapper(*args, **kwargs):
+        led = Pin('LED', Pin.OUT)
+        led.on()
+        func(*args, **kwargs)
+        led.off()
+    return wrapper
+```
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* Namakaný webinár #10: [Začíname s Raspberry Pi Pico](http://namakanyden.sk/webinars/2021.05-rpi.pico.html)
+* [Raspberry Pi Pico W: your $6 IoT platform](https://www.raspberrypi.com/news/raspberry-pi-pico-w-your-6-iot-platform/)
+* [Raspberry Pi Pico and Pico W](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html)
+* YouTube: [A journey with Raspberry Pi Pico beginner to Advance Level](https://www.youtube.com/playlist?app=desktop&list=PLOYsAys6a6mk6Aq24_7ZbBE7rsiWtzqB4)
+* [Get Started with MicroPython on Raspberry Pi Pico - 2nd Edition](https://store.rpipress.cc/products/get-started-with-micropython-on-raspberry-pi-pico-2nd-edition)
+
+</section>
+
+
+<section id="where-to-buy" data-markdown>
+## Kde kúpiť?
+
+* [RPishop.cz](https://rpishop.cz/raspberry-pi-pico/5074-raspberry-pi-pico-wh.html) - 8.04 Eur
+* [RLX.sk](https://rlx.sk/sk/raspberry-pi-pico-rp2040/8944-raspberry-pi-pico-w-pico-rp2040-incl-header-wireless-lan-and-bluetooth-52-cyw43439.html) - 13.10 Eur
+</section>
+
+
+<section id="rpi.pico.2" data-background="images/rpi.pico.2.jpg" data-markdown>
+
+notes:
+* https://www.hackster.io/news/raspberry-pi-unveils-the-pico-2-powered-by-the-dual-architecture-quad-core-rp2350-605253ab1235
+</section>
+
+
+{% include qr.html %}

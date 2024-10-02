@@ -1,0 +1,11 @@
+Včera som konečne dokončil prípadovú štúdiu, na ktorej vám chcem prezentovať schopnosti a možnosti nového Raspberry Pi Pico W. O čom to celé bude? Taký klasický worflow/ETL, kde najprv údaje stiahnem, potom ich spracujem a nakoniec ich zasa niekam pošlem. Konkrétne bude vyzerať takto:
+0. najprv si pripravíme prostredie - editor Thonny a nahráme firmvér do mikrokontroléra
+1. hneď potom sa pripojíme k WiFi AP pomocou WiFi modulu, ktorý sa na doske nachádza
+2. potom pomocou HTTP protokolu ukradneme údaje o aktuálnom počasí
+3. potom pomocou HTTP protokolu tieto údaje pošleme do služby Adafruit IO, ktorá nám umožní tieto údaje uchovávať, vizualizovať a vytvárať rozličné dashboard-y
+4. následne si ukážeme, že údaje o počasí vieme do služby Adafruit IO poslať aj pomocou protokolu MQTT, až na to, že modul pre podporu tohto protokolu potrebujeme do mikrokontroléra nahrať ručne, pretože ho základný firmvér neobsahuje
+5. sťahovanie a publikovanie údajov budeme vykonávať v pravidelných intervaloch, k čomu nám pomôžu časovače
+6. a ako bonus navyše vytvorím jednoduchý dekorátor, ktorý rozsvieti LED diódu na doske vždy, keď sa začne sťahovanie a publikovanie údajov do služby Adafruit IO
+Aby ste mali lepšiu predstavu, ako bude vyzerať výsledok, môžete sa pozrieť na živú vizualizáciu zozbieraných dát počas tvorby prípadovej štúdie na službe Adafruit IO. Vizualizáciu nájdete na tejto linke: https://io.adafruit.com/bletvaska/feeds/weather.temp. Nové záznamy stále pribúdajú podľa toho, či je Pico zapnuté alebo nie.
+Popri tom vám ukážem jeden z možných spôsobov, ako si spravovať konfiguráciu (nie len) na mikrokontroléri.
+Zabudol som ešte na niečo? Ak máte nejaký tajný tip, že čo by ste ešte chceli vidieť, napíšte do komentárov. Rozhodne sa ale máte na čo tešiť!
