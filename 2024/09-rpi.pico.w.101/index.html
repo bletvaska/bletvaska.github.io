@@ -370,12 +370,9 @@ def load_data_mqtt(aio_username: str, aio_key: str, group: str, data: dict):
 ### ...v nekonečnej slučke
 
 ```python
-def main():
+if __name__ == '__main__':
     while True:
-        do_connect(WIFI_SSID, WIFI_PASSWORD)
-        measurement = extract_data(...)
-        data = transform_data(measurement)
-        load_data_http(...)
+        main()
 
         print(f'>> going to sleep for {INTERVAL} minuts')
         time.sleep(INTERVAL * 60)
@@ -387,11 +384,8 @@ def main():
 ### ...hlbokým uspaním
 
 ```python
-def main():
-    do_connect(WIFI_SSID, WIFI_PASSWORD)
-    measurement = extract_data(...)
-    data = transform_data(measurement)
-    load_data_http(...)
+if __name__ == '__main__':
+    main()
 
     print(f'>> going to sleep for {INTERVAL} minutes')
     machine.deepsleep(INTERVAL * 60 * 1000)
@@ -427,6 +421,7 @@ def enlight(func):
 <section id="links" data-markdown>
 ## Odkazy
 
+* výsledný projekt: [`main.py`](src/main.py), [`boot.py`](src/boot.py)
 * Namakaný webinár #10: [Začíname s Raspberry Pi Pico](http://namakanyden.sk/webinars/2021.05-rpi.pico.html)
 * [Raspberry Pi Pico W: your $6 IoT platform](https://www.raspberrypi.com/news/raspberry-pi-pico-w-your-6-iot-platform/)
 * [Raspberry Pi Pico and Pico W](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html)

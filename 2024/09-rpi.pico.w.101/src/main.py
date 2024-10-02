@@ -1,174 +1,113 @@
-from time import sleep, gmtime
-from machine import Timer, unique_id, ADC, reset
 import json
-import urequests as requests
+import requests
+import time
+import machine
 
 from umqtt.simple import MQTTClient
 
-from settings import OpenWeatherMap, Wifi, AdafruitIO
+
+def do_connect(ssid, password):
+    import network
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    if not wlan.isconnected():
+        print(f'>> Connecting to network "{ssid}"...')
+        wlan.connect(ssid, password)
+        while not wlan.isconnected():
+            pass
+    print('>> Network config:', wlan.ifconfig())
 
 
-def do_connect(networks: dict):
-    try:
-        import network
-        wlan = network.WLAN(network.STA_IF)
-        wlan.active(True)
-        
-        # connect to network
-        if not wlan.isconnected():
-            filtered_networks = filter(lambda net: net[0].decode('utf-8') in networks, wlan.scan())
-            net = list(filtered_networks)[0]
-            ssid = net[0].decode('utf-8')
-            print(f'>> Connecting to network {ssid}...')
-            wlan.connect(ssid, networks[ssid])
-            while not wlan.isconnected():
-                pass
-            
-        print('>> Network config:', wlan.ifconfig())
-    except Exception as ex:
-        print('>> No network to connect. Will reboot in 30 seconds and try again.')
-        sleep(30)
-        reset()
-    
+def extract_data(query: str, units: str, appid: str) -> dict:
+    print('>> extract data')
 
-def enlight(func):
-    def wrapper(*args, **kwargs):
-        led = machine.Pin('LED', machine.Pin.OUT)
-        led.on()
-        func(*args, **kwargs)
-        led.off()
-    return wrapper
+    url = f'https://api.openweathermap.org/data/2.5/weather?q={query}&appid={appid}&units={units}'
+    response = requests.get(url)
+    data = response.json()
+    response.close()
+
+    return data
 
 
-@enlight
-def publish_data_over_http(timer: Timer = None):
-    data = download_data()
-    print('>> Publishing data over HTTP')
-    
-    headers = {
-        'X-AIO-Key': AdafruitIO.key
+def to_iso8601(ts: int) -> str:
+    dt = time.gmtime(ts)
+    return f'{dt[0]:04}-{dt[1]:02}-{dt[2]:02}T{dt[3]:02}:{dt[4]:02}:{dt[5]:02}Z'
+
+
+def transform_data(data: dict) -> dict:
+    print('>> transform data')
+
+    return {
+        'dt': to_iso8601(data['dt']),
+        'lat': data['coord']['lat'],
+        'lon': data['coord']['lon'],
+        'metrics': {
+            'temp': data['main']['temp'],
+            'humidity': data['main']['humidity'],
+            'pressure': data['main']['pressure']
+        }
     }
 
-    for feed in AdafruitIO.feeds:
-        url = f'https://io.adafruit.com/api/v2/{AdafruitIO.username}/feeds/{AdafruitIO.group}.{feed}/data'
-        dt = gmtime(data['dt'])
+
+def load_data_http(user: str, key: str, group: str, data: dict):
+    print('>> load data over http')
+
+    headers = {
+        'X-AIO-Key': key
+    }
+
+    for feed in data['metrics']:
+        url = f'https://io.adafruit.com/api/v2/{user}/feeds/{group}.{feed}/data'
+
         payload = {
-            'value': data['main'][feed],
-            'lat': data['coord']['lat'],
-            'lon': data['coord']['lon'],
-            'created_at': f'{dt[0]}-{dt[1]}-{dt[2]}T{dt[3]}:{dt[4]}:{dt[5]}Z'
+            "lat": data['lat'],
+            "lon": data['lon'],
+            "value": data['metrics'][feed],
+            "created_at": data['dt']
         }
-        
+
         response = requests.post(url, headers=headers, json=payload)
         response.close()
 
 
-@enlight
-def publish_data_over_mqtt(timer: Timer = None):
-    data = download_data()
-    print('>> Publishing data over MQTT')
-    
-    # connect to broker
-    client = MQTTClient(client_id=unique_id(),
-                        server=AdafruitIO.mqtt_broker,
-                        user=AdafruitIO.username,
-                        password=AdafruitIO.key)
-    client.connect()
-    
-    # prepare data
-    # https://io.adafruit.com/api/docs/mqtt.html#group-topics
-    # mosquitto_pub -u "bletvaska" -P "9e2d7e22555b4b1482f652a2d8113006"  -h "io.adafruit.com" -t "bletvaska/feeds/weather.temperature" -m "30"
-    topic = f'{AdafruitIO.username}/groups/{AdafruitIO.group}'
-    
+def load_data_mqtt(user: str, key: str, group: str, data: dict):
+    print('>> load data over mqtt')
+
+    topic = f'{user}/groups/{group}'
+
     payload = {
-        "feeds": { # { key : data['main'][key] for key in AdafruitIO.feeds }
-            "temp": data['main']['temp'],
-            "humidity": data['main']['humidity'],
-            "pressure": data['main']['pressure'],
+        'feeds': {
+            'temp': data['metrics']['temp'],
+            'humidity': data['metrics']['humidity'],
+            'pressure': data['metrics']['pressure']
         },
-        "location": {
-            'lat': data['coord']['lat'],
-            'lon': data['coord']['lon'],
+        'location': {
+            "lat": data['lat'],
+            "lon": data['lon'],
         }
     }
-    
-    # publish data
-    client.publish(topic, json.dumps(payload))
-    client.disconnect()
-    
-    
-def download_data() -> dict:
-    # download data
-    print(f'>> Downloading weather forecast for {OpenWeatherMap.query}.')
-    url = f'https://api.openweathermap.org/data/2.5/weather?' + \
-          f'q={OpenWeatherMap.query}&units={OpenWeatherMap.units}' + \
-          f'&appid={OpenWeatherMap.appid}'
-    response = requests.get(url)
-    
-    data = response.json()
-    response.close()
-    
-    return data
 
-
-@enlight
-def publish_pico_temperature(timer: Timer = None):
-    print('>> Publishing Pico temperature over MQTT')
-    
-    # read the temperature
-    sensor = ADC(4)
-    conversion_factor = 3.3 / (65535)
-
-    reading = sensor.read_u16() * conversion_factor 
-    temperature = 27 - (reading - 0.706)/0.001721
-    
-    # connect to broker
-    client = MQTTClient(client_id=unique_id(),
-                        server=AdafruitIO.mqtt_broker,
-                        user=AdafruitIO.username,
-                        password=AdafruitIO.key)
+    client = MQTTClient('mirek.on.pico', 'io.adafruit.com', 1883, user, key)
     client.connect()
-    
-    # prepare data
-    # https://io.adafruit.com/api/docs/mqtt.html#sending-json
-    # mosquitto_pub -u "bletvaska" -P "9e2d7e22555b4b1482f652a2d8113006"  -h "io.adafruit.com" -t "bletvaska/feeds/weather.temperature" -m "30"
-    topic = f'{AdafruitIO.username}/feeds/pico_temp/json'
-    
-    payload = {
-        'value': temperature
-    }
-    
-    # publish data
     client.publish(topic, json.dumps(payload))
     client.disconnect()
-    
+
+
+def main():
+    do_connect(WIFI_SSID, WIFI_PASSWORD)
+    raw_data = extract_data(OPENWEATHERMAP_QUERY, OPENWEATHERMAP_UNITS, OPENWEATHERMAP_APPID)
+    data = transform_data(raw_data)
+    #load_data_http(AIO_USER, AIO_KEY, AIO_GROUP, data)
+    load_data_mqtt(AIO_USER, AIO_KEY, AIO_GROUP, data)
+
+    import network
+    wlan = network.WLAN(network.STA_IF)
+    wlan.disconnect()
+
 
 if __name__ == '__main__':
-    # connect to wifi
-    do_connect(Wifi.networks)
-    
-    # make first publishing after startup
-    publish_pico_temperature()
-    publish_data_over_http()
-    
-    # set timers
-    timer1 = Timer(period=1 * 60 * 1000, mode=Timer.PERIODIC, callback=publish_pico_temperature)
-    #timer2 = Timer(period=10 * 60 * 1000, mode=Timer.PERIODIC, callback=publish_data_over_mqtt)
-    timer3 = Timer(period=10 * 60 * 1000, mode=Timer.PERIODIC, callback=publish_data_over_http)
+    main()
 
-    
-#     counter = 0
-#     while True:
-#         if counter == 0:
-#             counter = 10
-#             data = download_data()
-#     
-# #             publish_data_over_http(data)
-#             publish_data_over_mqtt(data)
-#         else:
-#             counter -= 1
-#             
-#         publish_pico_temperature()
-#         
-#         print('>> Going to sleep...')
-#         time.sleep(1 * 60)
+    print(f'>> going to sleep for {INTERVAL} minutes')
+    machine.deepsleep(INTERVAL * 60 * 1000)
+
