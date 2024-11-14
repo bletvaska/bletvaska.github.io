@@ -1,0 +1,318 @@
+---
+title: Building lightweight Python Docker images
+#subtitle: alebo (nie) príliš stručný úvod do [Apache Airflow](https://airflow.apache.org/)
+description:
+  Poznáte to - aj keď sa pokúsite zabaliť do Docker obrazu aplikáciu "Hello world", jeho výsledná veľkosť bude vždy väčšia ako 50MB. Jazyk Python preto nemusí byť ideálnou voľbou, ak sa snažíte takouto formou distribuovať svoje konzolové nástroje. V tomto príspevku sa však pozrieme na to, ako túto hranicu pokoriť a ako vytvárať naozaj malé obrazy pre naše Python aplikácie.
+duration: 30
+date: 2024-11-14
+# bitly: https://bit.ly/3TeXd6R
+event:
+    title: Tech Night #12
+    url: https://www.facebook.com/events/843418984343396
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+
+video: https://youtu.be/rPYZEUfbml4
+token: 98113cc2ea891cc2246900c7dc6a8038
+notes:
+- nuitka
+- python -m py_compile
+- appimage
+---
+
+<style>
+
+#etl-in-bash code,
+#etl-in-python code,
+#cli-tool code,
+#apache-airflow-installation code
+{
+    font-size: 0.7em;
+    line-height: 1.5em;
+};
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.na.hackathone.jpg)
+</section>
+
+
+<section id="once-upon-a-time" data-markdown>
+## Once Upon a Time...
+</section>
+
+
+<section id="scrape-data" data-markdown>
+### Scrape Data
+
+```python
+def scrape_data(query: str, units: str, appid: str) -> dict:
+    print('>> Scrape data')
+
+    url = 'http://api.openweathermap.org/data/2.5/weather'
+    params = {
+        'q': query,
+        'units': units,
+        'appid': appid
+    }
+    response = httpx.get(url, params=params)
+    return response.json()
+```
+</section>
+
+
+<section id="process-data" data-markdown>
+### Process Data
+
+```python
+def process_data(data: dict) -> str:
+    print('>> Process data')
+
+    return '{},{},{},{},{},{}'.format(
+        data['dt'],
+        data['name'],
+        data['sys']['country'],
+        data['main']['temp'],
+        data['main']['humidity'],
+        data['main']['pressure'],
+    )
+```
+</section>
+
+
+<section id="publish-data" data-markdown>
+### Publish Data
+
+```python
+def publish_data(line: str):
+    print('>> Publishing data')
+
+    # with open('dataset.csv', 'a') as dataset:
+    #     print(line, file=dataset)
+    
+    print(line)
+```
+</section>
+
+
+<section id="cli-tool" data-markdown>
+### CLI Tool
+
+```python
+#!/usr/bin/env python
+
+import click
+import httpx
+
+@click.command(help='Download current weather condition in CSV format.')
+@click.argument('query')
+@click.option('--units', type=click.Choice(['metric', 'standard', 'imperial']),
+              default='metric', help='Unit of measurement')
+@click.option('--appid', default=None, help='API key for openweathermap.org service.',
+              envvar='APPID')
+def main(query: str, units: str, appid: str):
+    data = scrape_data(query, units, appid)
+    processed_data = process_data(data)
+    publish_data(processed_data)
+
+main()
+```
+</section>
+
+
+<section id="running-from-cli" data-markdown>
+### Running from CLI
+
+```bash
+# token will be available during the talk ;)
+$ ./scraper.py --appid {{ page.token }} kosice
+```
+</section>
+
+
+<section id="the-size" data-markdown>
+### The Final Size
+
+```                        
+    Python standard lib ~45MB
+  + third party libs  
+  + source code  
+  + Docker base image  
+-------------------------------
+  > 50MB
+```
+
+notes:
+* pozrime sa na to, z coho sa sklada vysledny Docker obraz:
+    * standardna kniznica Python-u - okolo 45M, jedina istota v tomto zozname, s ktorou nevieme hybat
+    * kniznice tretich stran - zalezi od toho, co vasa aplikacia vyzaduje
+    * zdrojovy kod vasej aplikacie - ten zalezi od vasich kvalit
+    * Docker base image - s 
+</section>
+
+
+<section id="python-images" data-markdown>
+```shell
+$ docker image ls
+REPOSITORY                           TAG           SIZE
+python                               3.12          1.02GB
+python                               3.12-slim     124MB
+python                               3.12-alpine   53.7MB
+gcr.io/distroless/python3-debian12   latest        52.8MB
+```
+
+notes:
+* docker image list --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"
+* pozrime sa na to, co mozeme pouzit ako zakladny obraz. vyberiem rovno obraz oficialny obraz pre python. k dispozicii mame 4 znacky a to su tieto 3:
+    * 3.12 - postaveny na full debian-e, velkost >1GB
+    * 3.12-slim - orezany debian len s Pythonom a zakladnymi balikmi
+    * 3.12-alpine - je to distribucia Alpine s Pythonom, ale nemusi byt stabilna, velkost ~velkost Pythonu
+* Distro-Less Containers - tiez Debian, ale iba s Pythonom a potrebnymi kniznicami (nema shell), nutny multistage build
+* vyberiem si python:3.12-slim, ktory sa javi ako vhodny kompromis
+</section>
+
+
+<section id="tool-dockerization" data-markdown>
+## Dockerization!
+
+```dockerfile
+FROM prefered-os
+RUN install-packages
+COPY app.py /app/
+ENTRYPOINT python3 /app/app.py
+```
+</section>
+
+
+<section id="scraper-slim" data-markdown>
+```dockerfile
+# Dockerfile.slim
+FROM python:3.12-slim
+
+RUN pip install httpx click
+
+COPY scraper.py /app/scraper.py
+
+ENTRYPOINT [ "/usr/bin/env", "python", "/app/scraper.py" ]
+```
+</section>
+
+
+<section id="building-scraper-slim" data-markdown>
+```bash
+$ docker image build --tag scraper:slim -f Dockerfile.slim .
+
+# after long time
+
+$ docker image ls
+REPOSITORY                           TAG           SIZE
+scraper                              slim          138MB
+python                               3.12-slim     124MB
+
+$ docker container run --rm -it scraper:slim 
+Usage: scraper.py [OPTIONS] QUERY
+Try 'scraper.py --help' for help.
+
+Error: Missing argument 'QUERY'.
+```
+</section>
+
+
+<section id="nuitka-project" data-markdown data-background="white">
+[![](https://opengraph.githubassets.com/8a49cea330d250e142c2aa789bdf931367d1df53e6e63d3de10d9f6455780567/Nuitka/Nuitka)](https://github.com/Nuitka/Nuitka)
+
+notes:
+* zhruba od roku 2010
+</section>
+
+
+<section id="magic" data-markdown>
+## Magic
+</section>
+
+
+<section id="modes-of-operation" data-markdown>
+## Modes of Operation
+
+```shell
+$ nuitka --help
+...
+--standalone  Enable standalone mode for output. This allows you
+              to transfer the created binary to other machines 
+              without it using an existing Python installation. 
+              This also means it will become big. It implies 
+              these option: "-- follow-imports" and 
+              "--python-flag=no_site". Defaults to off.
+--onefile     On top of standalone mode, enable onefile mode. 
+              This means not a folder, but a compressed 
+              executable is created and used. Defaults to off.
+...
+```
+
+notes:
+* 
+</section>
+
+
+<section id="the-usage" data-markdown>
+## The Usage
+
+```bash
+# onefile mode
+$ nuitka --onefile scraper.py
+$ ls -lh scraper.bin
+-rwxr-xr-x. 1 mirek mirek 15M nov 14 10:19 scraper.bin*
+```
+
+```bash
+# standalone
+$ nuitka --standalone scraper.py
+$ du -hs scraper.dist
+62M	scraper.dist/
+$ cd scraper.dist 
+$ upx -9 scraper.bin
+$ du -hs .
+48M	.
+```
+
+notes:
+* jednoduche pouzitie
+* v pripade `onefile` rezimu z neho vypadne jeden subor, ktory sa vola `scraper.bin` a je to staticky vykompilovana binarka
+* v pripade `standalone` je to priecinok s vykompilovanou binarkou, ktora sa este skomprimovat
+</section>
+
+
+<section id="lets-docker" data-markdown data-background="#253237">
+![](images/docker.png)
+
+notes:
+* lets docker - najvyssi cas to cele supnut do dockeru a vytvorit docker obraz
+</section>
+
+<section id="other-options" data-markdown>
+## Other Options
+
+* [PyPy](https://pypy.org) - A fast, compliant alternative implementation of Python
+* [PyInstaller](https://pyinstaller.org/en/stable/) - PyInstaller bundles a Python application and all its dependencies into a single package.
+* Cython
+* [AppImage](https://github.com/niess/python-appimage) - AppImage distributions of Python
+</section>
+
+
+<section id="links" data-markdown>
+## Links
+
+* [Nuitka@Github](https://github.com/Nuitka/Nuitka) - Nuitka is a Python compiler written in Python.
+* [Optimising Python3 with Nuitka and Docker Scratch](https://medium.com/dazn-tech/nuitka-python3-and-scratch-4ce209ed6dd6)
+</section>
+
+
+{% include qr.html %}

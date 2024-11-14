@@ -1,7 +1,7 @@
 ---
-title: RPi Pi Pico W 101
+title: RPi Pico W 101
 description: |
-  Doska Raspberry Pi Pico spolu s mikrokontrolérom RP2040 je vďaka svojej cene a schopnostiam fantastickým komponentom pre prototypovanie vecí pre IoT projekty, ako aj skvelou pomôckou pre výučbu problematiky IoT. V tomto príspevku si ukážeme základy práce s touto doskou v jazyku MicroPython. Začneme nahratím firmvéru, nainštalovaním potrebných knižníc z prostredia editora Thonny, a pre ilustráciu činnosti si vytvoríme jednoduchý projekt, ktorý bude pomocou HTTP protokolu zbierať informácie o počasí vo vybratej lokalite a bude ich pomocou protokolu MQTT publikovať do prostredia platformy AdafruitIO.
+  Doska Raspberry Pi Pico spolu s mikrokontrolérom RP2040 je vďaka svojej cene a schopnostiam fantastickým komponentom pre prototypovanie vecí pre IoT projekty, ako aj skvelou pomôckou pre výučbu problematiky IoT. V tomto príspevku si ukážeme základy práce s touto doskou v jazyku MicroPython. Začneme nahratím firmvéru, nainštalovaním potrebných knižníc z prostredia editora Thonny, a pre ilustráciu činnosti si vytvoríme jednoduchý projekt, ktorý bude pomocou HTTP protokolu zbierať informácie o počasí vo vybratej lokalite a bude ich pomocou protokolov HTTP a MQTT publikovať do prostredia platformy AdafruitIO.
 duration: 90
 date: 2024-10-02
 layout: slide
@@ -15,7 +15,7 @@ authors:
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
 bitly: https://bit.ly/3Y5Xv3j
-# video: https://youtu.be/s1RbHF_HCXo
+video: https://youtu.be/mQIzIKE35DE
 ---
 
 <style>
@@ -374,7 +374,7 @@ if __name__ == '__main__':
     while True:
         main()
 
-        print(f'>> going to sleep for {INTERVAL} minuts')
+        print(f'>> going to sleep for {INTERVAL} minutes')
         time.sleep(INTERVAL * 60)
 ```
 </section>

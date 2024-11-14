@@ -52,6 +52,7 @@ exclude:
    - node_modules
    - vendor/
    - old/
+   - __pycache__/
 #   - vendor/bundle/
 #   - vendor/cache/
 #   - vendor/gems/
