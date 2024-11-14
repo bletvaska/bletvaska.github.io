@@ -17,7 +17,7 @@ authors:
       email: miroslav.binas@tuke.sk
       url: https://bletvaska.github.io
 
-video: https://youtu.be/rPYZEUfbml4
+<!-- video: https://youtu.be/rPYZEUfbml4 -->
 token: 98113cc2ea891cc2246900c7dc6a8038
 notes:
 - nuitka
@@ -297,6 +297,93 @@ notes:
 * lets docker - najvyssi cas to cele supnut do dockeru a vytvorit docker obraz
 </section>
 
+
+<section id="multi-stage-build-1" data-markdown>
+### Stage 1: The Base
+
+```Dockerfile
+FROM python:3.12-alpine AS base
+
+RUN apk add gcc \
+        python3-dev \
+        musl-dev \
+        ccache \
+        patchelf \
+        upx
+RUN pip install nuitka httpx click
+
+COPY scraper.py /app/scraper.py
+
+WORKDIR /app
+```
+</section>
+
+
+<section id="multi-stage-build-2">
+    <h3>Stage 2: The Nuitka</h3>
+
+<div style="display: flex;">
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-dockerfile hljs"># standalone mode
+
+FROM base AS nuitka
+
+RUN nuitka --standalone \
+    scraper.py
+RUN cd scraper.dist \
+    && upx -9 scraper.bin</code>
+      </pre>
+  </div>
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-dockerfile hljs"># onefile mode
+
+FROM base AS nuitka
+
+RUN nuitka --onefile scraper.py
+
+
+      </code>
+      </pre>
+  </div>
+</div>
+</section>
+
+
+<section id="multi-stage-build-3">
+    <h3>Stage 3: The Production</h3>
+
+<div style="display: flex;">
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-dockerfile hljs"># standalone mode
+
+FROM alpine:latest
+
+COPY --from=nuitka \
+    /app/scraper.dist/ /app/
+WORKDIR /app
+ENTRYPOINT ["/app/scraper.bin"]
+    </code>
+      </pre>
+  </div>
+  <div style="flex: 50%;">
+      <pre>
+      <code class="lang-dockerfile hljs"># onefile mode
+
+FROM alpine:latest
+
+COPY --from=nuitka \
+    /app/scraper.bin /app/
+WORKDIR /app
+ENTRYPOINT ["/app/scraper.bin"]
+      </code>
+      </pre>
+  </div>
+</div>
+</section>
+
 <section id="other-options" data-markdown>
 ## Other Options
 
@@ -304,6 +391,11 @@ notes:
 * [PyInstaller](https://pyinstaller.org/en/stable/) - PyInstaller bundles a Python application and all its dependencies into a single package.
 * Cython
 * [AppImage](https://github.com/niess/python-appimage) - AppImage distributions of Python
+</section>
+
+
+<section id="questions" data-markdown>
+## Questions?
 </section>
 
 
