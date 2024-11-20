@@ -12,7 +12,7 @@ event:
 categories: talk
 theme: night
 authors:
-    - name: mirek
+    - name: Miroslav "mirek" Biňas
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
 bitly: https://bit.ly/4i00P87
@@ -42,10 +42,10 @@ bitly: https://bit.ly/4i00P87
 }
 </style>
 
-<section id="countdown">
+<!-- <section id="countdown">
 Dnešný webinár začína už za
 <h1></h1>
-</section>
+</section> -->
 
 
 {% include first.slide.html %}
@@ -154,6 +154,8 @@ notes:
 * `Factory Reset` - uvedenie zariadenia do výrobných nastavení
 * `Error` - stav, do ktorého sa zariadenie dostane pri vzniku chyby
 * `Sleep` - prechod do režimu spánku
+* `Alarm` - poplach, ak došlo k pohybu
+* `EcoMode` - pred vypnutím prejsť do úsporného režimu
 </section>
 
 
@@ -176,9 +178,9 @@ notes:
 <section id="links" data-markdown>
 ## Odkazy
 
-* výsledný projekt: 
+* výsledný projekt: [slution.zip](src/solution.zip), [modified.zip](src/modified.zip)
 * [Arduino Day 2021](http://namakanyden.sk/2021/arduinoday/): Ako organizovať svoj kód (lepšie)
-* [Namakaný webinár](http://namakanyden.sk/webinare/): [Bitka stavov robustných konečných automatov](http://namakanyden.sk/webinars/2022.08-statove.automaty.html)
+* [Namakaný webinár #38](http://namakanyden.sk/webinare/): [Bitka stavov robustných konečných automatov](http://namakanyden.sk/webinars/2022.08-statove.automaty.html)
 </section>
 
 
@@ -196,7 +198,7 @@ notes:
 <script>
     window.onload = function() {
         let start = moment('{{ page.start }}', 'YYYY-MM-DD hh:mm:ss');
-        start.minutes( start.minutes() + 15 );
+        start.minutes( start.minutes() + 5 );
 
         $("#countdown > h1").countdown(start.format('YYYY-MM-DD HH:mm:ss') , function (event) {
             if(event.elapsed){
