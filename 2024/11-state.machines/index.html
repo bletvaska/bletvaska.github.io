@@ -1,0 +1,210 @@
+---
+title: Stavové stroje
+description: |
+    Ak sa pozrieme na charakteristiku (nie len) IoT zariadení, ich povahu a správanie vieme opísať a modelovať pomocou stavových strojov. Na tomto webinári si teda povieme, čo stavový stroj vlastne je, ako ho vieme modelovať a jeden jednoduchý si aj vytvoríme. Praktická ukážka bude realizovaná v jazyku MicroPython na doske Raspberry Pi Pico W.
+duration: 90
+date: 2024-11-20
+start: 2024-11-20 15:30:00
+layout: slide
+event:
+    title: Namakaný webinár
+    url: http://www.namakanyden.sk
+categories: talk
+theme: night
+authors:
+    - name: mirek
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/3Y5Xv3j
+# video: https://youtu.be/mQIzIKE35DE
+---
+
+<style>
+#to-adafruit-with-mqtt > pre {
+  font-size: 0.39em;
+}
+
+#post-to-feed > pre {
+  font-size: 0.5em;
+}
+
+#transform-data > pre {
+  font-size: 0.44em;
+}
+
+#micropython-and-thonny > p > a > img {
+  height: 180px;
+  padding: 25px;
+}
+
+#to-adafruit-with-http > pre {
+  font-size: 0.4em;
+}
+</style>
+
+<section id="countdown">
+Dnešný webinár začína už za
+<h1></h1>
+</section>
+
+
+{% include first.slide.html %}
+
+
+<section id="behavior" data-markdown>
+## Správanie zariadení
+
+1. ako ETL
+2. ako stavový stroj
+3. (kombinácia)
+</section>
+
+
+<section id="etl" data-markdown data-background="white">
+![](images/etl.png)
+
+note:
+* https://www.fivetran.com/learn/data-pipeline-vs-etl
+</section>
+
+
+<section id="pipeline" data-markdown>
+```
+[ extract_data ] --> [ transform_data ] --> [ load_data ]
+```
+</section>
+
+
+
+<section id="rp2040-features-i" data-markdown>
+### Konečno-stavový automat
+
+> Konečnými automatmi modelujeme chovanie jednoduchých objektov, ktoré sa môžu nachádzať v **rôznych stavoch** a **prechádzať medzi nimi** na základe vstupu.
+
+notes:
+* http://voho.eu/wiki/konecny-automat/
+</section>
+
+
+<section id="examples" data-markdown>
+## Príklady použitia
+
+* dvere - otvorené/zatorené
+* počítačové hry
+    * postupnosť obrazoviek
+    * ovládanie postavy
+* výťah, budík, ... - reakcia tlačidiel je iná vzhľadom na to, čo sa s výťahom momentálne deje
+</section>
+
+
+<section id="game-example" data-markdown data-background="white">
+[![](images/state-flowchart.png)](https://gameprogrammingpatterns.com/state.html)
+
+notes:
+* toto je ukazka pouzitia stavov v pocitacovej hre
+* co sa tu deje? co mi viete povedat o tomto obrazku?
+    * jednotlive stavy postavy
+    * prechod medzi stavmi je stlacenim prislusnej klavesy
+</section>
+
+
+<section id="state-diagram" data-markdown data-background="white">
+## Diagram stavov
+
+![](images/state.machine-turnstile.jpg)
+
+notes:
+* stavove stroje vieme jednoducho vizualizovat pomocou diagramov stavov/statovych diagramov
+* sklada sa z dvoch komponentov
+    * stav - elipsa
+    * prechod medzi stavmi - orientovana sipka
+</section>
+
+
+<section id="night-light" data-markdown>
+![](images/night.light.gif)
+### [Nočné svetlo s detekciou pohybu](https://randomnerdtutorials.com/build-a-night-security-light-with-arduino/)
+(prípadová štúdia bez použitia prerušení)
+</section>
+
+
+<section id="citron-base-board" data-markdown>
+[![](images/citron.base.board.jpg)](https://rpishop.cz/pico-karty/3854-cytron-maker-pi-pico-base-deska-pro-pi-pico-pro-zacatecniky.html)
+</section>
+
+
+<section id="let's-rock" data-markdown>
+## [Let's Code!](https://excalidraw.com)
+</section>
+
+
+<section id="another-states" data-markdown>
+## Ďalšie stavy
+
+* `Factory Reset` - uvedenie zariadenia do výrobných nastavení
+* `Error` - stav, do ktorého sa zariadenie dostane pri vzniku chyby
+* `Sleep` - prechod do režimu spánku
+</section>
+
+
+<section id="benefits" data-markdown>
+## Aké to má výhody?
+
+* zjednodušenie logiky programu
+* jednoduchá rozšíriteľnosť
+* modularita
+* testovanie
+* efektívne spracovanie udalostí
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* výsledný projekt: 
+* [Arduino Day 2021](http://namakanyden.sk/2021/arduinoday/): Ako organizovať svoj kód (lepšie)
+* [Namakaný webinár](http://namakanyden.sk/webinare/): [Bitka stavov robustných konečných automatov](http://namakanyden.sk/webinars/2022.08-statove.automaty.html)
+</section>
+
+
+
+{% include qr.html %}
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
+
+
+
+<script>
+    window.onload = function() {
+        let start = moment('{{ page.start }}', 'YYYY-MM-DD hh:mm:ss');
+        start.minutes( start.minutes() + 15 );
+
+        $("#countdown > h1").countdown(start.format('YYYY-MM-DD HH:mm:ss') , function (event) {
+            if(event.elapsed){
+                Reveal.slide(1);
+                Reveal.toggleAutoSlide(false);
+            }else{
+                let format = null; 
+                if(event.offset.hours == 0 && event.offset.minutes == 0){
+                    format = '%S';
+                }else if(event.offset.hours == 0){
+                    format = '%M:%S';
+                }else{
+                    format = '%H:%M:%S';
+                }
+
+//                console.log(event.strftime(format));
+                $(this).text(event.strftime(format));
+            }
+        });
+    };
+</script>
