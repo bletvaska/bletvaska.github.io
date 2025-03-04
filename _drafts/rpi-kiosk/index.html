@@ -1,0 +1,109 @@
+---
+title: Raspberry Pi ako kiosk
+description: |
+    Ako vyzerá štúdium na KPI?
+duration: 30
+date: 2025-03-04
+layout: slide
+event:
+    title: SOST Michalovce
+    url: https://sostmi.edupage.org/
+categories: talk
+theme: night
+authors:
+    - name: Miroslav Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/3Xm05ld
+# video: https://youtu.be/s1RbHF_HCXo
+---
+
+
+
+{% include first.slide.html %}
+
+<section id="kiosk-mode" data-markdown>
+## Čo je to Kiosk?
+
+</section>
+
+
+<section id="existing-solutions" data-markdown>
+## Existujúce riešenia
+
+</section>
+
+
+<section id="autostart-app" data-markdown>
+## Spustenie aplikácie po štarte
+</section>
+
+
+<section id="gui-in-linux" data-markdown>
+## Ako funguje UI v Linuxe?
+
+* X11
+  * server
+  * klient
+* Wayland
+* wayfire
+* labwc
+</section>
+
+
+<section id="audio-over-hdmi" data-markdown>
+## Zvuk cez HDMI
+</section>
+
+
+
+
+<section id="browser-in-kiosk-mode" data-markdown>
+## Prehliadač v kiosk režime
+```bash
+$ chromium --kiosk
+```
+</section>
+
+
+<section id="power-off" data-markdown>
+## Vypni/zapni RPi
+
+* built-in podpora
+  * GPIO pin 3 - tlačítko
+* v súbore `config.txt` treba pridať riadok:
+
+  ```
+  dtoverlay=gpio-shutdown
+  # dtoverlay=gpio-shutdown, gpio_pin=5, active_low=1
+  ```
+</section>
+
+
+<section id="remote-access" data-markdown>
+## Vzdialený prístup
+
+* existujúce riešenia
+  * ssh
+  * vnc
+* problém - RPi musí byť dostupné (verejná IP adresa)
+  * VPN?
+  * port forwarding?
+* rpi connect :-*
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [A new release of Raspberry Pi OS](https://www.raspberrypi.com/news/a-new-release-of-raspberry-pi-os/)
+* RPi Connect
+</section>
+
+
+{% include qr.html %}
