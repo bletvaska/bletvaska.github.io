@@ -1,0 +1,7 @@
+{% if include.url %}
+<section data-markdown id="{{ include.title }}">
+    ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ include.url }}&size=300x300)
+
+    (**{{ include.url }}**)
+</section>
+{% endif %}
