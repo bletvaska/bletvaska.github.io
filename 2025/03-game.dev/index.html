@@ -1,0 +1,304 @@
+---
+title: Programujeme počítačové hry
+description: |
+    Ak si niekedy rozmýšľal nad tým, ako vyzerá programovanie počítačovej hry, tak máš jedinečnú príležitosť si to vyskúšať. Že nevieš programovať? To vôbec nevadí - pre vytvorenie počítačovej hry totiž nepotrebujeme len programátorov, ale aj grafikov, dizajnérov, hudobníkov a... aj teba! Staň sa teda súčasťou herného vývojárskeho tímu, ktorého úlohou je za necelých 60 minút naprogramovať remake počítačovej hry Flappy Bird
+
+duration: 50
+date: 2025-03-12
+layout: slide
+event:
+    title: KPI
+    url: https://kpi.fei.tuke.sk
+categories: talk
+theme: night
+authors:
+    - name: Miroslav Biňas, Filip Gurbáľ
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+#    - name: Filip Gurbáľ
+bitly: https://bit.ly/4657oAO
+# video: https://youtu.be/-Nue8zK_JVc
+---
+
+<style>
+/* Check out my article on how to create this: https://roboleary.net/css/2020/11/17/parallax-animation.html
+
+Source code: https://github.com/robole/artifice
+*/
+* {
+  box-sizing: border-box;
+}
+
+#lunar-lander-text-game img {
+  height: 550px;
+}
+
+#lunar-lander-arcade img {
+  height: 550px;
+}
+
+body {
+  background-color: rgb(197, 217, 255);
+  overflow-x: auto;
+}
+
+#parallax-scrolling-example {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  /* margin: 60px auto;  */
+}
+
+#scene {
+  position: absolute;
+  height: inherit;
+}
+
+#background {
+  animation: background-shift 8s linear infinite forwards;
+}
+
+#train {
+  animation: train-shift 4s linear infinite forwards;
+}
+
+#foreground {
+  animation: foreground-shift 2s linear infinite forwards;
+}
+
+@keyframes background-shift {
+  to {
+    transform: translateX(-800px);
+  }
+}
+
+@keyframes train-shift {
+  to {
+    transform: translateX(820px);
+  }
+}
+
+@keyframes foreground-shift {
+  to {
+    transform: translateX(-800px);
+  }
+}
+</style>
+
+
+{% include first.slide.html %}
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.jpg)
+</section>
+
+
+<section id="hrate-sa" data-markdown>
+## Hráte sa počítačové hry?
+</section>
+
+
+<section id="indiana-jones" data-markdown data-background="#070201">
+![Indiana Jones and the Great Circle](images/indiana.jones.webp)
+</section>
+
+
+<section id="chceli-by-ste" data-markdown>
+## Chceli by ste si naprogramovať vlastnú hru?
+
+notes:
+* a kolki ste si uz vlastnu hru aj naprogramovali?
+</section>
+
+
+<section id="pygame-zero" data-markdown data-background="white">
+[![](images/logo-pygamezero.svg)](https://pygame-zero.readthedocs.io/)
+
+notes:
+* budeme spolu programovat hru
+* mozeme posrandovat - lebo som pocul, ze programovat viete - v assembleri / C :-P
+</section>
+
+
+<section id="lunar-lander" data-markdown data-background="#000">
+  ![Apollo 11 Lunar Module Eagle](images/apollo.11.lunar.module.eagle.jpg)
+
+  ([since 1969](https://en.wikipedia.org/wiki/Lunar_lander))
+
+notes:
+* https://en.wikipedia.org/wiki/Lunar_lander
+</section>
+
+
+<section id="lunar-lander-text-game" data-markdown data-background="#000">
+  ![Lunar Lander: Text Game](images/lunar.lander-text.game.gif)
+</section>
+
+
+<section id="lunar-lander-arcade" data-markdown data-background="#000">
+  [![Lunar Lander: Arcade](images/lunar.lander-arcade.gif)](http://moonlander.seb.ly/)
+</section>
+
+
+<section id="2d-coordinate-system" data-markdown>
+## 2D Súradnicový sys.
+
+![2D Coordinate System](images/2d.coordinate.system.png)
+</section>
+
+
+<section id="game-loop" data-markdown data-background="#FEFCF6">
+![Herná slučka](images/game-loop-simple.png)
+
+Notes:
+* http://gameprogrammingpatterns.com/images/game-loop-simple.png
+* vytvorit kostru funkcii:
+    * `draw()`
+    * `update()`
+</section>
+
+
+<section id="what-is-game-loop" data-markdown>
+## Herná slučka
+
+**Herná slučka** je nepretržitý proces, ktorý **riadi každú hru**. Skladá sa z:
+
+* **získania vstupov** od hráča
+* **aktualizácie** herného stavu
+* **vykreslenia** scény, a
+* **kontroly ukončenia** hry.
+
+notes:
+* definicia hernej slucky
+* v nasom pripade
+  * ziskanie vstupu znamena, ze overime, ci stlacil klaves na pridanie
+  * aktualizacia hry - overime na zaklade vstupov a aktualnej pozicie, co s reketou a taktiez overime, ci uz nahodou uspesne nepristala alebo nehavarovala
+  * vykreslime scenu pre hraca na obrazovku
+</section>
+
+
+<section id="super.mario" data-markdown>
+![](images/super.mario.gif)
+</section>
+
+
+<section id="co-je-akter" data-markdown>
+## Čo je aktér?
+
+**Aktér** je **ľubovoľný herný objekt**, ktorý:
+
+* má **vzhľad** (obrázok alebo tvar),
+* má **polohu** (niekde sa nachádza),
+* niečo **robí** alebo na niečo **reaguje** (pohybuje sa, skáče, padá, mizne, útočí).
+
+notes:
+* v našom prípade to môže byť:
+  * raketa - teda hráč
+  * plameň pod raketou
+  * miesto pristátia
+  * nápisy ako Game Over, Well Done a pod.
+</section>
+
+
+<section id="mega.man-sprite.sheet" data-markdown data-background="white">
+![Mega Man Spritesheet](images/mega.man-sprite.sheet.jpg)
+
+notes:
+* https://remarkablecoder.com/sprites-in-games/
+</section>
+
+
+<section id="mega.man-animation" data-markdown>
+![Mega Man Animation](images/mega.man-animation.gif)
+
+notes:
+* https://remarkablecoder.com/sprites-in-games/
+</section>
+
+
+<section id="pygame-handles" data-markdown>
+## Pygame Handles
+
+![Pygame Handles](images/handles.png)
+</section>
+
+
+<section id="game-mechanics" data-markdown>
+## Herná mechanika
+
+**Mechanika** predstavuje **súbor pravidiel**, ktorými sa riadi celá hra.
+
+notes:
+* ked si kupite stolovu hru, dostanete k nej vytlaceny manual, kde sa pravidla hry nachadzaju. vasou ulohou je sa ich naucit, aby ste sa vedeli hru hrat. a sami dohliadate na to, aby sa pravidla hry dodrziavali.
+* v hre su tieto pravidla zabudovane a obecne subor takychto pravidiel nazyvame hernymi mechanikami.
+* je velmi dolezite, aby hra mala jasne mechaniky pre rozpoznanie konca hry - ci uz uspesne alebo neuspesne
+* v nasom pripade vieme hovorit napr. o:
+  * pravidlach pre pohyb rakety smerom hore a dole
+  * pravidlach pri stlaceni klavesy pridaj plyn
+  * pravidlach pre uspesne alebo neuspesne ukoncenie hry
+</section>
+
+
+<section id="flappybird-gameplay" data-markdown>
+![Flappy Bird](images/flappy.gif)
+</section>
+
+
+<section id="analysis" data-markdown data-background="#52C2CA">
+![Game Analysis](images/analysis.png)
+
+Note:
+* https://www.researchgate.net/publication/324066514_Playing_Flappy_Bird_with_Deep_Reinforcement_Learning
+</section>
+
+
+
+<section id="collision-detections" data-markdown>
+## Detekcia kolízií
+</section>
+
+
+<section id="collision-detections-illustration" data-markdown data-background="white">
+![Ilustrácia detekcie kolízií](images/collisions.png)
+</section>
+
+
+<section id="good-job" data-markdown>
+## Hotovo (!?)
+</section>
+
+
+<section id="adding-sounds" data-markdown>
+## Pridáme zvuky
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="resources" data-markdown>
+## Na stiahnutie
+
+* [itch.io](https://mattwalkden.itch.io/lunar-battle-pack) - assety
+* kostra projektu: [project.zip](resources/project.zip)
+* to, čo som plánoval spraviť: [flappybird.py](resources/flappy/flappybird.py)
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [Pygame Zero homepage](https://pygame-zero.readthedocs.io/) ([sk](https://pgzero-slovak.readthedocs.io/sk/latest/index.html))
+* [Code a homage to Lunar Lander | Wireframe #37](https://www.raspberrypi.com/news/code-a-homage-to-lunar-lander-wireframe-37/)
+* [Wireframe](https://wireframe.raspberrypi.org/) Magazine, [MagPi](https://www.raspberrypi.org/magpi/) Magazine
+* [Mission Python](https://nostarch.com/missionpython) ([YouTube Video](https://www.youtube.com/watch?time_continue=2&v=_2aglIeW1kQ))
+* [Code the Classics – Volume 1](https://wireframe.raspberrypi.org/books/code-the-classics1)
+* [Pygame Zero: snadno použitelný nástroj určený pro výuku programování](https://www.root.cz/clanky/pygame-zero-snadno-pouzitelny-nastroj-urceny-pro-vyuku-programovani/) - časť seriálu [Jazyky pro výuku programování](https://www.root.cz/serialy/jazyky-pro-vyuku-programovani/) na portáli [root.cz](https://www.root.cz)
+</section>
+
+
+
+{% include qr.html %}
