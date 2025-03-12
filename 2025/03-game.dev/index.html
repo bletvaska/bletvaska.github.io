@@ -16,7 +16,7 @@ authors:
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
 #    - name: Filip Gurbáľ
-bitly: https://bit.ly/4657oAO
+bitly: https://bit.ly/3FnlO61
 # video: https://youtu.be/-Nue8zK_JVc
 ---
 
@@ -34,6 +34,10 @@ Source code: https://github.com/robole/artifice
 }
 
 #lunar-lander-arcade img {
+  height: 550px;
+}
+
+#lunar-lander-banner img {
   height: 550px;
 }
 
@@ -141,6 +145,39 @@ notes:
 </section>
 
 
+<section id="lunar-lander-banner" data-markdown>
+![](images/lunar.lander-banner.webp)
+
+notes:
+* nasa implementacia bude velmi jednoducha
+  * mame len hodinu
+  * budeme pristavat kolmo dolu
+</section>
+
+
+<section id="super.mario" data-markdown>
+![](images/super.mario.gif)
+</section>
+
+
+<section id="co-je-akter" data-markdown>
+## Čo je aktér?
+
+**Aktér** je **ľubovoľný herný objekt**, ktorý:
+
+* má **vzhľad** (obrázok alebo tvar),
+* má **polohu** (niekde sa nachádza),
+* niečo **robí** alebo na niečo **reaguje** (pohybuje sa, skáče, padá, mizne, útočí).
+
+notes:
+* v našom prípade to môže byť:
+  * raketa - teda hráč
+  * plameň pod raketou
+  * miesto pristátia
+  * nápisy ako Game Over, Well Done a pod.
+</section>
+
+
 <section id="2d-coordinate-system" data-markdown>
 ## 2D Súradnicový sys.
 
@@ -178,27 +215,6 @@ notes:
 </section>
 
 
-<section id="super.mario" data-markdown>
-![](images/super.mario.gif)
-</section>
-
-
-<section id="co-je-akter" data-markdown>
-## Čo je aktér?
-
-**Aktér** je **ľubovoľný herný objekt**, ktorý:
-
-* má **vzhľad** (obrázok alebo tvar),
-* má **polohu** (niekde sa nachádza),
-* niečo **robí** alebo na niečo **reaguje** (pohybuje sa, skáče, padá, mizne, útočí).
-
-notes:
-* v našom prípade to môže byť:
-  * raketa - teda hráč
-  * plameň pod raketou
-  * miesto pristátia
-  * nápisy ako Game Over, Well Done a pod.
-</section>
 
 
 <section id="mega.man-sprite.sheet" data-markdown data-background="white">
@@ -242,6 +258,9 @@ notes:
 
 <section id="flappybird-gameplay" data-markdown>
 ![Flappy Bird](images/flappy.gif)
+
+notes:
+* jednoduchou zmenou niekolkych mechanik vieme z nasho lunar landera spravit flappy birda
 </section>
 
 
@@ -251,7 +270,6 @@ notes:
 Note:
 * https://www.researchgate.net/publication/324066514_Playing_Flappy_Bird_with_Deep_Reinforcement_Learning
 </section>
-
 
 
 <section id="collision-detections" data-markdown>
@@ -266,11 +284,10 @@ Note:
 
 <section id="good-job" data-markdown>
 ## Hotovo (!?)
-</section>
 
-
-<section id="adding-sounds" data-markdown>
-## Pridáme zvuky
+notes:
+* ake dalsie herne mechaniky by sme vedeli pridat?
+* ake dalsie hry by sme vedeli urobit ohnutim mechanik?
 </section>
 
 
