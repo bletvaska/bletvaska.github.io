@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
         john=1.9.0-Jumbo-1+git20211102-0kali9 \
         netcat-traditional=1.10-50 \
         nmap=7.95+dfsg-1kali1 \
+        openssh-clien=1:9.9p1-3 \
+        curl=8.12.1-2 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

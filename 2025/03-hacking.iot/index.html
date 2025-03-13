@@ -14,7 +14,7 @@ authors:
     - name: Miroslav 'mirek' Biňas
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
-bitly: https://bit.ly/3FnlO61
+bitly: https://bit.ly/4iE06cA
 # video: https://youtu.be/-Nue8zK_JVc
 ---
 
@@ -37,8 +37,21 @@ bitly: https://bit.ly/3FnlO61
 </section>
 
 
+<section id="mr-robot" data-markdown data-background="images/mr.robot.png">
+> That’s not how this works. I can’t just hack a prison in a day. I need time to do research, figure out the security protocols, the layout, how the system works. -- (Eliot)
+</section>
+
+
 <section id="owasp-iot-top-10" data-markdown data-background="#303030">
 [![](images/owasp.iot.top.ten.jpg)](https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10)
+</section>
+
+
+<section id="iot-devices-hacking" data-markdown>
+## Hacking of IoT Devices
+
+* hacking of real device
+* hacking of software image
 </section>
 
 
@@ -103,12 +116,161 @@ notes:
 
 <section id="port-scanning" data-markdown>
 ```bash
-# scans only 1000 ports by default
-$ nmap IP_ADDRESS
+$ nmap 192.168.0.136
+Starting Nmap 7.92 ( https://nmap.org ) at 2025-03-13 12:11 CET
+Nmap scan report for 192.168.0.136
+Host is up (0.0012s latency).
+Not shown: 995 closed tcp ports (conn-refused)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+53/tcp   open  domain
+80/tcp   open  http
+443/tcp  open  https
+5000/tcp open  upnp
 
-# full port scan with
-$ nmap -nv -p- IP_ADDRES
+Nmap done: 1 IP address (1 host up) scanned in 38.62 seconds
 ```
+
+notes:
+* oskenovali sme porty na zariadeni
+</section>
+
+
+<section id="port-scanning" data-markdown>
+```bash
+$ nmap -nv -p- 192.168.0.136
+Completed Connect Scan at 22:32, 2788.47s elapsed (65535 total ports)
+Nmap scan report for 192.168.0.136
+Host is up (0.021s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT      STATE SERVICE
+22/tcp    open  ssh
+53/tcp    open  domain
+80/tcp    open  http
+443/tcp   open  https
+5000/tcp  open  upnp
+5515/tcp  open  unknown
+65534/tcp open  unknown
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 2788.53 seconds
+```
+notes:
+* pozor - `nmap` neoskenoval vsetky porty
+  * `nmap` oskenoval len 1000 portov
+  * neoskenoval zvysnych 65535 - 1000 = 64535
+  * na to musime `nmap` spustit inak
+* ak vsak 1k portov trvalo 40s, tak 65k portov bude trvat nasobne dlhsie
+  * 65 * 40 = 2600s = 43min
+  * ... a to si teda pockame...
+</section>
+
+
+<section id="know-your-enemy" data-markdown>
+## 3. Know Your Enemy ;)
+</section>
+
+
+<section id="tooling" data-markdown>
+* use exact tools for exact services
+  * `ssh` for ssh
+  * `curl`, `http` for http
+  * `nc`, `telnet` for everyting else ;)
+* identify type of service with `getent`
+  ```bash
+  $ getent services 53
+  domain                53/tcp
+  ```
+
+notes:
+* s akym pouzivatelom otestujeme ssh?
+* ako testneme dns?
+* http:
+  ```bash
+  $ http 192.168.0.136:80
+  $ http 192.168.0.136:443
+  ```
+* a co je zac `5000`?
+  ```bash
+  $ getent services 5000
+  $ http 192.168.0.136:5000
+  ```
+```
+</section>
+
+
+<section id="backdoor-located" data-markdown>
+## Backdoor has been Located
+
+```bash
+$ nc 192.168.0.136 5515
+[***]Successfully Connected to IoTGoat's Backdoor[***]
+```
+</section>
+
+
+<section id="insecure-network-services" data-markdown>
+## Risk #2. Insecure Network Services
+</section>
+
+
+<section id="insecure-network-services-definition" data-markdown>
+> Unneeded or insecure network services running on the device itself, especially those exposed to the internet, that compromise the confidentiality, integrity/authenticity, or availability of information or allow unauthorized remote control...
+
+notes:
+* na zariadeniach byvaju spustene aj sluzby, ktore pre beh zariadenia nie su vobec potrebne alebo su nezabezpecene
+  * napr. preco mame telnet server na chytrej ziarovke?
+* problem je nasobne vacsi, ak tieto sluzby:
+  * pouzivaju predvolene prihlasovacie udaje
+  * nepouzivaju prihlasovacie udaje vobec
+  * su dostupne z internetu
+</section>
+
+
+<section id="insecure-network-services-mitigate" data-markdown>
+### How to Mitigate Security Risk
+
+* turn off unwanted services
+* create separate network for IoT solution
+* use secure communication channel
+   * problem with microcontrollers
+</section>
+
+
+<section id="insecure-ecosystem-interfaces" data-markdown>
+## Risk #3. Insecure Ecosystem Interfaces
+</section>
+
+
+<section id="insecure-ecosystem-interfaces-definition" data-markdown>
+> Insecure web, backend API, cloud, or mobile interfaces in the ecosystem outside of the device that allows compromise of the device or its related components. Common issues include a lack of authentication/authorization, lacking or weak encryption, and a lack of input and output filtering.
+
+notes:
+* casty problem je aj nezabezpecene komunikacne rozhranie
+  * napr. ui bez loginu/hesla
+  * napr. po pripojeni monitora a klavesnice dostanem rovno prikazovy riadok s pravami superpouzivatela
+* casty problem je aj nezabezpecena seriova linka pri mikrokontroleroch
+</section>
+
+
+<section id="insecure-ecosystem-interfaces-mitigate" data-markdown>
+### How to Mitigate Security Risk
+
+* use secure and reliable authentication and authorization mechanism with auditing system
+   * use existing one instead of creating your own
+* use encrypted communication
+* use filtering of incomming and outgoing network communication on network interfaces
+
+</section>
+
+
+<section id="get-the-job-done" data-markdown>
+## 4. Get the Job Done!
+</section>
+
+
+<section id="todo" data-markdown>
+* `/etc/passwd` - get the list of users
+* `/etc/shadow` - password hashes
 </section>
 
 
