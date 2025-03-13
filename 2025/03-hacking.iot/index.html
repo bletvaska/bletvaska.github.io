@@ -26,6 +26,10 @@ bitly: https://bit.ly/4iE06cA
 #bettercap img {
   height: 400px;
 }
+
+#cracking-with-john code {
+  font-size: 0.7em;
+}
 </style>
 
 
@@ -264,13 +268,63 @@ notes:
 
 
 <section id="get-the-job-done" data-markdown>
-## 4. Get the Job Done!
+## 4. Cracking the User
 </section>
 
 
 <section id="todo" data-markdown>
 * `/etc/passwd` - get the list of users
+  * `root`
+  * `iotgoatuser`
 * `/etc/shadow` - password hashes
+* try google first ;)
+* use password cracker, such as `john`, `hashcat`, `hydra` with [wordlist](resources/mirai-botnet.txt)
+* if needed, extract the passwords first:
+  ```bash
+  # extract only passwords from mirai-botnet.txt
+  $ cut -d' ' -f2 mirai-botnet.txt > passwords
+  ```
+
+notes:
+* `$1$Jl7H1VOG$Wgw2F/C.nLNTC.4pwDa4H1`
+* `$1$79bz0K8z$Ii6Q/if83F1QodGmkb4Ah.`
+</section>
+
+
+<section id="cracking-with-john" data-markdown>
+## Cracking with John
+
+```bash
+$ john --wordlist=passwords.txt shadow
+Warning: detected hash type "md5crypt", but the string is also recognized as "md5crypt-long"
+Use the "--format=md5crypt-long" option to force loading these as that type instead
+Using default input encoding: UTF-8
+Loaded 2 password hashes with 2 different salts (md5crypt, crypt(3) $1$ (and variants) [MD5 256/256 AVX2 8x3])
+Will run 8 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+Warning: Only 59 candidates left, minimum 192 needed for performance.
+7ujMko0vizxv     (iotgoatuser)
+1g 0:00:00:00 DONE (2025-03-13 13:50) 20.00g/s 1180p/s 2360c/s 2360C/s xc3511..fucker
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed.
+```
+</section>
+
+
+<section id="lets-hack" data-markdown>
+## Let's Break Something!
+
+notes:
+* hotovo. mozeme robit co chceme.
+</section>
+
+
+<section id="hacking-software-image" data-markdown>
+## Hacking Software Image
+
+```bash
+$ binwalk -e IoTGoat-raspberry-pi2.img
+```
 </section>
 
 
