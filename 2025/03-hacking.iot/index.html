@@ -1,0 +1,127 @@
+---
+title: The S in IoT Stands for Security
+description: Hacking of IoT Devices
+
+duration: 50
+date: 2025-03-12
+layout: slide
+event:
+    title: talk@ABB Solutions
+    url: https://abbsolutionsslovakia.com/
+categories: talk
+theme: night
+authors:
+    - name: Miroslav 'mirek' Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+bitly: https://bit.ly/3FnlO61
+# video: https://youtu.be/-Nue8zK_JVc
+---
+
+<style>
+#kali-linux img {
+  height: 500px;
+}
+
+#bettercap img {
+  height: 400px;
+}
+</style>
+
+
+{% include first.slide.html %}
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.jpg)
+</section>
+
+
+<section id="owasp-iot-top-10" data-markdown data-background="#303030">
+[![](images/owasp.iot.top.ten.jpg)](https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10)
+</section>
+
+
+<section id="owasp-iot-goat" data-markdown>
+[![](https://opengraph.githubassets.com/f993c8e3694331cd888fa6ca319a677984f9609bdfb5ce8bfe5bb245ac557e1e/OWASP/IoTGoat)](https://github.com/OWASP/IoTGoat)
+</section>
+
+
+<section id="docker" data-markdown data-background="white">
+[![Docker](images/docker-logo.png)](https://www.docker.com/)
+</section>
+
+
+<section id="kali-linux" data-markdown data-background="white">
+[![Kali Linux](images/kali.linux-logo.jpg)](https://www.kali.org/)
+</section>
+
+
+<section id="step-1" data-markdown>
+## 1. Connect & Locate Your Device
+
+notes:
+* po kupeni si zariadenie pripojim do vlastnej siete a potrebujem zistit, aku ma ip adresu
+* na to vieme samozrejme pouzit viacero sposobov
+  * kedze je to nasa domacnost, viem sa pozriet do domaceho wifi smerovaca na zoznam pripojenych a rozdanych ip adries
+  * mozem oskenovat celu siet pomocou `nmap`-u
+</section>
+
+
+<section id="bettercap" data-markdown data-background="white">
+[![Bettercap](images/bettercap-logo.png)](https://www.bettercap.org/)
+
+notes:
+* na zistenie ip adresy pouzijeme nastroj bettercap
+</section>
+
+<section id="bettercap-description" data-markdown>
+The Swiss Army knife for WiFi, Bluetooth Low Energy, wireless HID hijacking, CAN-bus and IPv4 and IPv6 networks reconnaissance and MITM attacks.
+
+notes:
+* na stranke maju takyto paradny popis
+</section>
+
+
+<section id="bettercap-notes" data-markdown>
+```bash
+$ bettercap
+> set ticker.commands 'clear; net.show; events.show 10'
+> net.probe on
+> ticker on
+```
+</section>
+
+
+<section id="step-2" data-markdown>
+## 2. Port Scanning
+
+notes:
+* potrebujeme overit, ake porty ma zariadenie otvorene
+</section>
+
+
+<section id="port-scanning" data-markdown>
+```bash
+# scans only 1000 ports by default
+$ nmap IP_ADDRESS
+
+# full port scan with
+$ nmap -nv -p- IP_ADDRES
+```
+</section>
+
+
+<section id="questions" data-markdown>
+## Questions?
+</section>
+
+
+<section id="links" data-markdown>
+## Links
+
+* [IoTGoat](https://github.com/OWASP/IoTGoat)
+</section>
+
+
+{% include qr.html %}
