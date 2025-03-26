@@ -5,6 +5,7 @@ description: |
 
 duration: 50
 date: 2025-03-26
+start: 2025-03-26 15:30:00
 layout: slide
 event:
     title: Klub učiteľov informatiky
@@ -15,7 +16,7 @@ authors:
     - name: Miroslav 'mirek' Biňas
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
-# bitly: https://bit.ly/4iE06cA
+bitly: https://bit.ly/3DHcSIt
 # video: https://youtu.be/-Nue8zK_JVc
 ---
 
@@ -37,6 +38,10 @@ authors:
 }
 </style>
 
+<section id="countdown">
+Dnešný webinár začína už za
+<h1></h1>
+</section>
 
 {% include first.slide.html %}
 
@@ -337,7 +342,7 @@ Session completed.
 </section>
 
 
-<section id="last-service">
+<section id="last-service" data-markdown>
 ## Otestovanie prístupu
 
 * do UI len ako `root`
@@ -372,8 +377,41 @@ $ binwalk -e IoTGoat-raspberry-pi2.img
 ## Odkazy
 
 * [IoTGoat](https://github.com/OWASP/IoTGoat)
+* Základy IoT: [IoT Security](https://kurzy.kpi.fei.tuke.sk/iot1/2024/lectures/10.html)
 </section>
 
 
 {% include qr.html %}
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
+
+
+
+<script>
+    window.onload = function() {
+        let start = moment('{{ page.start }}', 'YYYY-MM-DD hh:mm:ss');
+        start.minutes( start.minutes() + 5 );
+
+        $("#countdown > h1").countdown(start.format('YYYY-MM-DD HH:mm:ss') , function (event) {
+            if(event.elapsed){
+                Reveal.slide(1);
+                Reveal.toggleAutoSlide(false);
+            }else{
+                let format = null; 
+                if(event.offset.hours == 0 && event.offset.minutes == 0){
+                    format = '%S';
+                }else if(event.offset.hours == 0){
+                    format = '%M:%S';
+                }else{
+                    format = '%H:%M:%S';
+                }
+
+//                console.log(event.strftime(format));
+                $(this).text(event.strftime(format));
+            }
+        });
+    };
+</script>
