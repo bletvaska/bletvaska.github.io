@@ -1,0 +1,398 @@
+---
+title: Raspberry Pi ako kiosk
+description: |
+    Ako vyzerá štúdium na KPI?
+duration: 30
+date: 2025-03-04
+layout: slide
+event:
+    title: Klub učiteľov informatiky
+    # url: https://abbsolutionsslovakia.com/
+categories: talk
+theme: night
+authors:
+    - name: Miroslav Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/3Xm05ld
+# video: https://youtu.be/s1RbHF_HCXo
+---
+
+<style>
+#browser-in-kiosk-mode > pre > code {
+  font-size: 0.9em;
+  line-height: 1.2em;
+}
+</style>
+
+
+{% include first.slide.html %}
+
+<section id="kiosk-mode" data-markdown>
+## Čo je to Kiosk?
+
+> Samoobslužné zariadeine s dotykovou obrazovkou, ktoré sa používa na predaj tovarov alebo služieb, poskytovanie informácií alebo interakciu s používateľmi.
+
+</section>
+
+
+<section id="kiosk-example" data-markdown>
+[![](images/kiosk-samsung.jpg)](https://www.samsung.com/sk/business/smart-signage/interactive-display/samsung-kiosk-with-windows-os-lh24kmccbgcxen/)
+
+notes:
+* kiosky mozu byt implementovane rozlicnym sposobom:
+  * na pulte
+  * na stene
+  * na stojane
+* tu je priklad kioskov od Samsungu
+* komerne riesenia sa pohybuju v cenach od 1000 EUR vyssie
+</section>
+
+
+<section id="rpi-kiosk" data-markdown>
+![](images/rpi.kiosk.india.jpg)
+
+notes:
+* rpi ako kiosk je jeden z popularnych sposobov vyuzitia minipocitaca rpi
+</section>
+
+
+<section id="howto" data-markdown>
+### Ako si postaviť vlastný kiosk?
+(návod)
+</section>
+
+
+<section id="installation" data-markdown>
+## 1. Inštalácia OS
+</section>
+
+
+<section id="raspberry-pi-os" data-markdown data-background="#F0F0F0">
+[![](images/rpios.png)](https://www.raspberrypi.com/software/operating-systems/)
+
+notes:
+* oficialny rpi os 
+  * desktop verzia
+  * pre rpi3 32bit verzia
+  * hlavne kvoli rozbehanemu a nakonfigurovanemu desktopu
+</section>
+
+
+<section id="rpi-imager" data-markdown>
+[![](images/rpi.imager.png)](https://www.raspberrypi.com/software/)
+
+notes:
+* mozete pouzit lubovolnu metodu na flashnutie SD karty
+  * balenaEtcher, dd
+* rpi imager je oficialny nastroj, ktory vie flashnut SD kartu s rpi os
+  * ma aj moznost stiahnut si aktualnu verziu rpi os
+  * mozete pomocou neho nakonfigurovat wifi, ssh, locale, timezone a dalsie veci
+</section>
+
+
+<section id="connection" data-markdown>
+### RPi Provisioning
+
+* zapnúť SSH
+* nastaviť WiFi pripojenie
+* nastaviť jazyk, časovú zónu, rozloženie klávesnice
+* nastaviť hostname
+* aktualizovať systém
+* doinštalovať potrebné balíčky
+</section>
+
+
+<section id="rpi-image-gen" data-markdown>
+[![](https://opengraph.githubassets.com/dd1a092ca6424b6a7c9199db6b8031f9e1c9be4aed88eee6f145d6a4f1a66c09/raspberrypi/rpi-image-gen)](https://github.com/raspberrypi/rpi-image-gen)
+</section>
+
+
+<section id="connection" data-markdown>
+## 2. Konfigurácia sieťového pripojenia
+
+notes:
+* pouzitie RPi moze byt v rozlicnych prostrediach
+  * mozno bude RPi pripojene k internetu 24/7
+  * mozno RPi nebude pripojene k internetu vobec
+* nastavenie siete urobite doma - tam, kde ho mate
+* je to priprava na 
+  * produkcne pouzitie (pripojenie k internetu 24/7), ale aj na
+  * servisne pripojenie, kde bude potrebne sa k RPi pripojit kvoli nastaveniu kiosku
+    * napr. cez WiFi z telefonu (WiFi tethering)
+    * alebo cez USB kabel cez telefon (USB tethering)
+    * alebo cez ethernet kabel s laptopom
+</section>
+
+
+<section id="rpi-connect" data-markdown>
+[![](images/rpi.connect.png)](https://connect.raspberrypi.com/)
+
+notes:
+* rpi connect je služba, ktorá umožňuje vzdialený prístup k zariadeniam Raspberry Pi cez webové rozhranie
+  * zdielanie plochy
+  * vzdialeny terminal
+* umožňuje jednoduché pripojenie a správu viacerých zariadení
+* beta od roku 2024, verzia 1.0 bola vydaná v marci 2025
+* toto chcete pouzivat!
+  * nepotrebujete ziadnu verejnu IP adresu
+  * nepotrebujete nastavovat ziadne port forwardingy
+  * nepotrebujete nastavovat VPN
+* rpi connect je bezplatná služba, ktorá je dostupná pre všetkých používateľov Raspberry Pi
+</section>
+
+
+<section id="rpi-connect-registration" data-markdown>
+### RPi Connect 101
+
+```bash
+# najprv treba zapnut
+$ rpi-connect on
+
+# potom sa prihlásime do sluzby zo zariadenia
+$ rpi-connect signin
+
+# kliknutim na vygenerovany odkaz sa zariadenie prihlasi
+# do sluzby a bude ho mozne spravovat cez webove rozhranie
+```
+</section>
+
+
+<section id="wifi-configuration" data-markdown>
+### WiFi konfigurácia
+
+```bash
+# vytvorenie WiFi pripojenia s názvom "CONN_NAME", 
+# ktoré sa pripojí k sieti s názvom "SSID" a heslom "PASSWORD"
+$ nmcli connection add type wifi \
+    con-name "CONN_NAME" \
+    ifname wlan0 \
+    ssid "SSID" \
+    wifi-sec.key-mgmt wpa-psk \
+    wifi-sec.psk "PASSWORD"
+
+# overenie pripojenia
+$ nmcli connection show
+```
+
+notes:
+* tymto sposobom je mozne pripravit konfiguraciu pre WiFi siet v mieste nasadenia
+* rovnako vsak je mozne pripravit konfiguraciu pre servisnu siet
+  * napr. pre WiFi siet z telefonu
+</section>
+
+
+<section id="ethernet-configuration" data-markdown>
+### Konfigurácia Ethernet pripojenia
+
+```bash
+# nastavenie IP adresy na 10.20.30.1
+$ nmcli connection add type ethernet \
+    con-name "Service Connection" \
+    ifname eth0 \
+    ipv4.addresses 10.20.30.1/24 \
+    ipv4.method manual
+
+# zapnutie rozhrania
+$ nmcli connection up "Service Connection"
+
+# overenie vysledku
+$ nmcli connection show
+```
+
+notes:
+* ethernetove pripojenie posluzi v pripade, ak sa potrebujeme pripojit k RPi cez kabel
+* pripojenie:
+  * IP adresa RPi bude 10.20.30.1/24
+  * na pocitaci staci nastavit IP adresu rucne z rovnakeho segmentu
+  * pouzit krizeny kabel
+* mozno vytvorit samostatnu konfiguraciu?
+  ```bash
+  $ nmcli connection add type ethernet \
+      con-name "Service Connection" \
+      ifname eth0 \
+      ipv4.addresses 10.20.30.1/24 \
+      ipv4.method manual
+  ```
+</section>
+
+
+<section id="autostart-app" data-markdown>
+## 3. Spustenie aplikácie po štarte
+
+notes:
+* nasim cielom je spustit pri zapnuti bud 
+  * webovy prehliadac, alebo
+  * prehravac videa
+* v oboch pripadoch sa jedna o graficke aplikacie. a kym si povieme o tom, ako ich spustit, tak si musime povedat trochu o tom, ako pracuje graficke rozhranie v Linuxe.
+</section>
+
+
+<section id="wayland-vs-xorg" data-markdown data-background="images/wayland.vs.x.jpg">
+notes:
+* graficke rozhranie v linuxe sa vola **display server** a v sucasnosti existuju dva hlavne display servery
+  * X11 (Xorg) - starsia technologia, ktora je v linuxe uz velmi dlho (od 80. rokov)
+  * Wayland - nova technologia, jednoduchsia a bezpecnejsia
+* v X serveri sa nachadzali dve aplikacie, ktore sa starali o vykreslenie okna:
+  * display server - zodpovedny za vykreslenie okna na obrazovke
+  * window manager - zodpovedny za spravu okien, ich presuvanie, zmenu velkosti, minimalizaciu, maximalizaciu, atd.
+* vo Waylande sa tieto dve aplikacie spojili do jednej, ktora sa vola compositor
+* RPi OS pouziva wayland experimentalne od roku 2021
+  * v 2021 s kompozitorom mutter
+  * v 2023 s kompozitorom wayfire na RPi 4 a 5, kde bol Wayland default
+  * na konci 2024 s kompozitorom labwc s moznostou spustat aj na starsich RPi a Wayland je default na vsetkych modeloch
+* takze aktualny stav
+  * Wayland je default na RPi OS
+  * labwc je default compositor
+* vysledok je taky, ze ak budete hladat navody, ako spravite kiosk z RPi, tak najdete navody v 99% prave pre X11 s jeho spravcami okien
+* https://www.raspberrypi.com/news/a-new-release-of-raspberry-pi-os/
+</section>
+
+
+<section id="autostart-in-labwc" data-markdown>
+### Autoštart v labwc
+
+* bash skript
+  * `/etc/xdg/labwc/autostart.sh`
+  * `$HOME/.config/labwc/autostart.sh`
+notes:
+* systemovy
+* pouzivatelsky
+</section>
+
+
+<section id="autostart" data-markdown>
+```bash
+#!/usr/bin/env bash
+
+# move mouse cursor out of the screen
+evemu-event /dev/input/event1 \
+    --type EV_REL --code REL_X --value 9999 --sync
+evemu-event /dev/input/event1 \
+    --type EV_REL --code REL_Y --value 9999 --sync
+
+# close other services
+# turns off pcmanfm for desktop management
+pcmanfm --desktop-off
+# kill watchdog for running apps
+killall -9 lwrespawn
+# kill panel
+killall -9 wf-panel-pi
+```
+</section>
+
+
+<section id="browser-in-kiosk-mode" data-markdown>
+### Prehliadač v kiosk režime
+
+```bash
+# auto-detect resolution and store in variables
+width=$(cut -d, -f1 /sys/class/graphics/fb0/virtual_size)
+height=$(cut -d, -f2 /sys/class/graphics/fb0/virtual_size)
+
+# start chromium in kiosk mode
+chromium-browser \
+    --no-first-run \
+    --start-maximized \
+    --noerrdialogs \
+    --disable-infobars \
+    --incognito \
+    --window-size="${width},${height}" \
+    --window-position=0,0 \
+    --kiosk \
+    --hide-scrollbars \
+    "${URL}"
+```
+</section>
+
+
+<section id="videoplayer-in-kiosk-mode" data-markdown>
+### Videoprehrávač v kiosk režime
+
+```bash
+# start vlc in kiosk mode
+cd "${HOME}/Videos" && cvlc \
+   --intf rc \
+   --rc-host localhost:4212 \
+   --fullscreen \
+   --no-video-title-show \
+   --video-on-top \
+   --no-audio \
+   --no-osd \
+   --no-mouse-events \
+   --loop \
+   *webm
+```
+</section>
+
+
+<section id="tips-and-tricks" data-markdown>
+## 4. Tipy a triky
+</section>
+
+
+<section id="config.txt" data-markdown>
+
+### `/boot/firmware/config.txt`
+
+```
+# signál do HDMI aj bez monitora
+hdmi_force_hotplug=1
+
+# vypínač RPi na GPIO 3
+# vypnutie - 2x stlačiť, zapnutie - 1x stlačiť
+dtoverlay=gpio-shutdown
+
+# vypne LED pre aktivity SD karty
+dtparam=act_led_trigger=none
+dtparam=act_led_activelow=on
+
+# vypne napájaciu LED
+dtparam=pwr_led_trigger=none
+dtparam=pwr_led_activelow=on
+```
+
+notes:
+* https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README
+* https://www.stderr.nl/Blog/Hardware/RaspberryPi/PowerButton.html
+* pravdepodobne sa da este pridat led-ka, ktora bude svietit, ked je rpi vypnute - https://gist.github.com/lbussy/9e81cbcc617952f1250e353bd42e7775
+</section>
+
+
+<section id="zram" data-markdown>
+### Zvýšenie výkonu cez ZRAM
+
+* vytvára komprimovanú pamäť v RAM, používa sa ako swap pri nedostatku fyzickej pamäte
+* inštalácia:
+  ```bash
+  $ sudo apt install --yes zram-tools
+  ```
+* konfigurácia v `/etc/default/zramswap`:
+  ```
+  ALGO=zstd
+  PERCENT=75
+  ```
+* reštart služby:
+  ```bash
+  $ sudo systemctl restart zramswap
+  ```
+* overenie cez `zramctl` alebo `free`
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [A new release of Raspberry Pi OS](https://www.raspberrypi.com/news/a-new-release-of-raspberry-pi-os/)
+* [RPi Connect](https://www.raspberrypi.com/software/connect/)
+* [Getting started with your Raspberry Pi](https://www.raspberrypi.com/documentation/computers/getting-started.html#setting-up-your-raspberry-pi)
+* [Návody (nie)len pre RPi](https://github.com/thagrol/Guides/tree/main)
+</section>
+
+
+{% include qr.html %}
