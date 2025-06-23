@@ -1,9 +1,9 @@
 ---
 title: Raspberry Pi ako kiosk
 description: |
-    Ako vyzerá štúdium na KPI?
+    RPi ako kisok
 duration: 30
-date: 2025-03-04
+date: 2025-06-26
 layout: slide
 event:
     title: Klub učiteľov informatiky
@@ -380,6 +380,27 @@ notes:
 </section>
 
 
+<section id="wlr-randr" data-markdown>
+### Vypnutie obrazovky
+
+* šetríme elektriku v noci ;)
+* pomocou `wlr-randr`
+  * Wayland alternatíva pre `xrandr`
+  * bez parametrov vypíše zoznam výstupov
+* príklady použitia:
+  ```bash
+  # vypnutie obrazovky HDMI-A-1
+  $ wlr-randr --output HDMI-A-1 --off
+
+  # opätovné zapnutie obrazovky
+  $ wlr-randr --output HDMI-A-1 --on
+
+  # otočenie obrazovky hore nohami
+  $ wlr-randr --output HDMI-A-1 --transform 180
+  ```
+</section>
+
+
 <section id="questions" data-markdown>
 ## Otázky?
 </section>
@@ -392,6 +413,7 @@ notes:
 * [RPi Connect](https://www.raspberrypi.com/software/connect/)
 * [Getting started with your Raspberry Pi](https://www.raspberrypi.com/documentation/computers/getting-started.html#setting-up-your-raspberry-pi)
 * [Návody (nie)len pre RPi](https://github.com/thagrol/Guides/tree/main)
+* archlinux: [Labwc](https://wiki.archlinux.org/title/Labwc)
 </section>
 
 
