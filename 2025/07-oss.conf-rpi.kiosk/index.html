@@ -413,8 +413,7 @@ notes:
 
 * vlastný obrázok pri štartovaní systému
 * [Plymouth](https://wiki.archlinux.org/title/Plymouth) - správca tém pre spúšťanie/ukončovanie systému
-  * komplexné témy
-  * splash screen môže byť animácia
+  * splash screen môže byť aj animácia
 * krátka odpoveď na zmenu splash obrazovky:
   ```bash
   # zistíme aktuálnu tému
@@ -423,6 +422,9 @@ notes:
 
   # zmeníme jej splash obrazovku za vlastnú
   /usr/share/plymouth/themes/pix/splash.png
+
+  # aplikujeme
+  $ sudo plymouth-set-default-theme --rebuild-initrd pix
   ```
 </section>
 
@@ -439,7 +441,7 @@ notes:
 * [RPi Connect](https://www.raspberrypi.com/software/connect/)
 * [Getting started with your Raspberry Pi](https://www.raspberrypi.com/documentation/computers/getting-started.html#setting-up-your-raspberry-pi)
 * [Návody (nie)len pre RPi](https://github.com/thagrol/Guides/tree/main)
-* archlinux: [Labwc](https://wiki.archlinux.org/title/Labwc)
+* ArchLinux: [Labwc](https://wiki.archlinux.org/title/Labwc), [Plymouth](https://wiki.archlinux.org/title/Plymouth)
 </section>
 
 
