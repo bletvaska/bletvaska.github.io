@@ -1,7 +1,10 @@
 ---
 title: Raspberry Pi ako kiosk
+subtitle: |
+    alebo "Mission: Kioskpossible"
 description: |
-    RPi ako kisok
+    Minipočítač Raspberry Pi je obľúbeným hrdinom mnohých domácich kutilských projektov. Jedným z nich je aj (webový) kiosk. Ale nie hocijaký – myslíme tým kiosk, ktorý beží spoľahlivo 24/7. Od prvého zapnutia. Taký, ktorý sa dá spravovať na diaľku. A keď nie na diaľku, tak aspoň na blízko. Ktorý v prípade potreby vypnete a zapnete ručne – a on bude aj tak fungovať. Rovnako. Aj zajtra.
+    Presne o tom bude tento príspevok – ako vytiahnuť Raspberry Pi zo šuflíka a spraviť z neho spoľahlivý kiosk. Bude to trochu technické, no veľmi praktické. Pripravte sa na príručku plnú tipov, chýb a víťazných „Aha!“ momentov, ktoré vám pomôžu zachrániť vaše duševné zdravie.
 duration: 30
 date: 2025-06-26
 layout: slide
@@ -352,11 +355,9 @@ dtoverlay=gpio-shutdown
 
 # vypne LED pre aktivity SD karty
 dtparam=act_led_trigger=none
-dtparam=act_led_activelow=on
 
 # vypne napájaciu LED
 dtparam=pwr_led_trigger=none
-dtparam=pwr_led_activelow=on
 ```
 
 notes:
