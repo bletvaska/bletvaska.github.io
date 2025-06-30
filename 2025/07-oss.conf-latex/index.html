@@ -1,0 +1,225 @@
+---
+title: Ako naši študenti píšu záverečné práce v $\LaTeX$-e
+description: |
+  Naši študenti odovzdávajú záverečné práce v typografickom systéme LaTeX povinne už viac než sedem rokov. Ročne tak vznikajú stovky prác a s nimi aj množstvo drobných nástrojov a overených postupov, ktoré sme v priebehu rokov zapracovali do celého procesu. Tento príspevok ponúka prehľad aktuálneho stavu šablóny v roku 2025, náčrt jej ďalšieho potenciálu a zároveň predstavuje náš agilný prístup k písaniu a hodnoteniu záverečných prác.
+  Ak uvažujete nad tým, že by aj vaši študenti mohli pri tvorbe záverečných prác používať LaTeX, príďte sa inšpirovať – ukážeme vám, ako to môže fungovať v praxi.
+
+duration: 25
+date: 2025-07-02
+<!-- bitly: https://bit.ly/45QaHfi -->
+event:
+    title: OSSConf 2025
+    url: https://ossconf.soit.sk/
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+
+---
+
+<style>
+
+/* #etl-in-bash code,
+#etl-in-python code,
+#cli-tool code,
+#apache-airflow-installation code
+{
+    font-size: 0.7em;
+    line-height: 1.5em;
+} */
+
+section#intro,
+section#k8s-rambo
+{
+  margin-top: 15%;
+  background-color: #2b3f679c;
+}
+</style>
+
+{% include first.slide.html %}
+
+<section id="previously" data-markdown>
+### Videli ste na predchádzajúcich ročníkoch [OSS Conf](https://ossconf.fri.uniza.sk/)...
+
+notes:
+* este skor, ako zacnem, tak len pripomeniem, ze tu na tuto temu nehovorim prvykrat
+</section>
+
+
+<section id="previously-2018" data-markdown>
+## [Zostavovanie $\LaTeX$ dokumentov ináč a využitie dedičnosti pri tvorbe šablón](https://bletvaska.github.io/2018/ossconf-tipy.pre.pracu.s.latexom.html)
+
+[Miroslav Biňas](http://bletvaska.github.io) / **[OSSConf 2018]({{ page.event.url }})**
+
+notes:
+* prvykrat som o tom hovoril v roku 2018, kedy som si sadol a znacne prerobil a aktualizoval vtedajsiu sablonu zaverecnych prac v LaTeX-u
+</section>
+
+
+<section id="previously-2024" data-markdown>
+## [Písanie záverečných prác v LaTeX-u](https://bletvaska.github.io/2024/07-oss.conf-latex/)
+
+[Miroslav Biňas](http://bletvaska.github.io) / **[OSSConf 2024]({{ page.event.url }})**
+
+notes:
+* naposledy som o tejto teme hovoril vlani, ked som sablonu prvykrat vaznejsie aktualizoval po zhruba 6. rokoch
+</section>
+
+
+<section id="usage-of-thesis" data-markdown>
+### záverečné práce na [KPI](https://kpi.fei.tuke.sk/) sa píšu [**LEN** v $\LaTeX$-u]() od roku [~2018]()
+
+notes:
+* aby ste vsak mali prehlad, tak uvediem niekolko cisiel
+* u nas na KPI studenti pisu zavarecne prace **POVINNE** v LaTeX-u zhruba od roku 2018
+</section>
+
+
+<section id="yearly" data-markdown>
+## vyše [400]() prác ročne
+
+notes:
+* a aby ste mali predstavu o tom, kolko tych prac rocne je, tak je ich zhruba 400
+  * nasich bakalarov + diplomantov je okolo 380
+  * su aj ine katedry, kde studenti pisu zaverecne prace v LaTeX-u a pouzivaju nasu sablonu
+</section>
+
+
+<section id="sample-thesis" data-markdown>
+## Práce na ukážku
+
+* slovenská bakalárka
+* anglická bakalárka
+* WIP
+
+notes:
+* aby ste mali predstavu aj o tom, ako vysledok vyzera, tak som priniesol tri ukazky
+  * BP v slovencine
+  * BP v anglictine
+  * WIP - nepozerajte sa na text (ukazkova praca), ale na to, ako to vyzera ako celok
+</section>
+
+
+<section id="the-state-of-the-art" data-markdown>
+## verzia [2025.4](https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex)
+
+notes:
+* aktualne v tomto roku sme spravili 4 verzie
+  * kazda ~10 zmien
+  * praca pokracuje
+</section>
+
+
+<section id="the-process" data-markdown>
+## [Proces tvorby]() záverečnej práce
+
+notes:
+* to, o com chcem dnes hovorit a co vam chcem ukazat, je, ako u nas vyzera proces tvorby zaverecnej prace
+</section>
+
+
+<section id="thesis-as-a-project" data-markdown>
+## Záverečná práca ako [softvérový projekt]()
+
+notes:
+* my sa totiz pozerame na zaverecnu pracu z pohladu organizacie a riadenia ako na softverovy projekt
+  * dohodnute deadline-y
+  * softver na organizaciu je rovnaky ako v pripade softverovych projektov
+  * tlak na vysledok
+  * struktura prace vyzera ako struktura projektu ;)
+</section>
+
+
+<section id="waterfall-vs-agile" data-markdown data-background="#fff">
+![](images/waterfall.vs.agile.webp)
+
+notes:
+* ak sa budeme pozerat na riadenie projektu, resp. na pristup k jeho rieseniu, tak budeme hovorit o dvoch pristupoch:
+  * vodopad
+  * agilny pristupu
+* vlastnosti vodopadu:
+  * sekvencny - jedna faza po druhej
+  * pevne stanovene casy
+  * malo flexibilny - tazko sa vracia naspat
+  * nie je pripraveny na zmeny
+  * projekt je cierna skrinka
+  * dlho trva - vid statne zakazky
+* vlastnosti agilneho pristupu:
+  * iterativny pristup -  robi sa v cykloch (sprintoch)
+  * tesne previazanie zakaznika s vyvojarom
+  * pripraveny na zmeny
+  * zakaznik na konci dostane najlepsi mozny produkt, ktory chce
+</section>
+
+
+<section id="sprints-for-thesis" data-markdown>
+## [Šprintovanie](https://theses.kpi.fei.tuke.sk/)
+
+* dobra praca zreje ako vino :-)
+* bakalárske práce - [**6**]() šprintov
+* diplomové práce - [**9**]() šprintov
+
+notes:
+* kedze je nasim cielom zvysovat kvalitu zaverecnych prac, tak
+  * neorganizujeme ju ako vodopad - raz sa zada a caka sa len na napisanie
+  * organizujeme ju v mesacnych sprintoch
+* existuje zoznam toho, co treba v jednotlivych sprintoch dodat
+  * meratelne ukazovatele ;)
+  * pocet stran
+  * pocet zdrojov
+* kolega urobil aj web, kde sa da nahliadnut do toho, ako sa dari studentom sprintovat
+  * od sprintovania sa odvija aj vysledne hodnotenie
+</section>
+
+
+<section id="the-architecture" data-markdown>
+## Architektúra
+</section>
+
+
+<section id="live-demo" data-markdown>
+## [Živá ukážka](https://git.kpi.fei.tuke.sk/mb774sn/thesis)
+
+notes:
+1. spravit zmenu
+2. `git commit && git push`
+3. gitlab ui
+</section>
+
+
+<section id="future-work" data-markdown>
+## Ďalšia práca
+
+* ďalší "tuning"
+  * šablóna
+  * projekt
+  * Docker obraz
+* pridať ďalšie nástroje kontroly pre každý šprint
+</section>
+
+
+<section id="join-us" data-markdown>
+> [Aj tvoji študenti môžu písať práce v $LaTeX$-u]((https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex)
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+### Odkazy
+
+* [Thesis in $\LaTeX$](https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex) - verejne dostupná šablóna
+* [`bletvaska/thesis`](https://hub.docker.com/r/bletvaska/thesis) - Docker obraz
+* [Awesome $\LaTeX$](https://github.com/egeerardyn/awesome-LaTeX) - Curated list of $\LaTeX$ awesomeness
+* OSSConf 2018: [Zostavovanie $\LaTeX$ dokumentov ináč a využitie dedičnosti pri tvorbe šablón](https://bletvaska.github.io/2018/ossconf-tipy.pre.pracu.s.latexom.html)
+* OSSConf 2024: [Písanie záverečných prác v $LaTeX$-u](https://bletvaska.github.io/2024/07-oss.conf-latex/)
+</section>
+
+
+{% include qr.html %}

@@ -5,12 +5,12 @@ subtitle: |
 description: |
     Minipočítač Raspberry Pi je obľúbeným hrdinom mnohých domácich kutilských projektov. Jedným z nich je aj (webový) kiosk. Ale nie hocijaký – myslíme tým kiosk, ktorý beží spoľahlivo 24/7. Od prvého zapnutia. Taký, ktorý sa dá spravovať na diaľku. A keď nie na diaľku, tak aspoň na blízko. Ktorý v prípade potreby vypnete a zapnete ručne – a on bude aj tak fungovať. Rovnako. Aj zajtra.
     Presne o tom bude tento príspevok – ako vytiahnuť Raspberry Pi zo šuflíka a spraviť z neho spoľahlivý kiosk. Bude to trochu technické, no veľmi praktické. Pripravte sa na príručku plnú tipov, chýb a víťazných „Aha!“ momentov, ktoré vám pomôžu zachrániť vaše duševné zdravie.
-duration: 30
-date: 2025-06-26
+duration: 25
+date: 2025-07-02
 layout: slide
 event:
-    title: Klub učiteľov informatiky
-    # url: https://abbsolutionsslovakia.com/
+    title: OSSConf 2025
+    url: https://ossconf.soit.sk/
 categories: talk
 theme: night
 authors:
@@ -26,6 +26,10 @@ bitly: http://bit.ly/46fSWrE
   font-size: 0.9em;
   line-height: 1.2em;
 }
+
+#howto img {
+  width: 60%;
+}
 </style>
 
 
@@ -35,7 +39,6 @@ bitly: http://bit.ly/46fSWrE
 ## Čo je to Kiosk?
 
 > Samoobslužné zariadeine s dotykovou obrazovkou, ktoré sa používa na predaj tovarov alebo služieb, poskytovanie informácií alebo interakciu s používateľmi.
-
 </section>
 
 
@@ -60,9 +63,11 @@ notes:
 </section>
 
 
-<section id="howto" data-markdown>
-### Ako si postaviť vlastný kiosk?
-(návod)
+<section id="howto" data-markdown data-background="white">
+### Staviame vlastný RPi kiosk
+###### (na ľubovoľnom RPi s [RPi OS with desktop](https://www.raspberrypi.com/software/operating-systems/) (13.5.2025))
+
+![](images/pi-plug-in.gif)
 </section>
 
 
@@ -97,13 +102,19 @@ notes:
 <section id="connection" data-markdown>
 ### RPi Provisioning
 
-* zapnúť SSH
-* nastaviť WiFi pripojenie
-* nastaviť jazyk, časovú zónu, rozloženie klávesnice
-* nastaviť hostname
-* aktualizovať systém
-* doinštalovať potrebné balíčky
+* cez RPi Imager:
+  * zapnúť SSH
+  * nastaviť WiFi pripojenie
+  * nastaviť jazyk, časovú zónu, rozloženie klávesnice
+  * nastaviť hostname
+* pri prvom spustení:
+  * aktualizovať systém
+  * doinštalovať potrebné balíčky
 </section>
+
+<!-- <section data-markdown="">
+* [RPi OS with desktop](https://www.raspberrypi.com/software/operating-systems/), 13.5.2025
+</section> -->
 
 
 <section id="rpi-image-gen" data-markdown>
@@ -269,16 +280,16 @@ notes:
 #!/usr/bin/env bash
 
 # move mouse cursor out of the screen
-evemu-event /dev/input/event1 \
+evemu-event /dev/input/event0 \
     --type EV_REL --code REL_X --value 9999 --sync
-evemu-event /dev/input/event1 \
+evemu-event /dev/input/event0 \
     --type EV_REL --code REL_Y --value 9999 --sync
 
 # close other services
-# turns off pcmanfm for desktop management
-pcmanfm --desktop-off
 # kill watchdog for running apps
 killall -9 lwrespawn
+# turns off pcmanfm for desktop management
+pcmanfm --desktop-off
 # kill panel
 killall -9 wf-panel-pi
 ```
