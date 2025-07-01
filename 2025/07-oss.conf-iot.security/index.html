@@ -80,10 +80,77 @@ notes:
 
 
 <section id="the-result" data-markdown>
-## Žiadny :-/
+## Žiadny :-(
 
 notes:
+* ziadny alebo minimalny
+* predposleny den pred deadline-om ma napadlo pozerat sa aj na tento problem
+  * najhorsi/najslabsi studenti
+  * sprava hesiel/uctov
 </section>
+
+
+<section id="examples-1" data-markdown>
+
+</section>
+
+
+<section id="nordvpn-survey" data-markdown data-background="white">
+[![](images/nordvpn.png)](https://s1.nordcdn.com/nord/misc/0.42.0/vpn/brand/your-smart-devices-put-you-at-risk.pdf)
+
+notes:
+* aby som zdovodnil, ze preco je to dolezite - Nordic VPN urobil prieskum a polozil tuto otazku
+  * vsimnite si, ze predvolene heslo na zariadeni zmeni len necelych 36% pouzivatelov
+  * to znamena, ze 64%, resp. 2 z 3 zariadeni maju nastavene predvolene heslo a utocnik ma sancu 2 z 3, ze sa s tym heslom trafi :-P
+</section>
+
+
+<section id="the-plan" data-markdown>
+## Capture the Flag
+
+* CTF je typ [bezpečnostnej súťaže]()
+* úlohou súťažiacich (hackerov) je nájsť tzv. [vlajky]() (špeciálny reťazec, napr `CTF-A1B2C3`)
+* vlajky je možné nájsť na rozličných miestach (napr.  v kóde webovej stránky, hlavičke HTTP správy, v konfiguračnom súbore, v MOTD, v binárke súboru, ...)
+* na ich získanie sú potrebné technické zručnosti a znalosti
+
+notes:
+* na popularizaciu a otestovanie bezpecnosti sa organizuju rozlicne sutaze. jednou z nich je aj CTF
+* ulohou sutaziacich si hladat vlajky
+  * je to specialny retazec
+  * moze byt kdekolvek
+  * kdekolvek znamena fakt kdekolvek
+* priklad:
+  * mame webovu appku
+  * vlajky mozu byt:
+    * v HTML kode v prehliadaci
+    * v dotahovanom JS kode v prehliadaci
+    * v hlavicke/tele odpovede HTTP protokolu
+    * vo websockete
+    * v konkretnej polozke v databaze
+    * v konfiguracnom subore webovej aplikacie
+    * v konfiguracnom subore weboveho servera, ktory tuto aplikaciu spusta
+    * v konfigracnom subore databazavoeho systemu
+    * v MOTD
+    * v premennych prostredia spusteneho kontajneru
+</section>
+
+
+<section id="the-goal" data-markdown>
+### Cieľ - [integrovať CTF do zariadení IoT Gateway]()
+
+notes:
+* detiska budu moct hackovat
+* budu odmenovani bodmi navyse
+  * mozno aj velmi velkymi bodmi
+</section>
+
+
+
+
+<section id="smart-department" data-markdown data-background="white">
+![](images/smart.department-architecture.png)
+</section>
+
 
 
 

@@ -22,14 +22,14 @@ authors:
 
 <style>
 
-/* #etl-in-bash code,
+#etl-in-bash code,
 #etl-in-python code,
 #cli-tool code,
-#apache-airflow-installation code
+.architecture code
 {
-    font-size: 0.7em;
-    line-height: 1.5em;
-} */
+    font-size: 0.9em;
+    line-height: 1.15em;
+} 
 
 section#intro,
 section#k8s-rambo
@@ -175,8 +175,174 @@ notes:
 </section>
 
 
-<section id="the-architecture" data-markdown>
-## Architektúra
+<section id="how-it-works-I" class="architecture" data-transition="none">
+  <pre>
+                      
+                      
+                    
+                    
+                    
+  O   1. zadanie    O 
+ /|\ ------------> /|\
+ / \               / \
+vedúci           študent
+
+
+
+
+                      
+                      
+                      
+                                      
+</pre>
+</section>
+
+
+<section id="how-it-works-ii" class="architecture" n data-transition="none">
+<pre>
+
+
+
+
+
+  O   1. zadanie    O 
+ /|\ ------------> /|\
+ / \               / \ 
+vedúci           študent
+                    ^   
+                    |   
+                    |   2. fork   +========+ 
+                    +------------ | GitLab | 
+                      repozitára  +========+ 
+                        
+                        
+                        
+</pre>
+</section>
+
+
+<section id="how-it-works-iii" class="architecture" data-transition="none">
+<pre>
+                                         +======================+
+                      3. písanie práce   | Autorské prostredie  |
+                    +------------------> | (lokálne /           |
+                    |                    |         / vzdialené) |
+                                         +======================+
+  O   1. zadanie    O 
+ /|\ ------------> /|\
+ / \               / \
+vedúci           študent
+                    ^   
+                    |   
+                    |   2. fork   +========+
+                    +------------ | GitLab |
+                      repozitára  +========+
+                                      
+                                      
+                                      
+</pre>
+</section>
+
+
+<section id="survey-editor" data-markdown data-background="white">
+![](images/survey-editor.png)
+</section>
+
+
+<section id="survey-build" data-markdown data-background="white">
+![](images/survey-build.png)
+</section>
+
+
+<section id="how-it-works-iiib" class="architecture" data-transition="none">
+<pre>
+                                         +======================+
+                      3. písanie práce   | Autorské prostredie  |
+                    +------------------> | (lokálne /           |
+                    |                    |         / vzdialené) |
+                                         +======================+
+  O   1. zadanie    O 
+ /|\ ------------> /|\
+ / \               / \
+vedúci           študent
+                    ^   
+                    |   
+                    |   2. fork   +========+
+                    +------------ | GitLab |
+                      repozitára  +========+
+                                      
+                                      
+                                      
+</pre>
+</section>
+
+
+<section id="how-it-works-iv" class="architecture" data-transition="none">
+<pre>
+                                         +======================+
+                      3. písanie práce   | Autorské prostredie  |
+                    +------------------> | (lokálne /           |
+                    |                    |         / vzdialené) |
+                                         +======================+
+  O   1. zadanie    O    4. git push
+ /|\ ------------> /|\ ---------------+
+ / \               / \                |
+vedúci           študent              |
+                    ^                 |
+                    |                 V
+                    |   2. fork   +========+  
+                    +------------ | GitLab | 
+                      repozitára  +========+ 
+                                      
+                                      
+                                      
+</pre>
+</section>
+
+
+<section id="how-it-works-v" class="architecture" data-transition="none">
+<pre>
+                                         +======================+
+                      3. písanie práce   | Autorské prostredie  |
+                    +------------------> | (lokálne /           |
+                    |                    |         / vzdialené) |
+                                         +======================+
+  O   1. zadanie    O    4. git push
+ /|\ ------------> /|\ ---------------+
+ / \               / \                |
+vedúci           študent              |
+                    ^                 |
+                    |                 V
+                    |   2. fork   +========+  5. spustí job   +=======+
+                    +------------ | GitLab | ---------------> | CI/CD |
+                      repozitára  +========+                  +=======+
+                                    
+                                    
+                                    
+</pre>
+</section>
+
+
+<section id="how-it-works-vi" class="architecture" data-transition="none">
+<pre>
+                                         +======================+
+                      3. písanie práce   | Autorské prostredie  |
+                    +------------------> | (lokálne /           |
+                    |                    |         / vzdialené) |
+                                         +======================+
+  O   1. zadanie    O    4. git push
+ /|\ ------------> /|\ ---------------+
+ / \               / \                |
+vedúci           študent              |
+                    ^                 |
+                    |                 V
+                    |   2. fork   +========+  5. spustí job   +=======+
+                    +------------ | GitLab | ---------------> | CI/CD |
+                      repozitára  +========+                  +=======+
+                                      ^                           |
+                                      |  6. vygeneruje artefakty  |
+                                      +---------------------------+
+</pre>
 </section>
 
 
@@ -202,7 +368,7 @@ notes:
 
 
 <section id="join-us" data-markdown>
-> [Aj tvoji študenti môžu písať práce v $LaTeX$-u]((https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex)
+> [Aj tvoji študenti môžu písať práce v $LaTeX$-u!]((https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex)
 </section>
 
 
