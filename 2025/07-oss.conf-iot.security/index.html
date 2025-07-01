@@ -1,0 +1,107 @@
+---
+title: O bezpečnosti v Internete ovládanom toastermi
+description: |
+  Legenda hovorí, že písmeno „S“ v skratke IoT znamená „bezpečnosť“. A tak, ako v skratke chýba písmeno S, tak sa bezpečnosti venujeme nedostatočne – ak vôbec – aj vo výučbe príslušných technológií. Dopadom tejto nedbanlivosti môže byť práve Internet ovládaný ovládnutými toastermi.
+  V tomto príspevku vám predstavím, ako sa tejto hrozbe snažíme predísť vo výučbe predmetu IoT na TUKE, a aký obrovský popularizačný potenciál táto téma má. A ako bonus si môžete sami vyskúšať zabezpečenie jedného z našich zariadení.
+duration: 25
+date: 2025-07-03
+<!-- bitly: https://bit.ly/45QaHfi -->
+event:
+    title: OSSConf 2025
+    url: https://ossconf.soit.sk/
+categories: talk
+layout: slide
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+
+---
+
+<style>
+section#intro,
+section#k8s-rambo
+{
+  margin-top: 15%;
+  background-color: #2b3f679c;
+}
+</style>
+
+{% include first.slide.html %}
+
+
+<section id="the-legend" data-markdown>
+> Písmeno "S" v skratke IoT znamená _bezpečnosť_.
+
+notes:
+* legenda
+</section>
+
+
+<section id="statista" data-background="#f5f5f5">
+  <a href="https://www.statista.com/statistics/1183457/iot-connected-devices-worldwide/" rel="nofollow"><img src="https://www.statista.com/graphic/1/1183457/iot-connected-devices-worldwide.jpg" alt="Statistic: Number of Internet of Things (IoT) connections worldwide from 2022 to 2023, with forecasts from 2024 to 2034 (in billions)  | Statista" style="width: 85%; height: auto !important; max-width:1000px;-ms-interpolation-mode: bicubic;"/></a>
+
+
+  <aside class="notes">
+    bilion - v amerike je to 10^12, u nas je to 10^18
+  </aside>
+</section>
+
+
+<section id="security-risk" data-markdown>
+## Bezpečnostné riziko
+
+notes:
+* 
+</section>
+
+
+<section id="owasp" data-markdown>
+[![](images/logo-owasp.png)](https://owasp.org/)
+</section>
+
+
+<section id="owasp-iot-top-10" data-markdown data-background="#303030">
+[![](images/owasp.iot.top.ten.jpg)](https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10)
+</section>
+
+
+<section id="owasp-iot-goat" data-markdown>
+[![](https://opengraph.githubassets.com/f993c8e3694331cd888fa6ca319a677984f9609bdfb5ce8bfe5bb245ac557e1e/OWASP/IoTGoat)](https://github.com/OWASP/IoTGoat)
+</section>
+
+
+<section id="the-impact" data-markdown>
+## Aký to malo dopad?
+
+notes:
+</section>
+
+
+<section id="the-result" data-markdown>
+## Žiadny :-/
+
+notes:
+</section>
+
+
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+### Odkazy
+
+* [Thesis in $\LaTeX$](https://git.kpi.fei.tuke.sk/tuke/thesis.in.latex) - verejne dostupná šablóna
+* [`bletvaska/thesis`](https://hub.docker.com/r/bletvaska/thesis) - Docker obraz
+* [Awesome $\LaTeX$](https://github.com/egeerardyn/awesome-LaTeX) - Curated list of $\LaTeX$ awesomeness
+* OSSConf 2018: [Zostavovanie $\LaTeX$ dokumentov ináč a využitie dedičnosti pri tvorbe šablón](https://bletvaska.github.io/2018/ossconf-tipy.pre.pracu.s.latexom.html)
+* OSSConf 2024: [Písanie záverečných prác v $LaTeX$-u](https://bletvaska.github.io/2024/07-oss.conf-latex/)
+</section>
+
+
+{% include qr.html %}
