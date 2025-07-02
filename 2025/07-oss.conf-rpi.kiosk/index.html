@@ -309,7 +309,7 @@ width=$(cut -d, -f1 /sys/class/graphics/fb0/virtual_size)
 height=$(cut -d, -f2 /sys/class/graphics/fb0/virtual_size)
 
 # start chromium in kiosk mode
-chromium-browser \
+/usr/bin/lwrespawn /usr/bin/chromium-browser \
     --no-first-run \
     --start-maximized \
     --noerrdialogs \
@@ -329,7 +329,7 @@ chromium-browser \
 
 ```bash
 # start vlc in kiosk mode
-cd "${HOME}/Videos" && cvlc \
+cd "${HOME}/Videos" && /usr/bin/lwrespawn /usr/bin/cvlc \
    --intf rc \
    --rc-host localhost:4212 \
    --fullscreen \
