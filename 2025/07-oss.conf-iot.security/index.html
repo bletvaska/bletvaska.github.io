@@ -53,17 +53,44 @@ notes:
 ## Bezpečnostné riziko
 
 notes:
-* 
+* uvedomme si dopad problemu
+* firma vyrobi dajme tomu milion zariadeni, ktore aj preda. a dojde k bezpecnostnemu incidentu.
+  * budeme ho vediet opravit? nie je "poskodeny" aj aktualizacny mechanizmus? a mame ho vlastne? a da sa este aj pouzit?
+  * co ak zakaznici zacnu predane kusy vracat a chciet peniaze? utiahneme to?
+  * co ak my budeme musiet chodit a servisovat zakaznicke nasadenia? utiehneme to?
+  * co to spravi s menom nasej spolocnosti? prezijeme to?
+* bankrot?
 </section>
 
 
 <section id="owasp" data-markdown>
 [![](images/logo-owasp.png)](https://owasp.org/)
+
+notes:
+* a tak som rozmyslal, ako tuto temu dostat do vyucby.
+* OWASP
+  * organizacia, ktora popularizuje bezpecnost
+  * vytvara konferencie, talky, nastroje, ...
+  * najznamejsi projekt sa vola OWASP Top 10
+    * hovori o 10 najvacsich problemoch/rizikach pri vyvoji webovych aplikacii
+    * aktualizuje sa kazde zhruba 4 roky komunitou odbornikov (desattisice ludi (mozno stotisice))
 </section>
 
 
 <section id="owasp-iot-top-10" data-markdown data-background="#303030">
 [![](images/owasp.iot.top.ten.jpg)](https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10)
+
+notes:
+* jednym z jej projektov je vsak aj OWASP IoT Top 10
+* zoznam 10 najvacsich hrozieb v oblasti IoT
+
+</section>
+
+
+<section id="video-lecture">
+  <h2><a href="https://kurzy.kpi.fei.tuke.sk/iot1/2024/lectures/10.html">IoT a bezpečnosť</a></h2>
+
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/6fe81A7zpPY?si=nSRrPeZTawsUVOkS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </section>
 
 
@@ -90,8 +117,58 @@ notes:
 </section>
 
 
-<section id="examples-1" data-markdown>
+<section id="hardcoded-passwords" data-markdown>
+### #1 Weak, guessable or hard coded passwords
+</section>
 
+
+<section id="hardcoded-passwords-description" data-markdown>
+> Use of easily bruteforced, publicly available, or unchangeable credentials, including backdoors in firmware or client software that grants unauthorized access to deployed systems.
+</section>
+
+
+
+<section id="examples-1" data-markdown>
+![](images/students-js1.jpg)
+
+notes:
+* staticka (hardcoded passwords) konfiguracia pre mqtt pripojenie
+* TUYA like - posiela to na cinske servery
+</section>
+
+
+<section id="examples-2" data-markdown>
+![](images/students-js2.jpg)
+
+notes:
+* to iste, len zapisane inac
+* co sa stane, ak dojde k vyzradeniu loginu a hesla a admini prijmu strasne rozhodnutie, ze credentials zmenia?
+</section>
+
+
+<section id="examples-3" data-markdown>
+![](images/students-python1.jpg)
+
+notes:
+* to iste, ale pre zmenu v pythone
+</section>
+
+
+<section id="examples-4" data-markdown>
+![](images/students-python2.jpg)
+
+notes:
+* opat defaults pre mqtt a databazu
+</section>
+
+
+<section id="examples-5" data-markdown>
+![](images/students-python3.jpg)
+</section>
+
+
+<section id="examples-6" data-markdown>
+![](images/students-python4.jpg)
 </section>
 
 
@@ -145,8 +222,6 @@ notes:
 </section>
 
 
-
-
 <section id="smart-department" data-markdown data-background="white">
 ![](images/smart.department-architecture.png)
 </section>
@@ -161,6 +236,8 @@ notes:
 ### Odkazy
 
 * [Namakaný webinár #43](https://namakanyden.sk/webinare/)
+* [OWASP IoT Top 10](https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10)
+* [OWASP IoT Goat](https://github.com/OWASP/IoTGoat)
 </section>
 
 
