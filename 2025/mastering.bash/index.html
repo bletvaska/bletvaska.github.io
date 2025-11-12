@@ -613,13 +613,13 @@ note:
 
 
 <section data-markdown id="env-file">
-## `.env` File
+### `.env` File
 
 * many apps expect it to exist in the same folder from which the app is executed
 * loading is simple:
   ```bash
   if [[ -f .env ]]; then
-  	source .env
+     source .env
   fi
   ```
 * or as oneliner:
@@ -630,6 +630,8 @@ note:
 
 
 <section data-markdown>
+### Running the Script in Modified Environment
+
 * source and export your env vars **before** running the app
 
     ```bash
