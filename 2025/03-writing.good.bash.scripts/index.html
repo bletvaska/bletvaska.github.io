@@ -8,7 +8,7 @@ description: |
 duration: 120
 layout: slide
 theme: night
-date: 2024-03-20
+date: 2025-11-12
 # bitly: https://bit.ly/3QVWwiG
 event:
     title: DevOps Adv Training
@@ -19,14 +19,13 @@ authors:
     - name: Mirek Biňas
       email: mirek@cnl.sk
       url: https://bletvaska.github.io
-published: false
+published: true
 todo:
 - getopts
 - xargs
 - shopts - `**/*.c`
 - tee
 ---
-
 
 <style>
 section#bash-script-template pre,
@@ -86,8 +85,8 @@ more than wherever
 
 * capitalization of var names:
 
-    * `${ALL_CAPS}` for global and env (exported) vars
-    * `${lower_case}` for local vars
+    * `ALL_CAPS` for global and env (exported) vars
+    * `lower_case` for local vars
 
 note:
 * https://bertvv.github.io/cheat-sheets/Bash.html
@@ -544,7 +543,7 @@ function delete_entry() {
 * some commands expect filenames as params
     * pipelining does not work
 
-* operator `&lt;()`
+* operator `&lt;(CMD)`
 
   ```bash
   jq -r .client_ip &lt;(http http://worldtimeapi.org/api/ip)
@@ -605,6 +604,28 @@ note:
 * env vars are easy to change between deploys without changing any code
 * the preffered way, how to communicate with apps from outside of apps
 * approach is used also in apps running in containers
+</section>
+
+
+<section data-markdown data-background="#F0E548">
+## .env
+</section>
+
+
+<section data-markdown id="env-file">
+## `.env` File
+
+* many apps expect it to exist in the same folder from which the app is executed
+* loading is simple:
+  ```bash
+  if [[ -f .env ]]; then
+  	source .env
+  fi
+  ```
+* or as oneliner:
+  ```bash
+  [[ -f .env ]] && source .env
+  ```
 </section>
 
 
