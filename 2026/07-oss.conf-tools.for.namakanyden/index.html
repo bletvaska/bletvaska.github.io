@@ -3,19 +3,19 @@ title: Aké nástroje používame pri organizácii Namakaných podujatí
 # subtitle: ako bezpečne ukladať heslá na mikrokontroléroch
 #description: |
 #    Prečo aj firmvér potrebuje dobrý dizajn
-duration: 25
+duration: 20
 date: 2026-07-01
 layout: slide
 event:
     title: OSS Conf Žilina 2026
-    url: https://www.namakanyden.sk/2026/
+    url: https://ossconf.fri.uniza.sk/
 categories: talk
 theme: night
 authors:
     - name: Mirek Biňas
       email: miroslav.binas@tuke.sk
       url: https://bletvaska.github.io
-# bitly: https://bit.ly/3Xm05ld
+bitly: https://bit.ly/3Tcfmph
 # video: https://youtu.be/s1RbHF_HCXo
 ---
 
@@ -47,15 +47,28 @@ authors:
 
 <section id="about" data-markdown>
 * od roku [2017](https://namakanyden.sk/2017/)
-* 4 ročníky podujatia + 2 ročníky [Arduino dňa](https://days.arduino.cc/about/)
+* 5 ročníkov podujatia + 2 ročníky [Arduino dňa](https://days.arduino.cc/about/)
 * orientácia hlavne na stredoškolských učiteľov informatiky, ale aj na študentov a makačov
+* nekomerčné a nadšenecké podujatie
 * [40+ webinárov](https://namakanyden.sk/webinare/)
 * [workshopy](https://namakanyden.sk/workshopy/)
 </section>
 
 
+<section id="namakany-den-2017" data-markdown data-background="#fff">
+[![html5](images/html5.jpg)](https://namakanyden.sk/2017/)
+
+notes:
+- rok 2017
+- jednoducha staticka stranka v html5, ale...
+</section>
+
+
 <section id="reveal.js" data-markdown data-background="#F4F4F4">
 [![reveal.js](images/reveal.js.png)](https://revealjs.com/)
+
+notes:
+- ...na promo prezentacie som zacal pouzivat reveal.js
 </section>
 
 
@@ -63,6 +76,8 @@ authors:
 * html5 rámec na tvorbu prezentácií
   * HTML5 + CSS + JavaScript
   * výhoda - dajú sa dynamicky generovať
+  * vedia byť [interaktívne](https://kurzy.kpi.fei.tuke.sk/zap/resources/slides/05.html#/16)
+* html5 + reveal.js - ideálna kombinácia na tvorbu vlastných interaktívnych aplikácií pre interaktívne tabule
 * [Reveal.js](https://revealjs.com/) poháňa väčšinu mojich prezentácií (aj túto)
 * [sprievodné slajdy](https://namakanyden.sk/2017/slides/main.track.html) na podujatí
 </section>
@@ -101,16 +116,47 @@ notes:
 </section>
 
 
-<section id="sessionize" data-markdown data-background="#1AB394">
-[![Sessionize](images/sessionize.png)](https://sessionize.com/)
+<section id="mailchimp-about" data-markdown>
+* služba na odosielanie newsletter-ov
+* newsletter umožňuje aj zdieľať na sockách
+* registrovať na odber sa dá priamo [z vlastnej stránky pomocou vloženého HTML kódu](https://namakanyden.sk/2021/)
+* a iné (navrhnovanie mailov, organizácia kampaní, reporty, štatistiky, plánovanie odosielania mailov, organizácia skupín používateľov, ...)
 </section>
-
-
-
 
 
 <section id="tito" data-markdown data-background="#fff">
 [![tito](images/tito.svg)](https://ti.to/)
+
+notes:
+- v roku 2019 som bol na slovenskom Pycon-e a tam som objavil sluzbu Tito
+</section>
+
+
+<section id="tito-about" data-markdown>
+* platforma určená na predaj vstupeniek a správu registrácií pre rôzne typy podujatí
+* ku vstupenke môžete pridať aj doplnkové info, ako veľkosť trička, strava a pod.
+* [mobilná aplikácia](https://ti.to/features/check-in) na kontrolu lístkov na akcii
+* lístok si viete "kúpiť"
+  * [zo stránok služby](https://ti.to/namakany-den/2023), alebo
+  * [pomocou vloženého HTML kódu na svojej stránke](https://namakanyden.sk/2026/register.html)
+</section>
+
+
+<section id="sessionize" data-markdown data-background="#1AB394">
+[![Sessionize](images/sessionize.png)](https://sessionize.com/)
+
+notes:
+- v roku 2024 som bol na konferencii KCD a tam som objavil službu Sessionize
+</section>
+
+
+<section id="sessionize-about" data-markdown>
+* platforma na organizáciu podujatí
+  * call for papers
+  * správa programu
+  * komunikácia s prednášajúcimi
+* [program](https://namakanyden.sk/2026/program.html) a [zoznamy](https://namakanyden.sk/2026/showroom.html) (rečníkov / prednášok / tvorivých dielní / stánkov / ...) je možné vložiť na svoju stránku pomocou HTML kódu
+* z programu vytvára aj [PWA aplikáciu](https://namakanyden2026.sessionize.com)
 </section>
 
 
@@ -124,6 +170,10 @@ notes:
 </section>
 
 
+<section id="claude-design" data-markdown data-background="#F0EADC">
+[![](images/claude.design.png)](https://claude.ai/design)
+</section>
+
 
 <section id="questions" data-markdown>
 ## Otázky?
@@ -134,9 +184,10 @@ notes:
 ## Odkazy
 
 * [www.namakanyden.sk](https://namakanyden.sk) - domovská stránka podujatia
-* [ED Hackathon](https://www.erstedigital.com/sk/hackathon)
-* [Deutche Telekom Hackathon](https://hackathon.deutschetelekomitsolutions.sk/)
-* [Namakaný deň](http://www.namakanyden.sk) - [YouTube](https://www.youtube.com/@namakanyden), [FB](https://www.facebook.com/namakanyden)
+* [Reveal.js](https://revealjs.com/) - rámec na tvorbu HTML prezentácií
+* [Mailchimp](https://mailchimp.com/) - emailový marketing
+* [Tito](https://ti.to/home) - vstupenky na podujatia
+* [Sessionize](https://sessionize.com/) - organizácia podujatí
 </section>
 
 
