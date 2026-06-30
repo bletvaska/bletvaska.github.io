@@ -1,0 +1,363 @@
+---
+title: Secrets v IoT
+subtitle: ako bezpečne ukladať heslá na mikrokontroléroch
+description: |
+    Prečo aj firmvér potrebuje dobrý dizajn
+duration: 25
+date: 2026-07-01
+layout: slide
+event:
+    title: OSS Conf Žilina 2026
+    url: https://www.namakanyden.sk/2026/
+categories: talk
+theme: night
+authors:
+    - name: Mirek Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/3Xm05ld
+# video: https://youtu.be/s1RbHF_HCXo
+---
+
+<style>
+#textovka code {
+  background-color: #111111;
+}
+
+#micropython-and-thonny > p > a > img {
+  height: 180px;
+  padding: 25px;
+}
+
+#to-adafruit-with-http > pre {
+  font-size: 0.4em;
+}
+</style>
+
+
+{% include first.slide.html %}
+
+
+<section id="joke" data-markdown>
+> The _S_ in _IoT_ Stands for Security.
+
+notes:
+- neda mi nezacat inac, ako standardnym vtipom na tuto temu a sice, ze oblast bezpecnosti v IoT je stale velmi problematicka
+</section>
+
+
+<section id="what-are-the-secrets" data-markdown>
+## Čo sú to Secrets?
+</section>
+
+
+<section id="secrets" data-markdown>
+## Secrets
+
+* **citlivé údaje**, ktoré **umožňujú prístup** k systémom, službám alebo dátam 
+* **musia byť bezpečne uložené a chránené pred neoprávneným prístupom**
+* napr.: heslá, API kľúče, tokeny alebo certifikáty
+</section>
+
+
+<section id="owasp-iot-top-10" data-markdown data-background="#fff">
+[![](images/owasp.iot.top.ten.png)](https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10)
+
+notes:
+* jednym z jej projektov je vsak aj OWASP IoT Top 10
+* zoznam 10 najvacsich hrozieb v oblasti IoT
+</section>
+
+
+<section id="hardcoded-passwords" data-markdown>
+### #1 Weak, guessable or hard coded passwords
+</section>
+
+
+<section id="hardcoded-passwords-description" data-markdown>
+> Use of easily bruteforced, publicly available, or unchangeable credentials, including backdoors in firmware or client software that grants unauthorized access to deployed systems.
+</section>
+
+
+<section id="examples-1" data-markdown>
+![](images/students-js1.jpg)
+
+notes:
+* staticka (hardcoded passwords) konfiguracia pre mqtt pripojenie
+* TUYA like - posiela to na cinske servery
+</section>
+
+
+<section id="examples-2" data-markdown>
+![](images/students-js2.jpg)
+
+notes:
+* to iste, len zapisane inac
+* co sa stane, ak dojde k vyzradeniu loginu a hesla a admini prijmu strasne rozhodnutie, ze credentials zmenia?
+</section>
+
+
+<section id="examples-3" data-markdown>
+![](images/students-python1.jpg)
+
+notes:
+* to iste, ale pre zmenu v pythone
+</section>
+
+
+<section id="examples-4" data-markdown>
+![](images/students-python2.jpg)
+
+notes:
+* opat defaults pre mqtt a databazu
+</section>
+
+
+<section id="examples-5" data-markdown>
+![](images/students-python3.jpg)
+</section>
+
+
+<section id="examples-6" data-markdown>
+![](images/students-python4.jpg)
+</section>
+
+
+<section id="other-sources" data-markdown>
+## Ďalšie zdroje
+
+* tutoriály - [Random Nerd Tutorials](https://randomnerdtutorials.com/micropython-mqtt-esp32-esp8266/)
+* knihy
+* čo na to AI?
+</section>
+
+
+<section id="where-are-the-problems" data-markdown>
+## Kde do $I&^% je problém?
+</section>
+
+
+<section id="the-problem" data-markdown>
+## Credentials sú súčasťou kódu!
+
+* hodnoty sú uložené v (globálnych) premenných
+* nedajú sa zmeniť bez zmeny kódu
+* sú čitateľné
+</section>
+
+
+<section id="what-to-do" data-markdown>
+## Čo s tým?
+</section>
+
+
+<section id="the-steps" data-markdown>
+1. **Izolácia**
+  
+  Secrets uložíme do samostatného súboru.
+
+2. **Šifrovanie**
+  
+  Zašifrujeme uložené údaje, aby boli čitateľné iba s kľúčom.
+
+3. **Binárny bytecode**
+
+  Kód pracujúci so secrets preložíme do binárneho bytecode, čím sťažíme jeho analýzu.
+
+notes:
+  * Preklad do .mpy (MicroPython bytecode) sťažuje analýzu zdrojového kódu, ale nie je to bezpečnostný mechanizmus porovnateľný so šifrovaním. Skôr ide o obfuskáciu alebo sťaženie reverzného inžinierstva.
+</section>
+
+
+<section id="isolation" data-markdown>
+## Krok 1. Izolácia
+
+* secrets uložíme do samostatného súboru
+* použijeme formát, ktorý umožňuje jednoduché čítanie aj zápis
+  * dataclass pre validáciu
+  * vystačíme si s formátom JSON
+* `data/secrets.json`
+</section>
+
+
+<section id="hands-off-program" data-markdown>
+## Hands Off!
+
+* program pre tých, ktorí sa **CHCÚ(!)** dozvedieť viac
+* z 200+ až na 10- ;)
+
+notes:
+* mame vela studentov, medzi ktorymi su aj dobri studenti
+* chceme podporit a pracovat so studentmi, ktori chcu pracovat
+* vymysleli sme program, do ktoreho sa moze zapojit kazdy, ale:
+  * treba ukazat, ze co spravili
+</section>
+
+
+<section id="openlab" data-markdown>
+![OpenLab](images/openlab.jpg)
+</section>
+
+
+<section id="hands-off-promo" data-background="#fff">
+  <iframe width="840" height="472"
+    src="https://www.youtube.com/embed/bJD6MUM3yr0"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen data-autoplay></iframe>
+</section>
+
+
+<section id="book" data-markdown>
+[![](https://inventwithpython.com/images/cover-invent4thed.webp)](https://inventwithpython.com/invent4thed/)
+</section>
+
+
+<section id="programovanie" data-markdown>
+## [Programovanie](https://kurzy.kpi.fei.tuke.sk/pvjc/2023/)
+(2. semester)
+</section>
+
+
+<section id="k-game" data-markdown data-background="#2E3436">
+![K](images/k.curses.png)
+</section>
+
+<section id="textovka" data-markdown>
+```
+Prebudil si sa v malom dvojmotorovom lietadle, plachtiacom nad
+egyptskou púšťou. Je tu nádherný kľud, pretože motory stoja a na
+palube nie je okrem teba živá duša. (Celkom zaujímavá situácia,
+že?)
+
+Vidíš:
+  bic
+  prazdne sedadla
+
+Možné východy z miestnosti:
+  dolu
+
+> vezmi bic
+Do batohu si si vložil bic.
+>
+```
+</section>
+
+
+<section id="zaciname-programovat-v-jazyku-python" data-markdown>
+[![](images/cover-zaciname.programovat.v.jazyku.python.png)](https://www.martinus.sk/696683-zaciname-programovat-v-jazyku-python/kniha)
+</section>
+
+<section id="mastermind" data-markdown>
+![](images/mastermind.jpg)
+</section>
+
+
+<section id="second-year" data-markdown>
+## 2. ročník
+</section>
+
+
+<section id="programovanie" data-markdown>
+## [Objektovo-orientované programovanie](https://kurzy.kpi.fei.tuke.sk/oop)
+(3. semester)
+</section>
+
+
+<section id="alien-breed" data-markdown>
+![Alien Breed OOP Remake](images/alien.breed.remake.png)
+</section>
+
+
+<section id="alien-breed-tower-assault" data-markdown data-background="#030504">
+[![Alien Breed on GOG](images/alien.breed.tower.assault.jpg)](https://www.gog.com/en/game/alien_breed_tower_assault)
+</section>
+
+
+<section id="architektury-pocitacovych-systemov" data-markdown>
+## Architektúry počítačových systémov
+(3. semester)
+</section>
+
+
+<section id="aps-video">
+  <iframe width="840" height="472"
+  src="https://www.youtube.com/embed/cC-_A4vo6-Y"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen data-autoplay></iframe>
+</section>
+
+<section id="komponentove-programovaine" data-markdown>
+## [Komponentové programovanie](https://kurzy.kpi.fei.tuke.sk/kp) & [Databázové systémy](https://kurzy.kpi.fei.tuke.sk/dbs)
+(4. semester)
+</section>
+
+
+<section id="">
+  <iframe width="840" height="472"
+  src="https://www.youtube.com/embed/HVcUXqht6O8"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen data-autoplay></iframe>
+</section>
+
+
+
+
+<section id="third-year" data-markdown>
+## 3. ročník
+</section>
+
+
+<section id="internet-vecí" data-markdown>
+## [Internet vecí](https://kurzy.kpi.fei.tuke.sk/iot1)
+(5. semester)
+</section>
+
+
+<section id="hackathon" data-background="images/hackathon.jpg">
+</section>
+
+
+<section id="inteligentne-systemy-v-informatike" data-markdown>
+## Inteligentné systémy v informatike
+(5. semester)
+</section>
+
+
+<section id="vyvoj-pocitacovych-hier" data-markdown>
+## [Dizajn a vývoj počítačových hier](https://kurzy.kpi.fei.tuke.sk/gamedev/)
+(6. semester)
+</section>
+
+
+<section id="">
+  <iframe width="840" height="472"
+  src="https://www.youtube.com/embed/1lSlIZyipeU"
+  title="Game Jam 2023"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen data-autoplay></iframe>
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [KPI@TUKE](https://kpi.fei.tuke.sk) - [YouTube](https://www.youtube.com/@kpi_fei_tuke), [FB](https://www.facebook.com/kpi.fei.tuke)
+* [ED Hackathon](https://www.erstedigital.com/sk/hackathon)
+* [Deutche Telekom Hackathon](https://hackathon.deutschetelekomitsolutions.sk/)
+* [Namakaný deň](http://www.namakanyden.sk) - [YouTube](https://www.youtube.com/@namakanyden), [FB](https://www.facebook.com/namakanyden)
+</section>
+
+
+{% include qr.html %}
