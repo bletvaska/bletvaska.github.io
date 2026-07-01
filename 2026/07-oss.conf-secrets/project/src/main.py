@@ -1,6 +1,21 @@
-print('hello world')
+import json
 
 
-SECRETS_PATH = '/data/secrets.py'
+SETTINGS_FILE = '/data/settings.py'
 
-with open(SECRETS_PATH) as f:
+# content of settings
+settings = {
+    "ssid": "OSS Conf 2026",
+    "password": "Linux.Rocks!",
+}
+
+# write settings
+with open(SETTINGS_FILE, 'w') as file:
+    json.dump(settings, file)
+
+# read settings
+with open(SETTINGS_FILE, 'r') as file:
+    settings = json.load(file)
+
+
+print(settings)

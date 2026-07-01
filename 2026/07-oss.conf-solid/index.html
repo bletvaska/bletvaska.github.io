@@ -1,20 +1,21 @@
 ---
 title: SOLID princípy v IoT
-description: |
-    Prečo aj firmvér potrebuje dobrý dizajn
+subtitle: Prečo aj firmvér potrebuje dobrý dizajn
+# description: |
+#     Prečo aj firmvér potrebuje dobrý dizajn
 duration: 25
 date: 2026-07-01
 layout: slide
 event:
     title: OSS Conf Žilina 2026
-    url: https://www.namakanyden.sk/2026/
+    url: https://ossconf.fri.uniza.sk/
 categories: talk
 theme: night
 authors:
     - name: Mirek Biňas
       email: miroslav.binas@tuke.sk
       url: https://bletvaska.github.io
-# bitly: https://bit.ly/3Xm05ld
+bitly: https://bit.ly/4eXGujh
 # video: https://youtu.be/s1RbHF_HCXo
 ---
 
@@ -31,216 +32,389 @@ authors:
 #to-adafruit-with-http > pre {
   font-size: 0.4em;
 }
+
+#dht-sensors {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+#dht-sensors > p {
+  margin: 0;
+  flex: 0 1 60%;
+}
+
+#dht-sensors > p img {
+  max-width: 100%;
+  height: auto;
+}
+
+#dht-sensors > pre {
+  margin: 0;
+  flex: 0 1 40%;
+  font-size: 0.5em;
+}
+
+#sensors-code {
+  display: flex !important;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+}
+
+#sensors-code > pre {
+  margin: 0;
+  flex: 0 1 31%;
+  font-size: 0.35em;
+}
+
+#common-temp-sensor {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+}
+
+#common-temp-sensor > h3 {
+  flex: 0 0 100%;
+  margin: 0;
+}
+
+#common-temp-sensor > pre {
+  margin: 0;
+  flex: 0 1 46%;
+  font-size: 0.5em;
+}
 </style>
+
 
 
 {% include first.slide.html %}
 
 
-<section id="solid" data-markdown data-background="white">
+<section id="smart-department" data-markdown data-background="#fff">
+![Smatr Department: Architecture](images/smart.department-architecture.png)
+
+notes:
+- uz som tu hovoril viackrat na temu Internetu veci, ale pravidelne som hovoril o infrastrukture ako celku
+- dnes vsak budem hovorit o koncovych bodoch architektury - o senzoroch a akcnych clenoch
+</section>
+
+
+<section id="thsensor" data-markdown data-background="#3F8BFD">
+![THSensor](images/thsensor-illustration.png)
+
+notes:
+- dnes vsak budem hovorit o koncovych bodoch architektury - o senzoroch a akcnych clenoch
+</section>
+
+
+<section id="firmware" data-markdown>
+## Firmvér 
+
+> Softvér trvalo uložený v pamäti mikrokontroléra, ktorý priamo riadi jeho hardvér a vykonáva špecifickú funkciu zariadenia. Spustí sa po zapnutí mikrokontroléra.
+
+notes:
+- dnes chcem hovorit o tom, akych pravidiel sa drzat pri programovani firmveru na mikrokontroleri
+</section>
+
+
+<section id="solid" data-markdown data-background="#FBF7F4">
 [![SOLID](images/solid-principles.webp)](https://techwayfit.com/blogs/design-principles/solid-principles/)
 </section>
 
 
-<section id="first-year" data-markdown>
-## 1. ročník
+<section id="srp" data-markdown>
+## Single Responsibility Principle (SRP)
 
-štúdium pre celú fakultu
+> A class should have one and only one reason to change.
+> -- [Robert C. Martin](https://en.wikipedia.org/wiki/Single-responsibility_principle)
 </section>
 
 
-<section id="zap" data-markdown>
-## [Základy algoritmizácie a programovania](https://kurzy.kpi.fei.tuke.sk/zap/)
-(1. semester)
-</section>
+<section id="srp-benefits" data-markdown="">
+### Výhody
 
-<section id="zap-info">
-  <iframe width="840" height="472"
-    src="https://www.youtube.com/embed/9snj6iCsy2M"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen="allowFullScreen" data-autoplay></iframe>
+* kód je ľahšie čitateľný a pochopiteľný
+* zmena jednej vlastnosti neovplyvní ostatné
+* triedy sa dajú testovať izolovane
+* jednoduchšie znovupoužitie
 </section>
 
 
-<section id="hands-off-program" data-markdown>
-## Hands Off!
+<section id="state-machine" data-markdown>
+## Stavový stroj
 
-* program pre tých, ktorí sa **CHCÚ(!)** dozvedieť viac
-* z 200+ až na 10- ;)
+celý životný cyklus zariadenia je organizovaný ako stavový stroj
+</section>
+
+
+<section id="smart-sensor-state-machine" data-markdown data-background="#fff">
+![Smart Sensor: State Diagram](images/smart.sensor-state.diagram.png)
+</section>
+
+
+<section id="state.design.pattern" data-markdown data-background="#fff">
+## Návrhový vzor Stav
+
+![](images/state.design.pattern.png)
+</section>
+
+
+<section id="ocp" data-markdown>
+## Open/Closed Principle (OCP)
+
+> Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification. 
+> -- [Bertrand Meyer](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle)
+</section>
+
+
+<section id="ocp-benefits" data-markdown="">
+### Výhody
+
+* škálovateľnosť - nový stav / príkaz / zariadenie sa dá pridať bez zmeny aktuálneho kódu
+* paralelný vývoj na viacerých triedach bez konfliktu
+* kód, ktorý sa nemení, sa nepokazí
+</section>
+
+
+
+<section id="ocp" data-markdown>
+## Liskov Substitution Principle (LSP)
+
+> Objects of a superclass should be replacable with objects of its subclasses.
+> -- [Barbara Liskov](https://en.wikipedia.org/wiki/Liskov_substitution_principle)
+</section>
+
+
+<section id="dht-sensors" data-markdown data-background="#fff">
+![DHT Sensors](images/dht.sensors.png)
 
 notes:
-* mame vela studentov, medzi ktorymi su aj dobri studenti
-* chceme podporit a pracovat so studentmi, ktori chcu pracovat
-* vymysleli sme program, do ktoreho sa moze zapojit kazdy, ale:
-  * treba ukazat, ze co spravili
+- predstavme si situaciu, ze robime prave senzor teploty
+- aktualna implementacia - pouzivame senzor DHT11
 </section>
 
 
-<section id="openlab" data-markdown>
-![OpenLab](images/openlab.jpg)
+<section id="tmp36-sensors" data-markdown data-background="#fff">
+![TMP36 Sensor](images/tmp.sensor.png)
+
+notes:
+- potom pride sef a povie, ze ked vymenime senzor, tak rozsah pracovnych teplot bud vacsi, ako ma DHT11
+- a dokonca budeme vediet citat aj desatinne hodnoty
 </section>
 
 
-<section id="hands-off-promo" data-background="#fff">
-  <iframe width="840" height="472"
-    src="https://www.youtube.com/embed/bJD6MUM3yr0"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen data-autoplay></iframe>
+<section id="ds1820-sensors" data-markdown data-background="#fff">
+![DS1820 Sensor](images/ds1820.sensor.png)
+
+notes:
+- ale ked ho vymenime za tento, tak to bude lacnejsie a bude mat nizsiu spotrebu
 </section>
 
 
-<section id="book" data-markdown>
-[![](https://inventwithpython.com/images/cover-invent4thed.webp)](https://inventwithpython.com/invent4thed/)
+<section id="temp-sensors-problem" data-markdown>
+### ...a máme problém 
+
+* každý používa iné knižnice
+* každý používa inú komunikačnú zbernicu
+* každý má iné požiadavky na piny
+* potrebujeme ručne upraviť všetky miesta, kde sa používa:
+  * inicializácia
+  * meranie údajov
+  * webové rozhranie
+  * príkaz v termináli
 </section>
 
 
-<section id="programovanie" data-markdown>
-## [Programovanie](https://kurzy.kpi.fei.tuke.sk/pvjc/2023/)
-(2. semester)
-</section>
+<section id="sensors-code" data-markdown>
+```python
+from machine import Pin
+from dht import DHT11
 
+# init sensor
+sensor = DHT11(Pin(4))
 
-<section id="k-game" data-markdown data-background="#2E3436">
-![K](images/k.curses.png)
-</section>
+# measure data
+sensor.measure()
 
-<section id="textovka" data-markdown>
+# get temperature
+temp = sensor.temperature()
+
+print(temp)
 ```
-Prebudil si sa v malom dvojmotorovom lietadle, plachtiacom nad
-egyptskou púšťou. Je tu nádherný kľud, pretože motory stoja a na
-palube nie je okrem teba živá duša. (Celkom zaujímavá situácia,
-že?)
 
-Vidíš:
-  bic
-  prazdne sedadla
+```python
+from machine import ADC, Pin
 
-Možné východy z miestnosti:
-  dolu
+# init sensor
+sensor = ADC(Pin(26))
 
-> vezmi bic
-Do batohu si si vložil bic.
->
+# read analog value
+value = sensor.read_u16()
+
+# convert to voltage
+voltage = value * (3.3 / 65535)
+
+# convert voltage to temperature
+temp = (voltage - 0.5) * 100
+
+print(temp)
+```
+
+```python
+import time
+from machine import Pin
+import onewire, ds18x20
+
+# init sensor
+ow = onewire.OneWire(Pin(4))
+sensor = ds18x20.DS18X20(ow)
+
+# find sensor
+roms = sensor.scan()
+
+# measure temperature
+sensor.convert_temp()
+
+# wait for conversion
+time.sleep_ms(750)
+
+# get temperature
+temp = sensor.read_temp(roms[0])
+
+print(temp)
+```
+
+notes:
+- pre ilustráciu - takto vyzerajú príslušné fragmenty kódu
+</section>
+
+
+<section id="what-is-common" data-markdown>
+### Čo majú všetky tri senzory teploty spoločné?
+</section>
+
+
+<section id="common-temp-sensor" data-markdown>
+### Potomok vie nahradiť predka
+
+```python
+# predok každého teplotného senzora
+
+class TemperatureSensor:
+    def temperature(self) -> float:
+        raise NotImplementedError
+```
+
+```python
+# implementácia potomka pre DHT11
+
+from machine import Pin
+from dht import DHT11
+
+class DHT11(TemperatureSensor):
+    def __init__(self, pin: int):
+        self.sensor = DHT11(Pin(pin))
+
+    def temperature(self) -> float:
+        self.sensor.measure()
+        return self.sensor.temperature()
 ```
 </section>
 
 
-<section id="zaciname-programovat-v-jazyku-python" data-markdown>
-[![](images/cover-zaciname.programovat.v.jazyku.python.png)](https://www.martinus.sk/696683-zaciname-programovat-v-jazyku-python/kniha)
-</section>
+<section id="component" data-markdown>
+## Komponent
 
-<section id="mastermind" data-markdown>
-![](images/mastermind.jpg)
-</section>
-
-
-<section id="second-year" data-markdown>
-## 2. ročník
+Komponent je **samostatná**, **zapúzdrená jednotka** systému, ktorá má **jasne definované rozhranie** a poskytuje **konkrétnu funkcionalitu**.
 </section>
 
 
-<section id="programovanie" data-markdown>
-## [Objektovo-orientované programovanie](https://kurzy.kpi.fei.tuke.sk/oop)
-(3. semester)
+<section id="isp" data-markdown>
+## Interface Segregation Principle (ISP)
+
+> Clients should not be forced to depend upon methods that they do not use.
+> -- [Robert C. Martin](https://en.wikipedia.org/wiki/Interface_segregation_principle)
 </section>
 
 
-<section id="alien-breed" data-markdown>
-![Alien Breed OOP Remake](images/alien.breed.remake.png)
+<section id="about-isp" data-markdown>
+### WTF?
+
+* ak by sme mali len DHT11, tak by spoločný predok vyzeral takto:
+
+  ```python
+  class SensorDevice:
+      def temperature(self) -> float:
+          raise NotImplementedError
+
+      def humidity(self) -> float:
+          raise NotImplementedError
+  ```
 </section>
 
 
-<section id="alien-breed-tower-assault" data-markdown data-background="#030504">
-[![Alien Breed on GOG](images/alien.breed.tower.assault.jpg)](https://www.gog.com/en/game/alien_breed_tower_assault)
+<section id="the-isp-problem" data-markdown>
+### ...a máme problém
+
+* ale TMP36 ani DS1820 nemerajú vlhkosť, takže `humidity()` nepotrebujú
+* ale senzor svetla potrebuje `intensity()`, ale nepotrebuje `temperature()` a `humidity()`
+* ale senzor tlaku potrebuje `pressure()`, ale nepotrebuje `temperature()`, `humidity()` ani `intensity()`
 </section>
 
 
-<section id="architektury-pocitacovych-systemov" data-markdown>
-## Architektúry počítačových systémov
-(3. semester)
+<section id="isp-solution" data-markdown>
+### Riešenie
+
+* miesto jedného mega-šupa-bomba-špica rozhrania vytvoríme niekoľko menších rozhraní
 </section>
 
 
-<section id="aps-video">
-  <iframe width="840" height="472"
-  src="https://www.youtube.com/embed/cC-_A4vo6-Y"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen data-autoplay></iframe>
-</section>
+<section id="mixins" data-markdown>
+## Mixins
 
-<section id="komponentove-programovaine" data-markdown>
-## [Komponentové programovanie](https://kurzy.kpi.fei.tuke.sk/kp) & [Databázové systémy](https://kurzy.kpi.fei.tuke.sk/dbs)
-(4. semester)
+> Mixin je trieda, ktorá pridáva jednu alebo viacero konkrétnych vlastností alebo správanie inej triede.
 </section>
 
 
-<section id="">
-  <iframe width="840" height="472"
-  src="https://www.youtube.com/embed/HVcUXqht6O8"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen data-autoplay></iframe>
+<section id="dip" data-markdown>
+## Dependency Inversion Principle (DIP)
+
+> Abstractions should not depend upon details. Details should depend upon abstractions.
+> -- [Robert C. Martin](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
+</section>
+
+
+<section id="dip-about" data-markdown>
+### O čo ide?
+
+* vysokoúrovňová logika aplikácie by nemala byť pevne naviazaná na konkrétnu implementáciu, ale na abstrakciu
 </section>
 
 
 
-
-<section id="third-year" data-markdown>
-## 3. ročník
+<section id="solid-at-the-end" data-markdown data-background="#FBF7F4">
+[![SOLID](images/solid-principles.webp)](https://techwayfit.com/blogs/design-principles/solid-principles/)
 </section>
 
 
-<section id="internet-vecí" data-markdown>
-## [Internet vecí](https://kurzy.kpi.fei.tuke.sk/iot1)
-(5. semester)
-</section>
+<section id="why-solid-on-microcontrollers" data-markdown>
+## Prečo SOLID na mikrokontroléroch?
 
-
-<section id="hackathon" data-background="images/hackathon.jpg">
-</section>
-
-
-<section id="inteligentne-systemy-v-informatike" data-markdown>
-## Inteligentné systémy v informatike
-(5. semester)
-</section>
-
-
-<section id="vyvoj-pocitacovych-hier" data-markdown>
-## [Dizajn a vývoj počítačových hier](https://kurzy.kpi.fei.tuke.sk/gamedev/)
-(6. semester)
-</section>
-
-
-<section id="">
-  <iframe width="840" height="472"
-  src="https://www.youtube.com/embed/1lSlIZyipeU"
-  title="Game Jam 2023"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen data-autoplay></iframe>
+* ak blikáš len LED-kou, tak nemusíš
+* jednoduchšia výmena hardvéru - lebo abstrakcia/rozhranie
+* lepšia testovateľnosť - zapúzdrené správanie
+* jednoduchšia rozšíriteľnosť / škálovateľnosť
+* znovupoužiteľnosť kódu
+* dobrá tímová práca 
 </section>
 
 
 <section id="questions" data-markdown>
 ## Otázky?
-</section>
-
-
-<section id="links" data-markdown>
-## Odkazy
-
-* [KPI@TUKE](https://kpi.fei.tuke.sk) - [YouTube](https://www.youtube.com/@kpi_fei_tuke), [FB](https://www.facebook.com/kpi.fei.tuke)
-* [ED Hackathon](https://www.erstedigital.com/sk/hackathon)
-* [Deutche Telekom Hackathon](https://hackathon.deutschetelekomitsolutions.sk/)
-* [Namakaný deň](http://www.namakanyden.sk) - [YouTube](https://www.youtube.com/@namakanyden), [FB](https://www.facebook.com/namakanyden)
 </section>
 
 
