@@ -32,6 +32,20 @@ bitly: https://bit.ly/4wnlBVO
 #settings-example > pre {
   font-size: 0.45em;
 }
+
+#kerckhoffs-principle .layout {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+#kerckhoffs-principle .layout blockquote {
+  flex: 6;
+}
+
+#kerckhoffs-principle .layout img {
+  flex: 4;
+}
 </style>
 
 
@@ -143,6 +157,7 @@ notes:
 * hodnoty sú uložené v (globálnych) premenných
 * nedajú sa zmeniť bez zmeny kódu
 * sú čitateľné
+* nie sú šifrované
 </section>
 
 
@@ -174,10 +189,10 @@ notes:
 
 * secrets uložíme do samostatného súboru
 * použijeme formát, ktorý umožňuje jednoduché čítanie aj zápis
-  * dataclass pre validáciu
   * vystačíme si s formátom JSON
     * priama podpora v jazyku MicroPython
     * umožňuje vnáranie
+  * výhodné je použiť dataclass pre validáciu
 * `/data/settings.json`
 </section>
 
@@ -205,19 +220,47 @@ with open(SETTINGS_FILE, 'r') as file:
 </section>
 
 
+<section id="encoding-vs-hashing-vs-encryption" data-markdown data-background="#FFFEFA">
+![Encoding vs Hashing vs Encryption](images/encoding.vs.hashing.vs.encryption.png)
+
+notes:
+* https://devcookies.medium.com/encoding-vs-hashing-vs-encryption-explained-with-examples-d92b423a4584
+* este predtym ako sa posunieme ku kroku 2 mi neda jedno kratke pedagogicko-terminologicke okienko
+  * encoding - kódovanie
+  * hashing - hašovanie
+  * encryption - šifrovanie
+</section>
+
+
 <section id="encoding" data-markdown>
 ## Krok 2. Šifrovanie
 
-* problém - obmedzené zdroje mikrokontrolérov
+* problém MCU pri šifrovaní - obmedzené zdroje mikrokontrolérov
   * výpočtový výkon
   * malá pamäť
   * spotreba energie
+  * bezpečné ukladanie údajov (TrustZone)
+  * odolnosť voči fyzickým útokom
+  * generovanie náhodných čísiel
+</section>
 
+<section id="atecc-608" data-markdown>
+[![ATECC 608](images/atecc.608.jpg)](https://www.adafruit.com/product/4314)
+
+notes:
+* mozeme si pomoct napr. tak, ze k nasmu rieseniu pridame externý šifrovací koprocesor (crypto-koprocesor), ako napr ATECC608
+  * kľúč tak nikdy neopustí čip
 </section>
 
 
 <section id="cryptolib" data-markdown>
 [`cryptolib`](https://docs.micropython.org/en/latest/library/cryptolib.html)
+</section>
+
+
+<section id="aes" data-markdown>
+## AES
+Advanced Encryption Standard
 </section>
 
 
@@ -229,12 +272,18 @@ notes:
 </section>
 
 
-<section id="encoding-vs-hashing-vs-encryption" data-markdown data-background="#F9F0E3">
-![Encoding vs Hashing vs Encryption](images/encoding.vs.hashing.vs.encryption.ng.png)
-
-notes:
-* https://devcookies.medium.com/encoding-vs-hashing-vs-encryption-explained-with-examples-d92b423a4584
+<section id="kerckhoffs-principle">
+  <div class="layout">
+    <blockquote>
+      <p>A cryptosystem should be secure, even if everything about the system, except the key, is public knowledge.</p>
+      <footer>— <a href="https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle">Auguste Kerckhoffs</a></footer>
+    </blockquote>
+    <img src="images/kerckhoffs.jpg" alt="Auguste Kerckhoffs">
+  </div>
 </section>
+
+
+
 
 <section id="binary-bytecodeencoding" data-markdown>
 ## Krok 3. Binárny bytecode

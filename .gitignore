@@ -15,3 +15,5 @@ _config_local.yml
 __pycache__/
 poetry.lock
 dist/
+.comments/
+
