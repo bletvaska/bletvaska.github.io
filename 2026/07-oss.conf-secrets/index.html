@@ -29,21 +29,24 @@ bitly: https://bit.ly/4wnlBVO
   padding: 25px;
 }
 
-#settings-example > pre {
+#settings-example > pre,
+#create-encryption > pre,
+#create-decryption > pre
+{
   font-size: 0.45em;
 }
 
-#kerckhoffs-principle .layout {
-  display: flex;
+#kerckhoffs-principle {
+  display: flex !important;
   align-items: center;
   gap: 2em;
 }
 
-#kerckhoffs-principle .layout blockquote {
+#kerckhoffs-principle > blockquote {
   flex: 6;
 }
 
-#kerckhoffs-principle .layout img {
+#kerckhoffs-principle > p {
   flex: 4;
 }
 </style>
@@ -260,7 +263,11 @@ notes:
 
 <section id="aes" data-markdown>
 ## AES
-Advanced Encryption Standard
+Advanced Encryption Standard 
+
+* **symetrická bloková šifra**
+* pracuje s blokmi o dĺžke 128 bitov / 16 bytov
+* podporuje kľúče s dĺžkou 128, 192 alebo 256 bitov
 </section>
 
 
@@ -272,21 +279,197 @@ notes:
 </section>
 
 
-<section id="kerckhoffs-principle">
-  <div class="layout">
-    <blockquote>
-      <p>A cryptosystem should be secure, even if everything about the system, except the key, is public knowledge.</p>
-      <footer>— <a href="https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle">Auguste Kerckhoffs</a></footer>
-    </blockquote>
-    <img src="images/kerckhoffs.jpg" alt="Auguste Kerckhoffs">
-  </div>
+<section id="aes-getting-ready" data-markdown>
+### Get Ready!
+
+```python
+# inštancia šifry AES
+>>> import cryptolib
+
+# konštruktor AES šifry potrebuje:
+
+# kľúč (16/24/32 bytov)
+>>> key = 'SuperTajnyKluc!!'
+
+# inicializačný vektor (vždy 16 bytov)
+>>> iv = '1234567890123456'
+
+# vytvorenie objektu šifry
+>>> cipher = cryptolib.aes(key, 2, iv)       # mode 2 = CBC
+```
 </section>
 
 
+<section id="aes-encryption" data-markdown>
+### Šifrovanie textu
+
+```python
+# majme nasledujúci text
+# dĺžka musí byť násobkom 16 (PKCS#7 padding)
+>>> text = 'Hello, Pico 2 W!'
+
+# zašifrovanie textu
+>>> encrypted = cipher.encrypt(text)
+
+# výsledok bude zašifrovaný
+>>> print(encrypted) 
+b'\xa4`\xa1\xd1(w\xe3\xe2\x13\xb4\xc8$\x04\xac\xbf\xe0'
+```
+</section>
+
+
+<section id="aes-decryption" data-markdown>
+### Dešifrovanie textu
+
+```python
+# pre dešifrovanie potrebujeme opäť vytvoriť objekt šifry
+# (zmenil sa vnútorný stav a zmenil sa iv)
+>>> cipher = cryptolib.aes(key, 2, iv)
+
+# dešifrujeme
+>>> decrypted = cipher.decrypt(bytearray(encrypted))
+
+# výsledok je ako pole bytov
+>>> decrypted
+b'Hello, Pico 2 W!'
+
+# spravíme z toho reťazec
+>>> decrypted.decode('utf8')
+'Hello, Pico 2 W!'
+```
+</section>
+
+
+<section id="kerckhoffs-principle" data-markdown>
+> A cryptosystem should be secure, even if everything about the system, **except the key**, is public knowledge.
+>
+> -- [Auguste Kerckhoffs](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle)
+
+![Auguste Kerckhoffs](images/kerckhoffs.jpg)
+</section>
+
+
+<section id="key-problem" data-markdown>
+### Kľúčový problém - ako zabezpečíme kľúč?
+</section>
 
 
 <section id="binary-bytecodeencoding" data-markdown>
 ## Krok 3. Binárny bytecode
+
+* kľúč zostavíme ako kompozíciu z:
+  * `salt` - náhodne vygenerované pole bytov, ktoré budú viazané na inštaláciu
+  * `unique_id` - viazané na hardvér
+* na šifrovanie/dešifrovanie vytvoríme vlastný modul `crypto.py`
+  * preložíme ho - vznikne binárny bytecode
+</section>
+
+
+<section id="create-salt" data-markdown>
+### Vytvorenie salt
+
+```python
+import os
+
+SALT_FILE = '/data/.salt'
+
+def create_salt(salt_path: str) -> None:
+    with open(salt_path, 'wb') as file:
+        file.write(os.urandom(16))
+```
+</section>
+
+
+<section id="create-key" data-markdown>
+### Vytvorenie kľúča
+
+```python
+import machine
+import hashlib
+
+def create_key(salt_path: str = SALT_FILE) -> bytes:
+    with open(salt_path, 'rb') as file:
+        salt = file.read()
+
+    hasher = hashlib.sha256()
+
+    # adding data to hash
+    hasher.update(machine.unique_id())
+    hasher.update(salt)
+
+    # return hash
+    return hasher.digest()[:16]  # AES-128
+```
+</section>
+
+
+<section id="create-encryption" data-markdown>
+### Funkcia na šifrovanie
+
+```python
+import cryptolib 
+import binascii
+
+def encrypt(plaintext: str, salt_path: str = SALT_FILE) -> str | None:
+    if plaintext is None:
+        return None
+
+    key = create_key(salt_path)
+    iv = os.urandom(16)
+    data = plaintext.encode('utf-8')
+    pad = 16 - (len(data) % 16)
+    data = bytearray(data + bytes([pad] * pad))
+    cipher = cryptolib.aes(key, 2, iv)
+    encrypted = cipher.encrypt(data)
+
+    return binascii.hexlify(
+        bytearray(iv) + bytearray(encrypted)
+    ).decode('ascii')
+```
+</section>
+
+
+<section id="create-decryption" data-markdown>
+### Funkcia na dešifrovanie
+
+```python
+def decrypt(ciphertext: str, salt_path: str = SALT_FILE) -> str | None:
+    if ciphertext is None:
+        return None
+
+    key = create_key(salt_path)
+    raw = binascii.unhexlify(ciphertext)
+    iv = raw[:16]
+    data = bytearray(raw[16:])
+    cipher = cryptolib.aes(key, 2, iv)
+    decrypted = cipher.decrypt(data)
+    pad = decrypted[-1]
+
+    return bytes(decrypted[:-pad]).decode('utf-8')
+```
+</section>
+
+
+<section id="mpy-cross" data-markdown>
+## [mpy-cross](https://gitlab.com/alelec/mpy_cross )
+
+the micropython cross compiler utility
+</section>
+
+
+<section id="mpy-cross-job" data-markdown>
+
+```bash
+# najprv nainštalujeme
+(venv) $ pip install mpy-cross
+
+# overíme verziu:
+(venv) $ mpy-cross --version
+MicroPython v1.27.0 on 2025-12-13; mpy-cross emitting mpy v6.3
+
+# preložíme modul crypto.py
+(venv) $ mpy-cross crypto.py
+```
 </section>
 
 
@@ -298,10 +481,9 @@ notes:
 <section id="links" data-markdown>
 ## Odkazy
 
-* [KPI@TUKE](https://kpi.fei.tuke.sk) - [YouTube](https://www.youtube.com/@kpi_fei_tuke), [FB](https://www.facebook.com/kpi.fei.tuke)
-* [ED Hackathon](https://www.erstedigital.com/sk/hackathon)
-* [Deutche Telekom Hackathon](https://hackathon.deutschetelekomitsolutions.sk/)
-* [Namakaný deň](http://www.namakanyden.sk) - [YouTube](https://www.youtube.com/@namakanyden), [FB](https://www.facebook.com/namakanyden)
+* [`cryptolib`](https://docs.micropython.org/en/latest/library/cryptolib.html) - cryptographic ciphers
+* [MicroPython `.mpy` files](https://docs.micropython.org/en/latest/reference/mpyfiles.html)
+* [`alelec/mpy_cross`](https://gitlab.com/alelec/mpy_cross) - MicroPython `mpy-cross` distribution
 </section>
 
 

@@ -12,8 +12,12 @@ _config_local.yml
 .idea-
 .idea/
 
-__pycache__/
-poetry.lock
 dist/
 .comments/
+
+# python/micropython stuff
+__pycache__/
+poetry.lock
+*.mpy
+uv.lock
 
