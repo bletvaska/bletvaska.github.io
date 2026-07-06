@@ -2,7 +2,11 @@
 title: Secrets v IoT
 subtitle: ako bezpečne ukladať heslá na mikrokontroléroch
 description: |
-    Prečo aj firmvér potrebuje dobrý dizajn
+    O IoT a bezpečnosti koluje taký vtip: "Písmeno S v skratke IoT znamená bezpečnosť." A vtip je samozrejme v tom, že ako skratka IoT neobsahuje písmenko S, tak ani IoT riešenia častokrát bezpečnosť neriešia alebo len na veľmi slabej úrovni.
+
+    Jedným z problémov, ktorý s bezpečnosťou IoT zariadení súvisí, je ukladanie citlivých údajov - tzv. secrets. Môže sa jednať o prihlasovacie údaje, ale rovnako aj len o tokeny, kľúče alebo len o heslo na pripojenie do WiFi siete. Pokiaľ tieto údaje budeme ukladať zle, bude veľmi jednoduché ich odcudziť a kompromitovať tak v najhoršom prípade celú našu infraštruktúru. Nie nadarmo je problematika ukladania hesiel prvou položkou rebríčka OWASP IoT Top 10. 
+    
+    A presne o tom, ako bezpečne ukladať citlivé údaje na mikrokontroléroch napísaných v jazyku MicroPython bude tento príspevok.
 duration: 25
 date: 2026-07-02
 layout: slide
@@ -155,7 +159,7 @@ notes:
 
 
 <section id="the-problem" data-markdown>
-## Credentials sú súčasťou kódu!
+## Secrets sú súčasťou kódu!
 
 * hodnoty sú uložené v (globálnych) premenných
 * nedajú sa zmeniť bez zmeny kódu

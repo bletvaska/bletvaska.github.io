@@ -1,13 +1,11 @@
 import json
-import crypto
 
-
-SETTINGS_FILE = '/data/settings.py'
+SETTINGS_FILE = '/data/settings.json'
 
 # content of settings
 settings = {
     "ssid": "OSS Conf 2026",
-    "password": crypto.encrypt("Linux.Rocks!"),
+    "password": "Linux.Rocks!",
 }
 
 # write settings

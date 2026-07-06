@@ -1,0 +1,228 @@
+---
+title: BEST in IoT
+description: |
+    Legendy hovoria, že Internet vecí sa na stredných školách týka len programovania Arduín a BBC micro:bit-ov. Tam to však len začína a my na tomto webinári budeme rozhodne pokračovať. Síce bez mikrokontrolérov, ale to nás nezastaví v tom, aby sme urobili jednoduchú meteo službu. Dáta ukradneme (tí kreatívnejší alebo lenivejší si ich vymyslia), zobrazíme ich na mape Slovenska a hneď uvidíme, aké meteorologické podmienky majú jednotliví účastníci webinára doma. A to všetko len s prehliadačom, nadšením, chuťou experimentovať, vymýšľať... Proste si ukážeme silu integrácie existujúcich nástrojov a služieb bez toho, aby sme napísali čo i len riadok kódu. No skús neprísť ;-)
+duration: 120
+date: 2026-07-06
+layout: slide
+event:
+    title: BEST Summer
+    url: https://mpc-edu.sk/sk
+categories: talk
+theme: night
+authors:
+    - name: Miroslav "mirek" Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: https://bit.ly/3uBhK7w
+openweathermap_apikey: 08f5d8fd385c443eeff6608c643e0bc5
+# video: https://youtu.be/coqzmKypHyE
+---
+
+{% include first.slide.html %}
+
+
+<section id="about-mirek" data-markdown>
+[![mirek](images/mirek.na.hackathone.jpg)](https://bletvaska.github.io)
+</section>
+
+
+<section id="what-is-iot" data-markdown>
+## What is IoT?
+</section>
+
+<section data-markdown id="what-is-iot-by-iotbuzzer">
+> Internet of Things (IoT) means any smart device with ability to communicate via Internet.
+> -- _by [iotbuzzer.com](https://iotbuzzer.com/what-is-iot-top-10-definitions-overview/)_
+</section>
+
+
+<section data-markdown id="iot-is-about-data">
+## IoT is built on data
+</section>
+
+
+<section data-markdown id="producers-and-consumers">
+* **data producers** (sensors)
+* **data consumers** (actuators)
+</section>
+
+
+<section data-markdown id="smart-waste-example" data-background="#fff">
+![Smart Waste Service](images/smart.waste.service.jpg)
+</section>
+
+
+<section id="iot-is-also-about" data-markdown>
+## IoT is also about...
+
+* hardware
+* low power
+* communication
+* data (data science, (time series) db)
+* updates (ota)
+* security
+</section>
+
+
+<section id="additional-value" data-markdown>
+## IoT is abou Additional Value
+</section>
+
+
+<section id="node-red" data-markdown data-background="#8F0000">
+[![Node-RED Logo](images/logo-node.red.png)](https://nodered.org)
+</section>
+
+
+<section id="what-is-node-red-i" data-markdown data-background="#8F0000">
+## What is Node-RED I.?
+
+> [Node-RED](https://nodered.org) is a **visual tool** for **wiring** the Internet of Things. (2016)
+
+> **Flow-based programming** for the Internet of Things. (2017)
+
+> **Low-code programming** for **event-driven applications**. (2019)
+</section>
+
+
+<section id="what-is-node-red-ii" data-markdown data-background="#8F0000">
+## What is Node-RED II.?
+
+> [Node-RED](https://nodered.org) is a **programming tool** for **wiring** together hardware devices, APIs and online services in new and interesting ways. (2022)
+
+> The easiest way to **collect**, **transform** and **visualize** real-time data. ([homepage](https://nodered.org))
+</section>
+
+
+<section id="nodered-features" data-markdown data-background="#8F0000">
+## And besides that...
+
+* open source (for free)
+* platform independent ([nodejs](https://nodejs.org/))
+    * runs in browser
+</section>
+
+
+<section id="iot-development" data-markdown>
+### "Traditional" Requirements for IoT Solution Development
+
+* Low-level programming skills
+* Hardware design expertise
+* Understanding of electronics
+* Knowledge of complex APIs for external service integration
+* Experience with Time Series Databases (TSDBs)
+* Knowledge of Data Analytics (DA) and Machine Learning (ML) for extracting insights from stored data
+</section>
+
+<section id="nodered-help" data-markdown data-background="#8F0000">
+[Node-RED](https://nodered.org) handles the technical aspects of your solution, allowing you to focus on your workflow.
+</section>
+
+
+<section id="nodered-with-docker" data-markdown data-background="#8F0000">
+## Running Node-RED
+
+1. start [Node-RED Docker Container](https://hub.docker.com/r/nodered/node-red)
+
+    ```bash
+    $ docker container run --rm -it \
+        --publish 1880:1880 \
+        --volume node_red_data:/data \
+        --name nodered \
+        nodered/node-red
+    ```
+
+2. open browser at [`http://localhost:1880`](http://localhost:1880)
+</section>
+
+
+<section id="hello-world" data-markdown data-background="#8F0000">
+## Hello world!
+</section>
+
+
+<section id="what-is-flow-based-programming" data-markdown data-background="#8F0000">
+## What is FBP?
+
+> **Flow-Based Programming** is a programming paradigm that defines applications as **networks** of "black box" processes, which exchange data across predefined **connections** by **message passing**, where the connections are specified **externally** to the processes. ([Wikipedia](https://en.wikipedia.org/wiki/Flow-based_programming))
+</section>
+
+
+<section id="message" data-markdown data-background="#8F0000">
+## The Message
+
+```json
+{
+    "_msgid": "89cbb063.7f7a7",
+    "payload": "Hello world!",
+    "topic": "Greetings!"
+}
+```
+</section>
+
+
+<section id="meteo-service" data-markdown data-background="#8F0000">
+## Meteo Servis
+
+([inspiration](https://meteo.skola.sk/meteostanica/?id=22))
+</section>
+
+
+<section id="worldmap-node" data-markdown data-background="#8F0000">
+[![node-red-contrib-web-worldmap](images/worldmap.node.gif)](https://flows.nodered.org/node/node-red-contrib-web-worldmap)
+[node-red-contrib-web-worldmap](https://flows.nodered.org/node/node-red-contrib-web-worldmap)
+</section>
+
+
+<section id="openweathermap-node" data-markdown data-background="#8F0000">
+[![OpenWeatherMap.org](images/logo-openweathermap.png)](https://openweathermap.org)
+
+* node: [node-red-node-openweathermap](https://flows.nodered.org/node/node-red-node-openweathermap)
+* API key: `{{ page.openweathermap_apikey }}`
+* [current weather data in a machine-readable format](http://api.openweathermap.org/data/2.5/weather?units=metric&q=dolny%20kubin,sk&appid={{ page.openweathermap_apikey }})
+    * HTTP protocol (REST API)
+    * JSON format
+</section>
+
+
+<section id="mqtt" data-markdown data-background="#8F0000">
+## MQTT
+</section>
+
+
+<section id="mqtt-explained" data-markdown data-background="white">
+![How MQTT Works](images/how.mqtt.works.png)
+
+Notes:
+* https://www.eclipse.org/community/eclipse_newsletter/2014/october/article2.php
+</section>
+
+
+<section id="what-can-nodered-do" data-markdown data-background="#8F0000">
+### What else can Node-RED do?
+
+* Build custom web applications
+* Create custom REST APIs
+* Develop custom dashboards
+* Integrate with database systems
+* Connect to external services (e.g., Twitter and many others)
+* Develop custom nodes (natively in JavaScript or in Python)
+* and much more
+</section>
+
+
+<section id="questions" data-markdown data-background="#8F1200">
+## Questions?
+</section>
+
+
+<section id="resources" data-markdown data-background="#8f1200">
+## Resources
+
+* [Node-RED homepage](https://nodered.org)
+* [resulting flow](resources/flow-meteoserice.json)
+* [Node-RED channel on YouTube](https://www.youtube.com/channel/UCQaB8NXBEPod7Ab8PPCLLAA)
+</section>
+
+{% include qr.html %}
