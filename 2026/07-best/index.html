@@ -19,6 +19,12 @@ openweathermap_apikey: b85449dbf5d71ab387d93367c7f1b790
 # video: https://youtu.be/coqzmKypHyE
 ---
 
+<style>
+#message-example pre {
+    font-size: 0.45em;
+}
+</style>
+
 {% include first.slide.html %}
 
 
@@ -130,7 +136,7 @@ openweathermap_apikey: b85449dbf5d71ab387d93367c7f1b790
         --publish 1880:1880 \
         --volume node_red_data:/data \
         --name nodered \
-        nodered/node-red
+        nodered/node-red:latest-minimal
     ```
 
 2. open browser at [`http://localhost:1880`](http://localhost:1880)
@@ -186,6 +192,12 @@ openweathermap_apikey: b85449dbf5d71ab387d93367c7f1b790
 </section>
 
 
+<section id="json" data-markdown>
+## JSON
+(JavaScript Obect Notation)
+</section>
+
+
 <section id="mqtt" data-markdown data-background="#8F0000">
 ## MQTT
 </section>
@@ -209,6 +221,81 @@ Notes:
 * Connect to external services (e.g., Twitter and many others)
 * Develop custom nodes (natively in JavaScript or in Python)
 * and much more
+</section>
+
+
+<section id="how-iotgw-works" data-markdown data-background="#BAECF9">
+[![IoT Gateway](images/iot-gw.webp)](https://psiborg.in/iot-gateway/)
+</section>
+
+
+<section id="iotgw-definition" data-markdown>
+> An **IoT Gateway** enables communication between different IoT system layers and bridges multiple communication protocols.
+</section>
+
+
+<section id="iotgw-as-rpi" data-markdown data-background="#fff">
+[![](images/rpi-plug.in.gif)](https://projects.raspberrypi.org/en/projects/raspberry-pi-getting-started)
+</section>
+
+
+<section id="ble" data-markdown data-background="#005DA3">
+## BLE
+(Bluetooth Low Energy)
+</section>
+
+<section id="what-is-ble" data-markdown data-background="#005DA3">
+## What Is BLE?
+
+A wireless standard designed for devices with limited power budgets and short data transfers.
+</section>
+
+
+<section id="ble-main-features" data-markdown data-background="#005DA3">
+### Main Features of BLE
+
+* **Low Power** - A device can run for months to years on a single coin-cell battery.
+* **Advertising** - Devices broadcast short data packets without needing to pair.
+* **Short Range** - Typically 10-100 m, well suited for sensors in a home or building.
+* **Star Topology** - A central device (gateway) communicates with multiple peripherals.
+</section>
+
+
+<section id="ble-star-topology" data-markdown data-background="#fff">
+[![Star Topology](images/star.topology.png)](https://medium.com/techtrends-digest/deep-dive-understanding-bluetooth-mesh-technology-5331d04d8f9c)
+</section>
+
+
+<section id="ble-device/types" data-markdown data-background="#005DA3">
+### BLE Device Types
+
+* **Peripheral** – a small, low-power device that broadcasts advertising packets and waits to be connected to (e.g. a sensor).
+* **Central** – a device that scans for peripherals and initiates connections (a phone, PC).
+* **Broadcaster** – only broadcasts packets, with no connection possible (e.g. beacons like iBeacon).
+* **Observer** – only listens to packets, never connects (e.g. Theengs Gateway)
+</section>
+
+
+<section id="message-example" data-markdown>
+```json
+{
+  "dt": "2026-07-06T20:09:35Z",
+  "metrics": [
+    {
+      "dt": "2026-07-06T20:00:00Z",
+      "name": "temperature",
+      "value": 23.4,
+      "units": "metric"
+    },
+    {
+      "dt": "2026-07-06T20:00:00Z",
+      "name": "humidity",
+      "value": 70,
+      "units": "%"
+    }
+  ]
+}
+```
 </section>
 
 
