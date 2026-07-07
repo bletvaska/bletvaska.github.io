@@ -17,6 +17,8 @@ authors:
 # bitly: https://bit.ly/3uBhK7w
 openweathermap_apikey: b85449dbf5d71ab387d93367c7f1b790
 # video: https://youtu.be/coqzmKypHyE
+todo:
+- pekny obrazok s rozlicnymi typmi ble topologii: https://www.linkedin.com/posts/mafaneh_ble-networktopologies-iot-activity-7258515079237685248-4756/
 ---
 
 <style>
@@ -239,9 +241,8 @@ Notes:
 </section>
 
 
-<section id="ble" data-markdown data-background="#005DA3">
-## BLE
-(Bluetooth Low Energy)
+<section id="ble" data-markdown data-background="#fff">
+[![](images/bluetooth-le.png)](https://lastminuteengineers.com/esp32-ble-tutorial/)
 </section>
 
 <section id="what-is-ble" data-markdown data-background="#005DA3">
@@ -261,18 +262,80 @@ A wireless standard designed for devices with limited power budgets and short da
 </section>
 
 
-<section id="ble-star-topology" data-markdown data-background="#fff">
-[![Star Topology](images/star.topology.png)](https://medium.com/techtrends-digest/deep-dive-understanding-bluetooth-mesh-technology-5331d04d8f9c)
+<section id="ble-communication-topologies" data-markdown data-background="#005DA3">
+### Communication Topologies
+
+* **Point-to-Point**
+* **Broadcast**
+* **Mesh** 
+* **Star topology**
 </section>
 
 
-<section id="ble-device/types" data-markdown data-background="#005DA3">
+<section id="ble-point-to-point" data-markdown data-background="#fff">
+### Point-to-Point
+
+[![Point-to-Point](images/ble-topology-point.to.point.png)](https://medium.com/techtrends-digest/deep-dive-understanding-bluetooth-mesh-technology-5331d04d8f9c)
+
+notes:
+- Klasické spojenie jedno zariadenie <-> jedno zariadenie (Central <-> Peripheral).
+- Používa sa napr. pri fitness náramkoch, senzoroch spárovaných s telefónom.
+</section>
+
+
+<section id="ble-star" data-markdown data-background="#fff">
+### Star
+
+[![Star](images/ble-topology-star.png)](https://medium.com/techtrends-digest/deep-dive-understanding-bluetooth-mesh-technology-5331d04d8f9c)
+
+notes:
+- Jeden Central sa môže pripojiť k viacerým Peripheralom súčasne (v štandarde BLE 4.x zvyčajne limitované number spojení, v 5.x rozšírené). 
+- Toto je bežné pri Raspberry Pi Pico/ESP32 gatewayoch, ktoré zbierajú dáta z viacerých senzorov.
+</section>
+
+
+<section id="ble-mesh" data-markdown data-background="#fff">
+### Mesh
+
+[![Mesh](images/ble-topology-mesh.png)](https://medium.com/techtrends-digest/deep-dive-understanding-bluetooth-mesh-technology-5331d04d8f9c)
+
+notes:
+- Zavedená v Bluetooth Mesh špecifikácii (postavená nad BLE advertising, nie nad GATT spojeniami). 
+- Funguje na princípe "managed flood" – správy sa šíria cez viacero uzlov (relay nodes), takže dosah siete je oveľa väčší ako dosah jedného zariadenia. 
+- Vhodné pre rozsiahlejšie inštalácie (napr. osvetlenie v budove, veľký počet senzorov).
+</section>
+
+
+<section id="ble-broadcast" data-markdown data-background="#fff">
+### Broadcast
+
+[![Broadcast](images/ble-topology-broadcast.png)](https://medium.com/techtrends-digest/deep-dive-understanding-bluetooth-mesh-technology-5331d04d8f9c)
+
+notes:
+- Zariadenie (Broadcaster) vysiela advertising pakety bez potreby spojenia, viacero prijímačov (Observers) ich môže čítať súčasne. 
+- Typické pre BLE beacony (iBeacon, Eddystone) 
+- ideálne, keď je potrebne jednosmerne posielať dáta viacerým prijímačom naraz.
+</section>
+
+
+<section id="ble-device-types" data-markdown data-background="#005DA3">
 ### BLE Device Types
 
-* **Peripheral** – a small, low-power device that broadcasts advertising packets and waits to be connected to (e.g. a sensor).
-* **Central** – a device that scans for peripherals and initiates connections (a phone, PC).
-* **Broadcaster** – only broadcasts packets, with no connection possible (e.g. beacons like iBeacon).
-* **Observer** – only listens to packets, never connects (e.g. Theengs Gateway)
+* **Peripheral** - a small, low-power device that broadcasts advertising packets and waits to be connected to (e.g. a sensor).
+* **Central** - a device that scans for peripherals and initiates connections (a phone, PC).
+* **Broadcaster** - only broadcasts packets, with no connection possible (e.g. beacons like iBeacon).
+* **Observer** - only listens to packets, never connects (e.g. Theengs Gateway)
+</section>
+
+
+<section id="topic-" data-markdown>
+## Structure of Topic
+
+`gw/:type/:id/:op`
+
+* `:type` - type of device
+* `:id` - unique identifier of device
+* `:op` - type of operation (`/data`, `/cmd`, `/status`, `/set`)
 </section>
 
 
@@ -296,6 +359,97 @@ A wireless standard designed for devices with limited power budgets and short da
   ]
 }
 ```
+</section>
+
+
+<section id="nodered-dashboard" data-markdown data-background="#fff">
+[![](images/nodered-dashboard.png)](https://flows.nodered.org/node/@flowfuse/node-red-dashboard)
+
+[`@flowfuse/node-red-dashboard`](https://flows.nodered.org/node/@flowfuse/node-red-dashboard)
+</section>
+
+
+<section id="zigbee-banner" data-markdown data-background="#fff">
+[![](images/zigbee-banner.jpg)](https://koti.sk/clanky/navody/co-je-zigbee-inteligentna-domacnost/)
+</section>
+
+
+<section id="what-is-zigbee" data-markdown data-background="#fff">
+### What Is Zigbee?
+
+[Zigbee](https://csa-iot.org/all-solutions/zigbee/) is a low-power, wireless communication technology used for connecting devices.
+</section>
+
+
+<section id="zigbee-main-features" data-markdown data-background="#fff">
+### Main Zigbee Features
+
+* wireless standard IEEE 802.15.4
+* low data rate - 250 kbps
+* low power - long battery life
+* scalability - easy to extend
+* reliability - mesh networking
+</section>
+
+<section id="zigbee-device-types" data-markdown data-background="#fff">
+### Device Roles in Zigbee Network
+
+* **Coordinator** - 1 per network, controls network
+* **Router** - relays messages, extends range
+* **End Device** - sensor / actuator, saves power
+
+notes:
+* 1. Zigbee Coordinator (Koordinátor)
+    * Je jediný v celej Zigbee sieti.
+    * Vytvára a spravuje sieť.
+    * Prideľuje adresy novým zariadeniam.
+    * Uchováva informácie o sieti a bezpečnostné kľúče.
+    * Môže zároveň vykonávať aj aplikačné funkcie (napr. riadiť inteligentnú domácnosť).
+
+    * Príklady:
+
+    * Zigbee USB dongle (Sonoff Zigbee Dongle, ConBee II)
+    * Zigbee hub (Philips Hue Bridge, SmartThings Hub)
+
+* 2. Zigbee Router
+    * Rozširuje dosah siete.
+    * Preposiela správy medzi zariadeniami (mesh networking).
+    * Umožňuje pripájanie ďalších zariadení.
+    * Väčšinou je trvalo napájaný zo siete (230 V alebo USB).
+
+    * Príklady:
+
+    * Inteligentné zásuvky
+    * Nástenné vypínače
+    * Žiarovky (väčšina Zigbee žiaroviek funguje ako router)
+    * Repeatery
+
+* 3. Zigbee End Device (Koncové zariadenie)
+    * Neprenáša komunikáciu ďalej.
+    * Komunikuje iba so svojím rodičom (koordinátorom alebo routerom).
+    * Môže prechádzať do režimu spánku, čím šetrí energiu.
+    * Je ideálny pre batériovo napájané zariadenia.
+
+    * Príklady:
+
+    * Teplotné senzory
+    * Pohybové senzory
+    * Kontakty na dvere a okná
+    * Tlačidlá
+    * Senzory vlhkosti
+    * Detektory úniku vody
+</section>
+
+
+<section id="zigbee-topologies" data-markdown data-background="#fff">
+[![Zigbee Network Topologies](images/zigbee-topologies.jpg)](https://stevessmarthomeguide.com/zigbee-basics/)
+</section>
+
+
+<section id="zigbee2mqtt" data-markdown data-background="#25262B">
+[![](images/logo-zigbee2mqtt.png)](https://www.zigbee2mqtt.io/)
+
+### [Zigbee2MQTT](https://www.zigbee2mqtt.io/)
 </section>
 
 
