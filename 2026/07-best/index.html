@@ -19,10 +19,12 @@ openweathermap_apikey: b85449dbf5d71ab387d93367c7f1b790
 # video: https://youtu.be/coqzmKypHyE
 todo:
 - pekny obrazok s rozlicnymi typmi ble topologii: https://www.linkedin.com/posts/mafaneh_ble-networktopologies-iot-activity-7258515079237685248-4756/
+- asi fajny zdroj (podla obrazkov): https://iotdunia.com/what-is-zigbee-in-iot/rbsnp/
 ---
 
 <style>
-#message-example pre {
+#message-example pre,
+#nodered-tips pre {
     font-size: 0.45em;
 }
 </style>
@@ -225,6 +227,10 @@ Notes:
 * and much more
 </section>
 
+<section id="what-is-iotgw" data-markdown data-background="#EAF7FF">
+[![IoT Gateway](images/iotgw-what.is.it.jpg)](https://iotdunia.com/what-is-an-iot-gateway-architecture-examples/rbsnp/)
+</section>
+
 
 <section id="how-iotgw-works" data-markdown data-background="#BAECF9">
 [![IoT Gateway](images/iot-gw.webp)](https://psiborg.in/iot-gateway/)
@@ -362,6 +368,21 @@ notes:
 </section>
 
 
+<section id="nodered-tips" data-markdown>
+### Node-RED Tips
+
+* JSONata expression
+* to set current time in ISO 8601
+    ```
+$(now)
+    ```
+* to get temperature from metrics
+    ```
+$$.payload.metrics[name="temperature"].value
+    ```
+</section>
+
+
 <section id="nodered-dashboard" data-markdown data-background="#fff">
 [![](images/nodered-dashboard.png)](https://flows.nodered.org/node/@flowfuse/node-red-dashboard)
 
@@ -461,9 +482,10 @@ notes:
 <section id="resources" data-markdown data-background="#8F0000">
 ## Resources
 
-* [Node-RED homepage](https://nodered.org)
-* [resulting flow](resources/flow-meteoserice.json)
-* [Node-RED channel on YouTube](https://www.youtube.com/channel/UCQaB8NXBEPod7Ab8PPCLLAA)
+* [Node-RED](https://nodered.org) homepage
+* [Zigbee2MQTT](https://www.zigbee2mqtt.io/) homepage
+* [Homepage](https://gethomepage.dev/)
+* [MQTTExplorer](https://mqtt-explorer.com/) homepage
 </section>
 
 {% include qr.html %}
