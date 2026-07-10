@@ -602,6 +602,67 @@ notes:
 </section>
 
 
+<section id="mini-hackathon" data-markdown>
+## Mini Hackathon
+</section>
+
+
+<section id="mini-hackathon-topics" data-markdown>
+### Topics Infrastructure
+
+```
+gw/:type/:id/:op
+```
+
+* `:type` - `blinds | door | thsensor | unipi | pir | socket | switch | vibration | ir | presence`
+* `:id` - device id
+* `:op` - `status | data | cmd`
+</section>
+
+
+<section id="mini-hackathon-notification-svc" data-markdown data-background="#fff">
+### Notification Service
+
+[![](https://raw.githubusercontent.com/caronc/apprise/master/apprise/assets/themes/default/apprise-logo.png)](https://github.com/caronc/apprise)
+</section>
+
+
+<section id="mini-hackathon-notification-svc-howto" data-markdown>
+### Notification Service Howto
+
+* easy notifications with [Pushbullet](https://www.pushbullet.com/)
+    * create account
+    * **browser extension** or **phone app**
+</section>
+
+
+<section id="mini-hackathon-notification-svc-notify" data-markdown>
+### Notification Service Notify!
+
+```
+# send this message
+{
+  "urls": "pbul://token-of-receiver",
+  "title": "Hello world!",
+  "body": "This message was sent with Apprise lib over MQTT."
+}
+
+# to this topic
+gw/service/notifier/notify
+```
+</section>
+
+
+<section id="mini-hackathon-nodered" data-markdown data-background="#8F0000">
+### Node-RED Test Nodes
+
+* test nodes for easy testing of the flow
+* (usually) they contain
+  * `payload` - with data
+  * `topic` - for test
+</section>
+
+
 <section id="have-fun" data-markdown data-background="purple">
 ## Have Fun!
 </section>
