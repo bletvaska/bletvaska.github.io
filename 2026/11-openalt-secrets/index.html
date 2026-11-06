@@ -1,0 +1,494 @@
+---
+title: Secrets v IoT
+subtitle: ako bezpečne ukladať heslá na mikrokontroléroch
+description: |
+    O IoT a bezpečnosti koluje taký vtip: "Písmeno S v skratke IoT znamená bezpečnosť." A vtip je samozrejme v tom, že ako skratka IoT neobsahuje písmenko S, tak ani IoT riešenia častokrát bezpečnosť neriešia alebo len na veľmi slabej úrovni.
+
+    Jedným z problémov, ktorý s bezpečnosťou IoT zariadení súvisí, je ukladanie citlivých údajov - tzv. secrets. Môže sa jednať o prihlasovacie údaje, ale rovnako aj len o tokeny, kľúče alebo len o heslo na pripojenie do WiFi siete. Pokiaľ tieto údaje budeme ukladať zle, bude veľmi jednoduché ich odcudziť a kompromitovať tak v najhoršom prípade celú našu infraštruktúru. Nie nadarmo je problematika ukladania hesiel prvou položkou rebríčka OWASP IoT Top 10. 
+    
+    A presne o tom, ako bezpečne ukladať citlivé údaje na mikrokontroléroch napísaných v jazyku MicroPython bude tento príspevok.
+duration: 25
+date: 2026-07-02
+layout: slide
+event:
+    title: OSS Conf Žilina 2026
+    url: https://ossconf.fri.uniza.sk/
+categories: talk
+theme: night
+authors:
+    - name: Mirek Biňas
+      email: miroslav.binas@tuke.sk
+      url: https://bletvaska.github.io
+bitly: https://bit.ly/4wnlBVO
+# video: https://youtu.be/s1RbHF_HCXo
+---
+
+<style>
+#textovka code {
+  background-color: #111111;
+}
+
+#micropython-and-thonny > p > a > img {
+  height: 180px;
+  padding: 25px;
+}
+
+#settings-example > pre,
+#create-encryption > pre,
+#create-decryption > pre
+{
+  font-size: 0.45em;
+}
+
+#kerckhoffs-principle {
+  display: flex !important;
+  align-items: center;
+  gap: 2em;
+}
+
+#kerckhoffs-principle > blockquote {
+  flex: 6;
+}
+
+#kerckhoffs-principle > p {
+  flex: 4;
+}
+</style>
+
+
+{% include first.slide.html %}
+
+
+<section id="joke" data-markdown>
+> The _S_ in _IoT_ Stands for Security.
+
+notes:
+- neda mi nezacat inac, ako standardnym vtipom na tuto temu a sice, ze oblast bezpecnosti v IoT je stale velmi problematicka
+</section>
+
+
+<section id="what-are-the-secrets" data-markdown>
+## Čo sú to Secrets?
+</section>
+
+
+<section id="secrets" data-markdown>
+## Secrets
+
+* **citlivé údaje**, ktoré **umožňujú prístup** k systémom, službám alebo dátam 
+* **musia byť bezpečne uložené a chránené pred neoprávneným prístupom**
+* napr.: heslá, API kľúče, tokeny alebo certifikáty
+</section>
+
+
+<section id="owasp-iot-top-10" data-markdown data-background="#fff">
+[![](images/owasp.iot.top.ten.png)](https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10)
+
+notes:
+* jednym z jej projektov je vsak aj OWASP IoT Top 10
+* zoznam 10 najvacsich hrozieb v oblasti IoT
+</section>
+
+
+<section id="hardcoded-passwords" data-markdown>
+### #1 Weak, guessable or hard coded passwords
+</section>
+
+
+<section id="hardcoded-passwords-description" data-markdown>
+> Use of easily bruteforced, publicly available, or unchangeable credentials, including backdoors in firmware or client software that grants unauthorized access to deployed systems.
+</section>
+
+
+<section id="examples-1" data-markdown>
+![](images/students-js1.jpg)
+
+notes:
+* staticka (hardcoded passwords) konfiguracia pre mqtt pripojenie
+* TUYA like - posiela to na cinske servery
+</section>
+
+
+<section id="examples-2" data-markdown>
+![](images/students-js2.jpg)
+
+notes:
+* to iste, len zapisane inac
+* co sa stane, ak dojde k vyzradeniu loginu a hesla a admini prijmu strasne rozhodnutie, ze credentials zmenia?
+</section>
+
+
+<section id="examples-3" data-markdown>
+![](images/students-python1.jpg)
+
+notes:
+* to iste, ale pre zmenu v pythone
+</section>
+
+
+<section id="examples-4" data-markdown>
+![](images/students-python2.jpg)
+
+notes:
+* opat defaults pre mqtt a databazu
+</section>
+
+
+<section id="examples-5" data-markdown>
+![](images/students-python3.jpg)
+</section>
+
+
+<section id="examples-6" data-markdown>
+![](images/students-python4.jpg)
+</section>
+
+
+<section id="other-sources" data-markdown>
+## Ďalšie zdroje
+
+* tutoriály - [Random Nerd Tutorials](https://randomnerdtutorials.com/micropython-mqtt-esp32-esp8266/)
+* knihy
+* čo na to AI?
+</section>
+
+
+<section id="where-are-the-problems" data-markdown>
+## Kde do $I&^% je problém?
+</section>
+
+
+<section id="the-problem" data-markdown>
+## Secrets sú súčasťou kódu!
+
+* hodnoty sú uložené v (globálnych) premenných
+* nedajú sa zmeniť bez zmeny kódu
+* sú čitateľné
+* nie sú šifrované
+</section>
+
+
+<section id="what-to-do" data-markdown>
+## Čo s tým?
+</section>
+
+
+<section id="the-steps" data-markdown>
+1. **Izolácia**
+  
+  Secrets uložíme do samostatného súboru.
+
+2. **Šifrovanie**
+  
+  Zašifrujeme uložené údaje, aby boli čitateľné iba s kľúčom.
+
+3. **Binárny bytecode**
+
+  Kód pracujúci so secrets preložíme do binárneho bytecode, čím sťažíme jeho analýzu.
+
+notes:
+  * Preklad do .mpy (MicroPython bytecode) sťažuje analýzu zdrojového kódu, ale nie je to bezpečnostný mechanizmus porovnateľný so šifrovaním. Skôr ide o obfuskáciu alebo sťaženie reverzného inžinierstva.
+</section>
+
+
+<section id="isolation" data-markdown>
+## Krok 1. Izolácia
+
+* secrets uložíme do samostatného súboru
+* použijeme formát, ktorý umožňuje jednoduché čítanie aj zápis
+  * vystačíme si s formátom JSON
+    * priama podpora v jazyku MicroPython
+    * umožňuje vnáranie
+  * výhodné je použiť dataclass pre validáciu
+* `/data/settings.json`
+</section>
+
+
+<section id="settings-example" data-markdown>
+```python
+import json
+
+SETTINGS_FILE = '/data/settings.py'
+
+# content of settings
+settings = {
+    "ssid": "OSS Conf 2026",
+    "password": "Linux.Rocks!",
+}
+
+# write settings
+with open(SETTINGS_FILE, 'w') as file:
+    json.dump(settings, file)
+
+# read settings
+with open(SETTINGS_FILE, 'r') as file:
+    settings = json.load(file)
+```
+</section>
+
+
+<section id="encoding-vs-hashing-vs-encryption" data-markdown data-background="#FFFEFA">
+![Encoding vs Hashing vs Encryption](images/encoding.vs.hashing.vs.encryption.png)
+
+notes:
+* https://devcookies.medium.com/encoding-vs-hashing-vs-encryption-explained-with-examples-d92b423a4584
+* este predtym ako sa posunieme ku kroku 2 mi neda jedno kratke pedagogicko-terminologicke okienko
+  * encoding - kódovanie
+  * hashing - hašovanie
+  * encryption - šifrovanie
+</section>
+
+
+<section id="encoding" data-markdown>
+## Krok 2. Šifrovanie
+
+* problém MCU pri šifrovaní - obmedzené zdroje mikrokontrolérov
+  * výpočtový výkon
+  * malá pamäť
+  * spotreba energie
+  * bezpečné ukladanie údajov (TrustZone)
+  * odolnosť voči fyzickým útokom
+  * generovanie náhodných čísiel
+</section>
+
+<section id="atecc-608" data-markdown>
+[![ATECC 608](images/atecc.608.jpg)](https://www.adafruit.com/product/4314)
+
+notes:
+* mozeme si pomoct napr. tak, ze k nasmu rieseniu pridame externý šifrovací koprocesor (crypto-koprocesor), ako napr ATECC608
+  * kľúč tak nikdy neopustí čip
+</section>
+
+
+<section id="cryptolib" data-markdown>
+[`cryptolib`](https://docs.micropython.org/en/latest/library/cryptolib.html)
+</section>
+
+
+<section id="aes" data-markdown>
+## AES
+Advanced Encryption Standard 
+
+* **symetrická bloková šifra**
+* pracuje s blokmi o dĺžke 128 bitov / 16 bytov
+* podporuje kľúče s dĺžkou 128, 192 alebo 256 bitov
+</section>
+
+
+<section id="aes-symetric" data-markdown data-background="#F2FFFF">
+![](images/aes.webp)
+
+notes:
+- https://nordlayer.com/blog/aes-encryption/
+</section>
+
+
+<section id="aes-getting-ready" data-markdown>
+### Get Ready!
+
+```python
+# inštancia šifry AES
+>>> import cryptolib
+
+# konštruktor AES šifry potrebuje:
+
+# kľúč (16/24/32 bytov)
+>>> key = 'SuperTajnyKluc!!'
+
+# inicializačný vektor (vždy 16 bytov)
+>>> iv = '1234567890123456'
+
+# vytvorenie objektu šifry
+>>> cipher = cryptolib.aes(key, 2, iv)       # mode 2 = CBC
+```
+</section>
+
+
+<section id="aes-encryption" data-markdown>
+### Šifrovanie textu
+
+```python
+# majme nasledujúci text
+# dĺžka musí byť násobkom 16 (PKCS#7 padding)
+>>> text = 'Hello, Pico 2 W!'
+
+# zašifrovanie textu
+>>> encrypted = cipher.encrypt(text)
+
+# výsledok bude zašifrovaný
+>>> print(encrypted) 
+b'\xa4`\xa1\xd1(w\xe3\xe2\x13\xb4\xc8$\x04\xac\xbf\xe0'
+```
+</section>
+
+
+<section id="aes-decryption" data-markdown>
+### Dešifrovanie textu
+
+```python
+# pre dešifrovanie potrebujeme opäť vytvoriť objekt šifry
+# (zmenil sa vnútorný stav a zmenil sa iv)
+>>> cipher = cryptolib.aes(key, 2, iv)
+
+# dešifrujeme
+>>> decrypted = cipher.decrypt(bytearray(encrypted))
+
+# výsledok je ako pole bytov
+>>> decrypted
+b'Hello, Pico 2 W!'
+
+# spravíme z toho reťazec
+>>> decrypted.decode('utf8')
+'Hello, Pico 2 W!'
+```
+</section>
+
+
+<section id="kerckhoffs-principle" data-markdown>
+> A cryptosystem should be secure, even if everything about the system, **except the key**, is public knowledge.
+>
+> -- [Auguste Kerckhoffs](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle)
+
+![Auguste Kerckhoffs](images/kerckhoffs.jpg)
+</section>
+
+
+<section id="key-problem" data-markdown>
+### Kľúčový problém - ako zabezpečíme kľúč?
+</section>
+
+
+<section id="binary-bytecodeencoding" data-markdown>
+## Krok 3. Binárny bytecode
+
+* kľúč zostavíme ako kompozíciu z:
+  * `salt` - náhodne vygenerované pole bytov, ktoré budú viazané na inštaláciu
+  * `unique_id` - viazané na hardvér
+* na šifrovanie/dešifrovanie vytvoríme vlastný modul `crypto.py`
+  * preložíme ho - vznikne binárny bytecode
+</section>
+
+
+<section id="create-salt" data-markdown>
+### Vytvorenie salt
+
+```python
+import os
+
+SALT_FILE = '/data/.salt'
+
+def create_salt(salt_path: str) -> None:
+    with open(salt_path, 'wb') as file:
+        file.write(os.urandom(16))
+```
+</section>
+
+
+<section id="create-key" data-markdown>
+### Vytvorenie kľúča
+
+```python
+import machine
+import hashlib
+
+def create_key(salt_path: str = SALT_FILE) -> bytes:
+    with open(salt_path, 'rb') as file:
+        salt = file.read()
+
+    hasher = hashlib.sha256()
+
+    # adding data to hash
+    hasher.update(machine.unique_id())
+    hasher.update(salt)
+
+    # return hash
+    return hasher.digest()[:16]  # AES-128
+```
+</section>
+
+
+<section id="create-encryption" data-markdown>
+### Funkcia na šifrovanie
+
+```python
+import cryptolib 
+import binascii
+
+def encrypt(plaintext: str, salt_path: str = SALT_FILE) -> str | None:
+    if plaintext is None:
+        return None
+
+    key = create_key(salt_path)
+    iv = os.urandom(16)
+    data = plaintext.encode('utf-8')
+    pad = 16 - (len(data) % 16)
+    data = bytearray(data + bytes([pad] * pad))
+    cipher = cryptolib.aes(key, 2, iv)
+    encrypted = cipher.encrypt(data)
+
+    return binascii.hexlify(
+        bytearray(iv) + bytearray(encrypted)
+    ).decode('ascii')
+```
+</section>
+
+
+<section id="create-decryption" data-markdown>
+### Funkcia na dešifrovanie
+
+```python
+def decrypt(ciphertext: str, salt_path: str = SALT_FILE) -> str | None:
+    if ciphertext is None:
+        return None
+
+    key = create_key(salt_path)
+    raw = binascii.unhexlify(ciphertext)
+    iv = raw[:16]
+    data = bytearray(raw[16:])
+    cipher = cryptolib.aes(key, 2, iv)
+    decrypted = cipher.decrypt(data)
+    pad = decrypted[-1]
+
+    return bytes(decrypted[:-pad]).decode('utf-8')
+```
+</section>
+
+
+<section id="mpy-cross" data-markdown>
+## [mpy-cross](https://gitlab.com/alelec/mpy_cross )
+
+the micropython cross compiler utility
+</section>
+
+
+<section id="mpy-cross-job" data-markdown>
+
+```bash
+# najprv nainštalujeme
+(venv) $ pip install mpy-cross
+
+# overíme verziu:
+(venv) $ mpy-cross --version
+MicroPython v1.27.0 on 2025-12-13; mpy-cross emitting mpy v6.3
+
+# preložíme modul crypto.py
+(venv) $ mpy-cross crypto.py
+```
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [`cryptolib`](https://docs.micropython.org/en/latest/library/cryptolib.html) - cryptographic ciphers
+* [MicroPython `.mpy` files](https://docs.micropython.org/en/latest/reference/mpyfiles.html)
+* [`alelec/mpy_cross`](https://gitlab.com/alelec/mpy_cross) - MicroPython `mpy-cross` distribution
+</section>
+
+
+{% include qr.html %}
