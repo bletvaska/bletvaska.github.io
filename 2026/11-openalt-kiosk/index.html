@@ -84,6 +84,12 @@ notes:
 * rpi ako kiosk je jeden z popularnych sposobov vyuzitia minipocitaca rpi
 </section>
 
+
+<section id="orientacny-beh" data-markdown>
+![](images/kiosk-results.png)
+</section>
+
+
 <section id="boris" data-markdown>
 ![Boris Vaitovič](images/boris.jpg)
 
@@ -542,9 +548,6 @@ killall -9 wf-panel-pi
 ### `/boot/firmware/config.txt`
 
 ```
-# signál do HDMI aj bez monitora
-hdmi_force_hotplug=1
-
 # vypne LED pre aktivity SD karty
 dtparam=act_led_trigger=none
 
@@ -560,6 +563,29 @@ notes:
 * https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README
 * https://www.stderr.nl/Blog/Hardware/RaspberryPi/PowerButton.html
 * pravdepodobne sa da este pridat led-ka, ktora bude svietit, ked je rpi vypnute - https://gist.github.com/lbussy/9e81cbcc617952f1250e353bd42e7775
+</section>
+
+
+<section id="cmdline.txt" data-markdown>
+### Obraz bez monitora
+
+```bash
+# /boot/firmware/cmdline.txt (jeden riadok!)
+... rootwait quiet splash video=HDMI-A-1:1920x1080MR@60D
+```
+
+* `M` - režim dopočítaný podľa CVT
+* `R` - redukované zatemňovanie (nižšia frekvencia pixelov)
+* `D` - výstup zapnutý aj bez pripojeného monitora
+
+notes:
+* s KMS (`dtoverlay=vc4-kms-v3d`) sa `hdmi_force_hotplug=1` v `config.txt` ignoruje
+* bez parametra labwc vytvori nahradny vystup `NOOP-1` a chromium nema na com bezat
+* bez EDID ovladac pozna len rezimy do 1024x768, preto `M`
+* bez EDID povoli ovladac max 165 MHz, beznych CVT 1920x1080@60 potrebuje 173 MHz - jadro hlasi `User-defined mode not supported`, preto `R` (~138,5 MHz)
+* vysledok: 1920x1080 @ 59,98 Hz
+* overenie: `wlr-randr` (ma tam byt `HDMI-A-1`, nie `NOOP-1`), `cat /sys/class/drm/card0-HDMI-A-1/status`
+* https://www.kernel.org/doc/html/latest/fb/modedb.html
 </section>
 
 
@@ -663,6 +689,8 @@ $ sudo plymouth-set-default-theme --rebuild-initrd pix
   ```
 
 * [log2ram](https://github.com/azlux/log2ram) - ramlog like for systemd (Put log into a ram folder)
+
+* stmievania je vypnuté by default - bude aj v budúcnosti?
 
 * vzdialený monitoring a ovládanie
 </section>
