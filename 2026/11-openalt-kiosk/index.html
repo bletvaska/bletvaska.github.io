@@ -1,0 +1,688 @@
+---
+title: RPi ako kiosk
+#subtitle: |
+#    alebo "Mission: Kioskpossible"
+description: |
+    Minipočítač Raspberry Pi je obľúbeným hrdinom mnohých domácich kutilských projektov. Jedným z nich je aj (webový) kiosk. Ale nie hocijaký – myslíme tým kiosk, ktorý beží spoľahlivo 24/7. Od prvého zapnutia. Taký, ktorý sa dá spravovať na diaľku. A keď nie na diaľku, tak aspoň na blízko. Ktorý v prípade potreby vypnete a zapnete ručne – a on bude aj tak fungovať. Rovnako. Aj zajtra.
+    Presne o tom bude tento príspevok – ako vytiahnuť Raspberry Pi zo šuflíka a spraviť z neho spoľahlivý kiosk. Bude to trochu technické, no veľmi praktické. Pripravte sa na príručku plnú tipov, chýb a víťazných „Aha!“ momentov, ktoré vám pomôžu zachrániť vaše duševné zdravie.
+duration: 40
+date: 2026-11-08
+layout: slide
+event:
+    title: OpenAlt 2026
+    url: https://www.openalt.cz/2026/
+categories: talk
+theme: night
+authors:
+    - name: Miroslav Biňas
+      email: mirek@cnl.sk
+      url: https://bletvaska.github.io
+# bitly: http://bit.ly/46fSWrE
+# video: https://youtu.be/s1RbHF_HCXo
+---
+
+<style>
+#browser-in-kiosk-mode > pre > code {
+  font-size: 0.9em;
+  line-height: 1.2em;
+}
+
+#howto img {
+  width: 60%;
+}
+
+#earth-4 img,
+#earth-2 img,
+#gauss img,
+#sd-card-selection img
+{
+  height: 600px;
+}
+
+#boris img
+{
+  height: 500px;
+}
+
+
+
+</style>
+
+
+{% include first.slide.html %}
+
+
+{% include about.mirek.html %}
+
+<section id="kiosk-mode">
+<h2>Čo je to Kiosk?</h2>
+
+<div class="fragment">
+<blockquote>Počítačový terminál so špecializovaným hardvérom a softvérom, ktorý poskytuje prístup k informáciám a aplikáciám na komunikáciu, nakupovanie, zábavu alebo vzdelávanie.</blockquote>
+<p><small>voľne podľa <a href="https://en.wikipedia.org/wiki/Interactive_kiosk">Wikipedia: Interactive kiosk</a></small></p>
+</div>
+</section>
+
+
+<section id="kiosk-example" data-markdown>
+[![](images/kiosk-samsung.jpg)](https://www.samsung.com/sk/business/smart-signage/interactive-display/samsung-kiosk-with-windows-os-lh24kmccbgcxen/)
+
+notes:
+* kiosky mozu byt implementovane rozlicnym sposobom:
+  * na pulte
+  * na stene
+  * na stojane
+* tu je priklad kioskov od Samsungu
+* komerne riesenia sa pohybuju v cenach od 1000 EUR vyssie
+</section>
+
+
+<section id="rpi-kiosk" data-markdown>
+![](images/rpi.kiosk.india.jpg)
+
+notes:
+* rpi ako kiosk je jeden z popularnych sposobov vyuzitia minipocitaca rpi
+</section>
+
+<section id="boris" data-markdown>
+![Boris Vaitovič](images/boris.jpg)
+
+###### Toto je Boris. Boris Vaitovič. Boris je umelec.
+
+notes:
+* boris je umelec
+* kazdy projekt je jedinecny
+</section>
+
+<section id="iot-corner" data-markdown>
+![](images/iot.corner.jpg)
+</section>
+
+
+<section id="gauss" data-markdown>
+![](images/gauss.jpg)
+</section>
+
+
+<section id="earth-1" data-markdown>
+![](images/earth-1.jpg)
+</section>
+
+
+<section id="earth-2" data-markdown>
+![](images/earth-2.jpg)
+</section>
+
+
+<section id="earth-3" data-markdown>
+![](images/earth-3.jpg)
+</section>
+
+
+<section id="earth-4" data-markdown>
+![](images/earth-4.jpg)
+</section>
+
+
+<section id="aurora" data-markdown>
+![](images/aurora.jpg)
+</section>
+
+
+<section id="howto" data-markdown data-background="white">
+### Staviame vlastný RPi kiosk
+###### (na ľubovoľnom RPi s [RPi OS with desktop](https://www.raspberrypi.com/software/operating-systems/) (6.okt.2026))
+
+![](images/pi-plug-in.gif)
+</section>
+
+
+<section id="installation" data-markdown>
+## 1. Inštalácia OS
+</section>
+
+
+<section id="sd-card-selection" data-markdown data-background="#fff">
+[![](images/rpi.sd.card.jpg)](https://rpishop.cz/535862/raspberry-pi-64-gb-microsd-karta-tridy-a2/)
+</section>
+
+
+<section id="raspberry-pi-os" data-markdown data-background="#F0F0F0">
+[![](images/rpios.png)](https://www.raspberrypi.com/software/operating-systems/)
+
+notes:
+* oficialny rpi os 
+  * desktop verzia
+  * pre rpi3 32bit verzia
+  * hlavne kvoli rozbehanemu a nakonfigurovanemu desktopu
+</section>
+
+
+<section id="rpi-imager" data-markdown>
+[![](images/rpi.imager.png)](https://www.raspberrypi.com/software/)
+
+notes:
+* mozete pouzit lubovolnu metodu na flashnutie SD karty
+  * balenaEtcher, dd
+* rpi imager je oficialny nastroj, ktory vie flashnut SD kartu s rpi os
+  * ma aj moznost stiahnut si aktualnu verziu rpi os
+  * mozete pomocou neho nakonfigurovat wifi, ssh, locale, timezone a dalsie veci
+</section>
+
+
+<section id="rpi-provisioning" data-markdown>
+### RPi Provisioning
+
+* cez RPi Imager:
+  * zapnúť SSH (nahrať kľúče)
+  * nastaviť WiFi pripojenie
+  * nastaviť jazyk, časovú zónu, rozloženie klávesnice
+  * nastaviť hostname
+  * zapnúť [RPi Connect](https://connect.raspberrypi.com/)
+* pri prvom spustení:
+  * aktualizovať systém
+  * doinštalovať potrebné balíčky
+</section>
+
+<!-- <section data-markdown="">
+* [RPi OS with desktop](https://www.raspberrypi.com/software/operating-systems/), 13.5.2025
+</section> -->
+
+
+<section id="rpi-image-gen" data-markdown>
+[![](https://opengraph.githubassets.com/dd1a092ca6424b6a7c9199db6b8031f9e1c9be4aed88eee6f145d6a4f1a66c09/raspberrypi/rpi-image-gen)](https://github.com/raspberrypi/rpi-image-gen)
+</section>
+
+
+<section id="connection" data-markdown>
+## 2. Konfigurácia sieťového pripojenia
+
+notes:
+* pouzitie RPi moze byt v rozlicnych prostrediach
+  * mozno bude RPi pripojene k internetu 24/7
+  * mozno RPi nebude pripojene k internetu vobec
+* nastavenie siete urobite doma - tam, kde ho mate
+* je to priprava na 
+  * produkcne pouzitie (pripojenie k internetu 24/7), ale aj na
+  * servisne pripojenie, kde bude potrebne sa k RPi pripojit kvoli nastaveniu kiosku
+    * napr. cez WiFi z telefonu (WiFi tethering)
+    * alebo cez USB kabel cez telefon (USB tethering)
+    * alebo cez ethernet kabel s laptopom
+</section>
+
+
+<section id="wifi-configuration" data-markdown>
+### WiFi konfigurácia
+
+```bash
+# vytvorenie WiFi pripojenia s názvom "kiosk-wifi", 
+# ktoré sa pripojí k sieti s názvom "SSID" a heslom "PASSWORD"
+$ nmcli connection add type wifi \
+    con-name "kiosk-wifi" \
+    ifname wlan0 \
+    ssid "SSID" \
+    wifi-sec.key-mgmt wpa-psk \
+    wifi-sec.psk "PASSWORD"
+
+# overenie pripojenia
+$ nmcli connection show
+
+# ak mas vypnute rozhranie, tak ho zapni
+$ nmcli radio wifi on
+```
+
+notes:
+* tymto sposobom je mozne pripravit konfiguraciu pre WiFi siet v mieste nasadenia
+</section>
+
+
+<section id="service-wifi-configuration" data-markdown>
+### Servisná WiFi sieť
+
+```bash
+$ nmcli connection add type wifi \
+    con-name "service-wifi" \
+    ifname wlan0 \
+    ssid "kiosk-service" \
+    wifi-sec.key-mgmt wpa-psk \
+    wifi-sec.psk "PASSWORD" \
+    connection.autoconnect-priority 100  # rozsah <-999, 999> 
+                                         # default=0
+```
+
+notes:
+* ak sa ma nieco pokazit, tak sa to pokazi
+* dopredu sa pripravte na tuto moznost
+  * urcite nieco nepojde
+  * a to nieco bude okamzite po prichode a pri prvej instalacii :-)
+* servisna wifi siet z telefonu
+  * nastavte si ju rovnako pre vsetky vase kiosky
+* priorita sa uplatni len pri vybere siete
+  * ak uz je pripojeny na wifi, sam sa na inu neprepne
+</section>
+
+
+<section id="service-ethernet-configuration" data-markdown>
+### Servisné Ethernet rozhranie
+
+```bash
+# nastavenie IP adresy na 10.20.30.1
+$ nmcli connection add type ethernet \
+    con-name "service-eth" \
+    ifname eth0 \
+    ipv4.addresses 10.20.30.1/24 \
+    ipv4.method shared    # DHCP na eth (a v cudzej sieti!)
+    # ipv4.method manual  # klient si nastavi IP adresu rucne
+
+# zapnutie rozhrania 
+$ nmcli connection up "service-eth"
+```
+
+```bash
+# ak shared, tak klient dostane GW z RPi
+# vypnut tymto
+# /etc/NetworkManager/dnsmasq-shared.d/no-gateway.conf
+dhcp-option=option:router
+dhcp-option=option:dns-server
+```
+
+notes:
+* ethernetove pripojenie posluzi v pripade, ak sa potrebujeme pripojit k RPi cez kabel
+* pripojenie:
+  * IP adresa RPi bude 10.20.30.1/24
+  * pri `shared` dostane pocitac IP adresu automaticky (DHCP)
+  * pri `manual` treba IP adresu nastavit rucne z rovnakeho segmentu
+</section>
+
+
+<section id="raspberry-pi-connect" data-markdown>
+## 3. RPi Connect
+</section>
+
+
+<section id="rpi-connect" data-markdown>
+[![](images/rpi.connect.png)](https://connect.raspberrypi.com/)
+
+notes:
+* rpi connect je služba, ktorá umožňuje vzdialený prístup k zariadeniam Raspberry Pi cez webové rozhranie
+  * zdielanie plochy
+  * vzdialeny terminal
+* umožňuje jednoduché pripojenie a správu viacerých zariadení
+* beta od roku 2024, verzia 1.0 bola vydaná v marci 2025, dnes je verzia 2.14
+* toto chcete pouzivat!
+  * nepotrebujete ziadnu verejnu IP adresu
+  * nepotrebujete nastavovat ziadne port forwardingy
+  * nepotrebujete nastavovat VPN
+* rpi connect je bezplatná služba, ktorá je dostupná pre všetkých používateľov Raspberry Pi
+</section>
+
+
+<section id="rpi-connect-registration" data-markdown>
+### Intro to RPi Connect
+
+* nepotrebuje mať zapnuté SSH
+* dnes je už predinštalovaný v desktopovom obraze a nastavuje sa už v [RPi Imager](https://www.raspberrypi.com/documentation/computers/getting-started.html#customisation)-i
+* RPi Connect 101:
+
+```bash
+# ak nie je nainštalovaný (napr. RPi OS Lite)
+$ sudo apt install rpi-connect
+
+# manualne zapnut/vypnut
+$ rpi-connect on
+
+# potom sa prihlásime do sluzby zo zariadenia
+$ rpi-connect signin
+
+# kliknutim na vygenerovany odkaz sa zariadenie prihlasi
+# do sluzby a bude ho mozne spravovat cez webove rozhranie
+```
+</section>
+
+
+<section id="autostart-app" data-markdown>
+## 4. Spustenie aplikácie po štarte
+
+notes:
+* nasim cielom je spustit pri zapnuti bud 
+  * webovy prehliadac, alebo
+  * prehravac videa
+* v oboch pripadoch sa jedna o graficke aplikacie. a kym si povieme o tom, ako ich spustit, tak si musime povedat trochu o tom, ako pracuje graficke rozhranie v Linuxe.
+</section>
+
+
+<section id="wayland-vs-xorg" data-markdown data-background="images/wayland.vs.x.jpg">
+notes:
+* graficke rozhranie v linuxe sa vola **display server** a v sucasnosti existuju dva hlavne display servery
+  * X11 (Xorg) - starsia technologia, ktora je v linuxe uz velmi dlho (od 80. rokov)
+  * Wayland - nova technologia, jednoduchsia a bezpecnejsia
+* v X serveri sa nachadzali dve aplikacie, ktore sa starali o vykreslenie okna:
+  * display server - zodpovedny za vykreslenie okna na obrazovke
+  * window manager - zodpovedny za spravu okien, ich presuvanie, zmenu velkosti, minimalizaciu, maximalizaciu, atd.
+* vo Waylande sa tieto dve aplikacie spojili do jednej, ktora sa vola compositor
+* RPi OS pouziva wayland experimentalne od roku 2021
+  * v 2021 s kompozitorom mutter
+  * v 2023 s kompozitorom wayfire na RPi 4 a 5, kde bol Wayland default
+  * na konci 2024 s kompozitorom labwc s moznostou spustat aj na starsich RPi a Wayland je default na vsetkych modeloch
+* takze aktualny stav
+  * Wayland je default na RPi OS
+  * labwc je default compositor
+* vysledok je taky, ze ak budete hladat navody, ako spravite kiosk z RPi, tak najdete navody v 99% prave pre X11 s jeho spravcami okien
+* https://www.raspberrypi.com/news/a-new-release-of-raspberry-pi-os/
+</section>
+
+
+<section id="autostart-in-labwc" data-markdown>
+### Autoštart v labwc
+
+* bash skript
+  * `/etc/xdg/labwc/autostart`
+  * `$HOME/.config/labwc/autostart`
+notes:
+* systemovy
+* pouzivatelsky
+</section>
+
+
+
+
+<section id="browser-in-kiosk-mode" data-markdown>
+### Prehliadač v kiosk režime
+
+```bash
+# start chromium in kiosk mode
+/usr/bin/lwrespawn /usr/bin/chromium \
+    --no-first-run \
+    --noerrdialogs \
+    --incognito \
+    --kiosk \
+    --hide-scrollbars \
+    "${URL}"
+```
+</section>
+
+
+<section id="chromium-policies" data-markdown>
+### [Politiky Chromium](https://chromeenterprise.google/policies/)
+
+> Prepínače hovoria, ako sa má prehliadač tváriť. Politiky hovoria, čo smie.
+
+[`chrome://policy`](chrome://policy) -- [dokumentácia](https://chromeenterprise.google/policies/)
+</section>
+
+
+
+<section id="chromium-policies-example" data-markdown>
+### [Politiky Chromium](https://chromeenterprise.google/policies/) - príklad
+
+```
+/etc/chromium/policies/managed/kiosk.json
+```
+
+```json
+{
+  "TranslateEnabled": false,
+  "BookmarkBarEnabled": false,
+  "PasswordManagerEnabled": false,
+  "AutofillAddressEnabled": false,
+  "DeveloperToolsAvailability": 2,
+  "DefaultNotificationsSetting": 2,
+  "BrowserSignin": 0
+}
+```
+
+
+notes:
+* politiky su povodne nastroj pre firmy na hromadnu spravu prehliadacov (Chrome Enterprise)
+  * funguju rovnako v Chrome aj Chromiu
+  * je ich viac ako 400 - https://chromeenterprise.google/policies/
+* na linuxe su to obycajne JSON subory, netreba ziadny server
+  * `managed/` - povinne, pouzivatel ich nemoze zmenit
+  * `recommended/` - predvolene hodnoty, pouzivatel ich moze zmenit
+  * nazov suboru je lubovolny, nacitaju sa vsetky `*.json` v adresari
+* platia pre cely system a patria rootovi - kiosk ich nevie obist
+  * nedaju sa nastavit len pre jedneho pouzivatela
+* preco politiky namiesto prepinacov?
+  * su zdokumentovane a stabilne
+  * prepinace google rusi bez upozornenia (`--disable-infobars`, `--disable-features=Translate`)
+* "prepinace hovoria, ako sa ma prehliadac tvarit. politiky hovoria, co smie."
+* overenie: `chrome://policy`
+* pozor: chybny JSON sa ticho ignoruje
+  * overit cez `python3 -m json.tool kiosk.json`
+* zmeny sa prejavia az po restarte prehliadaca
+* firefox ma ekvivalent: `/etc/firefox/policies/policies.json`
+</section>
+
+
+<section id="videoplayer-in-kiosk-mode" data-markdown>
+### Videoprehrávač v kiosk režime
+
+```bash
+# start vlc in kiosk mode
+cd "${HOME}/Videos" \
+&& /usr/bin/lwrespawn /usr/bin/cvlc \
+   --intf rc \
+   --rc-host localhost:4212 \
+   --fullscreen \
+   --no-video-title-show \
+   --video-on-top \
+   --no-audio \
+   --no-osd \
+   --no-mouse-events \
+   --loop \
+   *webm
+```
+</section>
+
+
+<section id="tips-and-tricks" data-markdown>
+## 5. Tipy a triky
+</section>
+
+
+<section id="video-encoding" data-markdown>
+### Kódovanie videa
+
+```bash
+$ ffmpeg \
+    -i input.video.mp4 \
+    -vf "scale=1920:1080,format=yuv420p" \
+    -c:v libvpx \
+    -b:v 1M \
+    -r 25 \
+    -c:a libvorbis \
+    output.webm
+```
+</section>
+
+
+<section id="hiding-mouse-cursor" data-markdown>
+### "Evanesco" -> kurzor myši
+
+```bash
+# ~/.config/labwc/autostart
+
+# move mouse cursor out of the screen
+# install package: evemu-tools
+evemu-event /dev/input/event0 \
+    --type EV_REL --code REL_X --value 9999 --sync
+evemu-event /dev/input/event0 \
+    --type EV_REL --code REL_Y --value 9999 --sync
+```
+</section>
+
+
+<section id="autostart" data-markdown>
+### Šetrenie zdrojov
+
+```bash
+# ~/.config/labwc/autostart
+
+# on top of autostart file
+
+# kill watchdog for running apps
+killall -9 lwrespawn
+# turns off pcmanfm for desktop management
+pcmanfm --desktop-off
+# kill panel
+killall -9 wf-panel-pi
+```
+</section>
+
+
+<section id="sound-over-hdmi" data-markdown>
+### Zvuk cez HDMI
+
+* nastaviť cez `raspi-config` 
+  * v menu `System Options > Audio` vybrať položku `HDMI`
+</section>
+
+
+<section id="config.txt" data-markdown>
+### `/boot/firmware/config.txt`
+
+```
+# signál do HDMI aj bez monitora
+hdmi_force_hotplug=1
+
+# vypne LED pre aktivity SD karty
+dtparam=act_led_trigger=none
+
+# vypne napájaciu LED
+dtparam=pwr_led_trigger=none
+
+# vypínač RPi na GPIO 3
+# vypnutie - 2x stlačiť, zapnutie - 1x stlačiť
+dtoverlay=gpio-shutdown
+```
+
+notes:
+* https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README
+* https://www.stderr.nl/Blog/Hardware/RaspberryPi/PowerButton.html
+* pravdepodobne sa da este pridat led-ka, ktora bude svietit, ked je rpi vypnute - https://gist.github.com/lbussy/9e81cbcc617952f1250e353bd42e7775
+</section>
+
+
+<section id="pinout" data-markdown data-background="white">
+[![](images/rpi.5-pinout.png)](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html)
+
+notes:
+* benefitom je aj moznost pripojit dalsiu elektroniku cez GPIO piny
+</section>
+
+
+<section id="zram" data-markdown>
+### Zvýšenie kapacity RAM
+
+* vytvára komprimovanú pamäť v RAM, používa sa ako swap pri nedostatku fyzickej pamäte
+* inštalácia:
+  ```bash
+  $ sudo apt install --yes zram-tools
+  ```
+* konfigurácia v `/etc/default/zramswap`:
+  ```
+  ALGO=zstd
+  PERCENT=75
+  ```
+* reštart služby:
+  ```bash
+  $ sudo systemctl restart zramswap
+  ```
+* overenie cez `zramctl` alebo `free`
+</section>
+
+<section id="zram-update" data-markdown>
+#### ZRAM je súčasťou nových RPi OS
+
+(Hotovo! Hirošima hadr!)
+</section>
+
+
+<section id="wlr-randr" data-markdown>
+### Vypnutie obrazovky
+
+* šetríme elektriku v noci ;)
+* pomocou `wlr-randr`
+  * Wayland alternatíva pre `xrandr`
+  * bez parametrov vypíše zoznam výstupov
+* príklady použitia:
+  ```bash
+  # vypnutie obrazovky HDMI-A-1
+  $ wlr-randr --output HDMI-A-1 --off
+
+  # opätovné zapnutie obrazovky
+  $ wlr-randr --output HDMI-A-1 --on
+
+  # otočenie obrazovky hore nohami
+  $ wlr-randr --output HDMI-A-1 --transform 180
+  ```
+</section>
+
+
+<section id="boot-splashscreen" data-markdown>
+![](images/splash.rpi.png)
+</section>
+
+
+<section id="plymouth" data-markdown>
+### Boot Splash Screen
+
+* obrázok/animácia pri štartovaní systému
+* [Plymouth](https://wiki.archlinux.org/title/Plymouth) - správca tém pre spúšťanie/ukončovanie systému
+</section>
+
+
+<section id="custom-plymouth" data-markdown>
+### Úprava témy pre Plymouth
+
+```bash
+# zistíme aktuálnu tému
+$ plymouth-set-default-theme
+pix
+
+# nahradíme existujúci splash za vlastný
+$ sudo mv splash.png /usr/share/plymouth/themes/pix/splash.png
+
+# aplikujeme zmeny
+$ sudo plymouth-set-default-theme --rebuild-initrd pix
+```
+
+* problém - po aktualizácii balíka sa zmeny obnovia
+  * vytvoriť vlastnú tému z existujúcej
+</section>
+
+
+<section id="future-plans" data-markdown>
+## ...sa nevošlo
+
+* Overlay FS - SD karta len na čítanie
+  * ochrana proti výpadku napájania
+
+  ```bash
+  $ sudo raspi-config nonint do_overlayfs 0   # 0 = zapnúť
+  ```
+
+* [log2ram](https://github.com/azlux/log2ram) - ramlog like for systemd (Put log into a ram folder)
+
+* vzdialený monitoring a ovládanie
+</section>
+
+
+<section id="questions" data-markdown>
+## Otázky?
+</section>
+
+
+<section id="links" data-markdown>
+## Odkazy
+
+* [A new release of Raspberry Pi OS](https://www.raspberrypi.com/news/a-new-release-of-raspberry-pi-os/)
+* [RPi Connect](https://www.raspberrypi.com/software/connect/)
+* [Getting started with your Raspberry Pi](https://www.raspberrypi.com/documentation/computers/getting-started.html#setting-up-your-raspberry-pi)
+* [Návody (nie)len pre RPi](https://github.com/thagrol/Guides/tree/main)
+* ArchLinux: [Labwc](https://wiki.archlinux.org/title/Labwc), [Plymouth](https://wiki.archlinux.org/title/Plymouth)
+* [Namakaný webinár #44](https://namakanyden.sk/webinare/44/)
+</section>
+
+
+{% include qr.html %}
