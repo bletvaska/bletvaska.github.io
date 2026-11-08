@@ -1,5 +1,5 @@
 import json
-from crypto import encrypt
+from crypto import encrypt, decrypt
 
 SETTINGS_FILE = '/data/settings.json'
 
@@ -12,3 +12,9 @@ settings = {
 # write settings
 with open(SETTINGS_FILE, 'w') as file:
     json.dump(settings, file)
+
+# read settings and decrypt password
+with open(SETTINGS_FILE, 'r') as file:
+    settings = json.load(file)
+
+print(decrypt(settings['password']))

@@ -1,8 +1,8 @@
-import cryptolib
-import binascii
 import os
 import machine
 import hashlib
+import cryptolib
+import binascii
 
 SALT_FILE = '/data/.salt'
 
@@ -41,7 +41,6 @@ def encrypt(plaintext: str, salt_path: str = SALT_FILE) -> str | None:
     return binascii.hexlify(
         bytearray(iv) + bytearray(encrypted)
     ).decode('ascii')
-
 
 def decrypt(ciphertext: str, salt_path: str = SALT_FILE) -> str | None:
     if ciphertext is None:

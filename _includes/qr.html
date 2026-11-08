@@ -1,4 +1,12 @@
 {% if page.bitly %}
+<style>
+/* white frame (quiet zone) so the QR code scans well on dark themes */
+#qr-code img {
+  background-color: #fff;
+  padding: 40px;
+}
+</style>
+
 <section data-markdown id="qr-code">
     ![qr code](https://api.qrserver.com/v1/create-qr-code/?data={{ page.bitly }}&size=300x300)
 
