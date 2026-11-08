@@ -34,6 +34,7 @@ bitly: https://bit.ly/4epMP7z
 }
 
 #settings-example > pre,
+#cipher-example > pre,
 #create-encryption > pre,
 #create-decryption > pre
 {
@@ -41,6 +42,7 @@ bitly: https://bit.ly/4epMP7z
 }
 
 #settings-example > pre > code,
+#cipher-example > pre > code,
 #create-encryption > pre > code,
 #create-decryption > pre > code
 {
@@ -88,7 +90,7 @@ notes:
 
 
 <section id="rpi-pico-2wh" data-markdown data-background="#fff">
-![](https://www.waveshare.com/img/devkit/Raspberry-Pi-Pico-2-W/Raspberry-Pi-Pico-2-WH-pack.jpg)
+![Raspberry Pi Pico 2 WH](images/rpi.pico.2wh.jpg)
 </section>
 
 
@@ -476,7 +478,7 @@ notes:
 * RP2350: os.urandom() ide cez TRNG (pico_rand)
 * secure boot / flash encryption = vlastny build firmveru + espefuse.py / picotool; oficialne buildy z micropython.org to nemaju zapnute
 * OTP/eFuse, HMAC/DS periferie, TrustZone - bez API; jedine cez machine.mem32 = hack
-* => preto kompromis: kluc odvodime zo salt + unique_id
+* => ked neviem pouzit to, co je na doske, idealne je externe samostatne zariadenie
 </section>
 
 
@@ -486,6 +488,8 @@ notes:
 notes:
 * mozeme si pomoct napr. tak, ze k nasmu rieseniu pridame externý šifrovací koprocesor (crypto-koprocesor), ako napr ATECC608
   * kľúč tak nikdy neopustí čip
+  * pripaja sa cez I2C, takze sa da pouzit aj z MicroPythonu
+* ja ho ale nemam => kompromis: kluc odvodime zo salt + unique_id
 </section>
 
 
@@ -587,7 +591,7 @@ def decrypt(ciphertext: str, salt_path: str = SALT_FILE) -> str | None:
 <section id="cipher-example" data-markdown>
 ```python
 import json
-from crypto import encrypt
+from crypto import encrypt, decrypt
 
 SETTINGS_FILE = '/data/settings.json'
 
@@ -600,6 +604,12 @@ settings = {
 # write settings
 with open(SETTINGS_FILE, 'w') as file:
     json.dump(settings, file)
+
+# read settings and decrypt password
+with open(SETTINGS_FILE, 'r') as file:
+    settings = json.load(file)
+
+print(decrypt(settings['password']))
 ```
 </section>
 
