@@ -19,14 +19,16 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/reveal.min.css" 
         rel="stylesheet" 
+        integrity="sha512-K7MQgVd+kiFPEsUpu5tWdqaHBYbqUxZvQ7KQPeJx6ihz7/90XUd5h2PEDoN6FIYRpYXx3UUtYMEE70bAKpx1bA=="
         crossorigin="anonymous" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/theme/{{ page.theme }}.min.css" 
+    <link id="theme" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/theme/{{ page.theme }}.css" 
         rel="stylesheet" 
-        />
+        crossorigin="anonymous" />
 
 	<!-- Theme used for syntax highlighting of code -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/plugin/highlight/zenburn.min.css" 
         rel="stylesheet" 
+        integrity="sha512-JPxjD2t82edI35nXydY/erE9jVPpqxEJ++6nYEoZEpX2TRsmp2FpZuQqZa+wBCen5U16QZOkMadGXHCfp+tUdg=="
         crossorigin="anonymous" />
 
     {% if page.styles.size > 0 %}
@@ -35,19 +37,6 @@
     <link rel="stylesheet" href="{{ style }}">
     {% endfor %}
     {% endif %}
-
-	<!-- Printing and PDF exports -->
-	<script>
-		var link = document.createElement( 'link' );
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = window.location.search.match( /print-pdf/gi ) ? '/assets/css/print/pdf.min.css' : '/assets/css/print/paper.css';
-		document.getElementsByTagName( 'head' )[0].appendChild( link );
-	</script>
-
-	<!--[if lt IE 9]>
-	<script src="lib/js/html5shiv.js"></script>
-	<![endif]-->
 
         <style>
         .reveal section img {
@@ -64,11 +53,27 @@
         integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
         crossorigin="anonymous">
     </script>
-	<script src="/assets/lib/js/head.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.min.js" 
-        integrity="sha512-Xu/cezKABTI81MGnaBm64vdiS7XkttHeYGOgr2Mdga0bTplSBGongLq2lhK2HwL79wefKM0u4uTCLD0ha1sRzQ==" 
-        crossorigin="anonymous">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/reveal.min.js" 
+        integrity="sha512-RnmqSI7XvyFfmmZgEA1BLzPGgTynDAVa19zaU1tl6IS/OuXTMlDxsK2/3buFGWThOvcITz9h6qMFhqOZsjTWbQ==" 
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/plugin/markdown/markdown.min.js" 
+        integrity="sha512-4exkEeyVuaWUFKozXl6L3UCugl6ai1cKnrVFkWUstdrNB2sDxxmPEaHBzTlYm9wX78EjPzEBG0s8k37oPeUFIw==" 
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/plugin/highlight/highlight.min.js" 
+        integrity="sha512-IkPzJ3njtxNL2Frm7zr18CEj9HH+CEFAqh+jSKjXTHVFGtWG1+USbIXINU8zdGmyLpf/OBIVfpNLGNgwhlymkA==" 
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/plugin/notes/notes.min.js" 
+        integrity="sha512-tDzEYXTFwGOO3tWp8oTV3yGeZ4lG4gUt+tJFQTsP7W4jV/MJ1Rgr6m9aICicjh/ymL5GD6jkHXDi9cHKfctFGQ==" 
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/plugin/zoom/zoom.min.js" 
+        integrity="sha512-Gras1ky8LoFJWwMTxBWyN2wfHfnJXQlyhHFH3M+m/jHe297DZsrQxg9P6Kxka6waxl4NeeQzietoFlCxL7x10g==" 
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/plugin/math/math.min.js" 
+        integrity="sha512-tdpe8NdPiaypY/eUgKqr/aL5y0tLiFEde/joBsD4bfjyB8yNuGsReuN/D+XDcGbHQ8/xbDbJ0mqkfGdh2JxCAw==" 
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js" 
+        integrity="sha512-qVy+aWbklH6h0mMbdYm3DNS2w1TVWzhWv7LXpfa0trnFvXLLK2mbe445nAl+VLTTcLAzwGztaeOkG/4XJ+KVWw==" 
+        crossorigin="anonymous"></script>
 
 	<div class="reveal">
 		<div class="slides">
@@ -81,6 +86,7 @@
 		Reveal.initialize({
 			controls: true,
 			progress: true,
+			hash: true,
 			history: true,
 			center: true,
 
@@ -156,7 +162,7 @@
                 // when 'themes' is set to 'true'. If you provide your own
                 // list of themes or 'themes' is set to 'false' the
                 // 'themesPath' option is ignored.
-                themesPath: '/assets/css/theme/',
+                themesPath: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.2.0/theme/',
 
                 // Specifies if the transitions menu panel will be shown.
                 // Set to 'true' to show the transitions menu panel with
@@ -209,19 +215,18 @@
                 loadIcons: true
             },
 
-			// More info https://github.com/hakimel/reveal.js#dependencies
-			dependencies: [
-				{ src: '/assets/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-				{ src: '/assets/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: '/assets/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: '/assets/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-				{ src: '/assets/plugin/zoom-js/zoom.js', async: true },
-				{ src: '/assets/plugin/notes/notes.js', async: true },
-                { src: '/assets/plugin/elapsed-time-bar/elapsed-time-bar.js' },
-                { src: '/assets/plugin/math/math.js', async: true },
-                { src: '/assets/plugin/menu/menu.js', async: true }
+			// https://revealjs.com/plugins/
+			plugins: [
+				RevealMarkdown,
+				RevealHighlight,
+				RevealNotes,
+				RevealZoom,
+				RevealMath.MathJax2,
+				RevealMenu
 			]
 		});
 	</script>
+	<!-- elapsed-time-bar is a legacy (non-plugin-API) script; it hooks into Reveal's 'ready' event -->
+	<script src="/assets/plugin/elapsed-time-bar/elapsed-time-bar.js"></script>
 </body>
 </html>

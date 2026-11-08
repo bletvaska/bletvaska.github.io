@@ -4,10 +4,10 @@ subtitle: ako bezpečne ukladať heslá na mikrokontroléroch
 description: |
     O IoT a bezpečnosti koluje taký vtip: "Písmeno S v skratke IoT znamená bezpečnosť." A vtip je samozrejme v tom, že ako skratka IoT neobsahuje písmenko S, tak ani IoT riešenia častokrát bezpečnosť neriešia alebo len na veľmi slabej úrovni.
 
-    Jedným z problémov, ktorý s bezpečnosťou IoT zariadení súvisí, je ukladanie citlivých údajov - tzv. secrets. Môže sa jednať o prihlasovacie údaje, ale rovnako aj len o tokeny, kľúče alebo len o heslo na pripojenie do WiFi siete. Pokiaľ tieto údaje budeme ukladať zle, bude veľmi jednoduché ich odcudziť a kompromitovať tak v najhoršom prípade celú našu infraštruktúru. Nie nadarmo je problematika ukladania hesiel prvou položkou rebríčka OWASP IoT Top 10. 
+    Jedným z problémov, ktorý s bezpečnosťou IoT zariadení súvisí, je ukladanie citlivých údajov - tzv. secrets. Môže sa jednať o prihlasovacie údaje, ale rovnako aj o tokeny, kľúče alebo len o heslo na pripojenie do WiFi siete. Pokiaľ tieto údaje budeme ukladať zle, bude veľmi jednoduché ich odcudziť a kompromitovať tak v najhoršom prípade celú našu infraštruktúru. Nie nadarmo je problematika ukladania hesiel prvou položkou rebríčka OWASP IoT Top 10. 
     
-    A presne o tom, ako bezpečne ukladať citlivé údaje na mikrokontroléroch napísaných v jazyku MicroPython bude tento príspevok.
-duration: 25
+    A presne o tom, ako bezpečne ukladať citlivé údaje na mikrokontroléroch v programoch napísaných v jazyku MicroPython, bude tento príspevok.
+duration: 40
 date: 2026-11-08
 layout: slide
 event:
@@ -37,26 +37,46 @@ bitly: https://bit.ly/4epMP7z
 #create-encryption > pre,
 #create-decryption > pre
 {
-  font-size: 0.45em;
+  font-size: 0.5em;
 }
 
-#kerckhoffs-principle {
+#settings-example > pre > code,
+#create-encryption > pre > code,
+#create-decryption > pre > code
+{
+  max-height: none;
+}
+
+#kerckhoffs-principle,
+#shannons-maxim {
   display: flex !important;
   align-items: center;
   gap: 2em;
 }
 
-#kerckhoffs-principle > blockquote {
+#kerckhoffs-principle > blockquote,
+#shannons-maxim > blockquote {
   flex: 6;
 }
 
-#kerckhoffs-principle > p {
+#kerckhoffs-principle > p,
+#shannons-maxim > p {
   flex: 4;
+}
+
+#the-steps {
+  font-size: 0.85em;
+}
+
+#rpi-pico-2wh img {
+  height: 600px;
 }
 </style>
 
 
 {% include first.slide.html %}
+
+{% include about.mirek.html %}
 
 
 <section id="joke" data-markdown>
@@ -64,6 +84,11 @@ bitly: https://bit.ly/4epMP7z
 
 notes:
 - neda mi nezacat inac, ako standardnym vtipom na tuto temu a sice, ze oblast bezpecnosti v IoT je stale velmi problematicka
+</section>
+
+
+<section id="rpi-pico-2wh" data-markdown data-background="#fff">
+![](https://www.waveshare.com/img/devkit/Raspberry-Pi-Pico-2-W/Raspberry-Pi-Pico-2-WH-pack.jpg)
 </section>
 
 
@@ -82,11 +107,15 @@ notes:
 
 
 <section id="owasp-iot-top-10" data-markdown data-background="#fff">
-[![](images/owasp.iot.top.ten.png)](https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Top_10)
+[![](images/owasp.iot.top.ten.png)](https://owasp.org/www-project-internet-of-things/)
 
 notes:
+* OWASP je nezisková organizácia zameraná na bezpečnosť softvéru, známa hlavne rebríčkom OWASP Top 10 pre web
 * jednym z jej projektov je vsak aj OWASP IoT Top 10
 * zoznam 10 najvacsich hrozieb v oblasti IoT
+* problem - je z roku 2018 :-(
+  * nic lepsie som zatial nevidel
+  * vy ano?
 </section>
 
 
@@ -144,6 +173,11 @@ notes:
 </section>
 
 
+<section id="examples-7" data-markdown>
+![](images/students-java1.jpg)
+</section>
+
+
 <section id="other-sources" data-markdown>
 ## Ďalšie zdroje
 
@@ -159,7 +193,7 @@ notes:
 
 
 <section id="the-problem" data-markdown>
-## Secrets sú súčasťou kódu!
+### Secrets sú súčasťou kódu!
 
 * hodnoty sú uložené v (globálnych) premenných
 * nedajú sa zmeniť bez zmeny kódu
@@ -176,15 +210,19 @@ notes:
 <section id="the-steps" data-markdown>
 1. **Izolácia**
   
-  Secrets uložíme do samostatného súboru.
+   Secrets uložíme do samostatného súboru.
 
 2. **Šifrovanie**
   
-  Zašifrujeme uložené údaje, aby boli čitateľné iba s kľúčom.
+   Zašifrujeme uložené údaje, aby boli čitateľné iba s kľúčom.
 
-3. **Binárny bytecode**
+3. **Odvodenie kľúča**
 
-  Kód pracujúci so secrets preložíme do binárneho bytecode, čím sťažíme jeho analýzu.
+   Kľúč neukladáme, ale odvodíme ho z hardvéru a inštalácie.
+
+4. **Binárny bytecode**
+
+   Kód pracujúci so secrets preložíme do binárneho bytecode, čím sťažíme jeho analýzu.
 
 notes:
   * Preklad do .mpy (MicroPython bytecode) sťažuje analýzu zdrojového kódu, ale nie je to bezpečnostný mechanizmus porovnateľný so šifrovaním. Skôr ide o obfuskáciu alebo sťaženie reverzného inžinierstva.
@@ -192,7 +230,7 @@ notes:
 
 
 <section id="isolation" data-markdown>
-## Krok 1. Izolácia
+### Krok 1. Izolácia
 
 * secrets uložíme do samostatného súboru
 * použijeme formát, ktorý umožňuje jednoduché čítanie aj zápis
@@ -208,11 +246,11 @@ notes:
 ```python
 import json
 
-SETTINGS_FILE = '/data/settings.py'
+SETTINGS_FILE = '/data/settings.json'
 
 # content of settings
 settings = {
-    "ssid": "OSS Conf 2026",
+    "ssid": "OpenAlt 2026",
     "password": "Linux.Rocks!",
 }
 
@@ -223,6 +261,29 @@ with open(SETTINGS_FILE, 'w') as file:
 # read settings
 with open(SETTINGS_FILE, 'r') as file:
     settings = json.load(file)
+```
+</section>
+
+
+<section id="flash-dump" data-markdown>
+### Dump flash pamäte
+
+* útočník môže odpájkovať flash pamäť a prečítať ju pomocou čítačky
+* dá sa to aj jednoduchšie (softvérovo)
+
+```bash
+# ak je prístupný REPL režim a viem, kde sa súbor nachádza, tak
+$ mpremote cat /data/settings.json
+
+# ak neviem, kde súbor je, prepnem zariadenie do BOOTSEL režimu
+# (bez REPL: podržím tlačidlo BOOTSEL pri pripájaní USB)
+$ mpremote bootloader
+
+# ulož celý obsah flash pamäte do súboru
+$ picotool save --all dump.bin
+
+# pozri sa, čo je vo vnútri
+$ strings dump.bin | grep -i password
 ```
 </section>
 
@@ -239,25 +300,18 @@ notes:
 </section>
 
 
-<section id="encoding" data-markdown>
-## Krok 2. Šifrovanie
+<section id="encryption" data-markdown>
+### Krok 2. Šifrovanie
 
-* problém MCU pri šifrovaní - obmedzené zdroje mikrokontrolérov
-  * výpočtový výkon
+* obmedzenia MCU pri šifrovaní
+  * nízky výpočtový výkon
   * malá pamäť
-  * spotreba energie
-  * bezpečné ukladanie údajov (TrustZone)
-  * odolnosť voči fyzickým útokom
-  * generovanie náhodných čísiel
+  * obmedzená spotreba energie
+  * chýbajúce bezpečné úložisko kľúčov (TrustZone)
+  * slabá odolnosť voči fyzickým útokom
+  * nie vždy kvalitný generátor náhodných čísel
 </section>
 
-<section id="atecc-608" data-markdown>
-[![ATECC 608](images/atecc.608.jpg)](https://www.adafruit.com/product/4314)
-
-notes:
-* mozeme si pomoct napr. tak, ze k nasmu rieseniu pridame externý šifrovací koprocesor (crypto-koprocesor), ako napr ATECC608
-  * kľúč tak nikdy neopustí čip
-</section>
 
 
 <section id="cryptolib" data-markdown>
@@ -309,7 +363,7 @@ notes:
 
 ```python
 # majme nasledujúci text
-# dĺžka musí byť násobkom 16 (PKCS#7 padding)
+# dĺžka musí byť násobkom 16, inak treba doplniť (PKCS#7 padding)
 >>> text = 'Hello, Pico 2 W!'
 
 # zašifrovanie textu
@@ -347,25 +401,101 @@ b'Hello, Pico 2 W!'
 <section id="kerckhoffs-principle" data-markdown>
 > A cryptosystem should be secure, even if everything about the system, **except the key**, is public knowledge.
 >
-> -- [Auguste Kerckhoffs](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle)
+> -- [Auguste Kerckhoffs](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle) (1883)
 
 ![Auguste Kerckhoffs](images/kerckhoffs.jpg)
+
+note:
+- holandský lingvista a kryptograf, ktorý pôsobil vo Francúzsku
+- v roku 1883, v článku La cryptographie militaire v časopise Journal des sciences militaires.
+- volne prelozene: "systém nesmie vyžadovať utajenie a musí byť možné, aby padol do rúk nepriateľa bez toho, aby to spôsobilo problém."
+</section>
+
+
+<section id="shannons-maxim" data-markdown>
+> The enemy knows the system.
+>
+> -- [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) (1949)
+
+![Claude Shannon](images/claude.shannon.jpg)
+
+note:
+- Claude Shannon ho v roku 1949 skrátil na vetu „The enemy knows the system“. 
+- Tej sa hovorí aj Shannonova maxima.
 </section>
 
 
 <section id="key-problem" data-markdown>
-### Kľúčový problém - ako zabezpečíme kľúč?
+Kľúčový problém: 
+
+### Ako zabezpečíme kľúč?
 </section>
 
 
-<section id="binary-bytecodeencoding" data-markdown>
-## Krok 3. Binárny bytecode
+<section id="mcu-rp2350" data-markdown>
+### Bezpečnosť a RP2350
+
+* Arm TrustZone (Cortex-M33)
+* secure boot (podpísaný firmvér)
+* 8 kB OTP pamäte pre kľúče
+* možnosť uzamknúť debug (SWD) aj BOOTSEL
+* HW generátor náhodných čísel (TRNG), SHA-256 akcelerátor
+
+notes:
+* RP2350 nema HW AES - sifrovanie bezi softverovo; encrypted boot riesi bootloader (AES-256 desifrovanie do SRAM)
+* RP2350 ma aj HW ochranu proti glitchom (glitch detectors) - Raspberry Pi k tomu vypisalo aj hacking challenge
+* konfiguruje sa cez Pico SDK / `picotool`, MicroPython to priamo nevystavuje
+* pozor: zapis do OTP je nevratny - zle nastavenie = mrtve zariadenie
+</section>
+
+
+<section id="mcu-esp32" data-markdown>
+### Bezpečnosť a ESP32
+
+* flash encryption - šifrovanie celého obsahu flash
+* secure boot
+* eFuse - jednorazovo zapisovateľné úložisko kľúčov
+* HW akcelerátory AES, SHA, RSA, TRNG
+
+notes:
+* ESP32-S2/S3/C3 maju navyse HMAC a Digital Signature periferiu - kluc z eFuse nikdy neopusti cip, softver ho neprecita
+* konfiguruje sa cez ESP-IDF (;espefuse.py;), MicroPython to priamo nevystavuje
+* pozor: zapis do eFuse je nevratny - zle nastavenie = mrtve zariadenie
+</section>
+
+
+<section id="mcu-micropython" data-markdown>
+### A čo MicroPython?
+
+* HW bezpečnosť využíva len **nepriamo** (akcelerácia, TRNG)
+* secure boot a flash encryption sú vecou **firmvéru**, nie MicroPythonu
+* bezpečné úložisko kľúčov (OTP/eFuse) z MicroPythonu **použiť nevieme**
+
+notes:
+* ESP32: cryptolib a hashlib idu cez mbedTLS, ktory pouziva HW AES/SHA; os.urandom() pouziva HW RNG
+* RP2350: os.urandom() ide cez TRNG (pico_rand)
+* secure boot / flash encryption = vlastny build firmveru + espefuse.py / picotool; oficialne buildy z micropython.org to nemaju zapnute
+* OTP/eFuse, HMAC/DS periferie, TrustZone - bez API; jedine cez machine.mem32 = hack
+* => preto kompromis: kluc odvodime zo salt + unique_id
+</section>
+
+
+<section id="atecc-608" data-markdown>
+[![ATECC 608](images/atecc.608.jpg)](https://www.adafruit.com/product/4314)
+
+notes:
+* mozeme si pomoct napr. tak, ze k nasmu rieseniu pridame externý šifrovací koprocesor (crypto-koprocesor), ako napr ATECC608
+  * kľúč tak nikdy neopustí čip
+</section>
+
+
+<section id="key-derivation" data-markdown>
+### Krok 3. Odvodenie kľúča
 
 * kľúč zostavíme ako kompozíciu z:
-  * `salt` - náhodne vygenerované pole bytov, ktoré budú viazané na inštaláciu
+  * `salt` - náhodne vygenerované pole bytov, ktoré bude viazané na inštaláciu
   * `unique_id` - viazané na hardvér
 * na šifrovanie/dešifrovanie vytvoríme vlastný modul `crypto.py`
-  * preložíme ho - vznikne binárny bytecode
 </section>
 
 
@@ -377,7 +507,7 @@ import os
 
 SALT_FILE = '/data/.salt'
 
-def create_salt(salt_path: str) -> None:
+def create_salt(salt_path: str = SALT_FILE) -> None:
     with open(salt_path, 'wb') as file:
         file.write(os.urandom(16))
 ```
@@ -454,6 +584,35 @@ def decrypt(ciphertext: str, salt_path: str = SALT_FILE) -> str | None:
 </section>
 
 
+<section id="cipher-example" data-markdown>
+```python
+import json
+from crypto import encrypt
+
+SETTINGS_FILE = '/data/settings.json'
+
+# content of settings
+settings = {
+    "ssid": "OpenAlt 2026",
+    "password": encrypt("Linux.Rocks!"),
+}
+
+# write settings
+with open(SETTINGS_FILE, 'w') as file:
+    json.dump(settings, file)
+```
+</section>
+
+
+<section id="binary-bytecode" data-markdown>
+### Krok 4. Binárny bytecode
+
+* modul `crypto.py` preložíme do binárneho bytecode (`crypto.mpy`)
+* na zariadenie nahráme iba `crypto.mpy`, nie zdrojový kód
+* sťaží to analýzu, ale nie je to šifrovanie (iba obfuskácia)
+</section>
+
+
 <section id="mpy-cross" data-markdown>
 ## [mpy-cross](https://gitlab.com/alelec/mpy_cross )
 
@@ -468,12 +627,33 @@ the micropython cross compiler utility
 (venv) $ pip install mpy-cross
 
 # overíme verziu:
+# (verzia .mpy musí sedieť s firmvérom na zariadení)
 (venv) $ mpy-cross --version
-MicroPython v1.27.0 on 2025-12-13; mpy-cross emitting mpy v6.3
+MicroPython v1.29.0 on 2026-08-29; mpy-cross emitting mpy v6.3
 
 # preložíme modul crypto.py
 (venv) $ mpy-cross crypto.py
+
+# .mpy presunieme do /src/lib
+# .py presunieme do /stubs/
 ```
+</section>
+
+
+<section id="summary" data-markdown>
+### Zhrnutie
+
+* **secrets nepatria do kódu** - ani do repozitára
+* izolácia + šifrovanie + kľúč viazaný na HW + `.mpy` = **sťaženie útoku**
+* bez HW podpory je to stále len **obfuskácia** - útočník s fyzickým prístupom vyhrá
+* skutočná ochrana = **HW**: secure boot, flash encryption, OTP/eFuse, krypto-koprocesor
+* **nedokonalé zabezpečenie je stále lepšie ako žiadne**
+
+notes:
+* zopakovat 4 kroky: izolacia, sifrovanie, odvodenie kluca, bytecode
+* uprimne: Kerckhoffs - bezpecnost ma stat na kluci; nas kluc je ale odvodeny z udajov, ktore su na zariadeni
+* cielom je, aby skopirovany settings.json bez zariadenia nebol na nic a aby heslo nebolo vidiet cez strings
+* ak to myslim vazne: RP2350/ESP32 s HW zabezpecenim alebo ATECC608
 </section>
 
 
